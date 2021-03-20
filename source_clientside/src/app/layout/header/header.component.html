@@ -112,15 +112,6 @@
                   </form>
             </li>
             <li>
-                <a title="">more pages</a>
-                <ul>
-                    <li><a [routerLink]="['/main/contact']" title="">contact</a></li>
-                    <li><a [routerLink]="['/main/faq']" title="">faq's page</a></li>
-                    <li><a [routerLink]="['/main/knowledge']" title="">Knowledge base</a></li>
-                    <li><a [routerLink]="['/main/widgets']" title="">Widgets</a></li>
-                </ul>
-            </li>
-            <li>
                 <a [routerLink]="['/main/trip']">Trip</a>
                 <ul>
                     <li><a [routerLink]="['/main/trip']" title="">View List Trips</a></li>
@@ -268,13 +259,21 @@
             <mat-icon>arrow_drop_down</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>dialpad</mat-icon>
-              <span>Redial</span>
+            <button mat-menu-item [routerLink]="['/main/knowledge']">
+                <mat-icon>school</mat-icon>
+                <span>Knowledge Base</span>
             </button>
-            <button mat-menu-item disabled>
-              <mat-icon>voicemail</mat-icon>
-              <span>Check voice mail</span>
+            <button mat-menu-item [routerLink]="['/main/faq']">
+                <mat-icon>question_answer</mat-icon>
+                <span>Faq's</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/main/contact']">
+              <mat-icon>contact_mail</mat-icon>
+              <span>Contact</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/main/widgets']">
+              <mat-icon>widgets</mat-icon>
+              <span>Widgets</span>
             </button>
             <button mat-menu-item [routerLink]="['/login']" (click)="onLogout()">
               <mat-icon>forward</mat-icon>
