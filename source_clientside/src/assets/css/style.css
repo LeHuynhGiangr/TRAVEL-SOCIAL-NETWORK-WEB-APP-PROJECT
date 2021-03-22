@@ -4711,8 +4711,7 @@ canvas {
 
 .top-area > ul.main-menu > li {
     line-height: 59px;
-    margin-right: 30px;
-    padding-right: 30px;
+    margin-right: 10px;
     position: relative;
 }
 

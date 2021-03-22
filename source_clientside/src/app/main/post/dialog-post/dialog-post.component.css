@@ -11,3 +11,24 @@
   td {
     padding-right: 8px;
   }
+  .btnpost
+  {
+    width: 500px;
+    margin-left: 32px;
+    top: 30px;
+  }
+  .rcorners2 {
+    border-radius: 25px;
+    border: 0.1px solid #bac2c1;
+    padding: 10px; 
+    width: 500px;
+    height: 40px;  
+    margin-left: 32px;
+    margin-bottom: 5px;
+  }
+  .btncancel
+  {
+    margin-left: 520px;
+    bottom: 320px;
+    color:#808584
+  }

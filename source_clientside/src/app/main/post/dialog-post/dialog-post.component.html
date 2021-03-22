@@ -1,15 +1,19 @@
-<h1><strong>New Post</strong></h1>
+<div>
+    <h1 style="margin-left: 220px;"><strong>Create Post</strong></h1>
+    <mat-divider></mat-divider>
+</div>
+<br>
 <mat-form-field class="example-full-width">
     <mat-label>Write Something...</mat-label>
-    <textarea style="height: 100px;"matInput #status_txtarea></textarea>
-    
+    <textarea style="height: 100px;"matInput #status_txtarea></textarea>    
 </mat-form-field>
-<div class="form-group">
-    <img [src]="url" height="200"> <br/>
-    <input type='file' accept="image/*" (change)="onSelectFile($event)">
- </div>
-
+<div>
+    <img [src]="url" height="100"> <br/>
+    <input class="rcorners2" type='file' accept="image/*" (change)="onSelectFile($event)">
+</div>
  <div mat-dialog-actions class="myDiv">
-    <button class="btn btn-primary" mat-button (click)="onPost(status_txtarea.value)">Post</button>
-    <button class="btn btn-danger left" mat-button (click)="onCancel()">Cancel</button>
+    <button class="btn btn-primary btnpost" mat-button (click)="onPost(status_txtarea.value)">Post</button>
+    <button mat-icon-button (click)="onCancel()" class="btncancel">
+        <mat-icon>cancel</mat-icon>
+    </button>
 </div>

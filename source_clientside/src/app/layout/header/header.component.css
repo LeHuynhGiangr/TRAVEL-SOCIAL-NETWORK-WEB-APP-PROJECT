@@ -1,0 +1,35 @@
+.rcorners2 {
+    border-radius: 55px;
+    border: 2px solid #8eccf0;
+    padding: 1px; 
+  }
+
+  .rcorners1 {
+    border-radius: 40px;
+    border: px solid #8eccf0;
+    width: 100px;
+    padding: 1px; 
+    margin-top: 10px;
+  }
+  .rcorners0 {
+    border-radius: 25px;
+    border: 0px solid #8eccf0;
+    padding:7px; 
+  }
+  .left
+  {
+      right: 70px;
+  }
+  .left2
+  {
+      right: 30px;
+      width: 50%;
+  }
+  .left3
+  {
+      margin-right: 10px;
+  }
+  .top
+  {
+    margin-top: 5px;
+  }

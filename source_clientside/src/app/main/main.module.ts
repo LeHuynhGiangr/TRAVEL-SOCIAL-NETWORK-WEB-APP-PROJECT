@@ -67,6 +67,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 export const mainRoutes: Routes = [
@@ -183,6 +184,7 @@ export const mainRoutes: Routes = [
     MatStepperModule,
     MatDividerModule,
     NgxPayPalModule,
+    MatBadgeModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

@@ -61,6 +61,7 @@ export class TimelineComponent implements OnInit {
       this.appUsers.LastName = user["lastName"]
       this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
       this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
+      this.appUsers.Image = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     }
     this.loadPostData();
     this.startTimer()

@@ -37,4 +37,5 @@ export class AppUsers {
     RequestFriend:boolean;
     Active:boolean;
     NamePayment:string;
+    Image:string;
 }

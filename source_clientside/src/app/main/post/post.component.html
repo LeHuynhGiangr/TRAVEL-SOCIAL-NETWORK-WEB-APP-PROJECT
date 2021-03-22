@@ -1,33 +1,33 @@
 <div class="user-post">
-    <button mat-icon-button [matMenuTriggerFor]="menu"
-       aria-label="Example icon-button with a menu" class="left2">
-       <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-       <button mat-menu-item *ngIf="this.id === postData.authorId">
-          <mat-icon>edit</mat-icon>
-          <span>edit</span>
-       </button>
-       <button mat-menu-item>
-          <mat-icon>report_problem</mat-icon>
-          <span>report</span>
-       </button>
-       <button mat-menu-item  *ngIf="this.id === postData.authorId">
-          <mat-icon>delete</mat-icon>
-          <span>delete</span>
-       </button>
-    </mat-menu>
     <div class="friend-info">
        <figure>
           <img src="{{postData.authorThumb}}" style="width: 50px; height: 50px;" alt="">
        </figure>
        <div class="friend-name">
           <ins><a (click)="getNavigation(postData.authorId)" [routerLink]="['/timeline/:', postData.authorId]" title="">{{postData.authorName}}</a></ins>
-          <span>published: {{postData.dateCreated}}</span>
+          <span>published: {{postData.dateCreated| date: 'dd/MM/yyyy'}}</span>
        </div>
        <app-post-meta [content]="postData.content" [imageUri]="postData.imageUri"></app-post-meta>
+      <button mat-icon-button [matMenuTriggerFor]="menu"
+       aria-label="Example icon-button with a menu" class="left2">
+       <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="this.id === postData.authorId">
+          <mat-icon>edit</mat-icon>
+          <span>edit</span>
+      </button>
+      <button mat-menu-item>
+          <mat-icon>report_problem</mat-icon>
+          <span>report</span>
+      </button>
+      <button mat-menu-item  *ngIf="this.id === postData.authorId">
+          <mat-icon>delete</mat-icon>
+          <span>delete</span>
+      </button>
+    </mat-menu>
     </div>
     <div class="coment-area">
-      <app-comment-area (submitCommentEvent)="submitComment($event)" [commentJson]="postData.commentJson"></app-comment-area>
+       <app-comment-area (submitCommentEvent)="submitComment($event)" [commentJson]="postData.commentJson"></app-comment-area>
     </div>
  </div>

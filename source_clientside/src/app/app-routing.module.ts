@@ -26,11 +26,11 @@ const routes: Routes = [
     loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
   }, //call ./admin/admin.module
 
-  { path: '**', redirectTo: '/' },
+  { path: '**', redirectTo: '404' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation:'reload'})],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

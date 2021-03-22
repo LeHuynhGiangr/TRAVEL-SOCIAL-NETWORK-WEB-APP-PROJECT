@@ -5,7 +5,7 @@
             <a (click)="openNav()" class="" href="#menu"><i class="fa fa-align-justify"></i></a>
         </span>
         <span class="mh-text">
-            <a [routerLink]="['/main/home']" title=""><img src="assets/images/logo.png" style="width: 100px; height: 50px;" alt=""></a>
+            <a [routerLink]="['/main/home']" title=""><img src="assets/images/logo-login.png" style="width: 90px; height: 50px;" alt=""></a>
         </span>
         <span class="mh-btns-right">
             <a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -97,168 +97,74 @@
 </div><!-- responsive header -->
 <div class="topbar ">
     <div class="logo">
-        <a title="" (click)="returnId()" [routerLink]="['/main']"><img src="assets/images/logo.png" style="width: 70px; height: 40px;"alt=""></a>
+        <a title="" (click)="returnId()" [routerLink]="['/main']"><img src="assets/images/logo.png" style="width: 100px; height: 60px;"alt=""></a>
     </div>
     
     <div class="top-area" >
         <ul class="main-menu">
             <li>
                 <form class="example-form" method="post">
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width left">
                       <mat-label>Search Friend</mat-label>
-                      <input  name="namesearch" type="tel" [(ngModel)]="this.NameSearch" matInput placeholder="">
-                      <mat-icon matSuffix [routerLink]="['/main/friends-search']" (click)="search()">search</mat-icon>
+                      <input name="namesearch" type="tel" [(ngModel)]="this.NameSearch" matInput placeholder="">
+                      <button mat-icon-button matSuffix [routerLink]="['/main/friends-search']" (click)="search()"><mat-icon>search</mat-icon></button>
                     </mat-form-field>
                   </form>
             </li>
             <li>
-                <a [routerLink]="['/main/trip']">Trip</a>
-                <ul>
-                    <li><a [routerLink]="['/main/trip']" title="">View List Trips</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="setting-area">
-            <li>
-                <a href="#" title="Notification" data-ripple="">
-                    <i class="ti-bell"></i><span>20</span>
-                </a>
-                <div class="dropdowns">
-                    <span>4 New Notifications</span>
-                    <ul class="drops-menu">
-                        <li>
-                            <a [routerLink]="['/main/notifications']" title="">
-                                <img src="assets/images/resources/thumb-1.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>sarah Loren</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag green">New</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/notifications']" title="">
-                                <img src="assets/images/resources/thumb-2.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Jhon doe</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag red">Reply</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/notifications']" title="">
-                                <img src="assets/images/resources/thumb-3.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Andrew</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag blue">Unseen</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/notifications']" title="">
-                                <img src="assets/images/resources/thumb-4.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Tom cruse</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag">New</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/notifications']" title="">
-                                <img src="assets/images/resources/thumb-5.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Amy</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag">New</span>
-                        </li>
-                    </ul>
-                    <a [routerLink]="['/main/notifications']" title="" class="more-mesg">view more</a>
-                </div>
+                <button [routerLink]="['/main/home']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>home</mat-icon></button>
             </li>
             <li>
-                <a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
-                <div class="dropdowns">
-                    <span>5 New Messages</span>
-                    <ul class="drops-menu">
-                        <li>
-                            <a [routerLink]="['/main/messages']" title="">
-                                <img src="assets/images/resources/thumb-1.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>sarah Loren</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag green">New</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/messages']" title="">
-                                <img src="assets/images/resources/thumb-2.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Jhon doe</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag red">Reply</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/messages']" title="">
-                                <img src="assets/images/resources/thumb-3.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Andrew</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag blue">Unseen</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/messages']" title="">
-                                <img src="assets/images/resources/thumb-4.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Tom cruse</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag">New</span>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/main/messages']" title="">
-                                <img src="assets/images/resources/thumb-5.jpg" alt="">
-                                <div class="mesg-meta">
-                                    <h6>Amy</h6>
-                                    <span>Hi, how r u dear ...?</span>
-                                    <i>2 min ago</i>
-                                </div>
-                            </a>
-                            <span class="tag">New</span>
-                        </li>
-                    </ul>
-                    <a [routerLink]="['/main/messages']" title="" class="more-mesg">view more</a>
-                </div>
+                <button [routerLink]="['/main/trip']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>commute</mat-icon></button>
             </li>
-            <button mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)">{{this.appUsers.FirstName}}</button>
+            <li>
+                <button [routerLink]="['/main/messages']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>people</mat-icon></button>
+            </li>
+            <li>
+                <button [routerLink]="['/main/videos']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button> <mat-icon>ondemand_video</mat-icon></button>
+            </li>
         </ul>
-        <div class="user-img">
-            <img src="{{this.appUsers.Avatar}}" style="width: 35px; height: 35px;" alt="">
-            <span class="status f-online"></span>
-        </div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <ul class="setting-area ">
+            <li>
+                <button class="rcorners1" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
+            </li>
+            <li>
+                <button class="top" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon matBadge="2" matBadgeColor="warn">message</mat-icon>
+                  </button>
+                <mat-menu #menu="matMenu" class="rcorners0">
+                    <button mat-menu-item>
+                        <span><strong class="left3">John</strong>Alo thằng kia</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span><strong class="left3">Kiệt</strong>You: hello !</span>
+                    </button>
+                </mat-menu>
+            </li>
+            <li>
+                <button class="top" mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
+                    <mat-icon matBadge="3" matBadgeColor="warn">notifications</mat-icon>
+                </button>
+                <mat-menu #menu2="matMenu" class="rcorners0">
+                    <button mat-menu-item>
+                        <mat-icon>thumb_up_alt</mat-icon>
+                        <span><strong>John</strong> just liked your photo</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>people_outline</mat-icon>
+                        <span><strong>Sena</strong> agreed to the friend request</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon> insert_comment</mat-icon>
+                        <span><strong>Khoi</strong> commented on your post</span>
+                    </button>
+                  </mat-menu>
+            </li>
+        </ul>
+        <button class="top" mat-icon-button [matMenuTriggerFor]="menu3" aria-label="Example icon-button with a menu">
             <mat-icon>arrow_drop_down</mat-icon>
           </button>
-          <mat-menu #menu="matMenu">
+          <mat-menu #menu3="matMenu">
             <button mat-menu-item [routerLink]="['/main/knowledge']">
                 <mat-icon>school</mat-icon>
                 <span>Knowledge Base</span>
@@ -272,8 +178,8 @@
               <span>Contact</span>
             </button>
             <button mat-menu-item [routerLink]="['/main/widgets']">
-              <mat-icon>widgets</mat-icon>
-              <span>Widgets</span>
+                <mat-icon>widgets</mat-icon>
+                <span>Widgets</span>
             </button>
             <button mat-menu-item [routerLink]="['/login']" (click)="onLogout()">
               <mat-icon>forward</mat-icon>
