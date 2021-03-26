@@ -21,30 +21,16 @@
         <a href="#" title="" class="showmore underline">more comments</a>
     </li> -->
     <li class="post-comment">
-        <div class="comet-avatar">
-            <img src="{{this.appUsers.Avatar}}"
-            style="width: 40px; height: 40px;" alt="">
-        </div>
-        <div class="post-comt-box">
-            <form method="post" on>
-                <textarea placeholder="Post your comment" (keyup.enter)="OnKeyUpTxtAreaEvent($event)"></textarea>
-                <div class="add-smiles">
-                    <span class="em em-expressionless" title="add icon"></span>
-                </div>
-                <div class="smiles-bunch">
-                    <i class="em em---1"></i>
-                    <i class="em em-smiley"></i>
-                    <i class="em em-anguished"></i>
-                    <i class="em em-laughing"></i>
-                    <i class="em em-angry"></i>
-                    <i class="em em-astonished"></i>
-                    <i class="em em-blush"></i>
-                    <i class="em em-disappointed"></i>
-                    <i class="em em-worried"></i>
-                    <i class="em em-kissing_heart"></i>
-                    <i class="em em-rage"></i>
-                    <i class="em em-stuck_out_tongue"></i>
-                </div>
+        <div>
+            <form method="post" class="example-form ">
+                <img src="{{this.appUsers.Avatar}}" style="width: 40px; height: 40px;" alt="">
+                <mat-form-field appearance="outline" class="auto">
+                    <mat-label>Write a comment</mat-label>
+                    <textarea matInput placeholder="Write a comment" (keyup.enter)="OnKeyUpTxtAreaEvent($event)"></textarea>
+                    <button mat-icon-button><mat-icon> insert_photo</mat-icon></button>
+                    <button mat-icon-button><mat-icon>gif</mat-icon></button>
+                    <button mat-icon-button><mat-icon> sentiment_satisfied_alt</mat-icon></button>
+                </mat-form-field>
             </form>
         </div>
     </li>

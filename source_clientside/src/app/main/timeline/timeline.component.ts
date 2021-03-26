@@ -59,9 +59,8 @@ export class TimelineComponent implements OnInit {
       const user =await this.service.getUserById(UserProfile.IdTemp)
       this.appUsers.FirstName = user["firstName"]
       this.appUsers.LastName = user["lastName"]
-      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
       this.appUsers.Background = ApiUrlConstants.API_URL+"/"+user["background"]
-      this.appUsers.Image = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     }
     this.loadPostData();
     this.startTimer()
@@ -110,8 +109,8 @@ export class TimelineComponent implements OnInit {
   }
   createpostDialog(): void {
     const dialogRef = this.dialog.open(DialogPostComponent, {
-      width: '800px',
-      height: '300px',
+      width: '600px',
+      height: '400px',
       data: { Id: this.appUsers.Id }
     });
 

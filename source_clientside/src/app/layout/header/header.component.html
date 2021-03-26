@@ -105,7 +105,7 @@
             <li>
                 <form class="example-form" method="post">
                     <mat-form-field class="example-full-width left">
-                      <mat-label>Search Friend</mat-label>
+                      <mat-label>Search</mat-label>
                       <input name="namesearch" type="tel" [(ngModel)]="this.NameSearch" matInput placeholder="">
                       <button mat-icon-button matSuffix [routerLink]="['/main/friends-search']" (click)="search()"><mat-icon>search</mat-icon></button>
                     </mat-form-field>
@@ -124,9 +124,9 @@
                 <button [routerLink]="['/main/videos']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button> <mat-icon>ondemand_video</mat-icon></button>
             </li>
         </ul>
-        <ul class="setting-area ">
+        <ul class="setting-area">
             <li>
-                <button class="rcorners1" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
+                <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
             </li>
             <li>
                 <button class="top" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

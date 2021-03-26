@@ -1,50 +1,15 @@
 <!-- Navigation -->
-<div class="widget">
-    <h4 class="widget-title">Shortcuts</h4>
-    <ul class="naves">
-        <li>
-            <i class="ti-clipboard"></i>
-            <a [routerLink]="['/main/home']" title="">News feed</a>
-        </li>
-        <li>
-            <i class="ti-mouse-alt"></i>
-            <a [routerLink]="['/main/inbox']" title="">Inbox</a>
-        </li>
-        <li>
-            <i class="ti-files"></i>
-            <a [routerLink]="['/main/groups-search']" title="">My pages</a>
-        </li>
-        <li>
-            <i class="ti-user"></i>
-            <a [routerLink]="['/main/friends']" title="">friends</a>
-        </li>
-        <li>
-            <i class="ti-image"></i>
-            <a [routerLink]="['/main/images']" title="">images</a>
-        </li>
-        <li>
-            <i class="ti-video-camera"></i>
-            <a [routerLink]="['/main/videos']" title="">videos</a>
-        </li>
-        <li>
-            <i class="ti-comments-smiley"></i>
-            <a [routerLink]="['/main/messages']" title="">Messages</a>
-        </li>
-        <li>
-            <i class="ti-bell"></i>
-            <a [routerLink]="['/main/notifications']" title="">Notifications</a>
-        </li>
-        <li>
-            <i class="ti-share"></i>
-            <a [routerLink]="['/main/people-nearby']" title="">People Nearby</a>
-        </li>
-        <li>
-            <i class="fa fa-bar-chart-o"></i>
-            <a [routerLink]="['/main/insights']" title="">insights</a>
-        </li>
-        <li>
-            <i class="ti-power-off"></i>
-            <a [routerLink]="['/login']" (click)="onLogout()" title="">Logout</a>
-        </li>
-    </ul>
+<div class="stick-widget">
+    <mat-divider style="width:250px;"></mat-divider>
+    <button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" class="mytimeline width-sidebar" mat-stroked-button><img class="leftimage" src="{{this.appUsers.Avatar}}" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
+    <button [routerLink]="['/main/groups-search']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">style</mat-icon><strong>My Pages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button [routerLink]="['/main/messages']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">message</mat-icon><strong>Messages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button [routerLink]="['/main/videos']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">ondemand_video</mat-icon><strong>My Videos</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button [routerLink]="['/main/images']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">burst_mode</mat-icon><strong>My Images</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button [routerLink]="['/main/friends']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">people_outline</mat-icon><strong>My Friends</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button [routerLink]="['/main/notifications']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">notifications_none</mat-icon><strong>Notification</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">history</mat-icon><strong>Activity Log</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">departure_board</mat-icon><strong>Tour History</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <button class="side-bar-left2 width-sidebar" mat-stroked-button><mat-icon class="leftimage">card_membership</mat-icon><strong>Advertisement</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+    <mat-divider style="width:250px;"></mat-divider>
 </div>

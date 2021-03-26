@@ -3,3 +3,8 @@
     border: 2px solid #8eccf0;
     padding: 20px; 
   }
+.left
+{
+  margin-left: 20px;
+  margin-right: 20px;
+}

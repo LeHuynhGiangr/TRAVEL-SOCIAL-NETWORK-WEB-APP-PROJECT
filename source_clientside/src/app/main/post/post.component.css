@@ -14,3 +14,10 @@
   .left1 {
     margin-left :150px 
 }
+.rcorners0 {
+  border-radius: 15px;
+  border: 0px solid #8eccf0;
+  padding:7px; 
+  margin-top: 10px;
+  margin-left: 6px;
+}

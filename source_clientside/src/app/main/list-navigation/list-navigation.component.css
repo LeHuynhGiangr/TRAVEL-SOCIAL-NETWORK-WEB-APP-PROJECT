@@ -1,0 +1,53 @@
+.mytimeline {
+    border-radius: 15px;
+    border: 0px solid #8eccf0;
+    padding:7px; 
+    text-indent: -150px;
+  }
+.side-bar-left
+{
+    border-radius: 15px;
+    border: 0px solid #8eccf0;
+    padding:7px; 
+    padding-right:135px; /*left-right-top-bottom-depend on ur choice*/
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.side-bar-left2
+{
+    border-radius: 15px;
+    border: 0px solid #8eccf0;
+    padding:7px; 
+    padding-right:115px; /*left-right-top-bottom-depend on ur choice*/
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+  .width-sidebar
+  {
+      right: 30px;
+      width: 350px;
+  }
+  .leftimage
+  {
+    border-radius: 15px;
+    position: absolute;
+    left: 30px;
+    width: 35px; 
+    height: 35px;
+  }
+  .lefttext
+  {
+    position: absolute;
+    left: 50px;
+  }
+  .rightimage
+  {
+    border-radius: 15px;
+    position: absolute;
+    right: 5px;
+    width: 35px; 
+    height: 35px;
+    bottom:2px;
+  }

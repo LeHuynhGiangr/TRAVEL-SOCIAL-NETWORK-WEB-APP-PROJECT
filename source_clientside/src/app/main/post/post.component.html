@@ -26,6 +26,11 @@
           <span>delete</span>
       </button>
     </mat-menu>
+    <div>
+      <button class="rcorners0" style="width: 220px;"mat-stroked-button><mat-icon>thumb_up_alt</mat-icon>Like</button>
+      <button class="rcorners0" style="width: 220px;"mat-stroked-button><mat-icon>chat_bubble_outline</mat-icon>Comment</button>
+      <button class="rcorners0" style="width: 220px;"mat-stroked-button><mat-icon>share</mat-icon>Share</button>
+   </div>
     </div>
     <div class="coment-area">
        <app-comment-area (submitCommentEvent)="submitComment($event)" [commentJson]="postData.commentJson"></app-comment-area>

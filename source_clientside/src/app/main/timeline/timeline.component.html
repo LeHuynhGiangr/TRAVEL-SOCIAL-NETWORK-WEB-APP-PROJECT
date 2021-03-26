@@ -60,7 +60,7 @@
 						<div class="row" id="page-contents">
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-									<div class="widget">
+									<div class="widget rcorners2">
 											<h4 class="widget-title">Socials</h4>
 											<ul class="socials">
 												<li class="facebook">
@@ -73,57 +73,9 @@
 													<a title="" href="#"><i class="fa fa-google"></i> <span>google</span><ins>35 likes</ins></a>
 												</li>
 											</ul>
-										</div>
-									<div class="widget">
-										<h4 class="widget-title">Shortcuts</h4>
-										<ul class="naves">
-											<li>
-												<i class="ti-clipboard"></i>
-												<a [routerLink]="['/main/home']" title="">News feed</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a [routerLink]="['/main/inbox']" title="">Inbox</a>
-											</li>
-											<li>
-												<i class="ti-files"></i>
-												<a [routerLink]="['/main/fanpage']" title="">My pages</a>
-											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a [routerLink]="['/main/friends']" title="">friends</a>
-											</li>
-											<li>
-												<i class="ti-image"></i>
-												<a [routerLink]="['/main/images']" title="">images</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a [routerLink]="['/main/videos']" title="">videos</a>
-											</li>
-											<li>
-												<i class="ti-comments-smiley"></i>
-												<a [routerLink]="['/main/messages']" title="">Messages</a>
-											</li>
-											<li>
-												<i class="ti-bell"></i>
-												<a [routerLink]="['/main/notifications']" title="">Notifications</a>
-											</li>
-											<li>
-												<i class="ti-share"></i>
-												<a [routerLink]="['/main/people-nearby']" title="">People Nearby</a>
-											</li>
-											<li>
-												<i class="fa fa-bar-chart-o"></i>
-												<a [routerLink]="['/main/insights']" title="">insights</a>
-											</li>
-											<li>
-												<i class="ti-power-off"></i>
-												<a [routerLink]="['/login']" (click)="onLogout()" title="">Logout</a>
-											</li>
-										</ul>
-									</div><!-- Shortcuts -->
-									<div class="widget">
+									</div>
+								
+									<div class="widget rcorners2">
 										<h4 class="widget-title">Recent Activity</h4>
 										<ul class="activitiez">
 											<li>
@@ -148,7 +100,7 @@
 											</li>
 										</ul>
 									</div><!-- recent activites -->
-									<div class="widget stick-widget">
+									<div class="widget stick-widget rcorners2">
 										<h4 class="widget-title">Who's follownig</h4>
 										<ul class="followers">
 											<li>
@@ -191,40 +143,21 @@
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
-								<div class="central-meta">
+								<div class="central-meta rcorners2">
 									<div class="new-postbox">
 										<figure>
-											<img src="{{this.appUsers.Image}}"
+											<img src="{{this.appUsers.Avatar}}"
 												style="width: 70px; height: 70px;" alt="">
 										</figure>
 										<div class="newpst-input">
 											<form method="post">
-												<textarea rows="2" placeholder="write something" (click)=createpostDialog()></textarea>
-												<div class="attachments">
-													<ul>
-														<li>
-															<i class="fa fa-music"></i>
-															<label class="fileContainer">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-image"></i>
-															<label class="fileContainer">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-video-camera"></i>
-															<label class="fileContainer">
-															</label>
-														</li>
-														<li>
-															<i class="fa fa-camera"></i>
-															<label class="fileContainer">
-															</label>
-														</li>
-													</ul>
-												</div>
+												<textarea class=" rcorners1" rows="2" placeholder="What do you think ?" (click)=createpostDialog()></textarea>
 											</form>
+											<div>
+												<button class="rcorners0" style="width: 190px;"mat-stroked-button><mat-icon>videocam</mat-icon>Live Stream</button>
+												<button class="rcorners0" style="width: 190px;"mat-stroked-button><mat-icon>image</mat-icon>Images/Videos</button>
+												<button class="rcorners0" style="width: 190px;"mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
+											</div>
 										</div>
 									</div>
 								</div><!-- add post new box -->
@@ -232,7 +165,7 @@
 								<div class="loadMore">
 									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
-										<div class="central-meta item">
+										<div class="central-meta item rcorners2">
 											<app-post (OnReceivePostCommentData)="commentPost($event)" [postData]=post></app-post>
 										</div>
 									</ng-template>
@@ -259,169 +192,8 @@
 											</div>
 										</div>											
 									</div>
-									<div class="widget friend-list stick-widget">
-										<h4 class="widget-title">Friends</h4>
-										<div id="searchDir"></div>
-										<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
-												</div>
-											</li>
-										</ul>
-										<div class="chat-box">
-											<div class="chat-head">
-												<span class="status f-online"></span>
-												<h6>Bucky Barnes</h6>
-												<div class="more">
-													<span><i class="ti-more-alt"></i></span>
-													<span class="close-mesage"><i class="ti-close"></i></span>
-												</div>
-											</div>
-											<div class="chat-list">
-												<ul>
-													<li class="me">
-														<div class="chat-thumb"><img src="assets/images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="you">
-														<div class="chat-thumb"><img src="assets/images/resources/chatlist2.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="me">
-														<div class="chat-thumb"><img src="assets/images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-												</ul>
-												<form class="text-box">
-													<textarea placeholder="Post enter to post..."></textarea>
-													<div class="add-smiles">
-														<span title="add icon" class="em em-expressionless"></span>
-													</div>
-													<div class="smiles-bunch">
-														<i class="em em---1"></i>
-														<i class="em em-smiley"></i>
-														<i class="em em-anguished"></i>
-														<i class="em em-laughing"></i>
-														<i class="em em-angry"></i>
-														<i class="em em-astonished"></i>
-														<i class="em em-blush"></i>
-														<i class="em em-disappointed"></i>
-														<i class="em em-worried"></i>
-														<i class="em em-kissing_heart"></i>
-														<i class="em em-rage"></i>
-														<i class="em em-stuck_out_tongue"></i>
-													</div>
-													<button type="submit"></button>
-												</form>
-											</div>
-										</div>
-									</div><!-- friends list sidebar -->
+									<app-right-sidebar-list-friend></app-right-sidebar-list-friend>
+									<!-- friends list sidebar -->
 								</aside>
 							</div><!-- sidebar -->
 						</div>	
