@@ -129,7 +129,7 @@ namespace API
             //try using websocket
             app.UseWebSockets(new WebSocketOptions { 
                 KeepAliveInterval=TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
-                ReceiveBufferSize= 1024*4 // 1024 byte * 4 = 4kb
+                ReceiveBufferSize= 4096 // 1024 byte * 4 = 4kb
             });
 
             app.Use(async (context, next) => {

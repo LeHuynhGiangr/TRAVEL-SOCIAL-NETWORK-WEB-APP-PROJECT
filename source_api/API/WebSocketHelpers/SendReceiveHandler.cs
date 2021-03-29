@@ -10,7 +10,7 @@ namespace API.WebSocketHelpers
     {
         public async Task Echo(HttpContext context, WebSocket webSocket)
         {
-            var buffer = new byte[1024 * 4];
+            var buffer = new byte[4096];
 
             WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
