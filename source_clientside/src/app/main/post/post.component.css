@@ -1,7 +1,7 @@
 .left2 {
     margin-left :650px;
     position: absolute;
-    bottom: 1;
+    top:0;
     left: 0;
 }
 .rcorners2 {
@@ -19,5 +19,31 @@
   border: 0px solid #8eccf0;
   padding:7px; 
   margin-top: 10px;
-  margin-left: 6px;
+  margin-left: 5px;
+  display: inline-block;
+  width: 31.3%;
+}
+.div-post1
+{
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  display: inline-block;
+  padding-left: 15px;
+  width: 100%;
+}
+.div-post2
+{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  padding-left: 15px;
+  width: 100%;
+}
+.infopost
+{
+  margin-top: 10px;
+  position: absolute;
+  right: 0;
 }

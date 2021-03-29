@@ -24,14 +24,15 @@
                                             <textarea class=" rcorners1" rows="2" placeholder="What do you think ?" (click)=openDialog()></textarea>
                                         </form>
                                         <div>
-                                            <button class="rcorners0" style="width: 190px;"mat-stroked-button><mat-icon>videocam</mat-icon>Live Stream</button>
-                                            <button class="rcorners0" style="width: 190px;"mat-stroked-button><mat-icon>image</mat-icon>Images/Videos</button>
-                                            <button class="rcorners0" style="width: 190px;"mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
+                                            <button class="rcorners0" mat-stroked-button><mat-icon>videocam</mat-icon>Live</button>
+                                            <button class="rcorners0" mat-stroked-button><mat-icon>image</mat-icon>Images</button>
+                                            <button class="rcorners0" mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- add post new box -->
                             <mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
+                            <br>
                             <div class="loadMore">
                                 <ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
                                     <div class="central-meta item rcorners2">

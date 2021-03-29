@@ -70,6 +70,17 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
+//primeng component
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {RatingModule} from 'primeng/rating';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+
+//module support
+import { ReadMoreModule } from 'ng-readmore';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -162,7 +173,8 @@ export const mainRoutes: Routes = [
     AddFriendDialogComponent,
     ChatBoxComponent,
     UsersListTripComponent,
-    PaymentHistoryDialogComponent
+    PaymentHistoryDialogComponent,
+    //Primeng
   ],
   imports: [
     CommonModule,
@@ -185,6 +197,16 @@ export const mainRoutes: Routes = [
     MatDividerModule,
     NgxPayPalModule,
     MatBadgeModule,
+    //Primeng
+    AccordionModule,
+    AutoCompleteModule,
+    InputTextareaModule,
+    RatingModule,
+    ButtonModule,
+    PanelModule,
+    ScrollPanelModule,
+    //Module support
+    ReadMoreModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

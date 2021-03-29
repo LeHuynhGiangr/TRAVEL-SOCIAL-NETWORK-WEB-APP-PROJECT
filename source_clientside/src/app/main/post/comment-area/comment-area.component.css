@@ -1,6 +1,7 @@
 .auto
 {
-    width: 620px;
-    top:20px;
-    margin-left: 20px;
+    display: inline-block;
+    padding-left: 15px;
+    position: relative;
+    width: 90%;
 }

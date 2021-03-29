@@ -8,6 +8,8 @@
           <span>published: {{postData.dateCreated| date: 'dd/MM/yyyy'}}</span>
        </div>
        <app-post-meta [content]="postData.content" [imageUri]="postData.imageUri"></app-post-meta>
+       <span><mat-icon style ="margin-left: 20px; margin-top: 5px;">thumb_up_alt</mat-icon> 20</span>
+       <span class="infopost">10<a> Comments</a> /2 <a href=""> Shares</a></span>
       <button mat-icon-button [matMenuTriggerFor]="menu"
        aria-label="Example icon-button with a menu" class="left2">
        <mat-icon>arrow_drop_down</mat-icon>
@@ -27,9 +29,15 @@
       </button>
     </mat-menu>
     <div>
-      <button class="rcorners0" style="width: 220px;"mat-stroked-button><mat-icon>thumb_up_alt</mat-icon>Like</button>
-      <button class="rcorners0" style="width: 220px;"mat-stroked-button><mat-icon>chat_bubble_outline</mat-icon>Comment</button>
-      <button class="rcorners0" style="width: 220px;"mat-stroked-button><mat-icon>share</mat-icon>Share</button>
+      <mat-divider class="div-post1"></mat-divider>
+    </div>
+    <div>
+      <mat-divider class="div-post2"></mat-divider>
+    </div>
+    <div>
+      <button class="rcorners0" mat-stroked-button><mat-icon>thumb_up_alt</mat-icon>Like</button>
+      <button class="rcorners0" mat-stroked-button><mat-icon>chat_bubble_outline</mat-icon>Comment</button>
+      <button class="rcorners0" mat-stroked-button><mat-icon>share</mat-icon>Share</button>
    </div>
     </div>
     <div class="coment-area">
