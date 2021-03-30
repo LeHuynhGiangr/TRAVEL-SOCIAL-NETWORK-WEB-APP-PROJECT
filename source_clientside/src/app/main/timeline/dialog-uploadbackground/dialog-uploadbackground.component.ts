@@ -33,8 +33,6 @@ export class DialogUploadBackgroundComponent implements OnInit {
     this.appUsers = new AppUsers();
     //var user = await this.service.getUser();
     this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
-    this.appUsers.Id = UserProfile.Id
-
   }
 
   //display image before upload
@@ -57,7 +55,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
       const formData = new FormData();
       if (Image) {
         formData.append('MediaFile', this.background);
-        this.Iservice.postImage(formData);
+        await this.Iservice.postImage(formData);
         //this.dialogRef.close();
       }
       else
@@ -69,10 +67,10 @@ export class DialogUploadBackgroundComponent implements OnInit {
   async onSave() {
     try{
       const formData = new FormData();
-      formData.append('id', this.appUsers.Id);
+      formData.append('id', this.service.getUserIdStorage());
       if (Image) {
         formData.append('background', this.background);
-        await this.timeLineService.uploadBackground(this.appUsers.Id, formData);
+        await this.timeLineService.uploadBackground(this.service.getUserIdStorage(), formData);
         this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();

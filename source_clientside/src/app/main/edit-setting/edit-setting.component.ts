@@ -5,12 +5,7 @@ import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from '../../_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditSettingService } from '../../_core/services/edit-setting.service';
-import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
-import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { UserProfile } from '../../_core/data-repository/profile'
-import { UriHandler } from 'src/app/_helpers/uri-handler';
-import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
-import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 @Component({
     selector: 'app-edit-setting',
     templateUrl: './edit-setting.component.html',
@@ -21,8 +16,8 @@ export class EditSettingComponent implements OnInit {
 
   public appUsers: AppUsers;
   public m_returnUrl: string;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
-   private m_route: ActivatedRoute, private m_router: Router, private ESService: EditSettingService,public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
+  constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,public dialog: MatDialog,
+   private m_route: ActivatedRoute, private m_router: Router, private ESService: EditSettingService) {
     
   }
   
@@ -33,12 +28,8 @@ export class EditSettingComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    //var user = await this.service.getUser();
-    this.appUsers.Id = UserProfile.Id
-    //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = this.service.getFirstNameStorage()
     this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Email = UserProfile.Email
     this.appUsers.Gender = UserProfile.Gender
     this.appUsers.Works = UserProfile.Works
@@ -47,7 +38,6 @@ export class EditSettingComponent implements OnInit {
     this.appUsers.Address = UserProfile.Address
     this.appUsers.Descriptions = UserProfile.Description
     this.appUsers.BirthDay = UserProfile.BirthDay
-    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
     this.appUsers.FollowMe = UserProfile.FollowMe
     this.appUsers.RequestFriend = UserProfile.RequestFriend
     this.appUsers.ViewListFriend = UserProfile.ViewListFriend
@@ -56,7 +46,7 @@ export class EditSettingComponent implements OnInit {
   async onSave() {
     try{
       const formData = new FormData();
-      formData.append('id', this.appUsers.Id);
+      formData.append('id', this.service.getUserIdStorage());
       if (1) {
         formData.append('firstName', this.appUsers.FirstName);
         formData.append('lastName', this.appUsers.LastName);
@@ -98,13 +88,6 @@ export class EditSettingComponent implements OnInit {
   refresh(): void {
     this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/about';
     this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-    //window.location.reload();
-  }
-  getPath(){
-    return this.router.url;
-  }
-  onFileChanged(event) {
-    this.appUsers.Avatar = event.target.files[0]
   }
   onChange1 = (event: any) => {
     this.appUsers.ViewTimeLine = event.target.value;
@@ -117,43 +100,5 @@ export class EditSettingComponent implements OnInit {
   }
   onChange4 = (event: any) => {
     this.appUsers.RequestFriend = event.target.value;
-  }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
-      width: '500px',
-      height: '400px',
-      data: { Id: this.appUsers.Id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Avatar = user["avatar"]
-        }
-      });
-    });
-  }
-  openDialogBackground(): void {
-    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
-      width: '500px',
-      height: '400px',
-      data: { Id: this.appUsers.Id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Background = user["background"]
-        }
-      });
-    });
   }
 }

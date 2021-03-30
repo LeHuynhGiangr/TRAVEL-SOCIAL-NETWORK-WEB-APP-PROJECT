@@ -42,7 +42,7 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
 
         this.appUsers = new AppUsers();
         this.appUsers.Avatar = UserProfile.Avatar
-        this.appUsers.Id = UserProfile.Id
+        this.appUsers.Id = this.service.getUserIdStorage()
         this.getTripList()
         this.startTimer()
         UserProfile.count = 1

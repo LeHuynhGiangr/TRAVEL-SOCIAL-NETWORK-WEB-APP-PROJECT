@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
+
 @Component({
   selector: 'app-dialog-uploadavatar',
   templateUrl: './dialog-uploadavatar.component.html',
@@ -32,7 +33,6 @@ export class DialogUploadAvatarComponent implements OnInit {
   async ngOnInit() {
     this.appUsers = new AppUsers();
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+ UserProfile.Avatar
-    this.appUsers.Id=UserProfile.Id
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
@@ -60,7 +60,7 @@ export class DialogUploadAvatarComponent implements OnInit {
       const formData = new FormData();
       if (Image) {
         formData.append('MediaFile', this.avatar);
-        this.Iservice.postImage(formData);
+        await this.Iservice.postImage(formData);
         //this.dialogRef.close();
       }
       else
@@ -72,10 +72,10 @@ export class DialogUploadAvatarComponent implements OnInit {
   async onSave() {
     try{
       const formData = new FormData();
-      formData.append('id', this.appUsers.Id);
+      formData.append('id', this.service.getUserIdStorage());
       if (Image) {
         formData.append('avatar', this.avatar);
-        await this.timeLineService.uploadAvatar(this.appUsers.Id, formData);
+        await this.timeLineService.uploadAvatar(this.service.getUserIdStorage(), formData);
         this.saveImage()
         alert("Upload succesfully !")
         this.dialogRef.close();

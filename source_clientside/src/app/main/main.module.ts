@@ -78,9 +78,12 @@ import {RatingModule} from 'primeng/rating';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
-
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
+import { BackgroundAreaComponent } from './background-area/background-area.component';
+import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -174,6 +177,8 @@ export const mainRoutes: Routes = [
     ChatBoxComponent,
     UsersListTripComponent,
     PaymentHistoryDialogComponent,
+    BackgroundAreaComponent,
+    DialogUploadAvatarComponent
     //Primeng
   ],
   imports: [
@@ -205,6 +210,8 @@ export const mainRoutes: Routes = [
     ButtonModule,
     PanelModule,
     ScrollPanelModule,
+    MessagesModule,
+    MessageModule,
     //Module support
     ReadMoreModule,
     NgxEchartsModule.forRoot({
