@@ -40,7 +40,7 @@ export class VideosComponent implements OnInit {
     if(UserProfile.Id==UserProfile.IdTemp)
     {
       this.compareId =true
-      this.appUsers.FirstName=UserProfile.FirstName;
+      this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName=UserProfile.LastName;
       this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar;
       this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background;

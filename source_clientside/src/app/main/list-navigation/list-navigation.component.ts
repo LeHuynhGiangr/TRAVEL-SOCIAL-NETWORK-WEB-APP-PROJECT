@@ -17,7 +17,7 @@ export class ListNavigationComponent implements OnInit {
   ngOnInit(): void {
     this.appUsers = new AppUsers();
     this.appUsers.Id = UserProfile.Id
-    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.FirstName = this.service.getFirstNameStorage()
     this.appUsers.LastName = UserProfile.LastName
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
   }

@@ -28,7 +28,7 @@ export class InboxComponent implements OnInit {
       this.elementRef.nativeElement.appendChild(script);
 
       this.appUsers = new AppUsers();
-      this.appUsers.FirstName = UserProfile.FirstName
+      this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName = UserProfile.LastName
       this.appUsers.Avatar =  ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Background =  ApiUrlConstants.API_URL+"/"+UserProfile.Background

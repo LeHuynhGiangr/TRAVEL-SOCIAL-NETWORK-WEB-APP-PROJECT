@@ -31,13 +31,10 @@ export class EditBasicComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
-      return false;
-    }
 
     this.appUsers = new AppUsers();
     this.appUsers.Id = UserProfile.Id
-    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.FirstName = this.service.getFirstNameStorage()
     this.appUsers.LastName = UserProfile.LastName
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Email = UserProfile.Email
@@ -53,6 +50,9 @@ export class EditBasicComponent implements OnInit {
     this.appUsers.RequestFriend = UserProfile.RequestFriend
     this.appUsers.ViewListFriend = UserProfile.ViewListFriend
     this.appUsers.ViewTimeLine = UserProfile.ViewTimeLine
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
   }
   onSubmit() {
     console.log('title is:');
@@ -81,12 +81,12 @@ export class EditBasicComponent implements OnInit {
         formData.append('gender', this.appUsers.Gender);
         formData.append('phoneNumber', this.appUsers.PhoneNumber);
         formData.append('works', this.appUsers.Works);
+        this.EBService.setUserInfoStorage(this.appUsers.FirstName);
         this.EBService.uploadProfile(this.appUsers.Id,formData);
         alert("Upload succesfully !")
 
         //Refresh user after edit profile
         //var user = await this.service.getUser();
-        UserProfile.FirstName = this.appUsers.FirstName
         UserProfile.LastName = this.appUsers.LastName
         UserProfile.Email = this.appUsers.Email
         UserProfile.Address = this.appUsers.Address

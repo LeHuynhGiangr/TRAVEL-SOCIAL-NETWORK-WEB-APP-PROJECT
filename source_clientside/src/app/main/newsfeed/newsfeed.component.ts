@@ -85,8 +85,6 @@ export class NewsfeedComponent implements OnInit {
 
   getProfile(user)
   {   
-    UserProfile.IdTemp = UserProfile.Id
-    UserProfile.FirstName = user["firstName"]
     UserProfile.LastName = user["lastName"]
     UserProfile.Avatar = user["avatar"]
     UserProfile.Background = user["background"]

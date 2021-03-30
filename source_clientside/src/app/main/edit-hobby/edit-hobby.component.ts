@@ -38,7 +38,7 @@ export class EditHobbyComponent implements OnInit {
     //var user = await this.service.getUser();
     this.appUsers.Id = UserProfile.Id
     //console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName = UserProfile.FirstName
+    this.appUsers.FirstName = this.service.getFirstNameStorage()
     this.appUsers.LastName = UserProfile.LastName
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Language = UserProfile.Language

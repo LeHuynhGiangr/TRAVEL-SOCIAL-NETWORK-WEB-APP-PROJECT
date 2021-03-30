@@ -18,6 +18,7 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
 import { PostComment } from 'src/app/_core/models/post-comment.model';
 import { PostCommentResponse } from 'src/app/_core/models/models.response/post-comment-response';
+import { EditBasicService } from 'src/app/_core/services/edit-basic.service';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -48,7 +49,7 @@ export class TimelineComponent implements OnInit {
     {
       this.compareId =true
       this.appUsers.Id = UserProfile.Id
-      this.appUsers.FirstName = UserProfile.FirstName
+      this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName = UserProfile.LastName
       this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background

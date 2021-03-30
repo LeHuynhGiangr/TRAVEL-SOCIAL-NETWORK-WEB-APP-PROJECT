@@ -10,6 +10,7 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { MatDialog } from '@angular/material/dialog';
 import {PaymentHistoryDialogComponent} from '../../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
+import { EditBasicService } from 'src/app/_core/services/edit-basic.service';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -35,7 +36,7 @@ export class HeaderComponent implements OnInit {
       this.appUsers = new AppUsers();
       this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Id = UserProfile.Id
-      this.appUsers.FirstName = UserProfile.FirstName
+      this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName = UserProfile.LastName
     }
     onLogout() {

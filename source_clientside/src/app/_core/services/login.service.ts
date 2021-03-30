@@ -88,7 +88,7 @@ export class LoginService {
             if (res["active"] == true) {
                 alert("Login successfully")
                 this.setToken(res.jwtToken);
-                this.saveUserIdStorage(res["id"],res["firstName"]);
+                this.saveUserStorage(res["id"],res["firstName"]);
                 await this.getUser();
             }
             else {
@@ -107,10 +107,9 @@ export class LoginService {
         this.currentUser.next(null);
     }
 
-    saveUserIdStorage = (userId: string,firstName:string) => {
+    saveUserStorage = (userId: string,firstName:string) => {
         localStorage.setItem('userId', userId)
         localStorage.setItem('firstName',firstName)
-        console.log(userId);
     }
 
     getUserIdStorage = () => {
@@ -131,11 +130,9 @@ export class LoginService {
     getToken = () => {
         return localStorage.getItem(SystemConstants.LOCAL_STORED_JWT_Key);
     };
-
+    
     getConfigToken = () => {
         const token = this.getToken();
         return token ? 'Bearer ' + token : undefined;
     }
-
-
 }

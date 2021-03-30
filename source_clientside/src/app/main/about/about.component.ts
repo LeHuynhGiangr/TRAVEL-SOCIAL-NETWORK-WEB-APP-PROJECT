@@ -10,6 +10,7 @@ import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { EditBasicService } from 'src/app/_core/services/edit-basic.service';
 @Component({
     selector: 'app-about',
     templateUrl: './about.component.html',
@@ -22,7 +23,8 @@ export class AboutComponent implements OnInit {
   public m_returnUrl: string;
   compareId: boolean;
   constructor( private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
-  private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog, public uriHandler:UriHandler,public timelineurl:TimelineUrl) {
+  private m_route: ActivatedRoute, private m_router: Router,public dialog: MatDialog, public uriHandler:UriHandler,
+  public timelineurl:TimelineUrl) {
     
   }
   
@@ -31,14 +33,12 @@ export class AboutComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
-       return false;
-     }
+
     this.appUsers = new AppUsers();
     if(UserProfile.Id==UserProfile.IdTemp)
     {
       this.compareId =true
-      this.appUsers.FirstName=UserProfile.FirstName
+      this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName=UserProfile.LastName
       this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Descriptions = UserProfile.Description
@@ -81,6 +81,9 @@ export class AboutComponent implements OnInit {
       this.appUsers.Hobby = user["hobby"]
       this.appUsers.Language = user["language"]
       this.appUsers.Gender = user["gender"]
+    }
+    this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
     }
   }
 

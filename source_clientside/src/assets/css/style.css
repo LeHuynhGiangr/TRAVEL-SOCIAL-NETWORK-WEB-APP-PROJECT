@@ -127,7 +127,7 @@ section {
 
 .gap {
     float: left;
-    padding: 60px 0;
+    padding: 20px 0;
     position: relative;
     width: 100%;
 }
@@ -3334,7 +3334,7 @@ nav.breadcrumb {
     border-bottom: 1px solid #e1e8ed;
     border-top: 1px solid #e1e8ed;
     float: left;
-    padding: 30px 15px;
+    padding: 5px 5px;
     width: 100%;
 }
 .page-header .breadcrumb {
