@@ -9,10 +9,13 @@ import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ImageService } from '../../../_core/services/images.service';
 import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
+import { MessageService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-dialog-uploadbackground',
   templateUrl: './dialog-uploadbackground.component.html',
-  styleUrls: ['./dialog-uploadbackground.component.css']
+  styleUrls: ['./dialog-uploadbackground.component.css'],
+  providers: [MessageService]
 })
 export class DialogUploadBackgroundComponent implements OnInit {
   public appUsers: AppUsers;
@@ -22,7 +25,7 @@ export class DialogUploadBackgroundComponent implements OnInit {
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
     private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService) {
+    public Iservice:ImageService, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
 
   }
   onNoClick(): void {
@@ -31,10 +34,21 @@ export class DialogUploadBackgroundComponent implements OnInit {
 
   async ngOnInit() {
     this.appUsers = new AppUsers();
-    //var user = await this.service.getUser();
     this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
+    this.primengConfig.ripple = true;
   }
-
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
+    setTimeout(() => {
+      this.dialogRef.close();
+   }, 1000)
+  }
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Message Content'});
+    setTimeout(() => {
+      this.dialogRef.close();
+    }, 1000)
+  }
   //display image before upload
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -56,11 +70,10 @@ export class DialogUploadBackgroundComponent implements OnInit {
       if (Image) {
         formData.append('MediaFile', this.background);
         await this.Iservice.postImage(formData);
-        //this.dialogRef.close();
       }
       else
       {
-        alert("Upload failure !")
+        this.showError()
       }
 
   }
@@ -72,24 +85,16 @@ export class DialogUploadBackgroundComponent implements OnInit {
         formData.append('background', this.background);
         await this.timeLineService.uploadBackground(this.service.getUserIdStorage(), formData);
         this.saveImage()
-        alert("Upload succesfully !")
-        this.dialogRef.close();
-        //this.refresh()
+        this.showSuccess()
       }
       else
       {
-        alert("Upload failure !")
+        this.showError()
       }
     }
     catch(e)
     {
-      alert("Upload failure !")
+      this.showError()
     }
-  }
-  
-  refresh(): void {
-    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/images';
-    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-    //window.location.reload();
   }
 }

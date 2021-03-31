@@ -29,6 +29,7 @@ export class LoginService {
                 }
             }
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_LOAD_USERBYID_URL + id).toPromise();
+            this.saveUserInfoStorage(result["firstName"],result["avatar"], result["background"]);
             return result
         }
         catch (e) {
@@ -88,8 +89,8 @@ export class LoginService {
             if (res["active"] == true) {
                 alert("Login successfully")
                 this.setToken(res.jwtToken);
-                this.saveUserStorage(res["id"],res["firstName"]);
-                await this.getUser();
+                this.saveIdUserStorage(res["id"]);
+                await this.getUserById(this.getUserIdStorage());
             }
             else {
                 alert("Account is blocked")
@@ -107,9 +108,13 @@ export class LoginService {
         this.currentUser.next(null);
     }
 
-    saveUserStorage = (userId: string,firstName:string) => {
+    saveIdUserStorage = (userId: string) => {
         localStorage.setItem('userId', userId)
+    }
+    saveUserInfoStorage = (firstName:string, avatar:string, background:string) => {
         localStorage.setItem('firstName',firstName)
+        localStorage.setItem('avatar',avatar)
+        localStorage.setItem('background',background)
     }
 
     getUserIdStorage = () => {
@@ -118,7 +123,12 @@ export class LoginService {
     getFirstNameStorage = () => {
         return localStorage.getItem('firstName').toString();
     }
-
+    getAvatarStorage = () => {
+        return localStorage.getItem('avatar').toString();
+    }
+    getBackgroundStorage = () => {
+        return localStorage.getItem('background').toString();
+    }
     setToken = (token) => {
         localStorage.setItem(SystemConstants.LOCAL_STORED_JWT_Key, token);
     };

@@ -28,58 +28,6 @@ export class MessagesComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-
-    this.appUsers = new AppUsers();
-    //var user = await this.service.getUser();
-    //console.log(user["firstName"]+" "+user["lastName"]);
-    this.appUsers.FirstName = this.service.getFirstNameStorage()
-    this.appUsers.LastName = UserProfile.LastName
-    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
-    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
-  }
- 
-  onFileChanged(event) {
-    this.appUsers.Avatar = event.target.files[0]
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
-      width: '500px',
-      height: '400px',
-      data: { Id: this.appUsers.Id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Avatar = user["avatar"]
-        }
-      });
-    });
-  }
-  openDialogBackground(): void {
-    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
-      width: '500px',
-      height: '400px',
-      data: { Id: this.appUsers.Id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-          console.log(user["firstName"] + " " + user["lastName"]);
-          this.appUsers.Id = user["id"].toString();
-          this.appUsers.Background = user["background"]
-        }
-      });
-
-    });
   }
   returnId()
     {

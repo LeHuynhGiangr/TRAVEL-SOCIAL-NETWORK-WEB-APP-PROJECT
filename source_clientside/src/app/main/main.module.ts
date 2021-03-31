@@ -80,10 +80,13 @@ import {PanelModule} from 'primeng/panel';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
+import {RippleModule} from 'primeng/ripple';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
 import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
+import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -178,7 +181,8 @@ export const mainRoutes: Routes = [
     UsersListTripComponent,
     PaymentHistoryDialogComponent,
     BackgroundAreaComponent,
-    DialogUploadAvatarComponent
+    DialogUploadAvatarComponent,
+    DialogUploadBackgroundComponent
     //Primeng
   ],
   imports: [
@@ -212,6 +216,8 @@ export const mainRoutes: Routes = [
     ScrollPanelModule,
     MessagesModule,
     MessageModule,
+    ToastModule,
+    RippleModule,
     //Module support
     ReadMoreModule,
     NgxEchartsModule.forRoot({

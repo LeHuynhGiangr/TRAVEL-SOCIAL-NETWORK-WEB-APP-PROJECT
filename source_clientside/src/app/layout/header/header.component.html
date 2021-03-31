@@ -126,7 +126,7 @@
         </ul>
         <ul class="setting-area">
             <li>
-                <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
+                <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" class="rcorners2" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
             </li>
             <li>
                 <button class="top" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

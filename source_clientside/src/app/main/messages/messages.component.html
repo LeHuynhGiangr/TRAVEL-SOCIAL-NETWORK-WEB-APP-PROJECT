@@ -1,56 +1,5 @@
 <app-header></app-header>	
-	<section>
-		<div class="feature-photo">
-			<figure><img src="{{this.appUsers.Background}}" style="width: 1600px; height: 450px;" alt=""></figure>
-			<div class="add-btn">
-				<span>1205 followers</span>
-				<a href="#" title="" data-ripple="">Add Friend</a>
-			</div>
-			<form class="edit-phto" (click)="openDialogBackground()">
-				<i class="fa fa-camera-retro"></i>
-				<label class="fileContainer">
-					Edit Cover Photo
-				</label>
-			</form>
-			<div class="container-fluid">
-				<div class="row merged">
-					<div class="col-lg-2 col-sm-3">
-						<div class="user-avatar">
-							<figure>
-								<img src="{{this.appUsers.Avatar}}" style="width: 250px; height: 200px;" alt="">
-								<form class="edit-phto" (click)=openDialog()>
-									<i class="fa fa-camera-retro"></i>
-									<label class="fileContainer">
-										Edit Display Photo
-									</label>
-								</form>
-							</figure>
-						</div>
-					</div>
-					<div class="col-lg-10 col-sm-9">
-						<div class="timeline-info">
-							<ul>
-								<li class="admin-name">
-									<h5><strong>{{this.appUsers.FirstName+" "+this.appUsers.LastName}}</strong></h5>
-									<span>My Messages</span>
-								</li>
-								<li>
-									<a class="active" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" [routerLink]="['/timeline/:', this.appUsers.Id]" title="" data-ripple="">time line</a>
-									<a class="" (click)="returnId()" [routerLink]="['/main/images']" title="" data-ripple="">Photos</a>
-									<a class="" (click)="returnId()" [routerLink]="['/main/videos']" title="" data-ripple="">Videos</a>
-									<a class="" (click)="returnId()" [routerLink]="['/main/friends']" title="" data-ripple="">Friends</a>
-									<a class="" (click)="returnId()" [routerLink]="['/main/groups']" title="" data-ripple="">Groups</a>
-									<a class="" (click)="returnId()" [routerLink]="['/main/about']" title="" data-ripple="">about</a>
-									<a class="" (click)="returnId()" [routerLink]="['/main/about']" title="" data-ripple="">more</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section><!-- top area -->
-
+	<app-background-area></app-background-area>
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -59,42 +8,8 @@
 						<div class="row" id="page-contents">
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-									<div class="advertisment-box">
-										<h4 class="">advertisment</h4>
-										<figure>
-											<a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.jpg" alt=""></a>
-										</figure>
-									</div>
-									<div class="widget stick-widget">
-										<h4 class="widget-title">Shortcuts</h4>
-										<ul class="naves">
-											<li>
-												<i class="ti-clipboard"></i>
-												<a [routerLink]="['/main/home']" title="">News feed</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a [routerLink]="['/main/inbox']" title="">Inbox</a>
-											</li>
-											<li>
-												<i class="ti-files"></i>
-												<a [routerLink]="['/main/fanpage']" title="">My pages</a>
-											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a [routerLink]="['/main/friends']" title="">friends</a>
-											</li>
-											<li>
-												<i class="ti-image"></i>
-												<a [routerLink]="['/main/images']" title="">images</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a [routerLink]="['/main/videos']" title="">videos</a>
-											</li>
-											
-										</ul>
-									</div><!-- Shortcuts -->										
+									<!-- Shortcuts -->
+									<app-list-navigation></app-list-navigation>										
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">

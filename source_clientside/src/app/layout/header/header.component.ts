@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
       
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
-      this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+      this.appUsers.Avatar = ApiUrlConstants.API_URL + "/" + this.service.getAvatarStorage()
       this.appUsers.Id = UserProfile.Id
       this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName = UserProfile.LastName

@@ -16,6 +16,11 @@
     border: 0px solid #8eccf0;
     padding:7px; 
   }
+  .rcorners2 {
+    border-radius: 15px;
+    border: 0px solid #8eccf0;
+    padding:2px; 
+  }
   .left
   {
       right: 70px;

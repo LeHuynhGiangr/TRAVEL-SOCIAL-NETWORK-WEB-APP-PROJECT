@@ -12,6 +12,7 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
 import { PostComment } from 'src/app/_core/models/post-comment.model';
 import { PostCommentResponse } from 'src/app/_core/models/models.response/post-comment-response';
+import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -25,7 +26,7 @@ export class TimelineComponent implements OnInit {
   time: number = 0;
   public m_posts:Post[];
   constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-     public dialog: MatDialog,private Pservice:PostService) {
+     public dialog: MatDialog,private Pservice:PostService, private service: LoginService) {
   }
 
   async ngOnInit() {
@@ -37,7 +38,7 @@ export class TimelineComponent implements OnInit {
       return false;
     }
     this.appUsers = new AppUsers();
-    this.appUsers.Avatar = ApiUrlConstants.API_URL + "/" + UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL + "/" + this.service.getAvatarStorage()
     this.loadPostData();
     this.startTimer()
   }

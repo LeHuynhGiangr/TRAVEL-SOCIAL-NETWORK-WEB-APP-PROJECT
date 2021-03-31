@@ -37,4 +37,10 @@ export class TimeLineService {
             console.log("ok");
         }
     }
+    setAvatarStorage = (avatar:string) => {
+        localStorage.setItem('avatar', avatar)
+    }
+    setBackgroundStorage = (background:string) => {
+        localStorage.setItem('background', background)
+    }
 }

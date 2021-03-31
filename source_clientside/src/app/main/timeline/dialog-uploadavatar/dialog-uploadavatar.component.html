@@ -7,8 +7,9 @@
 <br>
 <br>
 <div mat-dialog-actions class="myDiv">
-    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
+    <button type="button" pButton pRipple (click)="onSave()"label="Save" class="p-button-primary"></button>
     <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
 </div>
+<p-toast></p-toast>
 
 

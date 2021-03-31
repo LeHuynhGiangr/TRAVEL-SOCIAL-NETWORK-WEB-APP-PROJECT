@@ -10,6 +10,7 @@ import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 import { DialogUploadBackgroundComponent } from '../timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { DialogUploadAvatarComponent } from '../timeline/dialog-uploadavatar/dialog-uploadavatar.component';
+import { TimeLineService } from 'src/app/_core/services/timeline.service';
 @Component({
     selector: 'app-background-area',
     templateUrl: './background-area.component.html',
@@ -23,7 +24,7 @@ export class BackgroundAreaComponent implements OnInit {
     compareId: boolean;
     constructor(private m_route: ActivatedRoute, private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc 
     ,private service: LoginService, public dialog: MatDialog,
-    public timelineurl:TimelineUrl) {
+    public timelineurl:TimelineUrl, private timeLineService: TimeLineService) {
       
     }
     
@@ -39,11 +40,11 @@ export class BackgroundAreaComponent implements OnInit {
         this.appUsers = new AppUsers();
         if(this.service.getUserIdStorage()==UserProfile.IdTemp)
         {
-            this.compareId =true
+            this.compareId = true
             this.appUsers.FirstName = this.service.getFirstNameStorage()
             this.appUsers.LastName=UserProfile.LastName;
-            this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar;
-            this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background;
+            this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+ this.service.getAvatarStorage()
+            this.appUsers.Background = ApiUrlConstants.API_URL+"/"+ this.service.getBackgroundStorage()
         }
 
         if(this.service.getUserIdStorage()!=UserProfile.IdTemp)
@@ -65,15 +66,11 @@ export class BackgroundAreaComponent implements OnInit {
           data: { Id: this.appUsers.Id }
         });
     
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(async result => {
           console.log('The dialog was closed');
-          console.log(result);
-          this.service.getUser().then(user => {
-            if (user) {
-              this.appUsers.Avatar = user["avatar"]
-              UserProfile.Avatar = user["avatar"]
-            }
-          });
+          const avt = await this.service.getUserById(this.service.getUserIdStorage())
+          this.timeLineService.setAvatarStorage(avt["avatar"])
+          this.appUsers.Avatar = ApiUrlConstants.API_URL + "/" + this.service.getAvatarStorage()
         });
       }
       openDialogBackground(): void {
@@ -83,15 +80,11 @@ export class BackgroundAreaComponent implements OnInit {
           data: { Id: this.appUsers.Id }
         });
     
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(async result => {
           console.log('The dialog was closed');
-          console.log(result);
-          this.service.getUser().then(user => {
-            if (user) {
-              this.appUsers.Background = user["background"]
-              UserProfile.Background = user["background"]
-            }
-          });
+          const bgr = await this.service.getUserById(this.service.getUserIdStorage())
+          this.timeLineService.setBackgroundStorage(bgr["background"])
+          this.appUsers.Background = ApiUrlConstants.API_URL + "/" + this.service.getBackgroundStorage()
     
         });
       }
