@@ -7,5 +7,15 @@ namespace WebSocketLib
 {
     class ConnectionObject :Dictionary<Guid, WebSocket>
     {
+        private WebSocket webSocket;
+        public WebSocket WebSocket { get; set; }
+        bool IsSynchronize()
+        {
+            return default(bool);
+        }
+        bool IsDisconnected()
+        {
+            return default(bool);
+        }
     }
 }
