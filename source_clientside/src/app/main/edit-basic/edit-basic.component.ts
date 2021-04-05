@@ -27,7 +27,7 @@ export class EditBasicComponent implements OnInit {
 
     this.appUsers = new AppUsers();
     this.appUsers.FirstName = this.service.getFirstNameStorage()
-    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.LastName = this.service.getLastNameStorage()
     this.appUsers.Email = UserProfile.Email
     this.appUsers.Gender = UserProfile.Gender
     this.appUsers.Works = UserProfile.Works
@@ -76,7 +76,6 @@ export class EditBasicComponent implements OnInit {
 
         //Refresh user after edit profile
         //var user = await this.service.getUser();
-        UserProfile.LastName = this.appUsers.LastName
         UserProfile.Email = this.appUsers.Email
         UserProfile.Address = this.appUsers.Address
         UserProfile.BirthDay = this.appUsers.BirthDay

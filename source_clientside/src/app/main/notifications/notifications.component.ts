@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
     //var user = await this.service.getUser();
     //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = this.service.getFirstNameStorage()
-    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.LastName = this.service.getLastNameStorage()
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
     this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
   }

@@ -64,7 +64,7 @@
                                             <mat-icon>more_vert</mat-icon>
                                         </button>
                                         <mat-menu #menu="matMenu">
-                                            <button mat-menu-item *ngIf="this.appUsers.Id === trip.authorId">
+                                            <button mat-menu-item *ngIf="this.service.getUserIdStorage() === trip.authorId">
                                                 <mat-icon>edit</mat-icon>
                                                 <span>edit</span>
                                             </button>
@@ -72,7 +72,7 @@
                                                 <mat-icon>report_problem</mat-icon>
                                                 <span>report</span>
                                             </button>
-                                            <button mat-menu-item *ngIf="this.appUsers.Id === trip.authorId">
+                                            <button mat-menu-item *ngIf="this.service.getUserIdStorage() === trip.authorId">
                                                 <mat-icon>delete</mat-icon>
                                                 <span>delete</span>
                                             </button>
@@ -104,8 +104,8 @@
                                                 <div>
                                                     <app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
                                                     <span><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span>
-                                                    <button class="btn btn-primary left" mat-button *ngIf="this.appUsers.Id != trip.authorId">Message</button>
-                                                    <button class="btn btn-primary left" mat-button (click)="AddFriendDialog(trip.Id)" *ngIf="this.appUsers.Id === trip.authorId">Info Passesngers</button>
+                                                    <button class="btn btn-primary left" mat-button *ngIf="this.service.getUserIdStorage() != trip.authorId">Message</button>
+                                                    <button class="btn btn-primary left" mat-button (click)="AddFriendDialog(trip.Id)" *ngIf="this.service.getUserIdStorage() === trip.authorId">Info Passesngers</button>
                                                 </div>
                                             </div>
                                         </div>

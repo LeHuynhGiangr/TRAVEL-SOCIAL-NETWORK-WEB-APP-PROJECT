@@ -29,7 +29,7 @@ export class InboxComponent implements OnInit {
 
       this.appUsers = new AppUsers();
       this.appUsers.FirstName = this.service.getFirstNameStorage()
-      this.appUsers.LastName = UserProfile.LastName
+      this.appUsers.LastName = this.service.getLastNameStorage()
       this.appUsers.Avatar =  ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
       this.appUsers.Background =  ApiUrlConstants.API_URL+"/"+UserProfile.Background
     }

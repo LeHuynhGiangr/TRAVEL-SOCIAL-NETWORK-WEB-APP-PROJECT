@@ -18,7 +18,7 @@ export class ListNavigationComponent implements OnInit {
     this.appUsers = new AppUsers();
     this.appUsers.Id = UserProfile.Id
     this.appUsers.FirstName = this.service.getFirstNameStorage()
-    this.appUsers.LastName = UserProfile.LastName
+    this.appUsers.LastName = this.service.getLastNameStorage()
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
   }
 }

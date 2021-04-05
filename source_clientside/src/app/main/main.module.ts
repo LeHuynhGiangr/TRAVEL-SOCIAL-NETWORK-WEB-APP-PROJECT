@@ -82,6 +82,9 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {RippleModule} from 'primeng/ripple';
+import {DialogModule} from 'primeng/dialog';
+import {AvatarModule} from 'primeng/avatar';
+import {CardModule} from 'primeng/card';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
@@ -218,6 +221,9 @@ export const mainRoutes: Routes = [
     MessageModule,
     ToastModule,
     RippleModule,
+    DialogModule,
+    CardModule,
+    AvatarModule,
     //Module support
     ReadMoreModule,
     NgxEchartsModule.forRoot({

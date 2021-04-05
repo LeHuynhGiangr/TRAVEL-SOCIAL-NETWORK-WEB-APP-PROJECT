@@ -86,9 +86,6 @@ export class NewsfeedComponent implements OnInit {
   getProfile(user)
   {   
     UserProfile.IdTemp = this.service.getUserIdStorage()
-    UserProfile.LastName = user["lastName"]
-    UserProfile.Avatar = user["avatar"]
-    UserProfile.Background = user["background"]
     UserProfile.Language = user["language"]
     UserProfile.Location = user["location"]
     UserProfile.Password = user["password"]

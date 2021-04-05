@@ -20,7 +20,6 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
     styleUrls: ['./trip.component.css']
   })
   export class TripComponent implements OnInit {
-    public appUsers: AppUsers;
     public trips:any
     public tripList = new Array<Trips>();
     play:boolean
@@ -32,7 +31,7 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
       private PService:PagesService,public pageurl:PageUrl, public tripurl:TripUrl) {
-  
+        
     }
     async ngOnInit() {
         var script = document.createElement("script");
@@ -40,9 +39,6 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
         script.src = "../assets/js/script.js";
         this.elementRef.nativeElement.appendChild(script);
 
-        this.appUsers = new AppUsers();
-        this.appUsers.Avatar = UserProfile.Avatar
-        this.appUsers.Id = this.service.getUserIdStorage()
         this.getTripList()
         this.startTimer()
         UserProfile.count = 1
@@ -92,13 +88,15 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description
-          trip.Image = this.trips[i].image
+          trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
-          trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
-          const user = await this.service.getUserById(trip.authorId)
-          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
-          trip.authorName = user["firstName"]+" "+user["lastName"]
+          trip.PageId = this.trips[i].pageId
+          const page = await this.PService.getPageById(trip.PageId)
+          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
+          trip.authorName = page["name"]
+          trip.Cost = this.trips[i].cost
+          trip.Content = this.trips[i].content
           this.tripList.push(trip)
       }
     }

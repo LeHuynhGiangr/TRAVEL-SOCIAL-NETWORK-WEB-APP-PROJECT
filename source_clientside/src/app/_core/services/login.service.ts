@@ -29,7 +29,7 @@ export class LoginService {
                 }
             }
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_LOAD_USERBYID_URL + id).toPromise();
-            this.saveUserInfoStorage(result["firstName"],result["avatar"], result["background"]);
+            this.saveUserInfoStorage(result["firstName"],result['lastName'],result["avatar"], result["background"]);
             return result
         }
         catch (e) {
@@ -111,8 +111,9 @@ export class LoginService {
     saveIdUserStorage = (userId: string) => {
         localStorage.setItem('userId', userId)
     }
-    saveUserInfoStorage = (firstName:string, avatar:string, background:string) => {
+    saveUserInfoStorage = (firstName:string, lastName:string, avatar:string, background:string) => {
         localStorage.setItem('firstName',firstName)
+        localStorage.setItem('lastName',lastName)
         localStorage.setItem('avatar',avatar)
         localStorage.setItem('background',background)
     }
@@ -122,6 +123,9 @@ export class LoginService {
     }
     getFirstNameStorage = () => {
         return localStorage.getItem('firstName').toString();
+    }
+    getLastNameStorage = () => {
+        return localStorage.getItem('lastName').toString();
     }
     getAvatarStorage = () => {
         return localStorage.getItem('avatar').toString();

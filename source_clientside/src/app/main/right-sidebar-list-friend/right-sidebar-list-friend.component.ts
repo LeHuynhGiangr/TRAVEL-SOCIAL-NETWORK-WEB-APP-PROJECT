@@ -8,6 +8,8 @@ import { UriHandler } from 'src/app/_helpers/uri-handler';
   styleUrls: ['./right-sidebar-list-friend.component.css']
 })
 export class RightSidebarListFriendComponent implements OnInit {
+  display: boolean = false;
+
   public m_friends:{
     Id:string,
     Name:string,
@@ -23,5 +25,8 @@ export class RightSidebarListFriendComponent implements OnInit {
   loadFriendData(){
     this.m_chattingService.getFriendDataById().subscribe(jsonData => {
       this.m_friends=jsonData.friendJsonString});
+  }
+  showDialog() {
+    this.display = true;
   }
 }

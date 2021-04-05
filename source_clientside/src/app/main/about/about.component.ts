@@ -30,6 +30,8 @@ export class AboutComponent implements OnInit {
     if(this.service.getUserIdStorage()==UserProfile.IdTemp)
     {
       this.compareId =true
+      this.appUsers.FirstName = this.service.getFirstNameStorage()
+      this.appUsers.LastName = this.service.getLastNameStorage()
       this.appUsers.Descriptions = UserProfile.Description
       this.appUsers.Address = UserProfile.Address
       this.appUsers.PhoneNumber = UserProfile.PhoneNumber

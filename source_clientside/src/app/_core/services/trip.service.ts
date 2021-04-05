@@ -41,15 +41,8 @@ export class TripService {
         }
     }
     getAllTrips = async () => {
-        try {
-       
-            const config = {
-                headers: {
-                    Authorization: this.service.getConfigToken()
-                }
-            }
-            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIP_URL, config).toPromise();
-            console.log(result)
+        try {   
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIP_URL).toPromise();
             return result;
         }
         catch (e) {
