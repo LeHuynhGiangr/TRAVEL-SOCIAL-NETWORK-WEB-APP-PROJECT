@@ -42,9 +42,6 @@ export class LoginComponent implements OnInit {
     });
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
     if (UserProfile.Id!=null) {
-      const user = await this.service.getUser() as any;
-      UserProfile.Avatar = user["avatar"];
-      UserProfile.Background = user["background"];
       return this.m_router.navigateByUrl("/main", { skipLocationChange: true });
     }
   }
@@ -76,8 +73,7 @@ export class LoginComponent implements OnInit {
     this.service.login(this.m_formValue.username.value, this.m_formValue.password.value).then(async (result) => {
       if (result) {
         const user = await this.service.getUser() as any;
-        UserProfile.Avatar = user["avatar"];
-        // this.m_authenService.startRefreshTokenTimer();
+
         this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main';
         
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});

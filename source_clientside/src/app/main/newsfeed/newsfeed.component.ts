@@ -38,8 +38,8 @@ export class NewsfeedComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    var user = await this.service.getUser();
-    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar;
+    var user = await this.service.getUser()
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+this.service.getAvatarStorage();
     this.loadPostData();
     this.getProfile(user);
     this.startTimer()

@@ -112,13 +112,14 @@ export class FanpageComponent implements OnInit {
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description
-          trip.Image = this.trips[i].image
+          trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
-          trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
-          const user = await this.service.getUserById(trip.authorId)
-          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+user["avatar"]
-          trip.authorName = user["firstName"]+" "+user["lastName"]
+          trip.PageId = this.trips[i].pageId
+          const page = await this.PService.getPageById(trip.PageId)
+          trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
+          trip.authorName = page["name"]
+          trip.Cost = this.trips[i].cost
           this.tripList.push(trip)
       }
     }

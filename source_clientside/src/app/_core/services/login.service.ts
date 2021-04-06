@@ -29,7 +29,6 @@ export class LoginService {
                 }
             }
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_LOAD_USERBYID_URL + id).toPromise();
-            this.saveUserInfoStorage(result["firstName"],result['lastName'],result["avatar"], result["background"]);
             return result
         }
         catch (e) {
@@ -41,8 +40,7 @@ export class LoginService {
         try {
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_LOAD_MAINUSER_URL).toPromise();
             this.currentUser.next(result);
-            UserProfile.Id = this.getUserIdStorage();
-            UserProfile.FirstName = this.getFirstNameStorage()
+            this.saveUserInfoStorage(result["firstName"],result['lastName'],result["avatar"], result["background"]);
             return result;
         }
         catch (e) {
@@ -90,7 +88,7 @@ export class LoginService {
                 alert("Login successfully")
                 this.setToken(res.jwtToken);
                 this.saveIdUserStorage(res["id"]);
-                await this.getUserById(this.getUserIdStorage());
+                await this.getUser();
             }
             else {
                 alert("Account is blocked")

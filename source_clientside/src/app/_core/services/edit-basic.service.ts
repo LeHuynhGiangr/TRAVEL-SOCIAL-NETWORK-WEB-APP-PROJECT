@@ -38,7 +38,8 @@ export class EditBasicService {
             // this.removeToken();
         }
     }
-    setUserInfoStorage = (firstName:string) => {
+    setUserInfoStorage = (firstName:string, lastName:string) => {
         localStorage.setItem('firstName',firstName)
+        localStorage.setItem('lastName',lastName)
     }
 }

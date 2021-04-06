@@ -71,6 +71,7 @@ export class EditBasicComponent implements OnInit {
         formData.append('gender', this.appUsers.Gender);
         formData.append('phoneNumber', this.appUsers.PhoneNumber);
         formData.append('works', this.appUsers.Works);
+        this.EBService.setUserInfoStorage(this.appUsers.FirstName, this.appUsers.LastName)
         this.EBService.uploadProfile(this.service.getUserIdStorage(),formData);
         alert("Upload succesfully !")
 
