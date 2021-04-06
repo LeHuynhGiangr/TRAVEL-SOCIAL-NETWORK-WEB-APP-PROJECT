@@ -38,6 +38,7 @@ namespace Data.EF
         public DbSet<OTP> OTPs { get; set; }
         public DbSet<Chatting> Chattings { get; set; }
 
+        public DbSet<ReviewPage> ReviewPages { get; set; }
 
         //end declare entites
 
@@ -80,16 +81,6 @@ namespace Data.EF
               .HasOne(sc => sc.User)
               .WithMany(s => s.Trips)
               .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
-
-
-            // builder.Entity<UserJoinTrip>().HasMany(i => i.User).WithRequired().WillCascadeOnDelete(false);
-
-            //end configure
-
-            //seeding data by extension method
-            //builder.SeedData();
-
-            //base.OnModelCreating(builder);
         }
         
         public override int SaveChanges()
