@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     });
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
     if (UserProfile.Id!=null) {
+      const user = await this.service.getUser() as any;
       return this.m_router.navigateByUrl("/main", { skipLocationChange: true });
     }
   }

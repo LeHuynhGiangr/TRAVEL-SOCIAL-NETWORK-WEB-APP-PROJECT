@@ -8,6 +8,9 @@ import { AppUsers } from '../../../login/shared/login.model';
 import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
 import { PostComment } from 'src/app/_core/models/post-comment.model';
 import { PostService } from 'src/app/_core/services/post.service';
+import { PrimeNGConfig } from 'primeng/api';  
+import {MenuItem, PrimeIcons} from 'primeng/api';
+import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
   selector: 'app-comment-area',
   templateUrl: './comment-area.component.html',
@@ -18,12 +21,12 @@ export class CommentAreaComponent implements OnInit {
   @Output() submitCommentEvent = new EventEmitter<string>();
   public m_returnUrl: string;
   public appUsers: AppUsers;
-  constructor(private m_postService:PostService, public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute, private m_router: Router) {
+  constructor(private m_postService:PostService, private service : LoginService, public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute, private m_router: Router) {
    }
 
   ngOnInit(): void {
     this.appUsers = new AppUsers();
-    this.appUsers.Avatar =ApiUrlConstants.API_URL + "/" + UserProfile.Avatar;
+    this.appUsers.Avatar =ApiUrlConstants.API_URL + "/" + this.service.getAvatarStorage();
   }
 
   getNavigation( id) {
