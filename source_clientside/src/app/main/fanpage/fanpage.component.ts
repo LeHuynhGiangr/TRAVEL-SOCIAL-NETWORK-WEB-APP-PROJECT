@@ -43,7 +43,7 @@ export class FanpageComponent implements OnInit {
       this.router.routeReuseStrategy.shouldReuseRoute = () =>{
         return false;
       }
-      this.userid=UserProfile.Id
+      this.userid=this.service.getUserIdStorage()
       this.getPage()
       this.startTimer()
       this.getTripList()

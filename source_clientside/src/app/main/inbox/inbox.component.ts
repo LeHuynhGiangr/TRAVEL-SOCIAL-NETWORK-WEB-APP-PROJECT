@@ -30,7 +30,7 @@ export class InboxComponent implements OnInit {
       this.appUsers = new AppUsers();
       this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName = this.service.getLastNameStorage()
-      this.appUsers.Avatar =  ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+      this.appUsers.Avatar =  ApiUrlConstants.API_URL+"/"+this.service.getAvatarStorage()
       this.appUsers.Background =  ApiUrlConstants.API_URL+"/"+UserProfile.Background
     }
     getPath(){
@@ -81,6 +81,6 @@ export class InboxComponent implements OnInit {
     }
     returnId()
     {
-      UserProfile.IdTemp = UserProfile.Id
+      UserProfile.IdTemp = this.service.getUserIdStorage()
     }
 }

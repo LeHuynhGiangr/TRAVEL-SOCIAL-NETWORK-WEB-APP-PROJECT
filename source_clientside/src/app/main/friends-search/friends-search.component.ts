@@ -43,7 +43,7 @@ export class FriendsSearchComponent implements OnInit {
             user.LastName = this.users[i].lastName;
             user.Descriptions = this.users[i].description
             user.Avatar = ApiUrlConstants.API_URL+"/"+this.users[i].avatar
-            if(this.users[i].id==UserProfile.Id)
+            if(this.users[i].id==this.service.getUserIdStorage())
             {
                 console.log("trung roi")
             }

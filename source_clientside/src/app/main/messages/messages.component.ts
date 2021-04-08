@@ -31,6 +31,6 @@ export class MessagesComponent implements OnInit {
   }
   returnId()
     {
-      UserProfile.IdTemp = UserProfile.Id
+      UserProfile.IdTemp = this.service.getUserIdStorage()
     }
 }

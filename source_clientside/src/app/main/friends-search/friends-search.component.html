@@ -19,73 +19,7 @@
                     <div class="row" id="page-contents">
                         <div class="col-lg-3">
                             <aside class="sidebar static">
-                                <div class="widget">
-                                        <h4 class="widget-title">Shortcuts</h4>
-                                        <ul class="naves">
-                                            <li>
-                                                <i class="ti-clipboard"></i>
-                                                <a [routerLink]="['/main/home']" title="">News feed</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-mouse-alt"></i>
-                                                <a [routerLink]="['/main/inbox']" title="">Inbox</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-files"></i>
-                                                <a [routerLink]="['/main/fanpage']" title="">My pages</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-user"></i>
-                                                <a [routerLink]="['/main/friends']" title="">friends</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-image"></i>
-                                                <a [routerLink]="['/main/images']" title="">images</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-video-camera"></i>
-                                                <a [routerLink]="['/main/videos']" title="">videos</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-comments-smiley"></i>
-                                                <a [routerLink]="['/main/messages']" title="">Messages</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-bell"></i>
-                                                <a [routerLink]="['/main/notifications']" title="">Notifications</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-share"></i>
-                                                <a [routerLink]="['/main/people-nearby']" title="">People Nearby</a>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-bar-chart-o"></i>
-                                                <a [routerLink]="['/main/insights']" title="">insights</a>
-                                            </li>
-                                            <li>
-                                                <i class="ti-power-off"></i>
-                                                <a [routerLink]="['/login']" (click)="onLogout()" title="">Logout</a>
-                                            </li>
-                                        </ul>
-                                    </div><!-- Shortcuts -->
-                                <div class="widget stick-widget">
-                                    <h4 class="widget-title">Profile intro</h4>
-                                    <ul class="short-profile">
-                                        <li>
-                                            <span>about</span>
-                                            <p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-                                        </li>
-                                        <li>
-                                            <span>fav tv show</span>
-                                            <p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-                                        </li>
-                                        <li>
-                                            <span>favourit music</span>
-                                            <p>Hi, i am jhon kates, i am 32 years old and worked as a web developer in microsoft company. </p>
-                                        </li>
-                                    </ul>
-                                </div><!-- profile intro widget -->
-
+                                <app-list-navigation></app-list-navigation>
                             </aside>
                         </div><!-- sidebar -->
                         <div class="col-lg-6">

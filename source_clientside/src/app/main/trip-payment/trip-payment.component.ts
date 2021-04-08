@@ -9,6 +9,7 @@ import { TripStatic } from '../../_core/data-repository/trip';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
+import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
     selector: 'app-trip-payment',
     templateUrl: './trip-payment.component.html',
@@ -33,7 +34,7 @@ export class TripPaymentComponent implements OnInit {
     phone:string
     requirements:string
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private _formBuilder: FormBuilder,
-    private TService:TripService, public tripurl:TripUrl ) {}
+    private TService:TripService, public tripurl:TripUrl,private service: LoginService ) {}
 
     ngOnInit() {
       var script = document.createElement("script");
@@ -128,7 +129,7 @@ export class TripPaymentComponent implements OnInit {
                   formData.append('requirements',this.requirements)
                   formData.append('peopleNumber',this.people.toString())
                   formData.append('costPayment',this.total.toString())
-                  formData.append('userId',UserProfile.Id)
+                  formData.append('userId',this.service.getUserIdStorage())
                   formData.append('tripId',TripStatic.Id)
                   await this.TService.addUserInTrip(formData);
                   alert("Payment succesfully !")

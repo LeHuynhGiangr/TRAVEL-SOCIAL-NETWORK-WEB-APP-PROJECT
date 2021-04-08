@@ -28,7 +28,7 @@ import { UserProfile } from 'src/app/_core/data-repository/profile';
     }
     getPaymentHistoryList = async () => {
         //get friends in trip
-        const users = await this.TService.getPaymentTrip(UserProfile.Id) as any;
+        const users = await this.TService.getPaymentTrip(this.service.getUserIdStorage()) as any;
         console.log(users)
         if (users.length > 0) {
           for (let i = 0; i < users.length; i++) {

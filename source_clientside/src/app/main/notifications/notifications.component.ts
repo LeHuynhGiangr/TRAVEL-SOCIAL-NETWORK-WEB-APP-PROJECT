@@ -34,7 +34,7 @@ export class NotificationsComponent implements OnInit {
     //console.log(user["firstName"]+" "+user["lastName"]);
     this.appUsers.FirstName = this.service.getFirstNameStorage()
     this.appUsers.LastName = this.service.getLastNameStorage()
-    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+UserProfile.Avatar
+    this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+this.service.getAvatarStorage()
     this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
   }
   getPath(){
@@ -90,6 +90,6 @@ export class NotificationsComponent implements OnInit {
   }
   returnId()
   {
-      UserProfile.IdTemp = UserProfile.Id
+      UserProfile.IdTemp = this.service.getUserIdStorage()
   }
 }

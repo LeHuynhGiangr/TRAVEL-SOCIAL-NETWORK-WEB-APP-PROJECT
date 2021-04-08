@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     //this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/admin';
-    if (UserProfile.Id!=null) {
+    if (this.service.getUserIdStorage()!=null) {
       const user = await this.service.getUser() as any;
       return this.m_router.navigateByUrl("/main", { skipLocationChange: true });
     }

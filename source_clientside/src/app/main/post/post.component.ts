@@ -9,6 +9,7 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 import { Output } from '@angular/core';
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
 import {ButtonModule} from 'primeng/button';
+import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -19,10 +20,11 @@ export class PostComponent implements OnInit {
   @Output() OnReceivePostCommentData = new EventEmitter<PostCommentRequest>();
   public m_returnUrl: string;
   id
-  constructor(public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute, private m_router: Router) { }
+  constructor(public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute,
+     private m_router: Router, private service: LoginService) { }
 
   ngOnInit(): void {
-    this.id = UserProfile.Id
+    this.id = this.service.getUserIdStorage()
     this.postData.imageUri = ApiUrlConstants.API_URL + "/" + this.postData.imageUri
     this.postData.authorThumb = ApiUrlConstants.API_URL + "/" + this.postData.authorThumb
   }

@@ -46,7 +46,6 @@ export class FriendsComponent implements OnInit {
       }
     }
     getUserList = async () => {
-      console.log(UserProfile.Id)
       this.users = await this.FService.getAllFriends();
       for (let i = 0; i < this.users.length; i++) {
           let user = new AppUsers();
@@ -55,7 +54,7 @@ export class FriendsComponent implements OnInit {
           user.LastName = this.users[i].lastName;
           user.Descriptions = this.users[i].description
           user.Avatar = ApiUrlConstants.API_URL + "/" + this.users[i].avatar
-          if(this.users[i].id == UserProfile.Id)
+          if(this.users[i].id == this.service.getUserIdStorage())
           {
               console.log("trung roi")
           }
