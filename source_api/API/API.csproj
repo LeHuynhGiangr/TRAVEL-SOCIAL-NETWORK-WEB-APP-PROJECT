@@ -6,10 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     
     <!-- project reference -->
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\WebSocketLib\WebSocketLib.csproj" />
 
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
 
@@ -18,8 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\RequestModels\" />
-    <Folder Include="Models\ResponseModels\" />
     <Folder Include="wwwroot\media-file\fake_post_media\" />
   </ItemGroup>
 

@@ -8,19 +8,36 @@ namespace API.WebSocketHelpers
 {
     public class SendReceiveHandler
     {
-        public async Task Echo(HttpContext context, WebSocket webSocket)
+        private byte[] dataBuffer = new byte[4096];
+        private string threadId = null;
+        private HttpContext context;
+        private WebSocket webSocket;
+        public SendReceiveHandler(HttpContext context, string threadId)
         {
-            var buffer = new byte[4096];
-
-            WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
-            while (!result.CloseStatus.HasValue)
+            this.context = context;
+            this.threadId = threadId;
+        }
+        public async Task Echo()
+        {
+            webSocket = await context.WebSockets.AcceptWebSocketAsync();
+            WebSocketReceiveResult data = await webSocket.ReceiveAsync(new ArraySegment<byte>(dataBuffer), CancellationToken.None);
+            if (!data.CloseStatus.HasValue)
             {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
-
-                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                string plainTxt = new ArraySegment<byte>(dataBuffer, 0, data.Count).ToString();
+                Mediator.Register(Guid.Parse(plainTxt), threadId, callbackFunc:Send);
+                while (!data.CloseStatus.HasValue)
+                {
+                    await webSocket.SendAsync(new ArraySegment<byte>(dataBuffer, 0, data.Count), data.MessageType, data.EndOfMessage, CancellationToken.None);
+                    data = await webSocket.ReceiveAsync(new ArraySegment<byte>(dataBuffer), CancellationToken.None);
+                }
             }
-            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+            await webSocket.CloseAsync(data.CloseStatus.Value, data.CloseStatusDescription, CancellationToken.None);
+        }
+
+        public void Send(object obj)
+        {
+            byte[] message = System.Text.ASCIIEncoding.UTF8.GetBytes((string)obj);
+            webSocket.SendAsync(new ArraySegment<byte>(message), WebSocketMessageType.Binary, true, CancellationToken.None);
         }
     }
 }
