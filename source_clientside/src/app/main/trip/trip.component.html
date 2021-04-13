@@ -52,10 +52,31 @@
                                     </mat-action-row>
                                   </mat-expansion-panel>
                             </mat-accordion>
-                            
-                            <!--<button class="btn btn-primary" mat-button style="width: 730px;"
-                                (click)="CreateTripDialog()">Create Trip</button><-->
-                            
+                            <div id="demo" class="carousel slide" data-ride="carousel">
+                                <ul class="carousel-indicators">
+                                  <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                  <li data-target="#demo" data-slide-to="1"></li>
+                                  <li data-target="#demo" data-slide-to="2"></li>
+                                </ul>
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img src="assets/images/logo.png" alt="Los Angeles" width="100%" style="height: 300px;">  
+                                  </div>
+                                  <div class="carousel-item" *ngFor="let trip of tripList">
+                                    <img class ="imgtrip"src="{{trip.Image}}" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" width="100%" style="height: 300px;">
+                                    <div class="carousel-caption">
+                                      <h3 style="color:black"><strong>{{trip.Name}}</strong></h3>
+                                      <p>{{trip.Content}}</p>
+                                    </div>   
+                                  </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                  <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#demo" data-slide="next">
+                                  <span class="carousel-control-next-icon"></span>
+                                </a>
+                              </div>
                             <div class="loadMore">
                                 <div class="central-meta item" *ngFor="let trip of tripList">
                                     <div class="user-post">
