@@ -87,6 +87,7 @@ import {DialogModule} from 'primeng/dialog';
 import {AvatarModule} from 'primeng/avatar';
 import {CardModule} from 'primeng/card';
 import {DataViewModule} from 'primeng/dataview';
+import {TooltipModule} from 'primeng/tooltip';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
@@ -227,6 +228,7 @@ export const mainRoutes: Routes = [
     DialogModule,
     CardModule,
     AvatarModule,
+    TooltipModule,
     //Module support
     ReadMoreModule,
     DataViewModule,

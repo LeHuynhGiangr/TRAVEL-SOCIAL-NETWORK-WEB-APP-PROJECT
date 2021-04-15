@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     async ngOnInit() {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src = "../assets/js/nav.js";
+      script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
       
       //var user = await this.service.getUser();
