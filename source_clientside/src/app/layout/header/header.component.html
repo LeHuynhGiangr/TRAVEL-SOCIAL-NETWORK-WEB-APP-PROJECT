@@ -100,7 +100,7 @@
         <a title="" (click)="returnId()" [routerLink]="['/main']"><img src="assets/images/logo.png" style="width: 100px; height: 60px;"alt=""></a>
     </div>
     
-    <div class="top-area" >
+    <div class="top-area">
         <ul class="main-menu">
             <li>
                 <form class="example-form" method="post">
@@ -112,16 +112,16 @@
                   </form>
             </li>
             <li>
-                <button [routerLink]="['/main/home']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>home</mat-icon></button>
+                <button [routerLink]="['/main/home']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button data-toggle="tooltip" title="Home"><mat-icon>home</mat-icon></button>
             </li>
             <li>
-                <button [routerLink]="['/main/trip']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>commute</mat-icon></button>
+                <button [routerLink]="['/main/trip']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button data-toggle="tooltip" title="Trips"><mat-icon>commute</mat-icon></button>
             </li>
             <li>
-                <button [routerLink]="['/main/friends']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>people</mat-icon></button>
+                <button [routerLink]="['/main/friends']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button data-toggle="tooltip" title="Friends"><mat-icon>people</mat-icon></button>
             </li>
             <li>
-                <button [routerLink]="['/main/videos']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button> <mat-icon>ondemand_video</mat-icon></button>
+                <button [routerLink]="['/main/videos']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button data-toggle="tooltip" title="Watch"><mat-icon>ondemand_video</mat-icon></button>
             </li>
         </ul>
         <ul class="setting-area">
@@ -129,7 +129,7 @@
                 <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" class="rcorners2" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
             </li>
             <li>
-                <button class="top" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <button class="top" mat-icon-button [matMenuTriggerFor]="menu" data-toggle="tooltip" title="Messages" aria-label="Example icon-button with a menu">
                     <mat-icon matBadge="2" matBadgeColor="warn">message</mat-icon>
                   </button>
                 <mat-menu #menu="matMenu" class="rcorners0">
@@ -142,7 +142,7 @@
                 </mat-menu>
             </li>
             <li>
-                <button class="top" mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
+                <button class="top" mat-icon-button [matMenuTriggerFor]="menu2" data-toggle="tooltip" title="Notifications" aria-label="Example icon-button with a menu">
                     <mat-icon matBadge="3" matBadgeColor="warn">notifications</mat-icon>
                 </button>
                 <mat-menu #menu2="matMenu" class="rcorners0">
@@ -161,7 +161,7 @@
                   </mat-menu>
             </li>
         </ul>
-        <button class="top" mat-icon-button [matMenuTriggerFor]="menu3" aria-label="Example icon-button with a menu">
+        <button class="top" mat-icon-button [matMenuTriggerFor]="menu3" data-toggle="tooltip" title="Setting" aria-label="Example icon-button with a menu">
             <mat-icon>arrow_drop_down</mat-icon>
           </button>
           <mat-menu #menu3="matMenu">
