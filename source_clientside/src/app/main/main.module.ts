@@ -68,6 +68,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 //primeng component
@@ -85,6 +86,7 @@ import {RippleModule} from 'primeng/ripple';
 import {DialogModule} from 'primeng/dialog';
 import {AvatarModule} from 'primeng/avatar';
 import {CardModule} from 'primeng/card';
+import {DataViewModule} from 'primeng/dataview';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
@@ -209,6 +211,7 @@ export const mainRoutes: Routes = [
     MatDividerModule,
     NgxPayPalModule,
     MatBadgeModule,
+    MatGridListModule,
     //Primeng
     AccordionModule,
     AutoCompleteModule,
@@ -226,6 +229,7 @@ export const mainRoutes: Routes = [
     AvatarModule,
     //Module support
     ReadMoreModule,
+    DataViewModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
