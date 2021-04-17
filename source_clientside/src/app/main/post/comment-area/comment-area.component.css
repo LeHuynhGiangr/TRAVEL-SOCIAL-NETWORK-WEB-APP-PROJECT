@@ -5,3 +5,12 @@
     position: relative;
     width: 90%;
 }
+.rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #8eccf0;
+}
+@media (max-width: 991px) {
+   .auto{
+       width: 87%;
+   }
+}

@@ -18,3 +18,14 @@
     position: relative;
     width: 33%;
   }
+  .img-postbox
+  {
+    width: 70px; 
+    height: 70px;
+  }
+  @media (max-width: 991px) {
+    .img-postbox
+    {
+      height: 40px;
+    }
+ }

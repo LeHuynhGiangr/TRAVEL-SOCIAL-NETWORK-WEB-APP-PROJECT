@@ -10,13 +10,16 @@ import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { MatDialog } from '@angular/material/dialog';
 import {PaymentHistoryDialogComponent} from '../../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
-import { EditBasicService } from 'src/app/_core/services/edit-basic.service';
+import {MenuItem} from 'primeng/api';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    items: MenuItem[];
+    visibleSidebar1;
+    visibleSidebar2;
     public appUsers: AppUsers;
     public NameSearch :string
     public m_returnUrl: string;
@@ -32,6 +35,12 @@ export class HeaderComponent implements OnInit {
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
       
+      //item responsive
+      this.items = [
+        {label: 'Trips', icon: 'pi pi-fw pi-compass',routerLink: ['/main/trip']},
+        {label: 'Messages', icon: 'pi pi-fw pi-comments',routerLink: ['/main/messages']},
+        {label: 'Friends', icon: 'pi pi-fw pi-users',routerLink: ['/main/friends']},
+      ];
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
       this.appUsers.Avatar = ApiUrlConstants.API_URL + "/" + this.service.getAvatarStorage()

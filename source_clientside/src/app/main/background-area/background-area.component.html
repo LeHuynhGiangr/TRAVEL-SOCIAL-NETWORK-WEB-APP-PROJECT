@@ -1,6 +1,6 @@
 <section>
     <div class="feature-photo">
-        <figure><img src="{{this.appUsers.Background}}" style="width: 1600px; height: 450px;" alt=""></figure>
+        <figure class="background-figure"><img class="background-img" src="{{this.appUsers.Background}}" alt=""></figure>
         <div class="add-btn" *ngIf="this.compareId === false">
             <span>1205 followers</span>
             <a href="#" title="" data-ripple="">Add Friend</a>
@@ -16,7 +16,7 @@
                 <div class="col-lg-2 col-sm-3">
                     <div class="user-avatar">
                         <figure>
-                            <img src="{{this.appUsers.Avatar}}" style="width: 250px; height: 200px;" alt="">
+                            <img class="avatar-img" src="{{this.appUsers.Avatar}}" alt="">
                             <form class="edit-phto" (click)=openDialog() *ngIf="this.compareId === true">
                                 <i class="fa fa-camera-retro"></i>
                                 <label class="fileContainer">

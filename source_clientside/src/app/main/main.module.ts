@@ -88,6 +88,8 @@ import {AvatarModule} from 'primeng/avatar';
 import {CardModule} from 'primeng/card';
 import {DataViewModule} from 'primeng/dataview';
 import {TooltipModule} from 'primeng/tooltip';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {SidebarModule} from 'primeng/sidebar';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
@@ -229,6 +231,8 @@ export const mainRoutes: Routes = [
     CardModule,
     AvatarModule,
     TooltipModule,
+    TabMenuModule,
+    SidebarModule,
     //Module support
     ReadMoreModule,
     DataViewModule,

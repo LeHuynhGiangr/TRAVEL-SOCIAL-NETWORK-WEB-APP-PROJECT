@@ -1,8 +1,7 @@
 .left2 {
-    margin-left :650px;
     position: absolute;
     top:0;
-    left: 0;
+    right: 0;
 }
 .rcorners2 {
     border-radius: 25px;
