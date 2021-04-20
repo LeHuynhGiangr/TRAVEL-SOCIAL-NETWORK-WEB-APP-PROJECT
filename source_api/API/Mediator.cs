@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace API
 {
-    public static class Mediator
+    public class Mediator
     {
         private static Dictionary<Guid, Dictionary<object, Action<object>>> s_clients = new Dictionary<Guid, Dictionary<object, Action<object>>>();
 

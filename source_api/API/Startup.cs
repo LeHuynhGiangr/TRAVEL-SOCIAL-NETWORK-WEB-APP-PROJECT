@@ -57,7 +57,7 @@ namespace API
             //register group of services with extension methods
             services.AddDbContext<ProjectDbContext>(
                 _ => _.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"), 
+                    Configuration.GetConnectionString("DefaultConnection"),
                     _ => _.MigrationsAssembly("source_api.Data.EF")
                     ));
 
@@ -85,14 +85,24 @@ namespace API
             services.AddScoped<IFriendService<Guid>, FriendService>();
 
             services.AddSingleton(typeof(Mediator));
-            services.AddAuthentication()
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/account/google-login"; // Must be lowercase
+            })
             .AddGoogle(options =>
             {
-                IConfigurationSection googleAuthNSection =
-                    Configuration.GetSection("Authentication:Google");
+                //IConfigurationSection googleAuthNSection =
+                //    Configuration.GetSection("Authentication:Google");
 
-                options.ClientId = googleAuthNSection["789840606120-vbkilj6pomg3g7t0tb90t98rq3t0fcml.apps.googleusercontent.com"];
-                options.ClientSecret = googleAuthNSection["fQiqjBWDt8Mz9MW6kH1N3DlR"];
+                //options.ClientId = googleAuthNSection["789840606120-vbkilj6pomg3g7t0tb90t98rq3t0fcml.apps.googleusercontent.com"];
+                //options.ClientSecret = googleAuthNSection["fQiqjBWDt8Mz9MW6kH1N3DlR"];
+
+                options.ClientId = "789840606120-vbkilj6pomg3g7t0tb90t98rq3t0fcml.apps.googleusercontent.com";
+                options.ClientSecret = "fQiqjBWDt8Mz9MW6kH1N3DlR";
             });
         }
 
@@ -138,12 +148,14 @@ namespace API
             app.UseMiddleware<JwtMiddleware>();
 
             //try using webSocket
-            app.UseWebSockets(new WebSocketOptions { 
-                KeepAliveInterval=TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
-                ReceiveBufferSize= 4096 // 1024 byte * 4 = 4kb
+            app.UseWebSockets(new WebSocketOptions
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
+                ReceiveBufferSize = 4096 // 1024 byte * 4 = 4kb
             });
 
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 if (context.Request.Path == "/ws")// webSocket only accepts request for /ws
                 {
                     if (context.WebSockets.IsWebSocketRequest)
