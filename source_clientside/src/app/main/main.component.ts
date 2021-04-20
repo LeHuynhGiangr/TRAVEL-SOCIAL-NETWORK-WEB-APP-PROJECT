@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import * as  WSMediator  from 'src/assets/js/websocket/WSMediator.js';
+
+declare const StaticWSMediator :WSMediator.StaticWSMediator
+declare let WebSocketHandler :WSMediator.WebSocketHandler
 
 @Component({
   selector: 'app-main',
@@ -7,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    WebSocketHandler = new WSMediator.WebSocketHandler();
+  }
 
   ngOnInit(): void {
   }

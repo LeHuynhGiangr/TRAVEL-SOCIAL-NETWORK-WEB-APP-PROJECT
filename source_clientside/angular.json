@@ -35,7 +35,7 @@
               "src/assets/js/script.js",
               "src/assets/js/main.min.js",
               "src/assets/js/echarts.min.js",
-              "src/assets/js/websocketHandler.js"
+              "src/assets/js/websocket/WSMediator.js"
             ]
           },
           "configurations": {
