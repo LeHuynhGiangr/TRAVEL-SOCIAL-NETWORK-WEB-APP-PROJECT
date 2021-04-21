@@ -1140,7 +1140,7 @@ header.sticky {
     display: table;
     float: none;
     margin: 0 auto;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     width: 80%;
 }
 

@@ -83,3 +83,9 @@ body {
   float: left;
   color: #999;
 }
+@media screen and (max-width: 1025px) {
+  .search-box
+  {
+    width: 150px;
+  }
+}

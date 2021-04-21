@@ -301,10 +301,7 @@
 
 /*--- tablet view ---*/
 
-@media screen and (max-width: 980px) {
-    .gap {
-        padding: 40px 0;
-    }
+@media screen and (max-width: 1025px) {
     p {
         font-size: 14px;
     }
@@ -353,7 +350,7 @@
         margin-bottom: 0;
     }
     #people-list figure {
-        width: 9%;
+        width: 25%;
     }
     footer .widget {
         margin-top: 50px;
@@ -417,7 +414,6 @@
     }
     .sidebar {
         width: 100%;
-        padding-bottom: 10px;
     }
     .linked-image {
         margin-right: 20px;
@@ -437,7 +433,7 @@
     }
     .sidebar .widget {
         margin: 10px;
-        width: 47.2%;
+        width: 85%;
     }
     a.add-butn {
         top: 7px;
@@ -618,6 +614,7 @@
     .feature-photo > figure {
         margin-bottom: 10px;
     }
+    
     .user-avatar {
         border: medium none;
         border-radius: 0;

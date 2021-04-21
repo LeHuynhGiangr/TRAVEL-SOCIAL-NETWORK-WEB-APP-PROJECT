@@ -52,65 +52,55 @@
                                     </mat-action-row>
                                   </mat-expansion-panel>
                             </mat-accordion>
-                            
-                            <!--<button class="btn btn-primary" mat-button style="width: 730px;"
-                                (click)="CreateTripDialog()">Create Trip</button><-->
-                            
-                            <div class="loadMore">
-                                <div class="central-meta item" *ngFor="let trip of tripList">
-                                    <div class="user-post">
-                                        <button mat-icon-button [matMenuTriggerFor]="menu"
-                                            aria-label="Example icon-button with a menu" class="left2">
-                                            <mat-icon>more_vert</mat-icon>
-                                        </button>
-                                        <mat-menu #menu="matMenu">
-                                            <button mat-menu-item *ngIf="this.service.getUserIdStorage() === trip.authorId">
-                                                <mat-icon>edit</mat-icon>
-                                                <span>edit</span>
-                                            </button>
-                                            <button mat-menu-item>
-                                                <mat-icon>report_problem</mat-icon>
-                                                <span>report</span>
-                                            </button>
-                                            <button mat-menu-item *ngIf="this.service.getUserIdStorage() === trip.authorId">
-                                                <mat-icon>delete</mat-icon>
-                                                <span>delete</span>
-                                            </button>
-                                        </mat-menu>
-                                        <div class="friend-info">
-                                            <figure>
-                                                <img src="{{trip.authorAvatar}}"
-                                                    style="width: 50px; height: 50px;">
-                                            </figure>
-                                            <div class="friend-name">
-                                                <ins><a title="" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">{{trip.Name}}</a></ins>
-                                                <span (click)="pageurl.getNavigation(trip.PageId)" [routerLink]="['/fanpage/:', trip.PageId]" >published: {{trip.CreatedDate| date: 'dd/MM/yyyy'}} Created by
-                                                    <strong>{{trip.authorName}}</strong></span>
-                                            </div>
-                                            <div class="description">
-
-                                                <p>
-                                                    {{trip.Content}}
-                                                </p>
-                                            </div>
-                                            <div class="post-meta">
-                                                <div class="linked-image align-left">
-                                                    <a title=""><img src="{{trip.Image}}"
-                                                            style="width: 750px;height: 400;" alt="" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]"></a>
-                                                </div>
-                                                <br>
-                                                <div class="detail">
-                                                </div>
-                                                <div>
-                                                    <app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
-                                                    <span><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span>
-                                                    <button class="btn btn-primary left" mat-button *ngIf="this.service.getUserIdStorage() != trip.authorId">Message</button>
-                                                    <button class="btn btn-primary left" mat-button (click)="AddFriendDialog(trip.Id)" *ngIf="this.service.getUserIdStorage() === trip.authorId">Info Passesngers</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="jumbotron">
+                                <h1>Find the good out there.</h1>      
+                                <p>Where to ?</p>
+                            </div>
+                            <div id="demo" class="carousel slide" data-ride="carousel">
+                                <ul class="carousel-indicators">
+                                  <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                  <li data-target="#demo" data-slide-to="1"></li>
+                                  <li data-target="#demo" data-slide-to="2"></li>
+                                </ul>
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img src="assets/images/logo.png" alt="Los Angeles" width="100%" style="height: 300px;">  
+                                  </div>
+                                  <div class="carousel-item" *ngFor="let trip of tripList">
+                                    <img class ="imgtrip" src="{{trip.Image}}" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" width="100%" style="height: 300px;">
+                                    <div class="carousel-caption">
+                                      <h3 style="color:black"><strong>{{trip.Name}}</strong></h3>
+                                      <p style="color:black">{{trip.Content}}</p>
+                                    </div>   
+                                  </div>
                                 </div>
+                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                  <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#demo" data-slide="next">
+                                  <span class="carousel-control-next-icon"></span>
+                                </a>
+                              </div>
+                              <br>
+                            <div class="loadMore">
+                                <mat-grid-list cols="2" rowHeight="2:1" style="height: 300px;">
+                                    <mat-grid-tile *ngFor="let trip of tripList">
+                                        <div class="card">
+                                        <img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
+                                        <div class="container">
+                                          <h4><b>{{trip.Name}}</b></h4> 
+                                        </div>
+                                        <span class="cost"><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span> 
+                                      </div>
+                                    </mat-grid-tile>
+                                  </mat-grid-list>
+                                  <ul class="pagination pag">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                  </ul>
                                 <mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
                                 <button class="btn-view btn-load-more" (click)="getTripListmore()"></button>
                             </div>

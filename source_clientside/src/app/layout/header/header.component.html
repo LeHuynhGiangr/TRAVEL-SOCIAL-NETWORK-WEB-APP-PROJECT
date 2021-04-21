@@ -1,100 +1,25 @@
+<div class="responsive-list">
+    <p-button type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars"></p-button>
+    <img class="img-logo" src="assets/images/logo.png" style="width: 100px; height: 45px;" [routerLink]="['/main/home']">
+    <p-button class="home-button"(click)="visibleSidebar2 = true" type="button" icon="pi pi-cog"></p-button>
+</div>
+<p-tabMenu class="responsive-menu" [model]="items"></p-tabMenu>
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+</p-sidebar>
 
-<div class="responsive-header">
-    <div class="mh-head first Sticky">
-        <span class="mh-btns-left">
-            <a (click)="openNav()" class="" href="#menu"><i class="fa fa-align-justify"></i></a>
-        </span>
-        <span class="mh-text">
-            <a [routerLink]="['/main/home']" title=""><img src="assets/images/logo-login.png" style="width: 90px; height: 50px;" alt=""></a>
-        </span>
-        <span class="mh-btns-right">
-            <a class="fa fa-sliders" href="#shoppingbag"></a>
-        </span>
-    </div>
-    <div class="mh-head second">
-        <form class="mh-form">
-            <input name="namesearch" type="text" placeholder="Search Something" [(ngModel)]="this.NameSearch">
-            <button data-ripple [routerLink]="['/main/friends-search']" (click)="search()"><i class="ti-search"></i></button>
-        </form>
-    </div>
-    <nav id="menu" class="res-menu" >
-        <ul>
-            <li *ngIf="this.res==true"><a [routerLink]="['/main/home']" title="">Home Social</a></li>
-            <li *ngIf="this.res==true"><a [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" title="">timeline</a></li>                             
-            <li *ngIf="this.res==true"><a [routerLink]="['/main/trip']" title="">View List Trips</a></li>
-            <li *ngIf="this.res==true"><a [routerLink]="['/main/contact']" title="">contact</a></li>
-            <li *ngIf="this.res==true"><a [routerLink]="['/main/faq']" title="">faq's page</a></li>
-            <li *ngIf="this.res==true"><a [routerLink]="['/main/knowledge']" title="">Knowledge base</a></li>
-            <li *ngIf="this.res==true"><a [routerLink]="['/main/widgets']" title="">Widgets</a></li>
-        </ul>
-    </nav>
-    <nav id="shoppingbag" *ngIf="this.res==true">
-        <div>
-            <div class="">
-                <form method="post">
-                    <div class="setting-row">
-                        <span>use night mode</span>
-                        <input type="checkbox" id="nightmode"/> 
-                        <label for="nightmode" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Notifications</span>
-                        <input type="checkbox" id="switch2"/> 
-                        <label for="switch2"></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Notification sound</span>
-                        <input type="checkbox" id="switch3"/> 
-                        <label for="switch3" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>My profile</span>
-                        <input type="checkbox" id="switch4"/> 
-                        <label for="switch4"></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Show profile</span>
-                        <input type="checkbox" id="switch5"/> 
-                        <label for="switch5" ></label>
-                    </div>
-                </form>
-                <h4 class="panel-title">Account Setting</h4>
-                <form method="post">
-                    <div class="setting-row">
-                        <span>Sub users</span>
-                        <input type="checkbox" id="switch6" /> 
-                        <label for="switch6" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>personal account</span>
-                        <input type="checkbox" id="switch7" /> 
-                        <label for="switch7" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Business account</span>
-                        <input type="checkbox" id="switch8" /> 
-                        <label for="switch8" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Show me online</span>
-                        <input type="checkbox" id="switch9" /> 
-                        <label for="switch9" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Delete history</span>
-                        <input type="checkbox" id="switch10" /> 
-                        <label for="switch10" ></label>
-                    </div>
-                    <div class="setting-row">
-                        <span>Expose author name</span>
-                        <input type="checkbox" id="switch11" /> 
-                        <label for="switch11" ></label>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </nav>
-</div><!-- responsive header -->
+<p-sidebar [(visible)]="visibleSidebar2" position="right" [baseZIndex]="10000">
+    <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" class="rcorners2" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button mat-button [routerLink]="['/main/knowledge']"><mat-icon style="margin-right: 10px;">dns</mat-icon><strong>Knowledge</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button mat-button [routerLink]="['/main/faq']"><mat-icon style="margin-right: 11px;">extension</mat-icon><strong>Faq</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button mat-button [routerLink]="['/main/contact']"><mat-icon style="margin-right: 10px;">contact_mail</mat-icon><strong>Contact</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button mat-button [routerLink]="['/main/edit-setting']"><mat-icon style="margin-right: 10px;">settings</mat-icon><strong>Settings & Privacy</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button mat-button [routerLink]="['/main/logout']"><mat-icon style="margin-right: 10px;">forward</mat-icon><strong>Log Out</strong></button>
+</p-sidebar>
 <div class="topbar ">
     <div class="logo">
         <a title="" (click)="returnId()" [routerLink]="['/main']"><img src="assets/images/logo.png" style="width: 100px; height: 60px;"alt=""></a>
@@ -112,16 +37,16 @@
                   </form>
             </li>
             <li>
-                <button [routerLink]="['/main/home']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>home</mat-icon></button>
+                <button [routerLink]="['/main/home']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button pTooltip="Home" tooltipPosition="bottom"><mat-icon>home</mat-icon></button>
             </li>
             <li>
-                <button [routerLink]="['/main/trip']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>commute</mat-icon></button>
+                <button [routerLink]="['/main/trip']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button pTooltip="Trips" tooltipPosition="bottom"><mat-icon>commute</mat-icon></button>
             </li>
             <li>
-                <button [routerLink]="['/main/friends']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button><mat-icon>people</mat-icon></button>
+                <button [routerLink]="['/main/friends']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button pTooltip="Friends" tooltipPosition="bottom"><mat-icon>people</mat-icon></button>
             </li>
             <li>
-                <button [routerLink]="['/main/videos']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button> <mat-icon>ondemand_video</mat-icon></button>
+                <button [routerLink]="['/main/videos']" class="rcorners0 left2" style="width: 150px;"mat-stroked-button pTooltip="Watch" tooltipPosition="bottom"><mat-icon>ondemand_video</mat-icon></button>
             </li>
         </ul>
         <ul class="setting-area">
@@ -129,7 +54,7 @@
                 <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" class="rcorners2" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
             </li>
             <li>
-                <button class="top" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <button class="top" mat-icon-button [matMenuTriggerFor]="menu" pTooltip="Messages" tooltipPosition="bottom" aria-label="Example icon-button with a menu">
                     <mat-icon matBadge="2" matBadgeColor="warn">message</mat-icon>
                   </button>
                 <mat-menu #menu="matMenu" class="rcorners0">
@@ -142,7 +67,7 @@
                 </mat-menu>
             </li>
             <li>
-                <button class="top" mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu">
+                <button class="top" mat-icon-button [matMenuTriggerFor]="menu2" pTooltip="Notifications" tooltipPosition="bottom" aria-label="Example icon-button with a menu">
                     <mat-icon matBadge="3" matBadgeColor="warn">notifications</mat-icon>
                 </button>
                 <mat-menu #menu2="matMenu" class="rcorners0">
@@ -161,7 +86,7 @@
                   </mat-menu>
             </li>
         </ul>
-        <button class="top" mat-icon-button [matMenuTriggerFor]="menu3" aria-label="Example icon-button with a menu">
+        <button class="top" mat-icon-button [matMenuTriggerFor]="menu3" pTooltip="Setting" tooltipPosition="bottom" aria-label="Example icon-button with a menu">
             <mat-icon>arrow_drop_down</mat-icon>
           </button>
           <mat-menu #menu3="matMenu">

@@ -1,0 +1,25 @@
+.background-img
+{
+    width: 1600px;
+    height: 450px;
+}
+.avatar-img
+{
+    height: 200px;
+}
+@media (max-width: 991px) {
+    .background-img
+    {
+      height: 150px;
+    }
+    .avatar-img
+    {
+        width: 150px; 
+        height: 100px;
+    }
+    .background-figure
+    {
+        height: 120px;
+    }
+}
+  

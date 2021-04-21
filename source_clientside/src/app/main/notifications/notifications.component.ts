@@ -30,63 +30,11 @@ export class NotificationsComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
 
     this.appUsers = new AppUsers();
-    //var user = await this.service.getUser();
-    //console.log(user["firstName"]+" "+user["lastName"]);
+    this.appUsers.Id = this.service.getUserIdStorage()
     this.appUsers.FirstName = this.service.getFirstNameStorage()
     this.appUsers.LastName = this.service.getLastNameStorage()
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+this.service.getAvatarStorage()
-    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
-  }
-  getPath(){
-    return this.router.url;
-  }
-  getImageMime(base64: string): string
-  {
-    if (base64.charAt(0)=='/') return 'jpg';
-    else if (base64.charAt(0)=='R') return "gif";
-    else if(base64.charAt(0)=='i') return 'png';
-    else return 'jpeg';
-  }
-  getImageSource(base64: string): string
-  {
-    return `data:image/${this.getImageMime(base64)};base64,${base64}`; 
-  }
-  onFileChanged(event) {
-    this.appUsers.Avatar = event.target.files[0]
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogUploadAvatarComponent, {
-      width: '500px',
-      height: '400px',
-      data: { Id: this.appUsers.Id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-        }
-      });
-    });
-  }
-  openDialogBackground(): void {
-    const dialogRef = this.dialog.open(DialogUploadBackgroundComponent, {
-      width: '500px',
-      height: '400px',
-      data: { Id: this.appUsers.Id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      this.service.getUser().then(user => {
-        if (user) {
-        }
-      });
-
-    });
+    this.appUsers.Background = ApiUrlConstants.API_URL+"/"+this.service.getBackgroundStorage()
   }
   returnId()
   {

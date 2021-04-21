@@ -377,7 +377,10 @@ jQuery(".post-comt-box textarea").on("keydown", function(event) {
 		return false;
 	});	
 	
-
+	$('#demo').carousel({
+		interval: 2000,
+		cycle: true
+	  });
 });//document ready end
 	
 })(jQuery);

@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<div class="stick-widget">
+<div class="stick-widget responsive-listnav">
     <mat-divider style="width:250px;"></mat-divider>
     <button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" class="mytimeline width-sidebar" mat-stroked-button><img class="leftimage" src="{{this.appUsers.Avatar}}" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
     <button [routerLink]="['/main/groups-search']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">style</mat-icon><strong>My Pages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>

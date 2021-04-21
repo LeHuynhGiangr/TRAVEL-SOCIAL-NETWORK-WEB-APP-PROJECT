@@ -3,3 +3,8 @@
     right:    0;
     margin-top: 20px;
   }
+  .rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #8eccf0;
+    padding: 20px; 
+  }
