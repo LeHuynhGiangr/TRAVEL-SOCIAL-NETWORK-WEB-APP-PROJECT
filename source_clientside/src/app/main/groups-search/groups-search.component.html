@@ -44,48 +44,25 @@
 									</ul>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
-							<div class="col-lg-3 rcorners2">
+							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">
-										<h4 class="widget-title">Who's follownig</h4>
-										<ul class="followers">
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a [routerLink]="['/groups-search']" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a [routerLink]="['/groups-search']" title="">Issabel</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a [routerLink]="['/groups-search']" title="">Andrew</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a [routerLink]="['/groups-search']" title="">Sophia</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a [routerLink]="['/groups-search']" title="">Allen</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-										</ul>
-									</div><!-- who's following -->
+										<div class="banner medium-opacity bluesh">
+											<div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)"
+												class="bg-image"></div>
+											<div class="baner-top">
+												<span><img src="assets/images/book-icon.png" alt=""></span>
+												<i class="fa fa-ellipsis-h"></i>
+											</div>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a [routerLink]="['/main/newpage']" title="" data-ripple="">start now!</a>
+											</div>
+										</div>
+									</div>
 									<app-right-sidebar-list-friend></app-right-sidebar-list-friend>		
 									<!-- friends list sidebar -->								
 								</aside>

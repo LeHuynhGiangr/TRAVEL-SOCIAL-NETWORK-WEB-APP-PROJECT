@@ -57,120 +57,12 @@
 						<div class="row" id="page-contents">
 							<div class="col-lg-3">
 								<aside class="sidebar static">
-									<div class="widget">
-										<h4 class="widget-title">Shortcuts</h4>
-										<ul class="naves">
-											<li>
-												<i class="ti-clipboard"></i>
-												<a [routerLink]="['/main/home']" title="">News feed</a>
-											</li>
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a [routerLink]="['/main/inbox']" title="">Inbox</a>
-											</li>
-											<li>
-												<i class="ti-files"></i>
-												<a [routerLink]="['/main/newpage']" title="">Create Page</a>
-											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a [routerLink]="['/main/friends']" title="">friends</a>
-											</li>
-											<li>
-												<i class="ti-image"></i>
-												<a [routerLink]="['/main/images']" title="">images</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a [routerLink]="['/main/videos']" title="">videos</a>
-											</li>
-											<li>
-												<i class="ti-comments-smiley"></i>
-												<a [routerLink]="['/main/messages']" title="">Messages</a>
-											</li>
-											<li>
-												<i class="ti-bell"></i>
-												<a [routerLink]="['/main/notifications']" title="">Notifications</a>
-											</li>
-											<li>
-												<i class="ti-share"></i>
-												<a [routerLink]="['/main/people-nearby']" title="">People Nearby</a>
-											</li>
-											<li>
-												<i class="fa fa-bar-chart-o"></i>
-												<a [routerLink]="['/main/insights']" title="">insights</a>
-											</li>
-											<li>
-												<i class="ti-power-off"></i>
-												<a [routerLink]="['/login']" (click)="onLogout()" title="">Logout</a>
-											</li>
-										</ul>
-									</div><!-- Shortcuts -->
-									<div class="widget">
-										<h4 class="widget-title">Recent Activity</h4>
-										<ul class="activitiez">
-											<li>
-												<div class="activity-meta">
-													<i>10 hours Ago</i>
-													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="time-line.html">black demon.</a></h6>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>30 Days Ago</i>
-													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
-												</div>
-											</li>
-											<li>
-												<div class="activity-meta">
-													<i>2 Years Ago</i>
-													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
-												</div>
-											</li>
-										</ul>
-									</div><!-- recent activites -->
-									<div class="widget stick-widget">
-										<h4 class="widget-title">Who's follownig</h4>
-										<ul class="followers">
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Issabel</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Andrew</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Sophia</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Allen</a></h4>
-													<a href="#" title="" class="underline">Add Friend</a>
-												</div>
-											</li>
-										</ul>
-									</div><!-- who's following -->
+									<div class="advertisment-box">
+										<h4 class="">advertisment</h4>
+										<figure>
+											<a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.jpg" alt=""></a>
+										</figure>
+									</div>
 								</aside>
 							</div><!-- sidebar -->
 							<div class="col-lg-6">
@@ -210,377 +102,52 @@
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								<div class="loadMore">
-								<div class="central-meta item"  *ngFor="let trip of tripList">
-									<div class="user-post">
-										<button mat-icon-button [matMenuTriggerFor]="menu"
-                                            aria-label="Example icon-button with a menu" class="left2">
-                                            <mat-icon>more_vert</mat-icon>
-											</button>
-											<mat-menu #menu="matMenu">
-												<button mat-menu-item >
-													<mat-icon>edit</mat-icon>
-													<span>edit</span>
-												</button>
-												<button mat-menu-item>
-													<mat-icon>report_problem</mat-icon>
-													<span>report</span>
-												</button>
-												<button mat-menu-item>
-													<mat-icon>delete</mat-icon>
-													<span>delete</span>
-												</button>
-											</mat-menu>
-											<div class="friend-info">
-												<figure>
-													<img src="{{trip.authorAvatar}}"
-														style="width: 50px; height: 50px;">
-												</figure>
-												<div class="friend-name">
-													<ins><a (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" title="">{{trip.Name}}</a></ins>
-													<span>published: {{trip.CreatedDate| date: 'dd/MM/yyyy'}} Created by
-														{{trip.authorName}}</span>
-												</div>
-												<div class="description">
-	
-													<p>
-														{{trip.Content}}
-													</p>
-												</div>
-												<div class="post-meta">
-													<div class="linked-image align-left">
-														<a title=""><img (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" src="{{trip.Image}}"
-																style="width: 750px;height: 400;" alt=""></a>
-													</div>
-													<br>
-													<div class="detail">
-													</div>
-													<div>
-														<app-users-list-trip [tripId]="trip.Id"></app-users-list-trip>
-														<span><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span>
-														<button class="btn btn-primary left" mat-button (click)="AddFriendDialog(trip.Id)" *ngIf="this.userid === trip.authorId">Info Passesngers</button>
-														<button class="btn btn-primary left" mat-button *ngIf="this.userid != trip.authorId">Message</button>
-													</div>
-												</div>
+								<div class="loadMore" *ngIf=" this.lengthcount > 0">
+									<mat-grid-list cols="2" rowHeight="2:1" style="height: 300px;">
+										<mat-grid-tile *ngFor="let trip of tripList">
+											<div class="card">
+											<img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
+											<div class="container">
+											  <h4><b>{{trip.Name}}</b></h4> 
 											</div>
-										<div class="coment-area">
-											<ul class="we-comet">
-												<li>
-													<div class="comet-avatar">
-														<img src="assets/images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="time-line.html" title="">Donald Trump</a></h5>
-															<span>1 week ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
-															<i class="em em-smiley"></i>
-														</p>
-													</div>
-												</li>
-												<li>
-													<div class="comet-avatar">
-														<img src="assets/images/resources/comet-3.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="time-line.html" title="">Jason borne</a></h5>
-															<span>1 year ago</span>
-															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-														</div>
-														<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
-													</div>
-													<ul>
-														<li>
-															<div class="comet-avatar">
-																<img src="assets/images/resources/comet-2.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="time-line.html" title="">alexendra dadrio</a></h5>
-																	<span>1 month ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
-															</div>
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img src="assets/images/resources/comet-3.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="time-line.html" title="">Olivia</a></h5>
-																	<span>16 days ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>i like lexus cars, lexus cars are most beautiful with the awesome features, but this car is really outstanding than lexus</p>
-															</div>
-														</li>
-													</ul>
-												</li>
-
-												<li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
-												<li class="post-comment">
-													<div class="comet-avatar">
-														<img src={{this.pages.Avatar}} style="width: 40px; height: 40px;" alt="">
-													</div>
-													<div class="post-comt-box">
-														<form method="post">
-															<textarea placeholder="Post your comment"></textarea>
-															<div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div>
-															<button type="submit"></button>
-														</form>	
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
+											<span class="cost"><mat-icon>attach_money</mat-icon>{{trip.Cost}}</span> 
+										  </div>
+										</mat-grid-tile>
+									  </mat-grid-list>
+									  <ul class="pagination pag">
+										<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+										<li class="page-item"><a class="page-link" href="#">1</a></li>
+										<li class="page-item"><a class="page-link" href="#">2</a></li>
+										<li class="page-item"><a class="page-link" href="#">3</a></li>
+										<li class="page-item"><a class="page-link" href="#">Next</a></li>
+									  </ul>
+									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
+									<button class="btn-view btn-load-more" (click)="getTripListmore()"></button>
 								</div>
-								<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
-                                <button class="btn-view btn-load-more" (click)="getTripListmore()"></button>
+								<div *ngIf=" this.lengthcount == 0">
+									<h2 style="text-align: center;">No tour has been created yet !</h2>
 								</div>
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">
-								<aside class="sidebar static">
-									<div class="advertisment-box">
-										<h4 class="">advertisment</h4>
-										<figure>
-											<a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.jpg" alt=""></a>
-										</figure>
-									</div>
+								<aside class="sidebar static">									
 									<div class="widget">
-										<h4 class="widget-title">Invite friends</h4>
-										<ul class="invition">
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar8.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" class="underline" title="">Sophia hayat</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar4.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" class="underline" title="">Issabel kaif</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar2.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" class="underline" title="">Kelly Bill</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" class="underline" title="">Allen jhon</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
-												</div>
-											</li>
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar6.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" class="underline" title="">tom Andrew</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
-												</div>
-											</li>
-
-											<li>
-												<figure><img src="assets/images/resources/friend-avatar3.jpg" alt=""></figure>
-												<div class="friend-meta">
-													<h4><a href="time-line.html" title="" class="underline">Allen doe</a></h4>
-													<a href="#" title="" class="invite" data-ripple="">invite</a>
-												</div>
-											</li>
-										</ul>
-									</div><!-- invite for page  -->
-									
-									<div class="widget friend-list stick-widget">
-										<h4 class="widget-title">Friends</h4>
-										<div id="searchDir"></div>
-										<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e6977706a7b6c6d71727a7b6c5e79737f7772307d7173">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="debcbfacb0bbad9eb9b3bfb7b2f0bdb1b3">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e646f7d61606c4e69636f6762206d6163">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="assets/images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513b30223e3f3311363c30383d7f323e3c">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="315b50425e5f5371565c50585d1f525e5c">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f69c9785999894b6919b979f9ad895999b">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bad0dbc9d5d4d8faddd7dbd3d694d9d5d7">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076d667468696547606a666e6b2964686a">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="assets/images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1d3d0c3dfd4c2f1d6dcd0d8dd9fd2dedc">[email&#160;protected]</a></i>
-												</div>
-											</li>
-										</ul>
-										<div class="chat-box">
-											<div class="chat-head">
-												<span class="status f-online"></span>
-												<h6>Bucky Barnes</h6>
-												<div class="more">
-													<span><i class="ti-more-alt"></i></span>
-													<span class="close-mesage"><i class="ti-close"></i></span>
-												</div>
+										<div class="banner medium-opacity bluesh">
+											<div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)"
+												class="bg-image"></div>
+											<div class="baner-top">
+												<span><img src="assets/images/book-icon.png" alt=""></span>
+												<i class="fa fa-ellipsis-h"></i>
 											</div>
-											<div class="chat-list">
-												<ul>
-													<li class="me">
-														<div class="chat-thumb"><img src="assets/images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="you">
-														<div class="chat-thumb"><img src="assets/images/resources/chatlist2.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-													<li class="me">
-														<div class="chat-thumb"><img src="assets/images/resources/chatlist1.jpg" alt=""></div>
-														<div class="notification-event">
-															<span class="chat-message-item">
-																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
-															</span>
-															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
-														</div>
-													</li>
-												</ul>
-												<form class="text-box">
-													<textarea placeholder="Post enter to post..."></textarea>
-													<div class="add-smiles">
-														<span title="add icon" class="em em-expressionless"></span>
-													</div>
-													<div class="smiles-bunch">
-														<i class="em em---1"></i>
-														<i class="em em-smiley"></i>
-														<i class="em em-anguished"></i>
-														<i class="em em-laughing"></i>
-														<i class="em em-angry"></i>
-														<i class="em em-astonished"></i>
-														<i class="em em-blush"></i>
-														<i class="em em-disappointed"></i>
-														<i class="em em-worried"></i>
-														<i class="em em-kissing_heart"></i>
-														<i class="em em-rage"></i>
-														<i class="em em-stuck_out_tongue"></i>
-													</div>
-													<button type="submit"></button>
-												</form>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a [routerLink]="['/main/newpage']" title="" data-ripple="">start now!</a>
 											</div>
 										</div>
-									</div><!-- friends list sidebar -->
+									</div>
+									<app-right-sidebar-list-friend></app-right-sidebar-list-friend>	<!-- friends list sidebar -->
 								</aside>
 							</div><!-- sidebar -->
 						</div>	
