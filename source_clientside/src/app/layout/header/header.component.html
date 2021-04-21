@@ -1,24 +1,43 @@
 <div class="responsive-list">
-    <p-button type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars"></p-button>
-    <img class="img-logo" src="assets/images/logo.png" style="width: 100px; height: 45px;" [routerLink]="['/main/home']">
-    <p-button class="home-button"(click)="visibleSidebar2 = true" type="button" icon="pi pi-cog"></p-button>
+    <p-button class="res-btn" type="button" (click)="visibleSidebar1 = true" icon="pi pi-bars"></p-button>
+    <img class="img-logo res-btn" src="assets/images/logo.png" style="width: 100px; height: 45px;" [routerLink]="['/main/home']">
+    <p-button class="home-button" (click)="visibleSidebar2 = true" type="button" icon="pi pi-cog"></p-button>
 </div>
-<p-tabMenu class="responsive-menu" [model]="items"></p-tabMenu>
+<div class="tab-menu">
+    <p-tabMenu class="responsive-menu" [model]="items"></p-tabMenu>
+</div>
 <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+    <br>
+    <br>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/groups-search']"><mat-icon class="margin-right:10px;">style</mat-icon><strong>My Page</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/videos']"><mat-icon class="margin-right:10px;">ondemand_video</mat-icon><strong>Videos</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/images']"><mat-icon class="margin-right:10px;">burst_mode</mat-icon><strong>Images</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/friends']"><mat-icon class="margin-right:10px;">people_outline</mat-icon><strong>Friends</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/']"><mat-icon class="margin-right:10px;">history</mat-icon><strong>Activities Log</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/']"><mat-icon class="margin-right:10px;">departure_board</mat-icon><strong>Tour History</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
+    <button class="btn-res" mat-button [routerLink]="['/main/']"><mat-icon class="margin-right:10px;">card_membership</mat-icon><strong>Advertisement</strong></button>
+    <mat-divider style="width:300px;"></mat-divider>
 </p-sidebar>
 
 <p-sidebar [(visible)]="visibleSidebar2" position="right" [baseZIndex]="10000">
     <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" class="rcorners2" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
     <mat-divider style="width:300px;"></mat-divider>
-    <button mat-button [routerLink]="['/main/knowledge']"><mat-icon style="margin-right: 10px;">dns</mat-icon><strong>Knowledge</strong></button>
+    <button class="btn-res" mat-button [routerLink]="['/main/knowledge']"><mat-icon style="margin-right: 10px;">dns</mat-icon><strong>Knowledge</strong></button>
     <mat-divider style="width:300px;"></mat-divider>
-    <button mat-button [routerLink]="['/main/faq']"><mat-icon style="margin-right: 11px;">extension</mat-icon><strong>Faq</strong></button>
+    <button class="btn-res" mat-button [routerLink]="['/main/faq']"><mat-icon style="margin-right: 11px;">extension</mat-icon><strong>Faq</strong></button>
     <mat-divider style="width:300px;"></mat-divider>
-    <button mat-button [routerLink]="['/main/contact']"><mat-icon style="margin-right: 10px;">contact_mail</mat-icon><strong>Contact</strong></button>
+    <button class="btn-res" mat-button [routerLink]="['/main/contact']"><mat-icon style="margin-right: 10px;">contact_mail</mat-icon><strong>Contact</strong></button>
     <mat-divider style="width:300px;"></mat-divider>
-    <button mat-button [routerLink]="['/main/edit-setting']"><mat-icon style="margin-right: 10px;">settings</mat-icon><strong>Settings & Privacy</strong></button>
+    <button class="btn-res" mat-button [routerLink]="['/main/edit-setting']"><mat-icon style="margin-right: 10px;">settings</mat-icon><strong>Settings & Privacy</strong></button>
     <mat-divider style="width:300px;"></mat-divider>
-    <button mat-button [routerLink]="['/main/logout']"><mat-icon style="margin-right: 10px;">forward</mat-icon><strong>Log Out</strong></button>
+    <button class="btn-res" mat-button [routerLink]="['/login']" (click)="onLogout()"><mat-icon style="margin-right: 10px;">forward</mat-icon><strong>Log Out</strong></button>
 </p-sidebar>
 <div class="topbar ">
     <div class="logo">

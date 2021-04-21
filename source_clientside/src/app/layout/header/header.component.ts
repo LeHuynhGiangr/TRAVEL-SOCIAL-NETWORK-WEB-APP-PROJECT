@@ -37,9 +37,11 @@ export class HeaderComponent implements OnInit {
       
       //item responsive
       this.items = [
-        {label: 'Trips', icon: 'pi pi-fw pi-compass',routerLink: ['/main/trip']},
-        {label: 'Messages', icon: 'pi pi-fw pi-comments',routerLink: ['/main/messages']},
-        {label: 'Friends', icon: 'pi pi-fw pi-users',routerLink: ['/main/friends']},
+        {label: '', icon: 'pi pi-fw pi-home',routerLink: ['/main/home']},
+        {label: '', icon: 'pi pi-fw pi-compass',routerLink: ['/main/trip']},
+        {label: '', icon: 'pi pi-fw pi-video',routerLink: ['/main/videos']},
+        {label: '', icon: 'pi pi-fw pi-comments',routerLink: ['/main/messages']},
+        {label: '', icon: 'pi pi-fw pi-bell',routerLink: ['/main/notifications']},
       ];
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();

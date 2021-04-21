@@ -145,3 +145,9 @@ mat-grid-tile {
   right: 20px;
   margin-bottom: 60px;
 }
+@media (max-width:760px) {
+  .title-panel
+  {
+    font-size: 12px;
+  }
+}
