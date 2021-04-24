@@ -60,7 +60,7 @@ namespace Domain.Services
             m_userRepository.Update(l_user);
             m_userRepository.SaveChanges();
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName,l_user.Active ,l_jwtToken, l_refreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_refreshToken.Token);
         }
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
@@ -98,7 +98,7 @@ namespace Domain.Services
             // generate new jwt
             var l_jwtToken = GenerateJwtToken(l_user);
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName,l_user.Active, l_jwtToken, l_newRefreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_newRefreshToken.Token);
         }
 
         //get new JWT and new refresh token
@@ -209,7 +209,7 @@ namespace Domain.Services
 
         public IEnumerable<UserResponse> GetAll()
         {
-            var l_users = m_userRepository.GetAll(_=>_.Friend);
+            var l_users = m_userRepository.GetAll(_ => _.Friend);
             List<UserResponse> l_userResponses = new List<UserResponse>();
             foreach (User user in l_users)
             {
@@ -288,6 +288,33 @@ namespace Domain.Services
                     Language = l_user.Language,
                     Role = l_user.Role
                 };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            //throw new NotImplementedException();
+        }
+
+        public UserResponse GetByUserName(string username)
+        {
+            try
+            {
+                var l_users = m_userRepository.GetAll();
+                var user = l_users.Where(_ => _.UserName.ToLower().Contains(username.ToLower())).FirstOrDefault();
+
+                UserResponse userResponse = new UserResponse
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Avatar = user.Avatar,
+                    Description = user.Description,
+                    UserName = user.UserName
+                };
+
+
+                return userResponse;
             }
             catch (Exception e)
             {

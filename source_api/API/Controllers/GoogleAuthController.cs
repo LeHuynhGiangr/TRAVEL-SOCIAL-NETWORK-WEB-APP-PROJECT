@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.DomainModels.API.RequestModels;
+using Domain.DomainModels.API.ResponseModels;
+using Domain.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -11,10 +14,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
+
     [AllowAnonymous, Route("account")]
     public class GoogleAuthController : ControllerBase
     {
+
+        private IUserService<Guid> m_userService;
+
+        public GoogleAuthController(IUserService<Guid> userService)
+        {
+            this.m_userService = userService;
+        }
+
         [Route("google-login")]
         public IActionResult GoogleLogin()
         {
@@ -41,8 +52,46 @@ namespace API.Controllers
                         claim.Value
                     });
 
+            string fname = "";
+            string lname = "";
+            string email = "";
+            var jwt = "";
+            if (claims.Count() > 3)
+            {
+                fname = claims.ToList()[2].ToString();
+                lname = claims.ToList()[3].ToString();
+                email = claims.ToList()[4].ToString();
+            }
 
-            return Ok(claims);
+            UserResponse userResponse = m_userService.GetByUserName(email);
+
+
+            if (userResponse != null)
+            {
+                //Writing....
+            }
+            else
+            {
+                // Register
+
+                RegisterRequest registerModel = new RegisterRequest()
+                {
+                    UserName = email,
+                    FirstName = fname,
+                    LastName = lname,
+                    Gender = "Male",
+                    Active = true,
+                    Password = email,
+                    ConfirmPassword = email,
+                    AcceptTerms = true
+                };
+
+
+                m_userService.Register(registerModel, Request.Headers["origin"]);
+            }    
+
+
+            return Redirect("localhost:4200?token" + jwt);
         }
     }
 }

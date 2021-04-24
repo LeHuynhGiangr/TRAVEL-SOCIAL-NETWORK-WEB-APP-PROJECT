@@ -44,5 +44,6 @@ namespace Domain.IServices
         void UpdateAcademic(Guid id, UpdateAcademicRequest model);
         void UpdateInterest(Guid id, UpdateInterestRequest model);
         void UploadBackground(Guid id, string webRootPath, IFormFile background);
+        UserResponse GetByUserName(string username);
     }
 }
