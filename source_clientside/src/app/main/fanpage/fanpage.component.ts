@@ -14,7 +14,6 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { DialogUploadPageAvatarComponent } from './dialog-uploadpageavatar/dialog-uploadpageavatar.component';
 import { DialogUploadPageBackgroundComponent } from './dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import {PageUrl} from 'src/app/_helpers/get-page-url'
-import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { AddFriendDialogComponent } from '../trip/addfriend-dialog/addfriend-dialog.component';
 @Component({
     selector: 'app-fanpage',
@@ -50,10 +49,10 @@ export class FanpageComponent implements OnInit {
     }
     async getPage(){
       this.pages = new Pages()
-      this.pages.Id = PageStatic.Id
-      this.pages.Name =  PageStatic.Name
-      this.pages.Avatar = ApiUrlConstants.API_URL+"/"+PageStatic.Avatar
-      this.pages.Background = ApiUrlConstants.API_URL+"/"+PageStatic.Background
+      this.pages.Id = this.pageurl.getPageIdStorage()
+      this.pages.Name =  this.pageurl.getPageNameStorage()
+      this.pages.Avatar = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageAvatarStorage()
+      this.pages.Background = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageBackgroundStorage()
     }
     CreateTripDialog(): void {
       const dialogRef = this.dialog.open(TripDialogComponent, {
@@ -105,7 +104,7 @@ export class FanpageComponent implements OnInit {
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTripsByPageId(PageStatic.Id)
+      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
       this.count=this.count+3
       for (let i = this.count-3; i < this.count; i++) {
           let trip = new Trips();
@@ -128,16 +127,13 @@ export class FanpageComponent implements OnInit {
         width: '500px',
         height: '400px',
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         this.router.routeReuseStrategy.shouldReuseRoute = () =>{
           return false;
         }
-        this.PService.getPageById(PageStatic.Id).then(page => {
-          if (page) {
-            this.pages.Avatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
-            PageStatic.Avatar = page["avatar"]
-          }
-        });
+        const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
+          this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"])
+          this.pages.Avatar = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageAvatarStorage()
       });
     }
     openDialogBackground(): void {

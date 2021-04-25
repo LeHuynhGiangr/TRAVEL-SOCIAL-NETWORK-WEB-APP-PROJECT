@@ -10,6 +10,7 @@ import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ApiUrlConstants } from '../../../_core/common/api-url.constants';
 import { PageStatic } from 'src/app/_core/data-repository/page';
+import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({
   selector: 'app-dialog-uploadpageavatar',
   templateUrl: './dialog-uploadpageavatar.component.html',
@@ -23,7 +24,7 @@ export class DialogUploadPageAvatarComponent implements OnInit {
   public pages: Pages;
   constructor(public dialogRef: MatDialogRef<DialogUploadPageAvatarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
     private PService: PagesService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService) {
+    public Iservice:ImageService,public pageurl:PageUrl) {
 
   }
   onNoClick(): void {
@@ -37,8 +38,8 @@ export class DialogUploadPageAvatarComponent implements OnInit {
     }
     console.log(PageStatic.Id)
     this.pages=new Pages()
-    this.pages.Id = PageStatic.Id
-    this.pages.Avatar = PageStatic.Avatar
+    this.pages.Id = this.pageurl.getPageIdStorage()
+    this.pages.Avatar = this.pageurl.getPageAvatarStorage()
   }
 
   // sửa sao thành lưu /assets/sdsad.jpg nữa chắc ok

@@ -5,18 +5,21 @@ import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from '../../_core/services/login.service';
 import { EditInterestService } from '../../_core/services/edit-hobby.service';
 import { UserProfile } from '../../_core/data-repository/profile'
+import { MessageService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
     selector: 'app-edit-hobby',
     templateUrl: './edit-hobby.component.html',
     styleUrls: ['./edit-hobby.component.css'],
-    
+    providers: [MessageService]
 })
 export class EditHobbyComponent implements OnInit {
-
+  public message: string;
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
-  private m_route: ActivatedRoute, private m_router: Router,private ETService:EditInterestService) {
+  private m_route: ActivatedRoute, private m_router: Router,private ETService:EditInterestService,
+  private messageService: MessageService, private primengConfig: PrimeNGConfig) {
     
   }
   
@@ -28,11 +31,23 @@ export class EditHobbyComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
+    this.primengConfig.ripple = true;
     this.appUsers = new AppUsers();
     this.appUsers.Language = UserProfile.Language
     this.appUsers.Hobby = UserProfile.Hobby
   }
-
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Update Successfully', detail: 'Interest Info'});
+    setTimeout(() => {
+      this.refresh();
+    }, 1500)
+  }
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Basic Info'});
+    setTimeout(() => {
+      this.refresh();
+    }, 1500)
+  }
   async onSave() {
     try{
       const formData = new FormData();
@@ -41,22 +56,19 @@ export class EditHobbyComponent implements OnInit {
         formData.append('hobby', this.appUsers.Hobby);
         formData.append('language', this.appUsers.Language);
         this.ETService.uploadProfile(this.service.getUserIdStorage(),formData);
-        alert("Upload succesfully !")
-        
-        //Refresh user after edit interest
-        //var user = await this.service.getUser();
+
         UserProfile.Hobby = this.appUsers.Hobby
         UserProfile.Language = this.appUsers.Language
-        this.refresh();
+        this.showSuccess()
       }
       else
       {
-        alert("Upload failure !")
+        this.showError()
       }
     }
     catch(e)
     {
-      alert("Upload failure !")
+      this.showError()
     }
   }
   refresh(): void {
