@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as  WSMediator  from 'src/assets/js/websocket/WSMediator.js';
 
-declare const StaticWSMediator :WSMediator.StaticWSMediator
-declare let WebSocketHandler :WSMediator.WebSocketHandler
-
+//declare const StaticWSMediator :WSMediator.StaticWSMediator
+//declare let WebSocketHandler :WSMediator.WebSocketHandler
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -12,7 +11,7 @@ declare let WebSocketHandler :WSMediator.WebSocketHandler
 export class MainComponent implements OnInit {
 
   constructor() { 
-    WebSocketHandler = new WSMediator.WebSocketHandler();
+    //WebSocketHandler = new WSMediator.WebSocketHandler();
   }
 
   ngOnInit(): void {
