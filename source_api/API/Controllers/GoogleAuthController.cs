@@ -23,7 +23,7 @@ namespace API.Controllers
 
         public GoogleAuthController(IUserService<Guid> userService)
         {
-            this.m_userService = userService;
+            m_userService = userService;
         }
 
         [Route("google-login")]
@@ -58,9 +58,9 @@ namespace API.Controllers
             var jwt = "";
             if (claims.Count() > 3)
             {
-                fname = claims.ToList()[2].ToString();
-                lname = claims.ToList()[3].ToString();
-                email = claims.ToList()[4].ToString();
+                fname = claims.ToList()[2].Value.ToString();
+                lname = claims.ToList()[3].Value.ToString();
+                email = claims.ToList()[4].Value.ToString();
             }
 
             UserResponse userResponse = m_userService.GetByUserName(email);
@@ -68,7 +68,7 @@ namespace API.Controllers
 
             if (userResponse != null)
             {
-                //Writing....
+                jwt = m_userService.AuthenticateG(email, GetclientIpv4Address());
             }
             else
             {
@@ -88,10 +88,21 @@ namespace API.Controllers
 
 
                 m_userService.Register(registerModel, Request.Headers["origin"]);
+
+                userResponse = m_userService.GetByUserName(email);
             }    
-
-
-            return Redirect("localhost:4200?token" + jwt);
+            return Redirect(@"http://localhost:4200?token=" + jwt + "&id=" + userResponse.Id);
+        }
+        private string GetclientIpv4Address()
+        {
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                return Request.Headers["X-Forwarded-for"];
+            }
+            else
+            {
+                return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Domain.IServices
     public interface IUserService<T>
     {
         AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest, string ipAdress);
-
+        string AuthenticateG(string email, string ipAddress);
         /// <summary>
         /// 
         /// </summary>

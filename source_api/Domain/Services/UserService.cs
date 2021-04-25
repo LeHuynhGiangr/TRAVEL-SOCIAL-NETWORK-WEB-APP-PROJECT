@@ -62,6 +62,28 @@ namespace Domain.Services
 
             return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_refreshToken.Token);
         }
+        public string AuthenticateG(string email, string ipAddress)
+        {
+            //var l_user = m_userRepository.FindSingle(_ => _.UserName == authenticateRequest.Username && _.Password == authenticateRequest.Password);
+            var l_user = m_userRepository.FindSingle(_ => _.UserName == email);
+
+            //User have be found so generate jwt and refresh tokens
+            var l_jwtToken = this.GenerateJwtToken(l_user);
+            var l_refreshToken = this.GenerateRefreshToken(ipAddress);
+
+            //save refresh token
+            if (l_user.RefreshTokens == null) l_user.RefreshTokens = new List<RefreshToken>();
+            l_user.RefreshTokens.Add(l_refreshToken);
+
+            //remove old refresh token from user
+            RemoveOldRefreshTokens(l_user);
+
+            //here is saving to db
+            m_userRepository.Update(l_user);
+            m_userRepository.SaveChanges();
+
+            return l_jwtToken;
+        }
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
         {
