@@ -193,6 +193,13 @@ namespace Domain.Services
                 DateVerified = null,
                 //VerificationShortToken = null,
                 VerificationShortToken = l_sixDigitToken,
+                Friend = new Friend
+                {
+                    Id = Guid.Empty,
+                    //list friend in json format
+                    FriendsJsonString = null,
+                    DateCreated = DateTime.Now
+                },
                 /*
                  * 
                  */
@@ -324,19 +331,21 @@ namespace Domain.Services
             {
                 var l_users = m_userRepository.GetAll();
                 var user = l_users.Where(_ => _.UserName.ToLower().Contains(username.ToLower())).FirstOrDefault();
-
-                UserResponse userResponse = new UserResponse
+                if (user != null)
                 {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Avatar = user.Avatar,
-                    Description = user.Description,
-                    UserName = user.UserName
-                };
-
-
-                return userResponse;
+                    UserResponse userResponse = new UserResponse
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Avatar = user.Avatar,
+                        Description = user.Description,
+                        UserName = user.UserName
+                    };
+                    return userResponse;
+                }
+                else
+                    return null;
             }
             catch (Exception e)
             {
@@ -536,7 +545,7 @@ namespace Domain.Services
             }
         }
 
-        private string RandomSixDigitToken()
+        public string RandomSixDigitToken()
         {
             Random l_random = new Random();
             int l_sixDigit = l_random.Next(100000, 999999);

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data.EF;
+using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
@@ -20,10 +22,11 @@ namespace API.Controllers
     {
 
         private IUserService<Guid> m_userService;
-
-        public GoogleAuthController(IUserService<Guid> userService)
+        private readonly EFRepository<User, Guid> m_userRepository;
+        public GoogleAuthController(IUserService<Guid> userService, EFRepository<User, Guid> userRepository)
         {
             m_userService = userService;
+            m_userRepository = userRepository;
         }
 
         [Route("google-login")]
@@ -73,23 +76,35 @@ namespace API.Controllers
             else
             {
                 // Register
-
-                RegisterRequest registerModel = new RegisterRequest()
+                var l_user = new User
                 {
                     UserName = email,
                     FirstName = fname,
                     LastName = lname,
                     Gender = "Male",
                     Active = true,
-                    Password = email,
-                    ConfirmPassword = email,
-                    AcceptTerms = true
+                    PasswordHash = null,
+                    Password = null,
+                    TwoFactorEnabled = true,
+                    PhoneNumberConfirmed = true,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                    DateVerified = null,
+                    Friend = new Friend
+                    {
+                        Id = Guid.Empty,
+                        FriendsJsonString = null,
+                        DateCreated = DateTime.Now
+                    },
                 };
-
-
-                m_userService.Register(registerModel, Request.Headers["origin"]);
+                l_user.Role = Data.Enums.ERole.User;
+                m_userRepository.Add(l_user);
+                m_userRepository.SaveChanges();
 
                 userResponse = m_userService.GetByUserName(email);
+
+                jwt = m_userService.AuthenticateG(email, GetclientIpv4Address());
             }    
             return Redirect(@"http://localhost:4200?token=" + jwt + "&id=" + userResponse.Id);
         }
