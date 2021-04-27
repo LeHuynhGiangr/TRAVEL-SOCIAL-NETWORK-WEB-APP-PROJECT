@@ -1,24 +1,24 @@
 .rcorners2 {
     border-radius: 55px;
-    border: 2px solid #8eccf0;
+    border: 2px solid #898e91;
     padding: 1px; 
   }
 
   .rcorners1 {
     border-radius: 40px;
-    border: px solid #8eccf0;
+    border: px solid #898e91;
     width: 100px;
     padding: 1px; 
     margin-top: 10px;
   }
-  .rcorners0 {
+  .rcorners-header {
     border-radius: 25px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:7px; 
   }
   .rcorners2 {
     border-radius: 15px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:2px; 
   }
   .left

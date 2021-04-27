@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from 'src/app/login/shared/login.model';
-import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { LoginService } from 'src/app/_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';

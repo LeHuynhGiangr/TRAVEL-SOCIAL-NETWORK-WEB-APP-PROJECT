@@ -102,23 +102,21 @@
 												<textarea class=" rcorners1" rows="2" placeholder="What do you think ?" (click)=createpostDialog()></textarea>
 											</form>
 											<div>
-												<button class="rcorners0"mat-stroked-button><mat-icon>videocam</mat-icon>Live</button>
-												<button class="rcorners0"mat-stroked-button><mat-icon>image</mat-icon>Images</button>
-												<button class="rcorners0"mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
+												<button class="rcorners-box-post"mat-stroked-button><mat-icon>videocam</mat-icon>Live</button>
+												<button class="rcorners-box-post"mat-stroked-button><mat-icon>image</mat-icon>Images</button>
+												<button class="rcorners-box-post"mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
 											</div>
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								
+								<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 								<div class="loadMore">
-									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<br>
 									<ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
 										<div class="central-meta item rcorners2">
 											<app-post (OnReceivePostCommentData)="commentPost($event)" [postData]=post></app-post>
 										</div>
 									</ng-template>
-									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<button class="btn-view btn-load-more"></button>
 								</div>
 							

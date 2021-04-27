@@ -1,13 +1,13 @@
 .mytimeline {
     border-radius: 15px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:7px; 
     text-indent: -150px;
   }
 .side-bar-left
 {
     border-radius: 15px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:7px; 
     padding-right:135px; /*left-right-top-bottom-depend on ur choice*/
     -moz-box-sizing: border-box;
@@ -17,7 +17,7 @@
 .side-bar-left2
 {
     border-radius: 15px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:7px; 
     padding-right:115px; /*left-right-top-bottom-depend on ur choice*/
     -moz-box-sizing: border-box;
@@ -55,5 +55,9 @@
     .responsive-listnav
     {
       display: none;
+    }
+    .rightimage
+    {
+      right: 45px;
     }
   }

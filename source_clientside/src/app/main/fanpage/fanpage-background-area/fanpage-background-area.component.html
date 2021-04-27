@@ -1,0 +1,49 @@
+<section>
+    <div class="feature-photo">
+        <figure><img src={{this.pages.Background}} style="width: 1600px; height: 450px;" alt=""></figure>
+        <div class="add-btn">
+            <span>1.3k followers</span>
+            <a href="#" title="" data-ripple="">Follow</a>
+        </div>
+        <form class="edit-phto" (click)="openDialogBackground()">
+            <i class="fa fa-camera-retro"></i>
+            <label class="fileContainer">
+                Edit Cover Photo
+        </label>
+        </form>
+        <div class="container-fluid">
+            <div class="row merged">
+                <div class="col-lg-2 col-sm-3">
+                    <div class="user-avatar">
+                        <figure>
+                            <img src={{this.pages.Avatar}} style="width: 250px; height: 200px;" alt="">
+                            <form class="edit-phto" (click)="openDialogAvatar()" >
+                                <i class="fa fa-camera-retro"></i>
+                                <label class="fileContainer">
+                                    Edit Display Photo
+                                </label>
+                            </form>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-sm-9">
+                    <div class="timeline-info">
+                        <ul>
+                            <li class="admin-name">
+                              <h5>{{this.pages.Name}}</h5>
+                              <span>@tourist_page</span>
+                            </li>
+                            <li>
+                                <a class="active" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
+                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Discount</a>
+                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
+                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
+                                <a class="" [routerLink]="['/main/likers']" title="" data-ripple="">More</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

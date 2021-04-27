@@ -59,9 +59,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { UsersListTripComponent } from './trip/users-list-trip/users-list-trip.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
@@ -95,6 +95,7 @@ import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
 import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { FanpageBackgroundAreaComponent } from './fanpage/fanpage-background-area/fanpage-background-area.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -190,7 +191,8 @@ export const mainRoutes: Routes = [
     PaymentHistoryDialogComponent,
     BackgroundAreaComponent,
     DialogUploadAvatarComponent,
-    DialogUploadBackgroundComponent
+    DialogUploadBackgroundComponent,
+    FanpageBackgroundAreaComponent
     //Primeng
   ],
   imports: [

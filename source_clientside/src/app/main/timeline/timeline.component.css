@@ -1,16 +1,16 @@
 .rcorners2 {
     border-radius: 25px;
-    border: 2px solid #8eccf0;
+    border: 2px solid #898e91;
     padding: 20px; 
   }
   .rcorners1 {
     border-radius: 25px;
-    border: 0.1px solid #bee2f7;
+    border: 0.1px solid #898e91;
     padding: 20px; 
   }
-  .rcorners0 {
+  .rcorners-box-post {
     border-radius: 25px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:7px; 
     display: inline-block;
     padding-left: 15px;
