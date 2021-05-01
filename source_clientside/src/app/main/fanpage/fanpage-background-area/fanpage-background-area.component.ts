@@ -68,7 +68,7 @@ export class FanpageBackgroundAreaComponent implements OnInit {
           }
           const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
             this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"])
-            this.pages.Avatar = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageBackgroundStorage()
+            this.pages.Background = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageBackgroundStorage()
         });
       }
 }

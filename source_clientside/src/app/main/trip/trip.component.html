@@ -82,9 +82,9 @@
                                 </a>
                               </div>
                               <br>
-                            <div class="loadMore">
-                                <mat-grid-list cols="2" rowHeight="2:1" style="height: 300px;">
-                                    <mat-grid-tile *ngFor="let trip of tripList">
+                              <mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
+                              <mat-grid-list cols="2" rowHeight="{{this.lengthcount}}" style="height: 300px;">
+                                  <mat-grid-tile *ngFor="let trip of tripList">
                                         <div class="card">
                                         <img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
                                         <div class="container">
@@ -94,16 +94,8 @@
                                       </div>
                                     </mat-grid-tile>
                                   </mat-grid-list>
-                                  <ul class="pagination pag">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                  </ul>
-                                <mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
-                                <button class="btn-view btn-load-more" (click)="getTripListmore()"></button>
-                            </div>
+                                  <br>
+                              <button *ngIf="(this.count) < (this.listcount)" class="btn-view btn-load-more" (click)="getTripListmore()"></button>
                         </div><!-- centerl meta -->
                         <div class="col-lg-3">
                             <aside class="sidebar static">

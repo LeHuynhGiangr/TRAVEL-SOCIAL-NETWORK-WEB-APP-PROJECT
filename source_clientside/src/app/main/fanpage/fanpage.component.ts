@@ -31,6 +31,7 @@ export class FanpageComponent implements OnInit {
     check:boolean=true
     lengthcount
     count
+    listcount
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
     private PService:PagesService,public dialog: MatDialog,private TService:TripService, public tripurl:TripUrl, public pageurl:PageUrl) {}
 
@@ -79,9 +80,10 @@ export class FanpageComponent implements OnInit {
       },50)
     }
     getTripList = async () => {
-      this.count=2
+      this.count=4
       this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
-      this.lengthcount=this.trips.length
+      this.listcount = this.trips.length
+      this.lengthcount="2:"+this.count/2
       for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
@@ -103,8 +105,10 @@ export class FanpageComponent implements OnInit {
       this.time=0
       this.startTimer()
       this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
-      this.count=this.count+3
-      for (let i = this.count-3; i < this.count; i++) {
+      this.count=this.count+2
+      this.listcount = this.trips.length
+      this.lengthcount="2:"+(this.count/2-1)
+      for (let i = this.count-4; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
