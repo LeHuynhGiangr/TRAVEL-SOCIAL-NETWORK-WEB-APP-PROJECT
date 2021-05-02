@@ -4,6 +4,8 @@ import { DOCUMENT } from '@angular/common';
 import { Trips } from '../../_core/models/trip.model';
 import { TripStatic } from '../../_core/data-repository/trip';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
+import { PagesService } from 'src/app/_core/services/page.service';
+import { parse } from 'query-string';
 @Component({
     selector: 'app-trip-detail',
     templateUrl: './trip-detail.component.html',
@@ -11,9 +13,11 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
 })
 export class TripDetailComponent implements OnInit {
     public trips :Trips;
-    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl ) {}
+    namePage
+    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl,
+    private PService:PagesService ) {}
 
-    ngOnInit() {
+    async ngOnInit() {
       var script = document.createElement("script");
       script.type = "text/javascript";
       script.src = "../assets/js/script.js";
@@ -32,6 +36,9 @@ export class TripDetailComponent implements OnInit {
       this.trips.DateStart = TripStatic.DateStart
       this.trips.DateEnd = TripStatic.DateEnd
       this.trips.Service = TripStatic.Service
+      this.trips.PageId = TripStatic.PageId
+      const page = await this.PService.getPageById(this.trips.PageId)
+      this.namePage = page["name"]
     }
     getPath(){
       return this.router.url;

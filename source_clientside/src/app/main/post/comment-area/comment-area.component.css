@@ -13,4 +13,7 @@
    .auto{
        width: 87%;
    }
+   .cmt-box {
+    margin-bottom: -10px;
+  }
 }

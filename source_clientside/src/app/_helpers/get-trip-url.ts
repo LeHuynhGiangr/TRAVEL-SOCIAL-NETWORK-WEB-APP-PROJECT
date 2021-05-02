@@ -25,6 +25,7 @@ export class TripUrl{
         TripStatic.Days = result["days"]
         TripStatic.DateStart = result["dateStart"]
         TripStatic.DateEnd = result["dateEnd"]
+        TripStatic.PageId = result["pageId"]
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
     public async getNavigationPayment( id) {

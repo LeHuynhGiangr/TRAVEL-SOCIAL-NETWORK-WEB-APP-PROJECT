@@ -18,6 +18,7 @@ import {MenuItem} from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
     items: MenuItem[];
+    activeItem: MenuItem;
     visibleSidebar1;
     visibleSidebar2;
     public appUsers: AppUsers;
@@ -43,6 +44,16 @@ export class HeaderComponent implements OnInit {
         {label: '', icon: 'pi pi-fw pi-comments',routerLink: ['/main/messages']},
         {label: '', icon: 'pi pi-fw pi-bell',routerLink: ['/main/notifications']},
       ];
+      if(this.router.url =='/main/home')
+        this.activeItem = this.items[0]
+      if(this.router.url =='/main/trip')
+        this.activeItem = this.items[1]
+      if(this.router.url =='/main/videos')
+        this.activeItem = this.items[2]
+      if(this.router.url =='/main/messages')
+        this.activeItem = this.items[3]
+      if(this.router.url =='/main/notifications')
+        this.activeItem = this.items[4]
       //var user = await this.service.getUser();
       this.appUsers = new AppUsers();
       this.appUsers.Avatar = ApiUrlConstants.API_URL + "/" + this.service.getAvatarStorage()
@@ -53,9 +64,6 @@ export class HeaderComponent implements OnInit {
     onLogout() {
       this.service.logout();
       this.router.navigateByUrl('/login');
-    }
-    openNav(){
-      this.res=true
     }
     async search(){
       UserProfile.Name = this.NameSearch

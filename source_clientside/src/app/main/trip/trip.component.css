@@ -150,4 +150,8 @@ mat-grid-tile {
   {
     font-size: 12px;
   }
+  .panel-header
+  {
+    height: 60px;
+  }
 }

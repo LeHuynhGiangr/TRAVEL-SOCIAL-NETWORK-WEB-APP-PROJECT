@@ -14,3 +14,22 @@
     line-height: 20px;
     text-decoration: none;
 }
+@media screen and (max-width: 540px) {
+    .land-featurearea
+    {
+        height: 20vh;
+        background-color: #a4a4a4;
+    }
+    .login-reg-bg 
+    {
+        height: 85vh;
+    }
+    .friend-logo > span::before
+    {
+        background: #bfc6c9;
+    }
+    .friend-logo > span::after
+    {
+        background: #bfc6c9;
+    }
+}
