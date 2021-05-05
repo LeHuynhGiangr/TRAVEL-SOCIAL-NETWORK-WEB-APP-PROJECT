@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { AppUsers } from './../../login/shared/login.model';
+import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({
     selector: 'app-fanpage-admin',
     templateUrl: './fanpage-admin.component.html',
@@ -10,13 +11,16 @@ import { AppUsers } from './../../login/shared/login.model';
 export class FanpageAdminComponent implements OnInit {
 
   public appUsers: AppUsers;
-  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc) {
-    
+  idpage;
+  constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,public pageurl:PageUrl) {
+
   }
   async ngOnInit() {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
+    
+    this.idpage = this.pageurl.getPageIdStorage();
   }
 }

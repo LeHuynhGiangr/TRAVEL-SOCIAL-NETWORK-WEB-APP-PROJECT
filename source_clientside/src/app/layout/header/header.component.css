@@ -118,10 +118,6 @@
   }
   @media screen and (max-width: 1025px) and (min-width: 769px)
   {
-    .res-btn
-    {
-      display: none;
-    }
     .tab-menu
     {
       margin-left: 370px;

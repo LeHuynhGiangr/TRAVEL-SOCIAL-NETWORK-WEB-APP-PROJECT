@@ -51,7 +51,7 @@
     height: 35px;
     bottom:2px;
   }
-  @media (max-width: 991px) {
+  @media (max-width: 1024px) {
     .responsive-listnav
     {
       display: none;
