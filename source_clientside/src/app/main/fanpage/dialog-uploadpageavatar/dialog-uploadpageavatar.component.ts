@@ -6,9 +6,7 @@ import { ImageService } from '../../../_core/services/images.service';
 import { PagesService } from '../../../_core/services/page.service';
 import {Pages} from '../../../_core/models/pages.model'
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
-import { ApiUrlConstants } from '../../../_core/common/api-url.constants';
 import { PageStatic } from 'src/app/_core/data-repository/page';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({

@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import { AppUsers } from '../../../login/shared/login.model';
 import { LoginService } from '../../../_core/services/login.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TripService } from '../../../_core/services/trip.service';
 @Component({

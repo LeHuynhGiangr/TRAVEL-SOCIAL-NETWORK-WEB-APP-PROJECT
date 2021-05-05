@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import { AppUsers } from '../../../login/shared/login.model';
 import { TripService } from '../../../_core/services/trip.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PageStatic } from 'src/app/_core/data-repository/page';
 import { DatePipe } from '@angular/common'
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({

@@ -3,11 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../../../_core/models/DialogData';
 import { LoginService } from '../../../_core/services/login.service';
 import { PagesService } from '../../../_core/services/page.service';
-import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ImageService } from '../../../_core/services/images.service';
-import { PageStatic } from 'src/app/_core/data-repository/page';
 import {Pages} from '../../../_core/models/pages.model'
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({

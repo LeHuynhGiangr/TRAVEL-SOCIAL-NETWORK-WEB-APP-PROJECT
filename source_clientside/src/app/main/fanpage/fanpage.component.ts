@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { LoginService } from '../../_core/services/login.service';
-import {PageStatic} from 'src/app/_core/data-repository/page'
 import { PagesService } from '../../_core/services/page.service';
 import {Pages} from '../../_core/models/pages.model'
 import { TripDialogComponent } from 'src/app/main/trip/trip-dialog/trip-dialog.component';
@@ -11,8 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
-import { DialogUploadPageAvatarComponent } from './dialog-uploadpageavatar/dialog-uploadpageavatar.component';
-import { DialogUploadPageBackgroundComponent } from './dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import {PageUrl} from 'src/app/_helpers/get-page-url'
 import { AddFriendDialogComponent } from '../trip/addfriend-dialog/addfriend-dialog.component';
 @Component({

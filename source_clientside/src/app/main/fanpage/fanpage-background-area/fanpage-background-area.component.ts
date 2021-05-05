@@ -1,13 +1,8 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { AppUsers } from 'src/app/login/shared/login.model';
-import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
-import { LoginService } from 'src/app/_core/services/login.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
-import { TimeLineService } from 'src/app/_core/services/timeline.service';
 import { DialogUploadPageAvatarComponent } from '../dialog-uploadpageavatar/dialog-uploadpageavatar.component';
 import { PagesService } from 'src/app/_core/services/page.service';
 import { PageUrl } from 'src/app/_helpers/get-page-url';

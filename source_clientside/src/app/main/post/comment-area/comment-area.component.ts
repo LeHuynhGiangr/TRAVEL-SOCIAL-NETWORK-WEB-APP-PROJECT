@@ -8,8 +8,6 @@ import { AppUsers } from '../../../login/shared/login.model';
 import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
 import { PostComment } from 'src/app/_core/models/post-comment.model';
 import { PostService } from 'src/app/_core/services/post.service';
-import { PrimeNGConfig } from 'primeng/api';  
-import {MenuItem, PrimeIcons} from 'primeng/api';
 import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
   selector: 'app-comment-area',

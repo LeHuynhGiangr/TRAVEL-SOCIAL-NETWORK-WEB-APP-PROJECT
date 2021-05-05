@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageStatic } from './../_core/data-repository/page'
 import { PagesService } from './../_core/services/page.service';
 @Injectable({
     providedIn:'root'

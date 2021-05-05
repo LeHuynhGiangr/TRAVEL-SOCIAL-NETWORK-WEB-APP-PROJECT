@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 
 @Component({
   selector: 'app-post-meta',
@@ -9,7 +8,6 @@ import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 export class PostMetaComponent implements OnInit {
   @Input() content:string;
   @Input() imageUri:string;
-
   constructor() { }
 
   ngOnInit(): void {

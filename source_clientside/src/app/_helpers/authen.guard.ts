@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../_core/services/login.service';
-import { UrlConstants } from '../_core/common/url.constants';
-import { UserProfile } from '../_core/data-repository/profile';
 import { AuthenService } from '../_core/services/authen.service';
 import { parse } from 'query-string';
 

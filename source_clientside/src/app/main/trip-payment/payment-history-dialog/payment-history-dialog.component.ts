@@ -6,7 +6,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { TripService } from '../../../_core/services/trip.service';
 import { AppUsers } from '../../../login/shared/login.model';
-import { UserProfile } from 'src/app/_core/data-repository/profile';
 @Component({
     selector: 'app-payment-history-dialog',
     templateUrl: './payment-history-dialog.component.html',

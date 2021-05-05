@@ -5,7 +5,6 @@ import { Trips } from '../../_core/models/trip.model';
 import { TripStatic } from '../../_core/data-repository/trip';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { PagesService } from 'src/app/_core/services/page.service';
-import { parse } from 'query-string';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({
     selector: 'app-trip-detail',
