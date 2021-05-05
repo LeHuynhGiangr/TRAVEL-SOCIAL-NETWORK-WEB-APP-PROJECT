@@ -22,12 +22,11 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { ListNavigationComponent } from './list-navigation/list-navigation.component';
 import { RightSidebarListFriendComponent } from './right-sidebar-list-friend/right-sidebar-list-friend.component';
 /**end group home */
-
+import { FanpageAdminComponent } from './fanpage-admin/fanpage-admin.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { ImagesComponent } from './images/images.component';
 import { InsightsComponent } from './insights/insights.component';
 import { KnowledgeComponent } from './knowledge/knowledge.component';
-import { LikersComponent } from './likers/likers.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NewpageComponent } from './newpage/newpage.component';
 import { NotificationsComponent } from './notifications/notifications.component';
@@ -112,6 +111,7 @@ export const mainRoutes: Routes = [
   { path: 'friends', component: FriendsComponent },
   { path: 'friends-search', component: FriendsSearchComponent },
   { path: 'fanpage/:id', component: FanpageComponent },
+  { path: 'fanpage-admin', component: FanpageAdminComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'groups-search', component: GroupsSearchComponent },
@@ -119,7 +119,6 @@ export const mainRoutes: Routes = [
   { path: 'images', component: ImagesComponent },
   { path: 'insights', component: InsightsComponent },
   { path: 'knowledge', component: KnowledgeComponent },
-  { path: 'likers', component: LikersComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'newpage', component: NewpageComponent },
   { path: 'notifications', component: NotificationsComponent },
@@ -148,6 +147,7 @@ export const mainRoutes: Routes = [
     FriendsComponent,
     FriendsSearchComponent,
     FanpageComponent,
+    FanpageAdminComponent,
     FaqComponent,
     GroupsComponent,
     GroupsSearchComponent,
@@ -155,7 +155,6 @@ export const mainRoutes: Routes = [
     ImagesComponent,
     InsightsComponent,
     KnowledgeComponent,
-    LikersComponent,
     MessagesComponent,
     DialogPostComponent,
     /**start group home */

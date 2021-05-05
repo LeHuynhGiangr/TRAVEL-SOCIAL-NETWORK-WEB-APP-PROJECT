@@ -6,6 +6,7 @@ import { TripStatic } from '../../_core/data-repository/trip';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { PagesService } from 'src/app/_core/services/page.service';
 import { parse } from 'query-string';
+import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({
     selector: 'app-trip-detail',
     templateUrl: './trip-detail.component.html',
@@ -15,7 +16,7 @@ export class TripDetailComponent implements OnInit {
     public trips :Trips;
     namePage
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl,
-    private PService:PagesService ) {}
+    private PService:PagesService,public pageurl:PageUrl ) {}
 
     async ngOnInit() {
       var script = document.createElement("script");

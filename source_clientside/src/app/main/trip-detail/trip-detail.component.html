@@ -85,7 +85,7 @@
                                  <p class="angular-with-newlines">
                                     {{this.trips.InfoContact}}
                                  </p>
-                                 <p class="angular-with-newlines">
+                                 <p class="angular-with-newlines" style="cursor: pointer;" (click)="pageurl.getNavigation(this.trips.PageId)">
                                     <span>Page Info:</span>
                                     <strong>{{this.namePage}}</strong>
                                  </p>
