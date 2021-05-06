@@ -3,3 +3,9 @@
     border: 2px solid #898e91;
     padding: 20px; 
   }
+  @media (max-width: 767px){
+    .nonedis
+    {
+      display: none;
+    }
+ }

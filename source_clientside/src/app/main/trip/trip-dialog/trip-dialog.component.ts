@@ -69,8 +69,8 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
         formData.append('cost',this.Cost)
         formData.append('days',this.Days)
         formData.append('service',this.Service)
-        let start_date =this.datepipe.transform(this.DateStart, 'dd/MM/yyyy');
-        let end_date =this.datepipe.transform(this.DateEnd, 'dd/MM/yyyy');
+        let start_date =this.datepipe.transform(this.DateStart, 'yyyy-MM-dd');
+        let end_date =this.datepipe.transform(this.DateEnd, 'yyyy-MM-dd');
         formData.append('dateStart',start_date.toString())
         formData.append('dateEnd',end_date.toString())
         formData.append('pageId',this.pageurl.getPageIdStorage())

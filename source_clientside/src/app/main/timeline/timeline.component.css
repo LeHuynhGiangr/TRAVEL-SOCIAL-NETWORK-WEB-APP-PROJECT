@@ -17,3 +17,27 @@
     position: relative;
     width: 33%;
   }
+  .img-postbox
+  {
+    width: 70px; 
+    height: 70px;
+  }
+  @media (max-width: 767px){
+    .img-postbox
+    {
+      width: 40px;
+      height: 40px;
+    }
+    .rcornersx
+    {
+      font-size: 12px;
+    }
+    .rcorners2
+    {
+      padding-bottom: 0px;
+    }
+    .nonedis
+    {
+      display: none;
+    }
+ }

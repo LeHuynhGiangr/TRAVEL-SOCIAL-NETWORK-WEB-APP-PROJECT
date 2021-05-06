@@ -22,9 +22,10 @@
     width: 70px; 
     height: 70px;
   }
-  @media (max-width: 991px) {
+  @media (max-width: 767px){
     .img-postbox
     {
+      width: 40px;
       height: 40px;
     }
     .rcornersx
