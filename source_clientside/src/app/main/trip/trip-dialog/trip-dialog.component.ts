@@ -4,8 +4,8 @@ import { DOCUMENT } from '@angular/common';
 import { AppUsers } from '../../../login/shared/login.model';
 import { TripService } from '../../../_core/services/trip.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PageStatic } from 'src/app/_core/data-repository/page';
 import { DatePipe } from '@angular/common'
+import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({
     selector: 'app-trip-dialog',
     templateUrl: './trip-dialog.component.html',
@@ -31,7 +31,7 @@ import { DatePipe } from '@angular/common'
     public m_returnUrl: string;
     url;
     constructor(public dialogRef: MatDialogRef<TripDialogComponent>, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-      private service: TripService,private m_route: ActivatedRoute,private m_router: Router,public datepipe: DatePipe) {
+      private service: TripService,private m_route: ActivatedRoute,private m_router: Router,public datepipe: DatePipe, public pageurl:PageUrl) {
     }
     async ngOnInit() {
     }
@@ -69,14 +69,11 @@ import { DatePipe } from '@angular/common'
         formData.append('cost',this.Cost)
         formData.append('days',this.Days)
         formData.append('service',this.Service)
-        let start_date =this.datepipe.transform(this.DateStart, 'dd/MM/yyyy');
-        let end_date =this.datepipe.transform(this.DateEnd, 'dd/MM/yyyy');
-        console.log(start_date)
-        console.log(end_date)
-        console.log(PageStatic.Id)
+        let start_date =this.datepipe.transform(this.DateStart, 'yyyy-MM-dd');
+        let end_date =this.datepipe.transform(this.DateEnd, 'yyyy-MM-dd');
         formData.append('dateStart',start_date.toString())
         formData.append('dateEnd',end_date.toString())
-        formData.append('pageId',PageStatic.Id)
+        formData.append('pageId',this.pageurl.getPageIdStorage())
         await this.service.createTrip(formData);
         alert("Create succesfully !")
         this.dialogRef.close();

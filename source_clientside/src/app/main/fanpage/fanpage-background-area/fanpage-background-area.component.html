@@ -1,0 +1,52 @@
+<section>
+    <div class="feature-photo">
+        <figure class="background-figure"><img class="background-img" src={{this.pages.Background}} alt=""></figure>
+        <div class="add-btn">
+            <span>1.3k followers</span>
+            <a href="#" title="" data-ripple="">Follow</a>
+        </div>
+        <form class="edit-phto" (click)="openDialogBackground()">
+            <i class="fa fa-camera-retro"></i>
+            <label class="fileContainer">
+                Edit Cover Photo
+        </label>
+        </form>
+        <div class="container-fluid">
+            <div class="row merged">
+                <div class="col-lg-2 col-sm-3">
+                    <div class="user-avatar">
+                        <figure>
+                            <img class="avatar-img" src={{this.pages.Avatar}} alt="">
+                            <form class="edit-phto" (click)="openDialogAvatar()" >
+                                <i class="fa fa-camera-retro"></i>
+                                <label class="fileContainer">
+                                    Edit Display Photo
+                                </label>
+                            </form>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-sm-9">
+                    <div class="timeline-info">
+                        <ul>
+                            <li class="admin-name">
+                              <h5>{{this.pages.Name}}</h5>
+                              <span>@tourist_page</span>
+                            </li>
+                            <li>
+                                <a class="active" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
+                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Discount</a>
+                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
+                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
+                            </li>
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" style="position: relative;
+                            float: right;margin-top: 5px;" [routerLink]="['/main/fanpage-admin']">
+                                <mat-icon>settings</mat-icon>
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

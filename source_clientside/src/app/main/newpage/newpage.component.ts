@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { AppUsers } from './../../login/shared/login.model';
 import { LoginService } from '../../_core/services/login.service';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { PagesService } from 'src/app/_core/services/page.service'

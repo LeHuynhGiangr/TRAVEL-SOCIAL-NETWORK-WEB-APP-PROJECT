@@ -1,15 +1,17 @@
 <!-- Navigation -->
 <div class="stick-widget responsive-listnav">
-    <mat-divider style="width:250px;"></mat-divider>
-    <button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" class="mytimeline width-sidebar" mat-stroked-button><img class="leftimage" src="{{this.appUsers.Avatar}}" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
-    <button [routerLink]="['/main/groups-search']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">style</mat-icon><strong>My Pages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button [routerLink]="['/main/messages']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">message</mat-icon><strong>Messages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button [routerLink]="['/main/videos']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">ondemand_video</mat-icon><strong>My Videos</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button [routerLink]="['/main/images']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">burst_mode</mat-icon><strong>My Images</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button [routerLink]="['/main/friends']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">people_outline</mat-icon><strong>My Friends</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button [routerLink]="['/main/notifications']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">notifications_none</mat-icon><strong>Notification</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">history</mat-icon><strong>Activity Log</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">departure_board</mat-icon><strong>Tour History</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <button class="side-bar-left2 width-sidebar" mat-stroked-button><mat-icon class="leftimage">card_membership</mat-icon><strong>Advertisement</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
-    <mat-divider style="width:250px;"></mat-divider>
+    <div>
+        <mat-divider style="width: 216px;"></mat-divider>
+        <button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)" class="mytimeline width-sidebar" mat-stroked-button><img class="leftimage" src="{{this.appUsers.Avatar}}" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
+        <button [routerLink]="['/main/groups-search']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">style</mat-icon><strong>My Pages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button [routerLink]="['/main/messages']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">message</mat-icon><strong>Messages</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button [routerLink]="['/main/videos']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">ondemand_video</mat-icon><strong>My Videos</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button [routerLink]="['/main/images']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">burst_mode</mat-icon><strong>My Images</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button [routerLink]="['/main/friends']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">people_outline</mat-icon><strong>My Friends</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button [routerLink]="['/main/notifications']" class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">notifications_none</mat-icon><strong>Notification</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">history</mat-icon><strong>Activity Log</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button class="side-bar-left width-sidebar" mat-stroked-button><mat-icon class="leftimage">departure_board</mat-icon><strong>Tour History</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <button class="side-bar-left2 width-sidebar" mat-stroked-button><mat-icon class="leftimage">card_membership</mat-icon><strong>Advertisement</strong><mat-icon class="rightimage">keyboard_arrow_right</mat-icon></button>
+        <mat-divider style="width:250px;"></mat-divider>
+    </div>
 </div>

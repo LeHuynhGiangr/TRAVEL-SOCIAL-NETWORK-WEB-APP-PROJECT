@@ -1,5 +1,11 @@
 .rcorners2 {
     border-radius: 25px;
-    border: 2px solid #8eccf0;
+    border: 2px solid #898e91;
     padding: 20px; 
   }
+  @media (max-width: 767px){
+    .nonedis
+    {
+      display: none;
+    }
+ }

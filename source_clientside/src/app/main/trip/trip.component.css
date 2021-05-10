@@ -145,3 +145,25 @@ mat-grid-tile {
   right: 20px;
   margin-bottom: 60px;
 }
+@media (max-width:760px) {
+  .title-panel
+  {
+    font-size: 12px;
+  }
+  .panel-header
+  {
+    height: 60px;
+  }
+  mat-grid-tile {
+    background: rgb(251, 252, 252);
+    height: 200px;
+  }
+  .ads
+  {
+    margin-top: 20px;
+  }
+  .trip-name
+  {
+    font-size: 8px;
+  }
+}

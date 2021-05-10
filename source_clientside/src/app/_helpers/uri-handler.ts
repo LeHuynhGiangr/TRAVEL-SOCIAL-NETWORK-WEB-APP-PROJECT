@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ApiUrlConstants } from '../_core/common/api-url.constants';
-import { SystemConstants } from '../_core/common/system.constants';
 
 @Injectable({
     providedIn:'any'

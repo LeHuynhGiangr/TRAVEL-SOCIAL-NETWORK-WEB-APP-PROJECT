@@ -1,19 +1,43 @@
 .rcorners2 {
     border-radius: 25px;
-    border: 2px solid #8eccf0;
+    border: 2px solid #898e91;
     padding: 20px; 
   }
   .rcorners1 {
     border-radius: 25px;
-    border: 0.1px solid #bee2f7;
+    border: 0.1px solid #898e91;
     padding: 20px; 
   }
-  .rcorners0 {
+  .rcorners-box-post {
     border-radius: 25px;
-    border: 0px solid #8eccf0;
+    border: 0px solid #898e91;
     padding:7px; 
     display: inline-block;
     padding-left: 15px;
     position: relative;
     width: 33%;
   }
+  .img-postbox
+  {
+    width: 70px; 
+    height: 70px;
+  }
+  @media (max-width: 767px){
+    .img-postbox
+    {
+      width: 40px;
+      height: 40px;
+    }
+    .rcornersx
+    {
+      font-size: 12px;
+    }
+    .rcorners2
+    {
+      padding-bottom: 0px;
+    }
+    .nonedis
+    {
+      display: none;
+    }
+ }

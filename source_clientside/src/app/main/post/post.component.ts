@@ -8,7 +8,6 @@ import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { Output } from '@angular/core';
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
-import {ButtonModule} from 'primeng/button';
 import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
   selector: 'app-post',

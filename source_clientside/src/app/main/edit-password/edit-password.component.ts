@@ -25,6 +25,8 @@ export class EditPasswordComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
+
+    this.appUsers = new AppUsers();
   }
   async onSave() {
     try{

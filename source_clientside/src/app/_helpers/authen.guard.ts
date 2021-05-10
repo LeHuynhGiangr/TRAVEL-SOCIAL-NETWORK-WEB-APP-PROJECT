@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../_core/services/login.service';
-import { UrlConstants } from '../_core/common/url.constants';
-import { UserProfile } from '../_core/data-repository/profile';
 import { AuthenService } from '../_core/services/authen.service';
+import { parse } from 'query-string';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenGuard implements CanActivate {
@@ -24,7 +23,16 @@ export class AuthenGuard implements CanActivate {
         //     this.m_router.navigateByUrl("/login", {skipLocationChange:true});
         //     return false;
         // }
-        
+
+        // If route has query includes token, extact it and store in localStorage
+        const tokenQuery = parse(location.search, { parseFragmentIdentifier: true });
+
+        if (tokenQuery.token) {
+            this.service.setToken(tokenQuery.token);
+            this.service.saveIdUserStorage(tokenQuery.id as string);
+            this.service.getUser();
+        }
+
         const user = this.service.getCurrrentUser();
         if (user) {
             if (user["role"] == 1) {
@@ -38,7 +46,6 @@ export class AuthenGuard implements CanActivate {
         }
 
         this.m_router.navigateByUrl("/login", { skipLocationChange: true });
-        return false;
 
     }
 

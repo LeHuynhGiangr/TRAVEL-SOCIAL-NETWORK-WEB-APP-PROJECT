@@ -293,6 +293,7 @@ section {
     float: left;
     width: 100%;
     background: #f4f2f2;
+    min-height: 550px;
 }
 
 [type="submit"],
@@ -10045,5 +10046,13 @@ aside.sidebar.full-style {
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
-
+.rcorners0 {
+    border-radius: 15px;
+    border: 0px solid #898e91;
+    padding:7px; 
+    margin-top: 10px;
+    margin-left: 5px;
+    display: inline-block;
+    width: 31.3%;
+}
 

@@ -6,7 +6,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { Trips } from '../../_core/models/trip.model';
 import { TripStatic } from '../../_core/data-repository/trip';
-import { UserProfile } from '../../_core/data-repository/profile'
 import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { LoginService } from 'src/app/_core/services/login.service';

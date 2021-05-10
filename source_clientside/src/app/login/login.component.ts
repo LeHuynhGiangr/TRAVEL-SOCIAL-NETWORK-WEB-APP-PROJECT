@@ -3,12 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { LoginService } from '../_core/services/login.service';
 import { AppUsers } from './shared/login.model';
-import { EditPasswordComponent } from '../main/edit-password/edit-password.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenService } from '../_core/services/authen.service';
-import { UrlConstants } from '../_core/common/url.constants';
-import { first } from 'rxjs/operators';
-import { UserProfile } from './../_core/data-repository/profile'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -57,16 +52,6 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.m_loading = true;
-    // this.m_authenService.login(this.m_formValue.username.value, this.m_formValue.password.value)
-    //   .pipe(first())
-    //   .subscribe({
-    //     next: () => {this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});},
-
-    //     error:error=>{
-    //       this.m_error=error;
-    //       this.m_loading=false;
-    //     }
-    //   });
     this.loginSubmit()
   
   }

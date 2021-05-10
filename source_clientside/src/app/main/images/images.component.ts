@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { AppUsers } from './../../login/shared/login.model';
 import { Images } from '../../_core/models/images.model';
 import { ImageService } from '../../_core/services/images.service';
 import { MatDialog } from '@angular/material/dialog';

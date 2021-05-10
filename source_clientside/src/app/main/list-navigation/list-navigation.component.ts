@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../_core/services/login.service';
 import { Router } from '@angular/router';
 import { AppUsers } from 'src/app/login/shared/login.model';
-import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({

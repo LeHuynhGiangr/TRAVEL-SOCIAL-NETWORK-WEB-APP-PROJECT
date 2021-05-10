@@ -23,7 +23,7 @@
 											</ul>
 									</div>
 								
-									<div class="widget rcorners2">
+									<div class="widget rcorners2 nonedis">
 										<h4 class="widget-title">Recent Activity</h4>
 										<ul class="activitiez">
 											<li>
@@ -48,7 +48,7 @@
 											</li>
 										</ul>
 									</div><!-- recent activites -->
-									<div class="widget stick-widget rcorners2">
+									<div class="widget stick-widget rcorners2 nonedis">
 										<h4 class="widget-title">Who's follownig</h4>
 										<ul class="followers">
 											<li>
@@ -94,31 +94,28 @@
 								<div class="central-meta rcorners2">
 									<div class="new-postbox">
 										<figure>
-											<img src="{{this.appUsers.Avatar}}"
-												style="width: 70px; height: 70px;" alt="">
+											<img src="{{this.appUsers.Avatar}}" class="img-postbox" alt="">
 										</figure>
 										<div class="newpst-input">
 											<form method="post">
 												<textarea class=" rcorners1" rows="2" placeholder="What do you think ?" (click)=createpostDialog()></textarea>
 											</form>
 											<div>
-												<button class="rcorners0"mat-stroked-button><mat-icon>videocam</mat-icon>Live</button>
-												<button class="rcorners0"mat-stroked-button><mat-icon>image</mat-icon>Images</button>
-												<button class="rcorners0"mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
+												<button class="rcorners-box-post"mat-stroked-button><mat-icon>videocam</mat-icon>Live</button>
+												<button class="rcorners-box-post"mat-stroked-button><mat-icon>image</mat-icon>Images</button>
+												<button class="rcorners-box-post"mat-stroked-button><mat-icon>file_copy</mat-icon>File</button>
 											</div>
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								
+								<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 								<div class="loadMore">
-									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<br>
 									<ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
 										<div class="central-meta item rcorners2">
 											<app-post (OnReceivePostCommentData)="commentPost($event)" [postData]=post></app-post>
 										</div>
 									</ng-template>
-									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
 									<button class="btn-view btn-load-more"></button>
 								</div>
 							

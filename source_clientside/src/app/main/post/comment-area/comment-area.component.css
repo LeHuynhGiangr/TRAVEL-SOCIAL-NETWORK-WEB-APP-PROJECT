@@ -7,10 +7,13 @@
 }
 .rcorners2 {
     border-radius: 25px;
-    border: 2px solid #8eccf0;
+    border: 2px solid #898e91;
 }
 @media (max-width: 991px) {
    .auto{
        width: 87%;
    }
+   .cmt-box {
+    margin-bottom: -10px;
+  }
 }

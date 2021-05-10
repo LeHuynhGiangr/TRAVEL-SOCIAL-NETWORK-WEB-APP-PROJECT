@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { LoginService } from '../../_core/services/login.service';
-import {PageStatic} from 'src/app/_core/data-repository/page'
 import { PagesService } from '../../_core/services/page.service';
 import {Pages} from '../../_core/models/pages.model'
 import { TripDialogComponent } from 'src/app/main/trip/trip-dialog/trip-dialog.component';
@@ -11,10 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
-import { DialogUploadPageAvatarComponent } from './dialog-uploadpageavatar/dialog-uploadpageavatar.component';
-import { DialogUploadPageBackgroundComponent } from './dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import {PageUrl} from 'src/app/_helpers/get-page-url'
-import { UserProfile } from 'src/app/_core/data-repository/profile';
 import { AddFriendDialogComponent } from '../trip/addfriend-dialog/addfriend-dialog.component';
 @Component({
     selector: 'app-fanpage',
@@ -32,6 +28,7 @@ export class FanpageComponent implements OnInit {
     check:boolean=true
     lengthcount
     count
+    listcount
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
     private PService:PagesService,public dialog: MatDialog,private TService:TripService, public tripurl:TripUrl, public pageurl:PageUrl) {}
 
@@ -50,10 +47,8 @@ export class FanpageComponent implements OnInit {
     }
     async getPage(){
       this.pages = new Pages()
-      this.pages.Id = PageStatic.Id
-      this.pages.Name =  PageStatic.Name
-      this.pages.Avatar = ApiUrlConstants.API_URL+"/"+PageStatic.Avatar
-      this.pages.Background = ApiUrlConstants.API_URL+"/"+PageStatic.Background
+      this.pages.Id = this.pageurl.getPageIdStorage()
+      this.pages.Avatar = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageAvatarStorage()   
     }
     CreateTripDialog(): void {
       const dialogRef = this.dialog.open(TripDialogComponent, {
@@ -82,9 +77,10 @@ export class FanpageComponent implements OnInit {
       },50)
     }
     getTripList = async () => {
-      this.count=2
-      this.trips = await this.TService.getAllTripsByPageId(PageStatic.Id)
-      this.lengthcount=this.trips.length
+      this.count=4
+      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
+      this.listcount = this.trips.length
+      this.lengthcount="2:"+this.count/2
       for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
@@ -105,9 +101,11 @@ export class FanpageComponent implements OnInit {
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTripsByPageId(PageStatic.Id)
-      this.count=this.count+3
-      for (let i = this.count-3; i < this.count; i++) {
+      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
+      this.count=this.count+2
+      this.listcount = this.trips.length
+      this.lengthcount="2:"+(this.count/2-1)
+      for (let i = this.count-4; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
@@ -122,40 +120,6 @@ export class FanpageComponent implements OnInit {
           trip.Cost = this.trips[i].cost
           this.tripList.push(trip)
       }
-    }
-    openDialogAvatar(): void {
-      const dialogRef = this.dialog.open(DialogUploadPageAvatarComponent, {
-        width: '500px',
-        height: '400px',
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-          return false;
-        }
-        this.PService.getPageById(PageStatic.Id).then(page => {
-          if (page) {
-            this.pages.Avatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
-            PageStatic.Avatar = page["avatar"]
-          }
-        });
-      });
-    }
-    openDialogBackground(): void {
-      const dialogRef = this.dialog.open(DialogUploadPageBackgroundComponent, {
-        width: '500px',
-        height: '400px',
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-          return false;
-        }
-        this.PService.getPageById(PageStatic.Id).then(page => {
-          if (page) {
-            this.pages.Background = ApiUrlConstants.API_URL+"/"+page["background"]
-            PageStatic.Background = page["background"]
-          }
-        });
-      });
     }
     AddFriendDialog(id): void {
       const dialogRef = this.dialog.open(AddFriendDialogComponent, {

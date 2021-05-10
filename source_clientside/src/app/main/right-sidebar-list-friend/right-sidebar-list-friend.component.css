@@ -1,6 +1,6 @@
 .rcorners2 {
     border-radius: 25px;
-    border: 2px solid #8eccf0;
+    border: 2px solid #898e91;
     padding: 20px; 
   }
 .left
@@ -10,13 +10,6 @@
 }
 .in-progress {
   cursor: pointer;
-}
-.rcorners0 {
-  border-radius: 25px;
-  border: 0.1px solid #8eccf0;
-  width:30px;
-  height: 30px;
-  margin-right: 5px;
 }
 .rcorners1 {
   border-radius: 5px;

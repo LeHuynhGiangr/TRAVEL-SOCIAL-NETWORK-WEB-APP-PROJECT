@@ -3,12 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../../../_core/models/DialogData';
 import { LoginService } from '../../../_core/services/login.service';
 import { PagesService } from '../../../_core/services/page.service';
-import { AppUsers } from '../../../login/shared/login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ImageService } from '../../../_core/services/images.service';
-import { PageStatic } from 'src/app/_core/data-repository/page';
 import {Pages} from '../../../_core/models/pages.model'
+import { PageUrl } from 'src/app/_helpers/get-page-url';
 @Component({
   selector: 'app-dialog-uploadpagebackground',
   templateUrl: './dialog-uploadpagebackground.component.html',
@@ -22,7 +21,7 @@ export class DialogUploadPageBackgroundComponent implements OnInit {
   public pages: Pages;
   constructor(public dialogRef: MatDialogRef<DialogUploadPageBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
     private PService: PagesService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService) {
+    public Iservice:ImageService,public pageurl:PageUrl) {
 
   }
   onNoClick(): void {
@@ -33,10 +32,9 @@ export class DialogUploadPageBackgroundComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
-    console.log(PageStatic.Id)
     this.pages=new Pages()
-    this.pages.Id = PageStatic.Id
-    this.pages.Background = PageStatic.Background
+    this.pages.Id = this.pageurl.getPageIdStorage()
+    this.pages.Background = this.pageurl.getPageBackgroundStorage()
 
   }
 

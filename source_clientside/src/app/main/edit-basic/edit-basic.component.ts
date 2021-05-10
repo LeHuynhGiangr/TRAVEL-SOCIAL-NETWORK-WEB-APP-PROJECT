@@ -5,18 +5,21 @@ import { LoginService } from '../../_core/services/login.service';
 import { EditBasicService } from '../../_core/services/edit-basic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../_core/data-repository/profile'
+import { MessageService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
     selector: 'app-edit-basic',
     templateUrl: './edit-basic.component.html',
     styleUrls: ['./edit-basic.component.css'],
-    
+    providers: [MessageService]
 })
 export class EditBasicComponent implements OnInit {
-
+  public message: string;
   public appUsers: AppUsers;
   public m_returnUrl: string;
   constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router) {
+    private EBService: EditBasicService, private m_route: ActivatedRoute, private m_router: Router,
+    private messageService: MessageService, private primengConfig: PrimeNGConfig) {
   }
   
   async ngOnInit() {
@@ -43,6 +46,19 @@ export class EditBasicComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
+    this.primengConfig.ripple = true;
+  }
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Update Successfully', detail: 'Basic Info'});
+    setTimeout(() => {
+      this.refresh();
+    }, 1500)
+  }
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Basic Info'});
+    setTimeout(() => {
+      this.refresh();
+    }, 1500)
   }
   onSubmit() {
     console.log('title is:');
@@ -73,26 +89,22 @@ export class EditBasicComponent implements OnInit {
         formData.append('works', this.appUsers.Works);
         this.EBService.setUserInfoStorage(this.appUsers.FirstName, this.appUsers.LastName)
         this.EBService.uploadProfile(this.service.getUserIdStorage(),formData);
-        alert("Upload succesfully !")
-
-        //Refresh user after edit profile
-        //var user = await this.service.getUser();
         UserProfile.Email = this.appUsers.Email
         UserProfile.Address = this.appUsers.Address
         UserProfile.BirthDay = this.appUsers.BirthDay
         UserProfile.Gender = this.appUsers.Gender
         UserProfile.PhoneNumber = this.appUsers.PhoneNumber
         UserProfile.Description = this.appUsers.Descriptions
-        this.refresh();
+        this.showSuccess()
       }
       else
       {
-        alert("Upload failure !")
+        this.showError()
       }
     }
     catch(e)
     {
-      alert("Upload failure !")
+      this.showError()
     }
   }
   refresh(): void {

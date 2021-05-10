@@ -1,0 +1,27 @@
+<app-header></app-header>
+	<section>
+		<div class="page-header">
+			<div class="header-inner">
+				<h2>Page Management</h2>
+				<nav class="breadcrumb">
+				  <a [routerLink]="['/newsfeed']" class="breadcrumb-item"><i class="fa fa-home"></i></a>
+				  <span class="breadcrumb-item active">Page Management</span>
+				</nav>
+			</div>
+		</div>
+	</section>
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<button pButton pRipple type="button" icon="pi pi-reply" class="p-button-rounded p-button-secondary btn-back" (click)="pageurl.getNavigation(this.idpage)"></button>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+<app-footer></app-footer>
