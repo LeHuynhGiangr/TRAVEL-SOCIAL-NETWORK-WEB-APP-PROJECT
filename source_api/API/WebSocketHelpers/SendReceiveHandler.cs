@@ -23,7 +23,7 @@ namespace API.WebSocketHelpers
             WebSocketReceiveResult data = await webSocket.ReceiveAsync(new ArraySegment<byte>(dataBuffer), CancellationToken.None);
             if (!data.CloseStatus.HasValue)
             {
-                string plainTxt = new ArraySegment<byte>(dataBuffer, 0, data.Count).ToString();
+                string plainTxt = System.Text.Encoding.ASCII.GetString(dataBuffer, 0, data.Count);
                 Mediator.Register(Guid.Parse(plainTxt), threadId, callbackFunc:Send);
                 while (!data.CloseStatus.HasValue)
                 {

@@ -84,16 +84,15 @@ namespace API
             services.AddScoped<IPageService<Guid>, PageService>();
             services.AddScoped<IFriendService<Guid>, FriendService>();
 
-            services.AddSingleton(typeof(Mediator));
-            services.AddAuthentication()
-            .AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthNSection =
-                    Configuration.GetSection("Authentication:Google");
+            //services.AddAuthentication()
+            //.AddGoogle(options =>
+            //{
+            //    IConfigurationSection googleAuthNSection =
+            //        Configuration.GetSection("Authentication:Google");
 
-                options.ClientId = googleAuthNSection["789840606120-vbkilj6pomg3g7t0tb90t98rq3t0fcml.apps.googleusercontent.com"];
-                options.ClientSecret = googleAuthNSection["fQiqjBWDt8Mz9MW6kH1N3DlR"];
-            });
+            //    options.ClientId = googleAuthNSection["789840606120-vbkilj6pomg3g7t0tb90t98rq3t0fcml.apps.googleusercontent.com"];
+            //    options.ClientSecret = googleAuthNSection["fQiqjBWDt8Mz9MW6kH1N3DlR"];
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

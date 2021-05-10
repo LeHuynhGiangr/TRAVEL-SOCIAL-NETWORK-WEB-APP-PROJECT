@@ -3,9 +3,9 @@ using System.Net.WebSockets;
 
 namespace WebSocketLib
 {
-    delegate void SentEventHandler(object sender, EventArgs eventArgs);
-    delegate void ReceivedEventHandler(object sender, EventArgs eventArgs);
-    class ConnectionObject
+    public delegate void SentEventHandler(object sender, EventArgs eventArgs);
+    public delegate void ReceivedEventHandler(object sender, EventArgs eventArgs);
+    public class ConnectedWSClient
     {
         private WebSocket webSocket;
         private byte[] databuffer;
@@ -17,20 +17,20 @@ namespace WebSocketLib
         #endregion Properties
 
         #region Methods
-        bool IsSynchronize()
+        public bool IsSynchronize()
         {
             return default(bool);
         }
-        bool IsDisconnected()
+        public bool IsDisconnected()
         {
             return default(bool);
         }
-        int Send()
+        public int Send()
         {
             OnSent?.Invoke(this, new EventArgs());
             return 0;
         }
-        int Receive()
+        public int Receive()
         {
             OnReceived?.Invoke(this, new EventArgs());
             return 0;
