@@ -14,6 +14,7 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
 import { PostComment } from 'src/app/_core/models/post-comment.model';
 import { PostCommentResponse } from 'src/app/_core/models/models.response/post-comment-response';
+import { WebSocketService } from 'src/app/_core/services/websocket.service';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -28,7 +29,7 @@ export class NewsfeedComponent implements OnInit {
   interval;
   time: number = 0;
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-  private m_postService:PostService,public dialog: MatDialog,public uriHandler:UriHandler) { 
+  private m_postService:PostService,public dialog: MatDialog,public uriHandler:UriHandler, private wsService:WebSocketService) { 
   }
   
   async ngOnInit() {
@@ -43,6 +44,10 @@ export class NewsfeedComponent implements OnInit {
     this.loadPostData();
     this.getProfile(user);
     this.startTimer()
+
+    //start temp code
+    this.wsService.sendMessage(localStorage.getItem('userId').toString());
+    //end temp code
   }
   startTimer() {
     this.play = true;

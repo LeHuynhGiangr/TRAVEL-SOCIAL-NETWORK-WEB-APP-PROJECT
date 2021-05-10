@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as  WSMediator  from 'src/assets/js/websocket/WSMediator.js';
-
-declare const StaticWSMediator :WSMediator.StaticWSMediator
-declare let WebSocketHandler :WSMediator.WebSocketHandler
+import { WebSocketService } from '../_core/services/websocket.service';
+import {StaticWSMediator} from '../../../src/assets/js/websocket/WSMediator.js';
 
 @Component({
   selector: 'app-main',
@@ -11,11 +9,15 @@ declare let WebSocketHandler :WSMediator.WebSocketHandler
 })
 export class MainComponent implements OnInit {
 
-  constructor() { 
-    WebSocketHandler = new WSMediator.WebSocketHandler();
+  constructor(private webSocketService:WebSocketService) {
+    StaticWSMediator.register(this.OnWsOpened, WebSocketService._SYS_TOKEN_DEF.ON_OPENED);
+    //this.webSocketService.sendMessage(localStorage.getItem('userId').toString());
   }
 
   ngOnInit(): void {
   }
 
+  OnWsOpened(){
+    this.webSocketService.sendMessage(localStorage.getItem('userId').toString());
+  }
 }

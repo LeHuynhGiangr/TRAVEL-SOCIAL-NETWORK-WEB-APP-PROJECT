@@ -95,6 +95,7 @@ import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
 import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -240,5 +241,6 @@ export const mainRoutes: Routes = [
       echarts: () => import('echarts')
     }),
     RouterModule.forChild(mainRoutes),],
+    bootstrap:[MainComponent]
 })
-export class MainModule { }
+export class MainModule {}

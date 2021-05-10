@@ -7,18 +7,24 @@
 /**
  * Define module token
  */
-export const SYS_TOKEN_DEF = {
-    DEFAULT: 0,
-    BROADCAST:1,//all
-    MODULE1: 2,
-    MODULE2: 3,
-    MODULE3: 4,
+export class SYS_TOKEN_DEF{
+    //ON_ERROR = -2
+    ON_ERROR = "ON_ERROR"
+    //ON_CLOSED = -1
+    ON_CLOSED = "ON_CLOSED"
+    //ON_OPENED = 0
+    ON_OPENED = "ON_OPENED"
+    //DEFAULT = 1
+    DEFAULT = "DEFAULT"
+    //BROADCAST = 2//all
+    BROADCAST = "BROADCAST"//all
+    //MODULE1 = 3
+    MODULE1 = "MODULE1"
+    //MODULE2 = 4
+    MODULE2 = "MODULE2"
+    //MODULE3 = 5
+    MODULE3 = "MODULE3"
 }
-
-/**
- * Define ws url
- */
-export const WS_URL = "\x77\x73\x3a\x2f\x2f\x31\x327\x2e0\x2e0\x2e1";
 
 /**
  * Define static mediator class
@@ -31,11 +37,11 @@ export class StaticWSMediator {
     //#region Methods
     static register(callbackFunc, token = SYS_TOKEN_DEF.DEFAULT) {
         const obj = { key: token, callbackFunc: callbackFunc };
-        this.s_clients.push(obj);
+        StaticWSMediator.s_clients.push(obj);
     }
 
     static notify(token = SYS_TOKEN_DEF.DEFAULT, jsonData = []) {
-        const listNotifiedClients = this.s_clients[token];
+        const listNotifiedClients = StaticWSMediator.s_clients.filter(_ => _.token == token);
         for (obj in listNotifiedClients) {
             obj.callbackFunc(jsonData);
         }
@@ -47,10 +53,27 @@ export class StaticWSMediator {
  * Define event handler for web socket
  */
 export class WebSocketHandler {
-    
-    constructor() {
+
+    constructor(url) {
+        this._url = url;
+        this.InitWebSocket();
+        /*
         //create connection
-        this._webSocket = new WebSocket(WS_URL);
+        this._webSocket = new WebSocket(url);
+        //add callback func for message event
+        this._webSocket.onmessage = this.OnReceivedEventHandler;
+        //add callback func for open event
+        this._webSocket.onopen = this.OnOpenedEventHandler;
+        //add callback func for close event
+        this._webSocket.onclose = this.OnClosedEventHandler;
+        //add callback func for error event
+        this._webSocket.onerror = this.OnErrorEventHandler;
+        */
+    }
+    
+    //#region Methods
+    InitWebSocket(){
+        this._webSocket = new WebSocket(this._url);
         //add callback func for message event
         this._webSocket.onmessage = this.OnReceivedEventHandler;
         //add callback func for open event
@@ -61,10 +84,19 @@ export class WebSocketHandler {
         this._webSocket.onerror = this.OnErrorEventHandler;
     }
 
-    //#region Methods
+    GetWebSocket(){
+        if(this._webSocket == null){
+            this.InitWebSocket();
+        }
+        else if(this._webSocket.readyState == WebSocket.CLOSED){
+            this.InitWebSocket();
+        }
+        return this._webSocket;
+    }
+
     OnOpenedEventHandler(event) {
-        StaticWSMediator.notify(SYS_TOKEN_DEF.BROADCAST, []);
-        console.log(event.data);
+        StaticWSMediator.notify(SYS_TOKEN_DEF.ON_OPENED, []);
+        console.log("On Opened");
     }
 
     OnReceivedEventHandler(event) {
@@ -78,13 +110,12 @@ export class WebSocketHandler {
     }
 
     OnErrorEventHandler(event) {
-        StaticWSMediator.notify(SYS_TOKEN_DEF.BROADCAST, []);
+        //StaticWSMediator.notify(SYS_TOKEN_DEF.BROADCAST, []);
         console.log(event.data);
     }
-    SendMessageToServer() {
+    SendMessageToServer(message) {
+        this.GetWebSocket().send(message);
         return true;
     }
     //#endregion Methods
 }
-
-//let _WebSocketHandler = new WebSocketHandler();
