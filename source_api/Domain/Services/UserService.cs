@@ -60,7 +60,29 @@ namespace Domain.Services
             m_userRepository.Update(l_user);
             m_userRepository.SaveChanges();
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName,l_user.Active ,l_jwtToken, l_refreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_refreshToken.Token);
+        }
+        public string AuthenticateG(string email, string ipAddress)
+        {
+            //var l_user = m_userRepository.FindSingle(_ => _.UserName == authenticateRequest.Username && _.Password == authenticateRequest.Password);
+            var l_user = m_userRepository.FindSingle(_ => _.UserName == email);
+
+            //User have be found so generate jwt and refresh tokens
+            var l_jwtToken = this.GenerateJwtToken(l_user);
+            var l_refreshToken = this.GenerateRefreshToken(ipAddress);
+
+            //save refresh token
+            if (l_user.RefreshTokens == null) l_user.RefreshTokens = new List<RefreshToken>();
+            l_user.RefreshTokens.Add(l_refreshToken);
+
+            //remove old refresh token from user
+            RemoveOldRefreshTokens(l_user);
+
+            //here is saving to db
+            m_userRepository.Update(l_user);
+            m_userRepository.SaveChanges();
+
+            return l_jwtToken;
         }
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
@@ -98,7 +120,7 @@ namespace Domain.Services
             // generate new jwt
             var l_jwtToken = GenerateJwtToken(l_user);
 
-            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName,l_user.Active, l_jwtToken, l_newRefreshToken.Token);
+            return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_newRefreshToken.Token);
         }
 
         //get new JWT and new refresh token
@@ -171,6 +193,13 @@ namespace Domain.Services
                 DateVerified = null,
                 //VerificationShortToken = null,
                 VerificationShortToken = l_sixDigitToken,
+                Friend = new Friend
+                {
+                    Id = Guid.Empty,
+                    //list friend in json format
+                    FriendsJsonString = null,
+                    DateCreated = DateTime.Now
+                },
                 /*
                  * 
                  */
@@ -209,7 +238,7 @@ namespace Domain.Services
 
         public IEnumerable<UserResponse> GetAll()
         {
-            var l_users = m_userRepository.GetAll(_=>_.Friend);
+            var l_users = m_userRepository.GetAll(_ => _.Friend);
             List<UserResponse> l_userResponses = new List<UserResponse>();
             foreach (User user in l_users)
             {
@@ -288,6 +317,35 @@ namespace Domain.Services
                     Language = l_user.Language,
                     Role = l_user.Role
                 };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            //throw new NotImplementedException();
+        }
+
+        public UserResponse GetByUserName(string username)
+        {
+            try
+            {
+                var l_users = m_userRepository.GetAll();
+                var user = l_users.Where(_ => _.UserName.ToLower().Contains(username.ToLower())).FirstOrDefault();
+                if (user != null)
+                {
+                    UserResponse userResponse = new UserResponse
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Avatar = user.Avatar,
+                        Description = user.Description,
+                        UserName = user.UserName
+                    };
+                    return userResponse;
+                }
+                else
+                    return null;
             }
             catch (Exception e)
             {
@@ -487,7 +545,7 @@ namespace Domain.Services
             }
         }
 
-        private string RandomSixDigitToken()
+        public string RandomSixDigitToken()
         {
             Random l_random = new Random();
             int l_sixDigit = l_random.Next(100000, 999999);

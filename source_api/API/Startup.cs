@@ -6,10 +6,14 @@ using Data.Entities;
 using Data.Interfaces;
 using Domain.IServices;
 using Domain.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Security.Claims;
 
 namespace API
 {
@@ -84,15 +89,26 @@ namespace API
             services.AddScoped<IPageService<Guid>, PageService>();
             services.AddScoped<IFriendService<Guid>, FriendService>();
 
-            //services.AddAuthentication()
-            //.AddGoogle(options =>
-            //{
-            //    IConfigurationSection googleAuthNSection =
-            //        Configuration.GetSection("Authentication:Google");
+            services.AddSingleton(typeof(Mediator));
 
-            //    options.ClientId = googleAuthNSection["789840606120-vbkilj6pomg3g7t0tb90t98rq3t0fcml.apps.googleusercontent.com"];
-            //    options.ClientSecret = googleAuthNSection["fQiqjBWDt8Mz9MW6kH1N3DlR"];
-            //});
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+              .AddCookie(options =>
+              {
+                  options.LoginPath = "/account/google-login"; // Must be lowercase
+              }) 
+            .AddGoogle(config =>
+              {
+                  config.ClientId = Configuration["Authentication:Google:Client_Id"];
+                  config.ClientSecret = Configuration["Authentication:Google:Client_Secret"];
+
+                  config.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "UserId");
+                  config.ClaimActions.MapJsonKey(ClaimTypes.Email, "EmailAddress", ClaimValueTypes.Email);
+                  config.ClaimActions.MapJsonKey(ClaimTypes.Name, "Name");
+              });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -130,10 +146,10 @@ namespace API
             //    RequestPath = "/53746174696346696c6573"
             //});
 
-            app.UseStaticFiles();
-
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles();
             app.UseMiddleware<JwtMiddleware>();
 
             //try using webSocket
