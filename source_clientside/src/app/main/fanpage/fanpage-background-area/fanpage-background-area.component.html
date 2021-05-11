@@ -1,7 +1,7 @@
 <section>
     <div class="feature-photo">
         <figure class="background-figure"><img class="background-img" src={{this.pages.Background}} alt=""></figure>
-        <div class="add-btn">
+        <div *ngIf="this.pages.UserId!=this.userid" class="add-btn">
             <span>1.3k followers</span>
             <a href="#" title="" data-ripple="">Follow</a>
         </div>
@@ -39,7 +39,7 @@
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
                             </li>
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" style="position: relative;
+                            <button *ngIf="this.pages.UserId==this.userid" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" style="position: relative;
                             float: right;margin-top: 5px;" [routerLink]="['/main/fanpage-admin']">
                                 <mat-icon>settings</mat-icon>
                             </button>

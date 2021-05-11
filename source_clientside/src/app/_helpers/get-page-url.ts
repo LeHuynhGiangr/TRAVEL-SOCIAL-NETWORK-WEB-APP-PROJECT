@@ -12,16 +12,17 @@ export class PageUrl{
         this.savePageIdStorage(id);
 
         const result = await this.PService.getPageById(id);
-        this.savePageInfoStorage(result["name"],result["avatar"],result["background"])
+        this.savePageInfoStorage(result["name"],result["avatar"],result["background"],result["userId"])
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
     savePageIdStorage = (pageId: string) => {
         localStorage.setItem('pageId', pageId)
     }
-    savePageInfoStorage = (pageName: string, pageAvatar: string, pageBackground: string) => {
+    savePageInfoStorage = (pageName: string, pageAvatar: string, pageBackground: string, ownPageId: string) => {
         localStorage.setItem('pageName', pageName)
         localStorage.setItem('pageAvatar', pageAvatar)
         localStorage.setItem('pageBackground', pageBackground)
+        localStorage.setItem('ownPageId',ownPageId)
     }
     getPageIdStorage = () => {
         return localStorage.getItem('pageId').toString();
@@ -34,5 +35,8 @@ export class PageUrl{
     }
     getPageBackgroundStorage = () => {
         return localStorage.getItem('pageBackground').toString();
+    }
+    getPageUserIdStorage = () => {
+        return localStorage.getItem('ownPageId').toString();
     }
 }

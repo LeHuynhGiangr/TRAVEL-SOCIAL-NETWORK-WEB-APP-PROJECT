@@ -8,6 +8,7 @@ import { PagesService } from 'src/app/_core/services/page.service';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 import { Pages } from 'src/app/_core/models/pages.model';
 import { DialogUploadPageBackgroundComponent } from '../dialog-uploadpagebackground/dialog-uploadpagebackground.component';
+import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
     selector: 'app-fanpage-background-area',
     templateUrl: './fanpage-background-area.component.html',
@@ -16,8 +17,9 @@ import { DialogUploadPageBackgroundComponent } from '../dialog-uploadpagebackgro
 })
 export class FanpageBackgroundAreaComponent implements OnInit {
     public pages: Pages;
+    userid;
     constructor(private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc 
-    , public dialog: MatDialog,private PService:PagesService, public pageurl:PageUrl) {
+    , public dialog: MatDialog,private PService:PagesService, public pageurl:PageUrl, private service:LoginService) {
       
     }
     
@@ -37,6 +39,8 @@ export class FanpageBackgroundAreaComponent implements OnInit {
         this.pages.Name =  this.pageurl.getPageNameStorage()
         this.pages.Avatar = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageAvatarStorage()
         this.pages.Background = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageBackgroundStorage()
+        this.pages.UserId = this.pageurl.getPageUserIdStorage()
+        this.userid = this.service.getUserIdStorage()
       }
     openDialogAvatar(): void {
         const dialogRef = this.dialog.open(DialogUploadPageAvatarComponent, {
@@ -48,7 +52,7 @@ export class FanpageBackgroundAreaComponent implements OnInit {
             return false;
           }
           const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
-            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"])
+            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],infoPage["userId"])
             this.pages.Avatar = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageAvatarStorage()
         });
       }
@@ -62,7 +66,7 @@ export class FanpageBackgroundAreaComponent implements OnInit {
             return false;
           }
           const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
-            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"])
+            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],infoPage["userId"])
             this.pages.Background = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageBackgroundStorage()
         });
       }

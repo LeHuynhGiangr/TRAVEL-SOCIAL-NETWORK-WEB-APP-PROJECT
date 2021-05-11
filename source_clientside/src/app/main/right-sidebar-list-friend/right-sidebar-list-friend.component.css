@@ -1,7 +1,7 @@
 .rcorners2 {
     border-radius: 25px;
     border: 2px solid #898e91;
-    padding: 20px; 
+    padding: 20px;
   }
 .left
 {
@@ -80,5 +80,12 @@ body {
   .search-box
   {
     width: 150px;
+  }
+}
+@media (min-width:1025px)
+{
+  .rcorners2
+  {
+    margin-top: 20px; 
   }
 }

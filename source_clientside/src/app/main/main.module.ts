@@ -68,6 +68,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTableModule} from '@angular/material/table';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 //primeng component
@@ -216,6 +217,7 @@ export const mainRoutes: Routes = [
     NgxPayPalModule,
     MatBadgeModule,
     MatGridListModule,
+    MatTableModule,
     //Primeng
     AccordionModule,
     AutoCompleteModule,

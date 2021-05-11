@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                <div class="row" id="page-contents">
                   <div class="col-lg-6 left">
-                     <h1>Trip Name : {{this.trips.Name}} </h1>
+                     <h1 style="font-weight: bold;">{{this.trips.Name}} </h1>
                      <span>
                         <mat-icon>local_atm</mat-icon>
                         <strong> {{this.trips.Cost}} $ / person</strong>
@@ -107,6 +107,13 @@
                      </mat-tab-group>
                      <button type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
                   </div>
+                  <div class="panel-introduction">
+                     <h2 style="text-align: center;font-weight: bold;">Introduction</h2>
+                     <div class="introduction-text" >
+                        <i class="fas fa-pager"></i><span class="page-name"style="cursor: pointer;margin-left: 10px;font-size: 16px;" (click)="pageurl.getNavigation(this.trips.PageId)"><strong>{{this.namePage}}</strong></span><br>
+                        <i class="fas fa-map-marked-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>{{this.trips.Destination}}</strong></span>
+                     </div>
+                   </div>
                   <!-- centerl meta -->
                </div>
             </div>
