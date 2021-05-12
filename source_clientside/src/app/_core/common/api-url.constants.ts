@@ -1,5 +1,5 @@
 export class ApiUrlConstants{
-    public static  WS_URL = "ws://localhost:44350/ws";
+    public static  WS_URL = "ws://localhost:44351/";
     public static API_URL = "http://localhost:44350";
     //user API
     //public static API_ATHENTICATE_URL= '/user/authenticate'

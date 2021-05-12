@@ -12,12 +12,13 @@ export class MainComponent implements OnInit {
   constructor(private webSocketService:WebSocketService) {
     StaticWSMediator.register(this.OnWsOpened, WebSocketService._SYS_TOKEN_DEF.ON_OPENED);
     //this.webSocketService.sendMessage(localStorage.getItem('userId').toString());
+    this.OnWsOpened();
   }
 
   ngOnInit(): void {
   }
 
-  OnWsOpened(){
+  OnWsOpened():void{
     this.webSocketService.sendMessage(localStorage.getItem('userId').toString());
   }
 }
