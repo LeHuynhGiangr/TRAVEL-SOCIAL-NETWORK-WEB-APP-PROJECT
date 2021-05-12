@@ -102,17 +102,6 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
           this.tripList.push(trip)
       }
     }
-    CreateTripDialog(): void {
-        const dialogRef = this.dialog.open(TripDialogComponent, {
-          width: '500px',
-          height: '400px',
-        });
-        
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
-          console.log(result);
-        });
-      }
     AddFriendDialog(id): void {
         const dialogRef = this.dialog.open(AddFriendDialogComponent, {
           width: '500px',

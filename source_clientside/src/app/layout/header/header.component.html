@@ -39,12 +39,13 @@
     <mat-divider style="width:300px;"></mat-divider>
     <button class="btn-res" mat-button [routerLink]="['/login']" (click)="onLogout()"><mat-icon style="margin-right: 10px;">forward</mat-icon><strong>Log Out</strong></button>
 </p-sidebar>
-<div class="topbar ">
+<div class="topbar" style="position: fixed;
+width: 100%;">
     <div class="logo">
         <a title="" (click)="returnId()" [routerLink]="['/main']"><img src="assets/images/logo.png" style="width: 100px; height: 60px;"alt=""></a>
     </div>
     
-    <div class="top-area" >
+    <div class="top-area">
         <ul class="main-menu">
             <li>
                 <form class="example-form" method="post">
@@ -67,9 +68,7 @@
             <li>
                 <button [routerLink]="['/main/videos']" class="rcorners-header left2" style="width: 150px;"mat-stroked-button pTooltip="Watch" tooltipPosition="bottom"><mat-icon>ondemand_video</mat-icon></button>
             </li>
-        </ul>
-        <ul class="setting-area">
-            <li>
+            <li style="margin-left: 50px;">
                 <button class="rcorners1 bottom" mat-button [routerLink]="['/timeline/:', this.appUsers.Id]" (click)="timelineurl.getNavigationMain(this.appUsers.Id)"><img src="{{this.appUsers.Avatar}}" class="rcorners2" style="width: 30px; height: 30px;" alt=""><strong>{{this.appUsers.FirstName}}</strong></button>
             </li>
             <li>

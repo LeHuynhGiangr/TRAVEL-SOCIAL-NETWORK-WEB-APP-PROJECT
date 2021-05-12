@@ -101,11 +101,10 @@ export class FanpageComponent implements OnInit {
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
-      this.count=this.count+2
-      this.listcount = this.trips.length
-      this.lengthcount="2:"+(this.count/2-1)
-      for (let i = this.count-4; i < this.count; i++) {
+      this.trips = await this.TService.getAllTrips()
+      this.count = this.count + 2
+      this.lengthcount = "2:"+(this.count/2-1)
+      for (let i = this.count-2; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
@@ -118,6 +117,7 @@ export class FanpageComponent implements OnInit {
           trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
           trip.authorName = page["name"]
           trip.Cost = this.trips[i].cost
+          trip.Content = this.trips[i].content
           this.tripList.push(trip)
       }
     }

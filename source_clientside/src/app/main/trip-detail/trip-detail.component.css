@@ -8,3 +8,58 @@ mat-form-field {
 .angular-with-newlines {
     white-space: pre-wrap;
 }
+.panel-introduction
+{
+  width: 400px;
+  background-color: white;
+  margin-right: 10%;
+  border: solid 1px;
+  border-radius: 15px;
+}
+.page-name:hover
+{
+  text-decoration: underline;
+}
+.introduction-text
+{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+@media (max-width:430px)
+{
+  .left
+  {
+    width: 100%;
+    margin-left: 5px;
+  }
+  .panel-introduction
+  {
+    width: 50%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+@media (max-width:768px) and (min-width:440px)
+{
+  .left
+  {
+    width: 70%;
+    margin-left: 5px;
+  }
+  .panel-introduction
+  {
+    width: 25%;
+    margin-top: 70px;
+    margin-right: 2%;
+  }
+}
+@media (max-width:1024px) and (min-width:769px)
+{
+  .panel-introduction
+  {
+    width: 25%;
+    margin-top: 70px;
+    margin-right: 2%;
+  }
+}

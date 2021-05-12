@@ -136,8 +136,8 @@ mat-grid-tile {
 .cost
 {
   position: absolute;
-  left:280px;
-  bottom:20px;
+  bottom: 0px;
+  right: 10px;
 }
 .pag
 {
@@ -145,7 +145,7 @@ mat-grid-tile {
   right: 20px;
   margin-bottom: 60px;
 }
-@media (max-width:760px) {
+@media (max-width:1024px) {
   .title-panel
   {
     font-size: 12px;
@@ -154,8 +154,7 @@ mat-grid-tile {
   {
     height: 60px;
   }
-  mat-grid-tile {
-    background: rgb(251, 252, 252);
+  .tile-grid {
     height: 200px;
   }
   .ads
