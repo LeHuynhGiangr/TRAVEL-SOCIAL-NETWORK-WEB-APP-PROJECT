@@ -12,5 +12,7 @@ namespace Domain.IServices
         //UserResponse Create(CreateRequest model);
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
+
+        List<Guid> GetAllKeyById(Guid id);
     }
 }

@@ -8,6 +8,7 @@
     <!--project reference - lehuynhgiang-->
     <ProjectReference Include="../Data.EF/Data.EF.csproj" />
     <ProjectReference Include="../Data/Data.csproj" />
+    <ProjectReference Include="..\MediationLib\MediationLib.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 

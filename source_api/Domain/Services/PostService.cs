@@ -4,8 +4,6 @@ using Data.Interfaces;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -184,7 +182,7 @@ namespace Domain.Services
             [DataMember]
             public string Comment { get; set; }
 
-        };
+        }
         public CommentPostResponse CommentPost(Guid userCmtId, CommentPostRequest commentPostRequest)
         {
             //edit comment-post

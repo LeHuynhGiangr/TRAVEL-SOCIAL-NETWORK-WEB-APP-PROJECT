@@ -16,7 +16,7 @@ namespace API.Controllers
     [ApiController]
     [AllowAnonymous]
     [Route("identity")]//routing/
-    public class IdentityController:ControllerBase
+    public class IdentityController : ControllerBase
     {
         private string m_tokenKeyName = "refreshtoken";
         private IUserService<Guid> m_userService;//dependency injection/
@@ -46,7 +46,7 @@ namespace API.Controllers
             {
 
                 // Validation OTP
-                OTP otp = await _context.OTPs.FirstOrDefaultAsync(otp =>  otp.MailAddress == registerRequest.UserName && otp.OTPcode.ToString() == registerRequest.OTP);
+                OTP otp = await _context.OTPs.FirstOrDefaultAsync(otp => otp.MailAddress == registerRequest.UserName && otp.OTPcode.ToString() == registerRequest.OTP);
 
                 if (otp == null)
                 {
@@ -77,6 +77,7 @@ namespace API.Controllers
                 }
 
                 SetTokenCookie(l_response.RefreshToken);
+                Response.Cookies.Append("id", l_response.Id);
 
                 return Ok(l_response);//status 200 OK
             }
@@ -154,6 +155,7 @@ namespace API.Controllers
                 HttpOnly = true,
                 Expires = DateTime.UtcNow.AddDays(7),//time of cookie life is seven day
                 //...
+                SameSite = SameSiteMode.Strict,
             };
             Response.Cookies.Append(m_tokenKeyName, token, l_cookieOptions);
         }

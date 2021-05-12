@@ -22,6 +22,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Security.Claims;
+using System.Web;
 
 namespace API
 {
@@ -89,8 +90,6 @@ namespace API
             services.AddScoped<IPageService<Guid>, PageService>();
             services.AddScoped<IFriendService<Guid>, FriendService>();
 
-            services.AddSingleton(typeof(Mediator));
-
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -152,29 +151,31 @@ namespace API
             app.UseStaticFiles();
             app.UseMiddleware<JwtMiddleware>();
 
-            //try using webSocket
-            app.UseWebSockets(new WebSocketOptions { 
-                KeepAliveInterval=TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
-                ReceiveBufferSize= 4096 // 1024 byte * 4 = 4kb
-            });
+            ////try using webSocket
+            //app.UseWebSockets(new WebSocketOptions { 
+            //    KeepAliveInterval=TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
+            //    ReceiveBufferSize= 4096, // 1024 byte * 4 = 4kb
+                
+            //});
 
-            app.Use(async (context, next) => {
-                if (context.Request.Path == "/ws")// webSocket only accepts request for /ws
-                {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        await new WebSocketHelpers.SendReceiveHandler(context, System.Diagnostics.Activity.Current.Id).Echo();//main handling
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
-                }
-                else
-                {
-                    await next();
-                }
-            });
+            //app.Use(async (context, next) => {
+            //    if (context.Request.Path == "/ws")// webSocket only accepts request for /ws
+            //    {
+            //        if (context.WebSockets.IsWebSocketRequest)
+            //        {
+            //            var wsHelper = new WebSocketHelpers.SendReceiveHandler(context, System.Diagnostics.Activity.Current.Id);
+            //            await wsHelper.Echo();//main handling
+            //        }
+            //        else
+            //        {
+            //            context.Response.StatusCode = 400;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        await next();
+            //    }
+            //});
 
             app.UseEndpoints(_ => _.MapControllers());
         }

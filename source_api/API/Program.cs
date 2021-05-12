@@ -5,6 +5,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading;
+using WebSocketLib;
 
 namespace API
 {
@@ -12,6 +14,10 @@ namespace API
     {
         public static void Main(string[] args)
         {
+            //Start socketserver
+            WebSocketServer webSocketServer = new WebSocketServer("0.0.0.0", 44351);
+            webSocketServer.StartServer();
+
             var l_hostBuilder = CreateHostBuilder(args).Build();
             using (var scope = l_hostBuilder.Services.CreateScope())
             {
@@ -21,7 +27,7 @@ namespace API
                     var projectDbContext = services.GetRequiredService(typeof(Data.EF.ProjectDbContext));
                     Data.EF.DbInitializer.SeedData(projectDbContext as Data.EF.ProjectDbContext);
                 }
-                catch(System.Exception)
+                catch (System.Exception)
                 {
 
                 }

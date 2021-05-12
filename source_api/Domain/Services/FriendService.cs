@@ -4,6 +4,11 @@ using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Text.Json;
 
 namespace Domain.Services
@@ -29,7 +34,7 @@ namespace Domain.Services
             {
                 l_friendResponses.Add(new FriendResponse
                 {
-                    FriendJsonString=friend.FriendsJsonString
+                    FriendJsonString = friend.FriendsJsonString
                 });
             }
             return l_friendResponses;
@@ -38,7 +43,7 @@ namespace Domain.Services
         public FriendResponse GetById(Guid id)
         {
             var l_friend = m_friendRepository.FindById(id);
-            if(l_friend == null)
+            if (l_friend == null)
             {
                 throw new Exception(message: "friend is null (FriendService.GetById)");
             }
@@ -47,6 +52,34 @@ namespace Domain.Services
                 FriendJsonString = JsonSerializer.Deserialize<object>(l_friend.FriendsJsonString ?? "[]"),
             };
             return l_friendResponse;
+        }
+
+        //
+        [DataContract]
+        private class FiendObjDataContract
+        {
+            [DataMember]
+            public string Id { get; set; }
+            [DataMember]
+            public string Name { get; set; }
+            [DataMember]
+            public string avarThumb { get; set; }
+        }
+        public List<Guid> GetAllKeyById(Guid id)
+        {
+            var l_friend = m_friendRepository.FindById(id);
+            if (l_friend == null)
+            {
+                throw new Exception(message: "friend is null (FriendService.GetById)");
+            }
+
+            var l_serializer = new DataContractJsonSerializer(typeof(FiendObjDataContract[]));
+            var l_memoryStream = new MemoryStream(ASCIIEncoding.ASCII.GetBytes(l_friend.FriendsJsonString ?? "[]"));
+            List<FiendObjDataContract> l_friendObjDCs = (l_serializer.ReadObject(l_memoryStream) as FiendObjDataContract[]).ToList();
+
+            var res = l_friendObjDCs.Select(p => Guid.Parse(p.Id)).ToList();
+
+            return res;
         }
     }
 }

@@ -19,6 +19,8 @@ using Domain.Services.InternalServices;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Utilities;
+using Data.Interfaces;
+using MediationLib;
 
 namespace Domain.Services
 {
@@ -30,9 +32,15 @@ namespace Domain.Services
         //private readonly AppSettings m_appSettings;
         //private readonly IEmailService
 
-        public UserService(EFRepository<User, Guid> userRepository)
+        //cross-service
+        private readonly IFriendService<Guid> m_friendService;
+
+        public UserService(EFRepository<User, Guid> userRepository, IFriendService<Guid> friendService)
         {
             m_userRepository = userRepository;
+
+            //
+            m_friendService = friendService;
         }
         public AuthenticateResponse Authenticate(AuthenticateRequest authenticateRequest, string ipAddress)
         {
@@ -60,6 +68,7 @@ namespace Domain.Services
             m_userRepository.Update(l_user);
             m_userRepository.SaveChanges();
 
+            Mediator.Notify(m_friendService.GetAllKeyById(l_user.Id), l_user.Id.ToString());
             return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_refreshToken.Token);
         }
         public string AuthenticateG(string email, string ipAddress)
