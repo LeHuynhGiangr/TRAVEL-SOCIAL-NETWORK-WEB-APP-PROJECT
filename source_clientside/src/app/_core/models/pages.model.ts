@@ -4,6 +4,8 @@ export class Pages {
     Background:string;
     Name:string;
     Description:string;
+    Address:string;
+    PhoneNumber:string;
     Follow:number;
     CreatedDate:Date;
     UserId:string;
