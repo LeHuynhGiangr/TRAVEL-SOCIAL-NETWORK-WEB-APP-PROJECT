@@ -60,6 +60,7 @@ namespace Data.Entities
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
         public IList<UserJoinTrip> UserJoinTrips { get; set; }
         public IList<Trip> Trips { get; set; }
+        public IList<ReviewPage> ReviewPages { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public Friend Friend { get; set; }
 
