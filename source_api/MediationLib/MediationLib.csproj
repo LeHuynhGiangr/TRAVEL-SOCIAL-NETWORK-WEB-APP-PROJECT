@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="CommunicationToken.cs" />
     <Compile Include="Mediator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
