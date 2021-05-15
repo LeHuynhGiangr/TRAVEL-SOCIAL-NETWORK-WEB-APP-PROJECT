@@ -27,7 +27,8 @@ namespace WebSocketLib
         public void Start()
         {
             Thread receiveThread = new Thread(HandleReceive);
-            Thread sendThread = new Thread(HandleReceive);
+
+            receiveThread.IsBackground = true;
             receiveThread.Start();
         }
 
@@ -52,32 +53,34 @@ namespace WebSocketLib
                 string id = plainTxt.Substring(index, 36);
                 Console.WriteLine("Receive {0} bytes: {1}", numOfBytes, id);
                 Mediator.Register(Guid.Parse(id), Thread.CurrentThread.ManagedThreadId, callbackFunc: Send);
+
+                networkStream.Flush();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception from WebSocketClient.HandleReceive(1): " + e.Message);
             }
+            
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        while (!networkStream.DataAvailable) ;//pass this line when stream has data for reading
 
-            while (true)
-            {
-                try
-                {
-                    while (!networkStream.DataAvailable) ;//pass this line when stream has data for reading
+            //        numOfBytes = _TcpClient.Available;
 
-                    numOfBytes = _TcpClient.Available;
-
-                    bytes = new byte[numOfBytes];
-                    networkStream.Read(bytes, 0, numOfBytes);
-                    plainTxt = Encoding.UTF8.GetString(bytes, 0, numOfBytes);
-                    Console.WriteLine("Receive data: " + plainTxt);
-                    //TODO: sending sent flag to client 
-                    networkStream.Flush();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Exception from WebSocketClient.HandleReceive(2): " + e.Message);
-                }
-            }
+            //        bytes = new byte[numOfBytes];
+            //        networkStream.Read(bytes, 0, numOfBytes);
+            //        plainTxt = Encoding.UTF8.GetString(bytes, 0, numOfBytes);
+            //        Console.WriteLine("Receive data: " + plainTxt);
+            //        //TODO: sending sent flag to client 
+            //        networkStream.Flush();
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("Exception from WebSocketClient.HandleReceive(2): " + e.Message);
+            //    }
+            //}
         }
 
         public void Send(object obj)
@@ -99,4 +102,6 @@ namespace WebSocketLib
             }
         }
     }
+
+
 }

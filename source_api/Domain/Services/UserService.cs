@@ -68,7 +68,7 @@ namespace Domain.Services
             m_userRepository.Update(l_user);
             m_userRepository.SaveChanges();
 
-            //Mediator.Notify(m_friendService.GetAllKeyById(l_user.Id), l_user.Id.ToString());
+            Mediator.Notify(m_friendService.GetAllKeyById(l_user.Id), l_user.Id.ToString());
             return new AuthenticateResponse(l_user.Id.ToString(), l_user.FirstName, l_user.LastName, l_user.Active, l_jwtToken, l_refreshToken.Token);
         }
         public string AuthenticateG(string email, string ipAddress)

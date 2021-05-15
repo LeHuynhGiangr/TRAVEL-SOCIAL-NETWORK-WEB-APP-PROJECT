@@ -25,6 +25,7 @@ namespace WebSocketLib
             Console.WriteLine("Server has started: {0}:{1}", _IpAddress, _Port);
 
             Thread thread = new Thread(AcceptConnet);
+            thread.IsBackground = true;
             thread.Start();
         }
 
@@ -37,7 +38,6 @@ namespace WebSocketLib
                 {
                     TcpClient client = _Server.AcceptTcpClient();
                     Console.WriteLine("Establish connection with {0}", i++);
-                    client.GetStream().Flush();
                     WebSocketClient newWsClient = new WebSocketClient(client);
                     newWsClient.Start();
                 }

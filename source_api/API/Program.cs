@@ -24,6 +24,7 @@ namespace API
                 var services = scope.ServiceProvider;
                 try
                 {
+                    //Init and save dummy data to server before host run 
                     var projectDbContext = services.GetRequiredService(typeof(Data.EF.ProjectDbContext));
                     Data.EF.DbInitializer.SeedData(projectDbContext as Data.EF.ProjectDbContext);
                 }
