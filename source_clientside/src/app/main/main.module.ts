@@ -96,6 +96,7 @@ import { BackgroundAreaComponent } from './background-area/background-area.compo
 import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackground/dialog-uploadbackground.component';
 import { FanpageBackgroundAreaComponent } from './fanpage/fanpage-background-area/fanpage-background-area.component';
+import { FanpageReviewComponent } from './fanpage-review/fanpage-review.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -113,6 +114,7 @@ export const mainRoutes: Routes = [
   { path: 'friends-search', component: FriendsSearchComponent },
   { path: 'fanpage/:id', component: FanpageComponent },
   { path: 'fanpage-admin', component: FanpageAdminComponent },
+  { path: 'fanpage-review', component: FanpageReviewComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'groups-search', component: GroupsSearchComponent },
@@ -192,7 +194,8 @@ export const mainRoutes: Routes = [
     BackgroundAreaComponent,
     DialogUploadAvatarComponent,
     DialogUploadBackgroundComponent,
-    FanpageBackgroundAreaComponent
+    FanpageBackgroundAreaComponent,
+    FanpageReviewComponent
     //Primeng
   ],
   imports: [
@@ -243,6 +246,5 @@ export const mainRoutes: Routes = [
       echarts: () => import('echarts')
     }),
     RouterModule.forChild(mainRoutes),],
-    bootstrap:[MainComponent]
 })
 export class MainModule { }

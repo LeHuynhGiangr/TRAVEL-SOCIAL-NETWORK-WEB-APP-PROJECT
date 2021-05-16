@@ -34,9 +34,9 @@
                               <span>@tourist_page</span>
                             </li>
                             <li>
-                                <a class="active" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
+                                <a class="" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Discount</a>
-                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
+                                <a class="" [routerLink]="['/main/fanpage-review']" title="" data-ripple="">Reviews</a>
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
                             </li>
                             <div class="rating-star"  pTooltip="{{this.rating}} star, {{this.reviews}}" tooltipPosition="bottom"><p-rating [ngModel]="this.rating" readonly="true" stars="5" [cancel]="false"></p-rating></div>

@@ -67,7 +67,7 @@
                                     <img src="assets/images/logo.png" alt="Los Angeles" width="100%" style="height: 300px;">  
                                   </div>
                                   <div class="carousel-item" *ngFor="let trip of tripList">
-                                    <img class ="imgtrip" src="{{trip.Image}}" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" width="100%">
+                                    <img class ="imgtrip" src="{{trip.Image}}" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]" width="100%" style="height:300px">
                                     <div class="carousel-caption">
                                       <h3 style="color:black"><strong>{{trip.Name}}</strong></h3>
                                       <p style="color:black">{{trip.Content}}</p>

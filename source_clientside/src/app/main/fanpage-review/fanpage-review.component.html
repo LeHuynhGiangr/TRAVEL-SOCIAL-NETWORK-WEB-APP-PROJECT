@@ -1,0 +1,53 @@
+<app-header></app-header>
+	<app-fanpage-background-area></app-fanpage-background-area>
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="advertisment-box">
+										<h4 class="">advertisment</h4>
+										<figure>
+											<a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.jpg" alt=""></a>
+										</figure>
+									</div>
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="central-meta rcorners2">
+									<h2><strong>Reviews</strong></h2>
+									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
+								</div><!-- photos -->
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">									
+									<div class="widget">
+										<div class="banner medium-opacity bluesh">
+											<div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)"
+												class="bg-image"></div>
+											<div class="baner-top">
+												<span><img src="assets/images/book-icon.png" alt=""></span>
+												<i class="fa fa-ellipsis-h"></i>
+											</div>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a [routerLink]="['/main/newpage']" title="" data-ripple="">start now!</a>
+											</div>
+										</div>
+									</div>
+									<app-right-sidebar-list-friend></app-right-sidebar-list-friend>	<!-- friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+<app-footer></app-footer>

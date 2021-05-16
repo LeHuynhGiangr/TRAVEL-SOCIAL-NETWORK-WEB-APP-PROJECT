@@ -15,6 +15,7 @@ export class TimelineUrl{
     }
     public getNavigation( id) {
         this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
+        UserProfile.IdTemp = id
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
 }

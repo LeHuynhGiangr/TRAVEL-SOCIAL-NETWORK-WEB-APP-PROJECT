@@ -6,6 +6,7 @@ import { LoginService } from '../../_core/services/login.service';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { FriendService } from '../../_core/services/friends.service';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',
@@ -20,7 +21,7 @@ export class FriendsComponent implements OnInit {
   public userList = new Array<AppUsers>();
   compareId: boolean;
   constructor(private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
-  private FService:FriendService) {
+  private FService:FriendService, public timelineurl:TimelineUrl) {
     
   }
   

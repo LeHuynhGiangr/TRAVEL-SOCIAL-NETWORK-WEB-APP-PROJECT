@@ -4,7 +4,7 @@
           <img src="{{postData.authorThumb}}" class="img-author" alt="">
        </figure>
        <div class="friend-name">
-          <ins><a (click)="getNavigation(postData.authorId)" [routerLink]="['/timeline/:', postData.authorId]" title="">{{postData.authorName}}</a></ins>
+          <ins><a (click)="timelineurl.getNavigation(postData.authorId)" [routerLink]="['/timeline/:', postData.authorId]" title="">{{postData.authorName}}</a></ins>
           <span>published: {{postData.dateCreated| date: 'dd/MM/yyyy'}}</span>
        </div>
        <app-post-meta [content]="postData.content" [imageUri]="postData.imageUri"></app-post-meta>
