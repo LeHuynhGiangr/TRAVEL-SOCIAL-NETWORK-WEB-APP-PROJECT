@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
+using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Hosting;
@@ -17,10 +18,12 @@ namespace API.Controllers
     public class PageController : ControllerBase
     {
         private readonly IPageService<Guid> _service;
+        private readonly IRatingService<Guid> _service_;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public PageController(IPageService<Guid> service, IWebHostEnvironment webHostEnvironment)
+        public PageController(IPageService<Guid> service, IWebHostEnvironment webHostEnvironment, IRatingService<Guid> service_)
         {
             _service = service;
+            _service_ = service_;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -98,6 +101,52 @@ namespace API.Controllers
             catch (Exception e)
             {
                 return BadRequest(new { message = e.Message });
+            }
+        }
+        [Route("rating")]
+        [HttpGet]
+        public IActionResult LoadAllRatings()
+        {
+            try
+            {
+                var ratingResponses = _service_.GetAll();
+                return Ok(ratingResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("rating")]
+        [HttpPost]
+        public IActionResult RatingPage([FromBody] RatingRequest ratingRequest)
+        {
+            try
+            {
+                System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                ratingRequest.UserId = id;
+                _service_.AddRating(ratingRequest);
+                return Ok("Add successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("rating/block/{id:guid}")]
+        [HttpPut]
+        public ActionResult<ReviewPage> BlockUser(Guid id)
+        {
+            try
+            {
+                if (_service_.BlockRating(id) == true)
+                    return Ok("UnBlock rating successfully");
+                else
+                    return Ok("Block rating successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Not found !" });
             }
         }
     }

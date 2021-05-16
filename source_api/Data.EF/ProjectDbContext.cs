@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Data.EF
 {
-    public  class ProjectDbContext : IdentityDbContext<User, Role, System.Guid>
+    public class ProjectDbContext : IdentityDbContext<User, Role, System.Guid>
     {
         public ProjectDbContext(DbContextOptions dbContextOption) : base(dbContextOption)
         {
@@ -55,8 +55,8 @@ namespace Data.EF
             builder.ApplyConfiguration(new FriendConfiguration());
 
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
-            builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_=>_.UserId);
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_=> new { _.UserId, _.RoleId});
+            builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_ => _.UserId);
+            builder.Entity<IdentityUserRole<Guid>>().ToTable("userroles").HasKey(_ => new { _.UserId, _.RoleId });
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("roleclaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("usertokens").HasKey(_ => _.UserId);
 
@@ -81,15 +81,23 @@ namespace Data.EF
               .HasOne(sc => sc.User)
               .WithMany(s => s.Trips)
               .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<ReviewPage>()
+              .HasOne(sc => sc.Page)
+              .WithMany(s => s.ReviewPages)
+              .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<ReviewPage>()
+              .HasOne(sc => sc.User)
+              .WithMany(s => s.ReviewPages)
+              .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
         }
-        
+
         public override int SaveChanges()
         {
             //auto add created datetime or update modified datetime
-            var l_modifiedEntities=ChangeTracker.Entries().Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
-            foreach(var modifiedEntity in l_modifiedEntities)
+            var l_modifiedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
+            foreach (var modifiedEntity in l_modifiedEntities)
             {
-                if(modifiedEntity is IDateTracking l_dateTrackedEntity)
+                if (modifiedEntity is IDateTracking l_dateTrackedEntity)
                 {
                     if (modifiedEntity.State == EntityState.Added)
                     {
