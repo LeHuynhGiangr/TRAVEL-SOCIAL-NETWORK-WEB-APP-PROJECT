@@ -18,6 +18,10 @@ import { LoginService } from 'src/app/_core/services/login.service';
 export class FanpageBackgroundAreaComponent implements OnInit {
     public pages: Pages;
     userid;
+
+    val3: number = 5;
+
+    msg: string;
     constructor(private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc 
     , public dialog: MatDialog,private PService:PagesService, public pageurl:PageUrl, private service:LoginService) {
       

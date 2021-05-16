@@ -7,6 +7,18 @@
 {
     height: 200px;
 }
+.rating-star{
+    display: inline-block;
+    position: absolute;
+    right: 10%;
+}
+@media (max-width:420px)
+{
+    .rating-star{
+        right: 0%;
+        margin-top: -50px;
+    }
+}
 @media (max-width: 991px) {
     .background-img
     {
@@ -21,4 +33,4 @@
     {
         height: 120px;
     }
-  }
+}

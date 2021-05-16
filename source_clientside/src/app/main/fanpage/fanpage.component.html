@@ -54,7 +54,7 @@
 									</div>
 								</div> -->
 									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
-									<mat-grid-list cols="2" rowHeight="{{this.lengthcount}}" style="height: 300px;">
+									<mat-grid-list cols="2" rowHeight="{{this.lengthcount}}">
 										<mat-grid-tile *ngFor="let trip of tripList">
 											<div class="card">
 											<img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
