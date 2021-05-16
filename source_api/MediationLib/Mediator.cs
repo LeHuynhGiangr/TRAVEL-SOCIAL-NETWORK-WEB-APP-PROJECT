@@ -26,6 +26,14 @@ namespace MediationLib
             //    s_clients[guid].Remove(threadId);
             //}
             //s_clients[guid].Add(threadId, callbackFunc);
+
+
+            Console.WriteLine("Current connected client");
+            foreach (var item in s_clients)
+            {
+                Console.WriteLine("\tid: {0},", item.Key);
+            }
+            Console.WriteLine("");
         }
 
         public static void Notify(List<Guid> guids, object message)
