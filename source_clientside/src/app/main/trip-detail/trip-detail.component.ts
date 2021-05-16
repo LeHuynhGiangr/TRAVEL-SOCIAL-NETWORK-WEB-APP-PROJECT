@@ -14,6 +14,7 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
 export class TripDetailComponent implements OnInit {
     public trips :Trips;
     namePage
+    phonePage
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl,
     private PService:PagesService,public pageurl:PageUrl ) {}
 
@@ -39,6 +40,7 @@ export class TripDetailComponent implements OnInit {
       this.trips.PageId = TripStatic.PageId
       const page = await this.PService.getPageById(this.trips.PageId)
       this.namePage = page["name"]
+      this.phonePage = page["phoneNumber"]
     }
     getPath(){
       return this.router.url;

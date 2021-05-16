@@ -11,6 +11,7 @@ mat-form-field {
 .panel-introduction
 {
   width: 400px;
+  height: 250px;
   background-color: white;
   margin-right: 10%;
   border: solid 1px;
@@ -25,6 +26,13 @@ mat-form-field {
   margin-left: 10px;
   margin-top: 10px;
 }
+.btn-booknow
+{
+  margin: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 48%;
+}
 @media (max-width:430px)
 {
   .left
@@ -38,6 +46,7 @@ mat-form-field {
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 40px;
   }
 }
 @media (max-width:768px) and (min-width:440px)
