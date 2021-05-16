@@ -1,6 +1,7 @@
 export class ApiUrlConstants{
-    public static  WS_URL = "ws://localhost:44351/";
-    public static API_URL = "http://localhost:44350";
+    //public static API_URL = "http://54.254.238.148";
+    public static API_URL = "https://localhost:44350";
+    //public static API_URL = "https://khoi-studio.tk";
     //user API
     //public static API_ATHENTICATE_URL= '/user/authenticate'
     public static API_REFRESHTOKEN_URL= '/user/refresh-token/'
@@ -33,4 +34,5 @@ export class ApiUrlConstants{
     public static API_PAGEID_URL = '/page/'
     public static API_UPDATE_PAGEAVATAR_URL = '/page/avatar'
     public static API_UPDATE_PAGEBACKGROUND_URL ='/page/background'
+    public static API_RATING_LOAD = '/page/rating'
 }

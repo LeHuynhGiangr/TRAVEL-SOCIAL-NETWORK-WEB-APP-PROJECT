@@ -39,7 +39,7 @@
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
                             </li>
-                            <div class="rating-star"><p-rating [ngModel]="val3" readonly="true" stars="5" [cancel]="false"></p-rating></div>
+                            <div class="rating-star"  pTooltip="{{this.rating}} star, {{this.reviews}}" tooltipPosition="bottom"><p-rating [ngModel]="this.rating" readonly="true" stars="5" [cancel]="false"></p-rating></div>
                             <button *ngIf="this.pages.UserId==this.userid" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" style="position: relative;
                             float: right;margin-top: 5px;" [routerLink]="['/main/fanpage-admin']">
                                 <mat-icon>settings</mat-icon>
