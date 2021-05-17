@@ -40,6 +40,7 @@ export class BackgroundAreaComponent implements OnInit {
         if(this.service.getUserIdStorage()==UserProfile.IdTemp)
         {
             this.compareId = true
+            this.appUsers.Id = this.service.getUserIdStorage()
             this.appUsers.FirstName = this.service.getFirstNameStorage()
             this.appUsers.LastName=this.service.getLastNameStorage();
             this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+ this.service.getAvatarStorage()

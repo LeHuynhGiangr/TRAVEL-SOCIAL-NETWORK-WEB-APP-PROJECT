@@ -5,7 +5,7 @@
             <span>1.3k followers</span>
             <a href="#" title="" data-ripple="">Follow</a>
         </div>
-        <form class="edit-phto" (click)="openDialogBackground()">
+        <form class="edit-phto" (click)="openDialogBackground()" *ngIf="this.pages.UserId===this.userid">
             <i class="fa fa-camera-retro"></i>
             <label class="fileContainer">
                 Edit Cover Photo
@@ -17,7 +17,7 @@
                     <div class="user-avatar">
                         <figure>
                             <img class="avatar-img" src={{this.pages.Avatar}} alt="">
-                            <form class="edit-phto" (click)="openDialogAvatar()" >
+                            <form class="edit-phto" (click)="openDialogAvatar()" *ngIf="this.pages.UserId===this.userid">
                                 <i class="fa fa-camera-retro"></i>
                                 <label class="fileContainer">
                                     Edit Display Photo

@@ -19,6 +19,74 @@
 							<div class="col-lg-6">
 								<div class="central-meta rcorners2">
 									<h2><strong>Reviews</strong></h2>
+									<p-rating [ngModel]="this.rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+									<p>{{this.rating}} average based on {{this.reviews}}.</p>
+									<hr style="border:3px solid #f1f1f1">
+									<div class="row">
+									  <div class="side">
+										<div>5 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star5" style="height: 18px; background-color: #04AA6D;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star5}}</div>
+									  </div>
+									  <div class="side">
+										<div>4 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star4" style="height: 18px; background-color: #2196F3;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star4}}</div>
+									  </div>
+									  <div class="side">
+										<div>3 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star3" style="height: 18px; background-color: #00bcd4;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star3}}</div>
+									  </div>
+									  <div class="side">
+										<div>2 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star2" style="height: 18px; background-color: #ff9800;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star2}}</div>
+									  </div>
+									  <div class="side">
+										<div>1 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star1" style="height: 18px; background-color: #f44336;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star1}}</div>
+									  </div>
+									</div>
+									<hr>
+									<br>
+									<div style="margin-top: -15px;margin-bottom: 15px;"><p-button label="Create a review" icon="pi pi-plus"></p-button></div>
+									<mat-card>
+										<div class="rating-star">
+											<p-rating readonly="true" stars="5" [cancel]="false"></p-rating>
+										</div>
+									</mat-card>
 									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
