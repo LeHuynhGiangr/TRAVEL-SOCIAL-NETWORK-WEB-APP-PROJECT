@@ -81,12 +81,39 @@
 									</div>
 									<hr>
 									<br>
-									<div style="margin-top: -15px;margin-bottom: 15px;"><p-button label="Create a review" icon="pi pi-plus"></p-button></div>
-									<mat-card>
-										<div class="rating-star">
-											<p-rating readonly="true" stars="5" [cancel]="false"></p-rating>
-										</div>
-									</mat-card>
+									<div style="margin-top: -15px;margin-bottom: 15px;" (click)="openDialogReview()"><p-button label="Create a review" icon="pi pi-plus"></p-button></div>
+									<div *ngFor="let userRating of userRatingsList">
+										<mat-card style="margin-bottom: 10px;">
+											<div class="rating-star">
+												<div style="display: inline-block;">
+													<p-rating [ngModel]="this.userRating.Rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+												</div>
+												<button mat-icon-button [matMenuTriggerFor]="menu"
+												aria-label="Example icon-button with a menu" class="left2">
+												<mat-icon>arrow_drop_down</mat-icon>
+											</button>
+											<mat-menu #menu="matMenu">
+											<button mat-menu-item>
+												<mat-icon>report_problem</mat-icon>
+												<span>report</span>
+											</button>
+											<button mat-menu-item>
+												<mat-icon>block</mat-icon>
+												<span>block</span>
+											</button>
+											</mat-menu>
+											</div>
+											<div style = "margin-top: 5px;">
+												<img style = "border-radius: 20px;height: 30px;width: 30px;" src="{{userRating.AvatarUser}}">
+												<p style="width: 50%;display: initial;margin-left: 10px;">
+													{{userRating.Content}}
+												</p>
+											</div>
+											<div style="font-size: 8px;position: relative;float: right;">
+												<span>by {{userRating.NameUser}}, {{userRating.DateCreated| date: 'dd/MM/yyyy'}}</span>
+											</div>
+										</mat-card>
+									</div>
 									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->

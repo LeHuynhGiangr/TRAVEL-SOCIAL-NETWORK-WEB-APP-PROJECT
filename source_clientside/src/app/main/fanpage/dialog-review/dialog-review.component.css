@@ -1,0 +1,11 @@
+.left {
+    margin-left :25px 
+}
+.example-form {
+    min-width: 150px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 97%;
+  }

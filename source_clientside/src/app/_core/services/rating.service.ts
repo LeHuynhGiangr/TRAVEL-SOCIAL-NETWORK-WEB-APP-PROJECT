@@ -19,4 +19,13 @@ export class RatingService {
             console.log(e);
         }
     }
+    postRating = async (rating) => {
+        try {
+            const result = await this.http.post(this.urlAPI + ApiUrlConstants.API_RATING_LOAD,rating).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }

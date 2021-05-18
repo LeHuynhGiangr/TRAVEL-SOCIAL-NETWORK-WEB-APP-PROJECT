@@ -43,7 +43,13 @@
     text-align: center;
     color: white;
   }
-  
+  .left2{
+    position: relative;
+    float: right;
+    height: 20px;
+    margin-top: -15px;
+    margin-right: -5px;
+  }
   /* Responsive layout - make the columns stack on top of each other instead of next to each other */
   @media (max-width: 400px) {
     .side, .middle {

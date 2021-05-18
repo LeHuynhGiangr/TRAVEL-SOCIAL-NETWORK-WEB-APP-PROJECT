@@ -8,6 +8,9 @@ import { MatDialog } from '@angular/material/dialog';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import {PageUrl} from 'src/app/_helpers/get-page-url'
 import { RatingService } from 'src/app/_core/services/rating.service';
+import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
+import { Ratings } from 'src/app/_core/models/rating.model';
+import { DialogReviewComponent } from '../fanpage/dialog-review/dialog-review.component';
 @Component({
     selector: 'app-fanpage-review',
     templateUrl: './fanpage-review.component.html',
@@ -15,9 +18,10 @@ import { RatingService } from 'src/app/_core/services/rating.service';
 })
 export class FanpageReviewComponent implements OnInit {
     public pages: Pages;
+    public userRatings:any
+    public userRatingsList = new Array<Ratings>();
     public ratings:any
     countRating:number=0
-    userid;
     rating:number=0
     reviews: string;
     star1:number=0
@@ -25,6 +29,7 @@ export class FanpageReviewComponent implements OnInit {
     star3:number=0
     star4:number=0
     star5:number=0
+    imgsample:string
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
     private PService:PagesService,public dialog: MatDialog, public tripurl:TripUrl, public pageurl:PageUrl,private RService:RatingService) {}
     async ngOnInit() {
@@ -35,6 +40,7 @@ export class FanpageReviewComponent implements OnInit {
       this.router.routeReuseStrategy.shouldReuseRoute = () =>{
         return false;
       }
+      this.getListReview()
       this.ratings = await this.RService.getAllRatings()
       for (let i = 0; i < this.ratings.length; i++) {
           if(parseFloat(this.ratings[i].rating) == 1)
@@ -51,6 +57,7 @@ export class FanpageReviewComponent implements OnInit {
           this.countRating += 1
       }
       this.rating = this.rating / this.countRating
+      this.rating = parseFloat(this.rating.toFixed(2))
       if(this.countRating > 1)
         this.reviews = this.countRating.toString() + " reviews"
       else
@@ -63,6 +70,42 @@ export class FanpageReviewComponent implements OnInit {
       (document.querySelector('.star3') as HTMLElement).style.width = (this.star3 / this.countRating) *100 + '%';
       (document.querySelector('.star4') as HTMLElement).style.width = (this.star4 / this.countRating) *100 + '%';
       (document.querySelector('.star5') as HTMLElement).style.width = (this.star5 / this.countRating) *100 + '%';
+    }
+    async getListReview()
+    {
+      this.userRatings = await this.RService.getAllRatings()
+      console.log(this.userRatings)
+      for (let i = 0; i < this.userRatings.length; i++) {
+        if(this.userRatings[i].pageId.toString() == this.pageurl.getPageIdStorage())
+        {
+          let userRating = new Ratings();
+          userRating.Id = this.userRatings[i].id.toString()
+          userRating.Content = this.userRatings[i].content
+          userRating.Active = this.userRatings[i].active
+          userRating.Rating = this.userRatings[i].rating
+          userRating.DateCreated = this.userRatings[i].dateCreated
+          userRating.UserId = this.userRatings[i].userId.toString()
+          const user = await this.service.getUserById(this.userRatings[i].userId.toString())
+          userRating.NameUser = user["firstName"] + " " + user["lastName"]
+          userRating.AvatarUser = ApiUrlConstants.API_URL  + "/" + user["avatar"]
+          userRating.PageId = this.userRatings[i].pageId.toString()
+          this.userRatingsList.push(userRating)
+        }
+      }
+    }
+    openDialogReview(): void {
+      const dialogRef = this.dialog.open(DialogReviewComponent, {
+        width: '500px',
+        height: '320px',
+      });
+      dialogRef.afterClosed().subscribe(async result => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }
+        this.userRatingsList = new Array<Ratings>();
+        this.getListReview()
+        this.ngAfterViewInit()
+      });
     }
     async loadmore()
     {

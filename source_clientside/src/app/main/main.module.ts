@@ -95,6 +95,7 @@ import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
 import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { DialogReviewComponent} from './fanpage/dialog-review/dialog-review.component';
 import { FanpageBackgroundAreaComponent } from './fanpage/fanpage-background-area/fanpage-background-area.component';
 import { FanpageReviewComponent } from './fanpage-review/fanpage-review.component';
 export const mainRoutes: Routes = [
@@ -195,7 +196,8 @@ export const mainRoutes: Routes = [
     DialogUploadAvatarComponent,
     DialogUploadBackgroundComponent,
     FanpageBackgroundAreaComponent,
-    FanpageReviewComponent
+    FanpageReviewComponent,
+    DialogReviewComponent
     //Primeng
   ],
   imports: [
