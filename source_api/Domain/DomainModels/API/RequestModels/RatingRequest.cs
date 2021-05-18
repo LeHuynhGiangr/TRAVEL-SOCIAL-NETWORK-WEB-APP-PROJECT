@@ -6,7 +6,7 @@ namespace Domain.DomainModels.API.RequestModels
 {
     public class RatingRequest
     {
-        public string Cotent { get; set; }
+        public string Content { get; set; }
         public bool Active { get; set; }
         public int Rating { get; set; }
         public Guid UserId { get; set; }
