@@ -59,7 +59,7 @@ namespace Domain.Services
                 {
                     Id = newid_rating,
                     DateCreated = DateTime.Now,
-                    Content = model.Cotent,
+                    Content = model.Content,
                     Rating = model.Rating,
                     Active = model.Active,
                     UserId = model.UserId,
