@@ -14,7 +14,7 @@ namespace Data.Entities
         public float Location { get; set; }
         public string Image { get; set; }
         public string Cost { get; set; }
-        public string Days { get; set; }
+        public string Persons { get; set; }
         public string Start { get; set; }
         public string Destination { get; set; }
         public string Service { get; set; }

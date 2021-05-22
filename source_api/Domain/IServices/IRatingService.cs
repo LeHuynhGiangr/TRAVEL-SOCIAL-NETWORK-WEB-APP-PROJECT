@@ -10,6 +10,6 @@ namespace Domain.IServices
     {
         RatingResponse AddRating(RatingRequest model);
         bool BlockRating(Guid id);
-        IEnumerable<RatingResponse> GetAll();
+        IEnumerable<RatingResponse> GetRatingsByPageId<IdType>(IdType id);
     }
 }

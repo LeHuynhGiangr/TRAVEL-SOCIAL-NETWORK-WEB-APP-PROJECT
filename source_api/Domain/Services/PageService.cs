@@ -71,6 +71,7 @@ namespace Domain.Services
                     Id = l_newTripGuidId,
                     Name = model.Name,
                     Description = model.Description,
+                    PhoneNumber = model.PhoneNumber,
                     DateCreated = DateTime.Now,
                     Follow = 0,
                     UserId = model.UserId

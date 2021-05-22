@@ -16,7 +16,7 @@ namespace Domain.DomainModels.API.RequestModels
         public string InfoContact { get; set; }
         public string Content { get; set; }
         public string Cost { get; set; }
-        public string Days { get; set; }
+        public string Persons { get; set; }
         public string DateStart { get; set; }
         public string DateEnd { get; set; }
         public IFormFile Image { get; set; }

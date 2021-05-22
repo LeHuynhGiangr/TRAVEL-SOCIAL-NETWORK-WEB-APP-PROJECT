@@ -57,7 +57,7 @@ namespace Domain.Services
                         trip.InfoContact,
                         trip.Content,
                         trip.Cost,
-                        trip.Days,
+                        trip.Persons,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -81,7 +81,7 @@ namespace Domain.Services
                         trip.InfoContact,
                         trip.Content,
                         trip.Cost,
-                        trip.Days,
+                        trip.Persons,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString());
@@ -109,7 +109,7 @@ namespace Domain.Services
                     Destination = model.Destination,
                     Content = model.Content,
                     Cost = model.Cost,
-                    Days = model.Days,
+                    Persons = model.Persons,
                     Policy = model.Policy,
                     InfoContact = model.InfoContact,
                     DateStart = DateTime.Parse(model.DateStart),
@@ -172,7 +172,7 @@ namespace Domain.Services
                         trip.InfoContact,
                         trip.Content,
                         trip.Cost,
-                        trip.Days,
+                        trip.Persons,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -204,7 +204,7 @@ namespace Domain.Services
                         trip.InfoContact,
                         trip.Content,
                         trip.Cost,
-                        trip.Days,
+                        trip.Persons,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -235,7 +235,7 @@ namespace Domain.Services
                         trip.InfoContact,
                         trip.Content,
                         trip.Cost,
-                        trip.Days,
+                        trip.Persons,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));

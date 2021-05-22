@@ -6,6 +6,7 @@ using Domain.IServices;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain.Services
@@ -30,9 +31,10 @@ namespace Domain.Services
                         rating.Page.Id.ToString());
             return ratingResponse;
         }
-        public IEnumerable<RatingResponse> GetAll()
+        IEnumerable<RatingResponse> IRatingService<Guid>.GetRatingsByPageId<IdType>(IdType pageId)
         {
-            var l_rating = m_ratingRepository.GetAll(_ => _.User, _ => _.Page);
+            //var l_rating = m_ratingRepository.GetAll(_ => _.User, _ => _.Page);
+            var l_rating = m_ratingRepository.FindMultiple(_ => _.Page.Id.Equals(pageId), _ => _.Page, _ => _.User);
             List<RatingResponse> l_ratingResponses = new List<RatingResponse>();
             foreach (ReviewPage rating in l_rating)
             {
@@ -44,7 +46,7 @@ namespace Domain.Services
                         rating.Rating,
                         rating.Active,
                         rating.User.Id.ToString(),
-                        rating.PageId.ToString()));
+                        rating.Page.Id.ToString()));
             }
             return l_ratingResponses;
         }

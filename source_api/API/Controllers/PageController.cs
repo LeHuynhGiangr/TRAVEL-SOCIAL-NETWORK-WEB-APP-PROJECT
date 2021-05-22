@@ -103,13 +103,13 @@ namespace API.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
-        [Route("rating")]
+        [Route("rating/{id:guid}")]
         [HttpGet]
-        public IActionResult LoadAllRatings()
+        public IActionResult LoadAllRatings(Guid id)
         {
             try
             {
-                var ratingResponses = _service_.GetAll();
+                var ratingResponses = _service_.GetRatingsByPageId(id);
                 return Ok(ratingResponses);
             }
             catch (Exception e)
