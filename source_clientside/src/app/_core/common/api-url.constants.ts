@@ -35,4 +35,5 @@ export class ApiUrlConstants{
     public static API_UPDATE_PAGEAVATAR_URL = '/page/avatar'
     public static API_UPDATE_PAGEBACKGROUND_URL ='/page/background'
     public static API_RATING_LOAD = '/page/rating/'
+    public static API_RATING_BLOCK = '/page/rating/block/'
 }

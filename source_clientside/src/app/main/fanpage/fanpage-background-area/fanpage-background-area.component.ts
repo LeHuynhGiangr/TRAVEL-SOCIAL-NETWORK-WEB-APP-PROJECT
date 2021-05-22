@@ -79,7 +79,7 @@ export class FanpageBackgroundAreaComponent implements OnInit {
       }
       async getRatingStar()
       {
-        this.ratings = await this.RService.getAllRatings()
+        this.ratings = await this.RService.getAllRatings(this.pageurl.getPageIdStorage())
         for (let i = 0; i < this.ratings.length; i++) {
             this.rating += parseFloat(this.ratings[i].rating)
             this.countRating += 1

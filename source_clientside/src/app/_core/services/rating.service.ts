@@ -10,9 +10,9 @@ export class RatingService {
     constructor(private http: HttpClient) {
 
     }
-    getAllRatings = async () => {
+    getAllRatings = async (id) => {
         try {   
-            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_RATING_LOAD).toPromise();
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_RATING_LOAD+id).toPromise();
             return result;
         }
         catch (e) {
@@ -22,6 +22,15 @@ export class RatingService {
     postRating = async (rating) => {
         try {
             const result = await this.http.post(this.urlAPI + ApiUrlConstants.API_RATING_LOAD,rating).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    blockRating = async (id) => {
+        try {
+            const result = await this.http.put(this.urlAPI + ApiUrlConstants.API_RATING_BLOCK+id,null).toPromise();
             return result;
         }
         catch (e) {

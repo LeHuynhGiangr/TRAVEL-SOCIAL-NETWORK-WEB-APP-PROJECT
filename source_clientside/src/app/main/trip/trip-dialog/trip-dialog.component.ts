@@ -27,7 +27,7 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
     public PageId: string
     public Content : string
     public Cost : string
-    public Days : string
+    public Persons : string
     public m_returnUrl: string;
     url;
     constructor(public dialogRef: MatDialogRef<TripDialogComponent>, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
@@ -67,7 +67,7 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
         formData.append('policy',this.Policy)
         formData.append('infoContact',this.InfoContact)
         formData.append('cost',this.Cost)
-        formData.append('days',this.Days)
+        formData.append('persons',this.Persons)
         formData.append('service',this.Service)
         let start_date =this.datepipe.transform(this.DateStart, 'yyyy-MM-dd');
         let end_date =this.datepipe.transform(this.DateEnd, 'yyyy-MM-dd');

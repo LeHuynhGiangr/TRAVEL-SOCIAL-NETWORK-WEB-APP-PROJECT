@@ -14,7 +14,7 @@ export class Trips {
     Policy: string
     InfoContact:string
     Service:string
-    Days:string
+    Persons:string
     DateStart:Date
     DateEnd:Date
     PageId:string

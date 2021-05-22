@@ -33,7 +33,7 @@ export class TripDetailComponent implements OnInit {
       this.trips.Destination = TripStatic.Destination
       this.trips.Policy = TripStatic.Policy
       this.trips.InfoContact = TripStatic.InfoContact
-      this.trips.Days = TripStatic.Days
+      this.trips.Persons = TripStatic.Persons
       this.trips.DateStart = TripStatic.DateStart
       this.trips.DateEnd = TripStatic.DateEnd
       this.trips.Service = TripStatic.Service

@@ -13,7 +13,7 @@ export class TripStatic {
     public static Policy: string
     public static InfoContact: string
     public static Service:string
-    public static Days:string
+    public static Persons:string
     public static DateStart:Date
     public static DateEnd:Date
     public static PageId:string

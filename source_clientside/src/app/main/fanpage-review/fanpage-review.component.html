@@ -82,7 +82,7 @@
 									<hr>
 									<br>
 									<div style="margin-top: -15px;margin-bottom: 15px;" (click)="openDialogReview()"><p-button label="Create a review" icon="pi pi-plus"></p-button></div>
-									<div *ngFor="let userRating of userRatingsList">
+									<div *ngFor="let userRating of userRatingsListSort">
 										<mat-card style="margin-bottom: 10px;">
 											<div class="rating-star">
 												<div style="display: inline-block;">
@@ -97,7 +97,7 @@
 												<mat-icon>report_problem</mat-icon>
 												<span>report</span>
 											</button>
-											<button mat-menu-item>
+											<button *ngIf="this.pageurl.getPageUserIdStorage() === this.iduser" mat-menu-item (click)="blockRating(userRating.Id)">
 												<mat-icon>block</mat-icon>
 												<span>block</span>
 											</button>

@@ -22,7 +22,7 @@ export class TripUrl{
         TripStatic.Policy = result["policy"]
         TripStatic.InfoContact = result["infoContact"]
         TripStatic.Service = result["service"]
-        TripStatic.Days = result["days"]
+        TripStatic.Persons = result["persons"]
         TripStatic.DateStart = result["dateStart"]
         TripStatic.DateEnd = result["dateEnd"]
         TripStatic.PageId = result["pageId"]
@@ -42,7 +42,7 @@ export class TripUrl{
         TripStatic.Policy = result["policy"]
         TripStatic.InfoContact = result["infoContact"]
         TripStatic.Service = result["service"]
-        TripStatic.Days = result["days"]
+        TripStatic.Persons = result["persons"]
         TripStatic.DateStart = result["dateStart"]
         TripStatic.DateEnd = result["dateEnd"]
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
