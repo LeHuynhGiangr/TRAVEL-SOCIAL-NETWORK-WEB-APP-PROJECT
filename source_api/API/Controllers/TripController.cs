@@ -96,7 +96,7 @@ namespace API.Controllers
             }
         }
         //get trip by page id
-        [HttpGet("filter")]
+        [HttpPost("filter")]
         public IActionResult FilterTrip([FromBody] FilterRequest filterRequest)
         {
             try
