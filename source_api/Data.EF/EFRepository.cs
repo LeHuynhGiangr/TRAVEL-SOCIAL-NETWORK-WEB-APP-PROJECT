@@ -133,7 +133,10 @@ namespace Data.EF
                 _context.Dispose();
             }
         }
-
+        public void SetModifierTripStatus(Trip trip, EntityState entityState)
+        {
+            _context.Entry(trip).State = entityState;
+        }
         public void SetModifierUserStatus(User user, EntityState entityState)
         {
             _context.Entry(user).State = entityState;

@@ -9,7 +9,7 @@ namespace Domain.DomainModels.API.ResponseModels
         public TripResponse() { }
         public TripResponse(Guid id, DateTime dateCreated, string description, string authorId, string image, string name,
             string start,string destination,string service,string policy,string infocontact,string content,string cost,
-            string persons, DateTime? datestart, DateTime? dateend, string pageid)
+            string persons,bool active, DateTime? datestart, DateTime? dateend, string pageid)
         {
             Id = id;
             DateCreated = dateCreated;
@@ -25,6 +25,7 @@ namespace Domain.DomainModels.API.ResponseModels
             Content = content;
             Cost = cost;
             Persons = persons;
+            Active = active;
             DateStart = datestart;
             DateEnd = dateend;
             PageId = pageid;
@@ -41,6 +42,7 @@ namespace Domain.DomainModels.API.ResponseModels
         public string Destination { get; set; }
         public string Service { get; set; }
         public string Policy { get; set; }
+        public bool Active { get; set; }
         public string InfoContact { get; set; }
         public string Content { get; set; }
         public string Cost { get; set; }

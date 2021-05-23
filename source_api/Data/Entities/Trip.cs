@@ -20,6 +20,7 @@ namespace Data.Entities
         public string Service { get; set; }
         public string Policy { get; set; }
         public string InfoContact { get; set; }
+        public bool Active { get; set; }
         public DateTime? DateStart { get; set; }
         public DateTime? DateEnd { get; set; }
         public DateTime DateCreated { get; set; }

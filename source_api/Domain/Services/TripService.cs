@@ -4,6 +4,7 @@ using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -59,6 +60,7 @@ namespace Domain.Services
                         trip.Content,
                         trip.Cost,
                         trip.Persons,
+                        trip.Active,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -83,6 +85,7 @@ namespace Domain.Services
                         trip.Content,
                         trip.Cost,
                         trip.Persons,
+                        trip.Active,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString());
@@ -111,6 +114,7 @@ namespace Domain.Services
                     Content = model.Content,
                     Cost = model.Cost,
                     Persons = model.Persons,
+                    Active = true,
                     Policy = model.Policy,
                     InfoContact = model.InfoContact,
                     DateStart = DateTime.Parse(model.DateStart),
@@ -174,6 +178,7 @@ namespace Domain.Services
                         trip.Content,
                         trip.Cost,
                         trip.Persons,
+                        trip.Active,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -206,6 +211,7 @@ namespace Domain.Services
                         trip.Content,
                         trip.Cost,
                         trip.Persons,
+                        trip.Active,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -237,6 +243,7 @@ namespace Domain.Services
                         trip.Content,
                         trip.Cost,
                         trip.Persons,
+                        trip.Active,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
@@ -268,11 +275,38 @@ namespace Domain.Services
                         trip.Content,
                         trip.Cost,
                         trip.Persons,
+                        trip.Active,
                         trip.DateStart,
                         trip.DateEnd,
                         trip.PageId.ToString()));
             }
             return l_tripResponses;
+        }
+        public void ModifyTrip(Guid id, CreateTripRequest model)
+        {
+            Trip trip = m_tripRepository.FindById(id);
+            var m_trip = trip;
+            {
+                trip.DateCreated = trip.DateCreated;
+                trip.Description = model.Description;
+                trip.UserId = trip.UserId;
+                trip.PageId = trip.PageId;
+                trip.Name = model.Name;
+                trip.Start = model.Start;
+                trip.Destination = model.Destination;
+                trip.Service = model.Service;
+                trip.Policy = model.Policy;
+                trip.Image = trip.Image;
+                trip.InfoContact = model.InfoContact;
+                trip.Content = model.Content;
+                trip.Cost = model.Cost;
+                trip.Persons = model.Persons;
+                trip.Active = model.Active;
+                trip.DateStart = DateTime.Parse(model.DateStart);
+                trip.DateEnd = DateTime.Parse(model.DateEnd);
+            }
+            m_tripRepository.SetModifierTripStatus(m_trip, EntityState.Modified);
+            m_tripRepository.SaveChanges();
         }
     }
 }

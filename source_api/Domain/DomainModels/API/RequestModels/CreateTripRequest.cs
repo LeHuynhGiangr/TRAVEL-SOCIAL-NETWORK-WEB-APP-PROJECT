@@ -15,6 +15,7 @@ namespace Domain.DomainModels.API.RequestModels
         public string Policy { get; set; }
         public string InfoContact { get; set; }
         public string Content { get; set; }
+        public bool Active { get; set; }
         public string Cost { get; set; }
         public string Persons { get; set; }
         public string DateStart { get; set; }

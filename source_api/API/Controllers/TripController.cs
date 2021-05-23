@@ -95,7 +95,20 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
-        //get trip by page id
+        [HttpPut("{id:guid}")]
+        public IActionResult ModifyTrip([FromBody] CreateTripRequest createTripRequest, Guid id)
+        {
+            try
+            {
+                _service.ModifyTrip(id,createTripRequest);
+                return Ok("Update successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        //filter trip
         [HttpPost("filter")]
         public IActionResult FilterTrip([FromBody] FilterRequest filterRequest)
         {

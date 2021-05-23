@@ -18,5 +18,6 @@ namespace Domain.IServices
         //UserResponse Update(T id, UpdateUserRequest model);
         bool Delete(T id);
         void DeleteByUserId(Guid id);
+        void ModifyTrip(Guid id, CreateTripRequest model);
     }
 }
