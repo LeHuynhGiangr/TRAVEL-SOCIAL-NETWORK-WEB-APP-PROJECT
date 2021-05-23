@@ -32,6 +32,7 @@
 								<div class="central-meta rcorners2">
 									<h2><strong>Images</strong></h2>
 									<ul class="photos">
+										<h3 style="text-align: center;" *ngIf = "this.images.length === 0">There are currently no images to display...</h3>
 										<li *ngFor="let image of imageList">
 											<a class="strip" (click)="showImage(image.Id,image.Image)">
 												<img src="{{image.Image}}" alt="" style="width:220px;height:210px;"></a>
