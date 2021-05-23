@@ -66,8 +66,6 @@ namespace WebSocketLib
                 Console.WriteLine("Exception from WebSocketClient.HandleReceive(1): " + e.Message);
             }
 
-            Send(CommunicationToken.BROADCAST);
-
             while (true)
             {
                 try
@@ -78,7 +76,11 @@ namespace WebSocketLib
 
                     bytes = new byte[numOfBytes];
                     networkStream.Read(bytes, 0, numOfBytes);
-                    plainTxt = Encoding.UTF8.GetString(bytes, 0, numOfBytes);
+
+                    byte[] unmaskedBytes;
+                    DecodeData(bytes, out unmaskedBytes);
+                    plainTxt = Encoding.UTF8.GetString(unmaskedBytes, 0, unmaskedBytes.Length);
+
                     Console.WriteLine("Receive data: " + plainTxt);
                     //TODO: sending sent flag to client 
                     networkStream.Flush();
@@ -88,8 +90,6 @@ namespace WebSocketLib
                     Console.WriteLine("Exception from WebSocketClient.HandleReceive(2): " + e.Message);
                 }
             }
-
-            //Send("abc");
         }
 
         public void Send(object obj)
@@ -147,5 +147,22 @@ namespace WebSocketLib
             return response;
         }
 
+        private void DecodeData(byte[] data, out byte[] unmaskedPayload)
+        {
+            int bytePos = 1;
+            int payloadLen = data[bytePos++] & 0x7f;
+            byte[] maskingKey = new byte[4];
+            for (int i = 0; i < 4; i++)
+            {
+                maskingKey[i] = data[bytePos++];
+            }
+
+            //unmask payload
+            unmaskedPayload = new byte[payloadLen];
+            for (int i = 0; i < payloadLen; i++)
+            {
+                unmaskedPayload[i] = (byte)(data[bytePos++] ^ maskingKey[i % 4]);
+            }
+        }
     }
 }
