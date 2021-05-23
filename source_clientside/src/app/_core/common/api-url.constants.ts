@@ -26,6 +26,7 @@ export class ApiUrlConstants{
     public static API_FRIENDSINTRIP_URL = '/invitefriend/'
     public static API_FRIENDSINTRIPLOAD_URL = '/invitefriend/load?tripid='
     public static API_PAYMENTHISTORY_URL = '/invitefriend/history?userId='
+    public static API_FILTER_TRIP = '/trip/filter'
     //media API
     public static API_MEDIA_URL = '/media'
 

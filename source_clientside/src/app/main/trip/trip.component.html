@@ -36,19 +36,19 @@
                                 
                                     <mat-form-field>
                                       <mat-label>Tourist place name</mat-label>
-                                      <input matInput>
+                                      <input [(ngModel)]="this.name" [ngModelOptions]="{standalone: true}" matInput>
                                     </mat-form-field>
                                 
                                     <mat-form-field>
                                       <mat-label>From $</mat-label>
-                                      <input matInput type="number" min="10">
+                                      <input [(ngModel)]="this.coststart" [ngModelOptions]="{standalone: true}" matInput type="number" min="10">
                                     </mat-form-field>
                                     <mat-form-field>
                                         <mat-label>To $</mat-label>
-                                        <input matInput type="number" min="10">
+                                        <input [(ngModel)]="this.costend" [ngModelOptions]="{standalone: true}" matInput type="number" min="10">
                                       </mat-form-field>
                                     <mat-action-row>
-                                      <button mat-button color="primary">Find</button>
+                                      <button mat-button color="primary" (click)="filter()">Find</button>
                                     </mat-action-row>
                                   </mat-expansion-panel>
                             </mat-accordion>

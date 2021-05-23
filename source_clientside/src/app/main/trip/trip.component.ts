@@ -13,6 +13,7 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 import { PagesService } from '../../_core/services/page.service';
 import {PageUrl} from 'src/app/_helpers/get-page-url'
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
+import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
 @Component({
     selector: 'app-trip',
     templateUrl: './trip.component.html',
@@ -20,6 +21,7 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
   })
   export class TripComponent implements OnInit {
     public trips:any
+    public filters:any
     public tripList = new Array<Trips>();
     play:boolean
     interval;
@@ -28,6 +30,9 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
     lengthcount
     count
     listcount
+    name:string=null
+    coststart:number=null
+    costend:number=null
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
       private PService:PagesService,public pageurl:PageUrl, public tripurl:TripUrl) {
@@ -39,6 +44,10 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
         script.src = "../assets/js/script.js";
         this.elementRef.nativeElement.appendChild(script);
 
+        this.filters = new FilterTrip()
+        this.filters.Name = ""
+        this.filters.CostStart = 0
+        this.filters.CostEnd = 99999999
         this.getTripList()
         this.startTimer()
         UserProfile.count = 1
@@ -57,9 +66,26 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
         }
       },50)
     }
+    async filter()
+    {      
+      if(this.name == null)
+        this.filters.Name = ""
+      else
+        this.filters.Name = this.name
+      if(this.coststart == null)
+        this.filters.CostStart = 0
+      else
+        this.filters.CostStart = this.coststart
+      if(this.costend == null)
+        this.filters.CostEnd = 99999999
+      else
+        this.filters.CostEnd = this.costend
+      this.tripList = new Array<Trips>();
+      this.getTripList()
+    }
     getTripList = async () => {
       this.count=4
-      this.trips = await this.TService.getAllTrips()
+      this.trips = await this.TService.filterTrip(this.filters)
       this.listcount = this.trips.length
       this.lengthcount="2:"+this.count/2
       for (let i = 0; i < this.count; i++) {
@@ -82,7 +108,7 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTrips()
+      this.trips = await this.TService.filterTrip(this.filters)
       this.count = this.count + 2
       this.lengthcount = "2:"+(this.count/2-1)
       for (let i = this.count-2; i < this.count; i++) {
