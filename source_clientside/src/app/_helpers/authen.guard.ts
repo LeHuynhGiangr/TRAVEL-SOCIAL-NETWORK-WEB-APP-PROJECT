@@ -25,6 +25,7 @@ export class AuthenGuard implements CanActivate {
         // }
 
         // If route has query includes token, extact it and store in localStorage
+
         const tokenQuery = parse(location.search, { parseFragmentIdentifier: true });
 
         if (tokenQuery.token) {
@@ -47,6 +48,7 @@ export class AuthenGuard implements CanActivate {
 
         this.m_router.navigateByUrl("/login", { skipLocationChange: true });
 
+        return false;
     }
 
 }

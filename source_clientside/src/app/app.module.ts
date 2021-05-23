@@ -15,6 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { LoginService } from './_core/services/login.service';
+import { WebSocketService } from './_core/services/websocket.service';
+import { WebSocketHandler } from 'src/assets/js/websocket/WSMediator';
+import { ApiUrlConstants } from './_core/common/api-url.constants';
 
 
 @NgModule({
@@ -47,5 +51,9 @@ import { FormsModule } from '@angular/forms';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private loginService: LoginService){
+    loginService.OLS.subscribe(_ => WebSocketHandler.EstablishConnect(ApiUrlConstants.WS_URL));
+  }
+}
 

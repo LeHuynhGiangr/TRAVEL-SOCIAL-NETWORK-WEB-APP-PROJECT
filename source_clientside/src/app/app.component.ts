@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { delay } from 'rxjs/operators';
 import { User } from './_core/domain/user';
 import { AuthenService } from './_core/services/authen.service';
+import { LoginService } from './_core/services/login.service';
+import { WebSocketService } from './_core/services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +11,14 @@ import { AuthenService } from './_core/services/authen.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  m_user:User
+  m_user: User
   title = 'ProjectAngular';
 
-  constructor(private m_authenService:AuthenService){
-    const m=1;
-    //this.m_authenService.m_user.subscribe(u => this.m_user=u);
+  constructor(private m_authenService: AuthenService) {
+    const m = 1;
   }
 
-  logout(){
+  logout() {
     this.m_authenService.logout();
   }
 }

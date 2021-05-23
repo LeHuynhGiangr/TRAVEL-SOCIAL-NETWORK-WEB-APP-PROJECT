@@ -44,10 +44,6 @@ export class NewsfeedComponent implements OnInit {
     this.loadPostData();
     this.getProfile(user);
     this.startTimer()
-
-    //start temp code
-    this.wsService.sendMessage(localStorage.getItem('userId').toString());
-    //end temp code
   }
   startTimer() {
     this.play = true;
