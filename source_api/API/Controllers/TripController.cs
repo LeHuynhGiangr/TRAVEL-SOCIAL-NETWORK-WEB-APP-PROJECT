@@ -95,5 +95,19 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        //get trip by page id
+        [HttpGet("filter")]
+        public IActionResult FilterTrip([FromBody] FilterRequest filterRequest)
+        {
+            try
+            {
+                var tripResponses = _service.FilterTrip(filterRequest);
+                return Ok(tripResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
     }
 }
