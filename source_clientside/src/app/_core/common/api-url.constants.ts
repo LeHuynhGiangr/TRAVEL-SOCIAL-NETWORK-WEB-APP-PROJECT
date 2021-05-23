@@ -1,4 +1,5 @@
 export class ApiUrlConstants{
+    public static  WS_URL = "ws://localhost:44351/";
     //public static API_URL = "http://54.254.238.148";
     public static API_URL = "https://localhost:44350";
     //public static API_URL = "https://khoi-studio.tk";
