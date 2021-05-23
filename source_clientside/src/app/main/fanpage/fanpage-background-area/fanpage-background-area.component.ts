@@ -84,7 +84,10 @@ export class FanpageBackgroundAreaComponent implements OnInit {
             this.rating += parseFloat(this.ratings[i].rating)
             this.countRating += 1
         }
-        this.rating = this.rating / this.countRating
+        if(this.countRating >0)
+          this.rating = this.rating / this.countRating
+        else
+          this.rating = 0
         if(this.countRating > 1)
           this.reviews = this.countRating.toString() + " reviews"
         else
