@@ -1,0 +1,11 @@
+<h1><strong>Add Review</strong></h1>
+<hr>
+<div><p-rating [(ngModel)]="uratings.Rating" stars="5" [cancel]="false"></p-rating></div>
+<mat-form-field class="example-full-width">
+    <mat-label>Content</mat-label>
+    <textarea style="height: 100px;" name="Content" type="text" id="input" [(ngModel)]="uratings.Content" [ngModelOptions]="{ standalone: true }" required="required" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<div mat-dialog-actions style="margin-left: 30%;">
+    <button class="btn btn-primary" mat-button  (click)="addReview(uratings)">Save</button>
+    <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
+</div>

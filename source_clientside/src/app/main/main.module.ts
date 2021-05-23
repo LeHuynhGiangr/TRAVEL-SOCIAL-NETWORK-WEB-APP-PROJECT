@@ -1,4 +1,4 @@
-import { AfterViewInit, NgModule, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -59,44 +59,46 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { UsersListTripComponent } from './trip/users-list-trip/users-list-trip.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule } from '@angular/material/card';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTableModule } from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTableModule} from '@angular/material/table';
 import { NgxPayPalModule } from 'ngx-paypal';
-import { PaymentHistoryDialogComponent } from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
+import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 //primeng component
-import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { RatingModule } from 'primeng/rating';
-import { ButtonModule } from 'primeng/button';
-import { PanelModule } from 'primeng/panel';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
-import { ToastModule } from 'primeng/toast';
-import { RippleModule } from 'primeng/ripple';
-import { DialogModule } from 'primeng/dialog';
-import { AvatarModule } from 'primeng/avatar';
-import { CardModule } from 'primeng/card';
-import { DataViewModule } from 'primeng/dataview';
-import { TooltipModule } from 'primeng/tooltip';
-import { TabMenuModule } from 'primeng/tabmenu';
-import { SidebarModule } from 'primeng/sidebar';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {RatingModule} from 'primeng/rating';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
+import {RippleModule} from 'primeng/ripple';
+import {DialogModule} from 'primeng/dialog';
+import {AvatarModule} from 'primeng/avatar';
+import {CardModule} from 'primeng/card';
+import {DataViewModule} from 'primeng/dataview';
+import {TooltipModule} from 'primeng/tooltip';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {SidebarModule} from 'primeng/sidebar';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
 import { DialogUploadAvatarComponent } from './timeline/dialog-uploadavatar/dialog-uploadavatar.component';
 import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackground/dialog-uploadbackground.component';
+import { DialogReviewComponent} from './fanpage/dialog-review/dialog-review.component';
 import { FanpageBackgroundAreaComponent } from './fanpage/fanpage-background-area/fanpage-background-area.component';
+import { FanpageReviewComponent } from './fanpage-review/fanpage-review.component';
 import { WebSocketService } from '../_core/services/websocket.service';
 import { LoginService } from '../_core/services/login.service';
 import { delay } from 'rxjs/operators';
@@ -117,6 +119,7 @@ export const mainRoutes: Routes = [
   { path: 'friends-search', component: FriendsSearchComponent },
   { path: 'fanpage/:id', component: FanpageComponent },
   { path: 'fanpage-admin', component: FanpageAdminComponent },
+  { path: 'fanpage-review', component: FanpageReviewComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'groups-search', component: GroupsSearchComponent },
@@ -196,7 +199,9 @@ export const mainRoutes: Routes = [
     BackgroundAreaComponent,
     DialogUploadAvatarComponent,
     DialogUploadBackgroundComponent,
-    FanpageBackgroundAreaComponent
+    FanpageBackgroundAreaComponent,
+    FanpageReviewComponent,
+    DialogReviewComponent
     //Primeng
   ],
   imports: [
@@ -247,7 +252,7 @@ export const mainRoutes: Routes = [
       echarts: () => import('echarts')
     }),
     RouterModule.forChild(mainRoutes),],
-  bootstrap: [MainComponent]
+    bootstrap:[MainComponent]
 })
 export class MainModule implements OnInit {
   constructor(private loginService: LoginService) {

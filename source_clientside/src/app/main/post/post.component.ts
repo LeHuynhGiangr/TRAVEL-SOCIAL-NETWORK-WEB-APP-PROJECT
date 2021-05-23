@@ -9,6 +9,7 @@ import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.consta
 import { Output } from '@angular/core';
 import { PostCommentRequest } from 'src/app/_core/models/models.request/post-comment-request.model';
 import { LoginService } from 'src/app/_core/services/login.service';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -20,19 +21,13 @@ export class PostComponent implements OnInit {
   public m_returnUrl: string;
   id
   constructor(public m_utility:UtilityService, public uriHandler:UriHandler,private m_route: ActivatedRoute,
-     private m_router: Router, private service: LoginService) { }
+     private m_router: Router, private service: LoginService, public timelineurl:TimelineUrl) { }
 
   ngOnInit(): void {
     this.id = this.service.getUserIdStorage()
     this.postData.imageUri = ApiUrlConstants.API_URL + "/" + this.postData.imageUri
     this.postData.authorThumb = ApiUrlConstants.API_URL + "/" + this.postData.authorThumb
   }
-  getNavigation( id) {
-    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/timeline/'+id;
-    UserProfile.IdTemp = id.toString()
-    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-  }
-
   submitComment(data:string){
     const postCommentRequest: PostCommentRequest={
       PostId : this.postData.id,

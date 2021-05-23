@@ -65,6 +65,16 @@ export class TripService {
             console.log(e);
         }
     }
+    filterTrip = async (filter) => {
+        try {
+            const result = await this.http.post(this.urlAPI + ApiUrlConstants.API_FILTER_TRIP,filter).toPromise();
+            console.log(result)
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
     getFriendInTrip = async (id) => {
         try {
        

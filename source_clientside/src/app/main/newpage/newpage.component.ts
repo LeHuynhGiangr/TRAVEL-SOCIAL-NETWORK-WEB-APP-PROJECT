@@ -30,6 +30,8 @@ export class NewpageComponent implements OnInit {
       const result = await this.PService.postPage(page);
       alert('Add sucessfully');    
       this.pages.Name=''
+      this.pages.Address=''
+      this.pages.PhoneNumber=''
       this.pages.Description=''
     }
     catch (e) {

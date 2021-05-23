@@ -40,7 +40,7 @@
 										  <div class="tab-pane active fade show " id="frends" >
 											<ul class="nearby-contct">
 											<li *ngFor="let user of userList">
-												<div class="nearly-pepls">
+												<div class="nearly-pepls" (click)="timelineurl.getNavigation(user.Id)" [routerLink]="['/timeline/:', user.Id]" style="cursor: pointer;">
 													<figure>
 														<a  title=""><img src="{{user.Avatar}}" style="width:60px; height:60px;" alt=""></a>
 													</figure>

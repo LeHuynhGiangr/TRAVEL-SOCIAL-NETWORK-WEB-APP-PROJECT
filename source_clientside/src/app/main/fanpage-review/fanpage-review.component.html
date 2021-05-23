@@ -1,0 +1,148 @@
+<app-header></app-header>
+	<app-fanpage-background-area></app-fanpage-background-area>
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="advertisment-box">
+										<h4 class="">advertisment</h4>
+										<figure>
+											<a href="#" title="Advertisment"><img src="assets/images/resources/ad-widget.jpg" alt=""></a>
+										</figure>
+									</div>
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="central-meta rcorners2">
+									<h2><strong>Reviews</strong></h2>
+									<p-rating [ngModel]="this.rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+									<p>{{this.rating}} average based on {{this.reviews}}.</p>
+									<hr style="border:3px solid #f1f1f1">
+									<div class="row">
+									  <div class="side">
+										<div>5 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star5" style="height: 18px; background-color: #04AA6D;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star5}}</div>
+									  </div>
+									  <div class="side">
+										<div>4 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star4" style="height: 18px; background-color: #2196F3;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star4}}</div>
+									  </div>
+									  <div class="side">
+										<div>3 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star3" style="height: 18px; background-color: #00bcd4;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star3}}</div>
+									  </div>
+									  <div class="side">
+										<div>2 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star2" style="height: 18px; background-color: #ff9800;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star2}}</div>
+									  </div>
+									  <div class="side">
+										<div>1 star</div>
+									  </div>
+									  <div class="middle">
+										<div class="bar-container">
+										  <div class="star1" style="height: 18px; background-color: #f44336;"></div>
+										</div>
+									  </div>
+									  <div class="side right">
+										<div>{{this.star1}}</div>
+									  </div>
+									</div>
+									<hr>
+									<br>
+									<div style="margin-top: -15px;margin-bottom: 15px;" (click)="openDialogReview()"><p-button label="Create a review" icon="pi pi-plus"></p-button></div>
+									<div *ngFor="let userRating of userRatingsListSort">
+										<mat-card style="margin-bottom: 10px;">
+											<div class="rating-star">
+												<div style="display: inline-block;">
+													<p-rating [ngModel]="this.userRating.Rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+												</div>
+												<button mat-icon-button [matMenuTriggerFor]="menu"
+												aria-label="Example icon-button with a menu" class="left2">
+												<mat-icon>arrow_drop_down</mat-icon>
+											</button>
+											<mat-menu #menu="matMenu">
+											<button mat-menu-item>
+												<mat-icon>report_problem</mat-icon>
+												<span>report</span>
+											</button>
+											<button *ngIf="this.pageurl.getPageUserIdStorage() === this.iduser" mat-menu-item (click)="blockRating(userRating.Id)">
+												<mat-icon>block</mat-icon>
+												<span>block</span>
+											</button>
+											</mat-menu>
+											</div>
+											<div style = "margin-top: 5px;">
+												<img style = "border-radius: 20px;height: 30px;width: 30px;" src="{{userRating.AvatarUser}}">
+												<p style="width: 50%;display: initial;margin-left: 10px;">
+													{{userRating.Content}}
+												</p>
+											</div>
+											<div style="font-size: 8px;position: relative;float: right;">
+												<span>by {{userRating.NameUser}}, {{userRating.DateCreated| date: 'dd/MM/yyyy'}}</span>
+											</div>
+										</mat-card>
+									</div>
+									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
+								</div><!-- photos -->
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">									
+									<div class="widget">
+										<div class="banner medium-opacity bluesh">
+											<div style="background-image: url(assets/images/resources/baner-widgetbg.jpg)"
+												class="bg-image"></div>
+											<div class="baner-top">
+												<span><img src="assets/images/book-icon.png" alt=""></span>
+												<i class="fa fa-ellipsis-h"></i>
+											</div>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a [routerLink]="['/main/newpage']" title="" data-ripple="">start now!</a>
+											</div>
+										</div>
+									</div>
+									<app-right-sidebar-list-friend></app-right-sidebar-list-friend>	<!-- friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+<app-footer></app-footer>

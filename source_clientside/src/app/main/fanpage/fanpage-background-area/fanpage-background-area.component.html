@@ -5,7 +5,7 @@
             <span>1.3k followers</span>
             <a href="#" title="" data-ripple="">Follow</a>
         </div>
-        <form class="edit-phto" (click)="openDialogBackground()">
+        <form class="edit-phto" (click)="openDialogBackground()" *ngIf="this.pages.UserId===this.userid">
             <i class="fa fa-camera-retro"></i>
             <label class="fileContainer">
                 Edit Cover Photo
@@ -17,7 +17,7 @@
                     <div class="user-avatar">
                         <figure>
                             <img class="avatar-img" src={{this.pages.Avatar}} alt="">
-                            <form class="edit-phto" (click)="openDialogAvatar()" >
+                            <form class="edit-phto" (click)="openDialogAvatar()" *ngIf="this.pages.UserId===this.userid">
                                 <i class="fa fa-camera-retro"></i>
                                 <label class="fileContainer">
                                     Edit Display Photo
@@ -34,11 +34,12 @@
                               <span>@tourist_page</span>
                             </li>
                             <li>
-                                <a class="active" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
+                                <a class="" (click)="pageurl.getNavigation(this.pages.Id)" [routerLink]="['/fanpage/:', this.pages.Id]" title="" data-ripple="">Tours</a>
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Discount</a>
-                                <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Reviews</a>
+                                <a class="" [routerLink]="['/main/fanpage-review']" title="" data-ripple="">Reviews</a>
                                 <a class="" [routerLink]="['/main/fanpage']" title="" data-ripple="">Images</a>
                             </li>
+                            <div class="rating-star"  pTooltip="{{this.rating}} star, {{this.reviews}}" tooltipPosition="bottom"><p-rating [ngModel]="this.rating" readonly="true" stars="5" [cancel]="false"></p-rating></div>
                             <button *ngIf="this.pages.UserId==this.userid" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" style="position: relative;
                             float: right;margin-top: 5px;" [routerLink]="['/main/fanpage-admin']">
                                 <mat-icon>settings</mat-icon>

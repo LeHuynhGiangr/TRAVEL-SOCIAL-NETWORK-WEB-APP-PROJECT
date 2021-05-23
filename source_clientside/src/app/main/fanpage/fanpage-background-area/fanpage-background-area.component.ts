@@ -9,6 +9,7 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
 import { Pages } from 'src/app/_core/models/pages.model';
 import { DialogUploadPageBackgroundComponent } from '../dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import { LoginService } from 'src/app/_core/services/login.service';
+import { RatingService } from 'src/app/_core/services/rating.service';
 @Component({
     selector: 'app-fanpage-background-area',
     templateUrl: './fanpage-background-area.component.html',
@@ -17,9 +18,14 @@ import { LoginService } from 'src/app/_core/services/login.service';
 })
 export class FanpageBackgroundAreaComponent implements OnInit {
     public pages: Pages;
+    public ratings:any
+    countRating:number=0
     userid;
+    rating:number=0
+    reviews: string;
     constructor(private m_router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc 
-    , public dialog: MatDialog,private PService:PagesService, public pageurl:PageUrl, private service:LoginService) {
+    , public dialog: MatDialog,private PService:PagesService, public pageurl:PageUrl, private service:LoginService, 
+    private RService:RatingService) {
       
     }
     
@@ -31,6 +37,7 @@ export class FanpageBackgroundAreaComponent implements OnInit {
         this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
           return false;
         }
+        this.getRatingStar()
         this.getPage()
     }
     async getPage(){
@@ -69,5 +76,18 @@ export class FanpageBackgroundAreaComponent implements OnInit {
             this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],infoPage["userId"])
             this.pages.Background = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageBackgroundStorage()
         });
+      }
+      async getRatingStar()
+      {
+        this.ratings = await this.RService.getAllRatings(this.pageurl.getPageIdStorage())
+        for (let i = 0; i < this.ratings.length; i++) {
+            this.rating += parseFloat(this.ratings[i].rating)
+            this.countRating += 1
+        }
+        this.rating = this.rating / this.countRating
+        if(this.countRating > 1)
+          this.reviews = this.countRating.toString() + " reviews"
+        else
+          this.reviews = this.countRating.toString() + " review"
       }
 }

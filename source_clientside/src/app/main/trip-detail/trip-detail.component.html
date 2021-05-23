@@ -50,8 +50,8 @@
                                     <input matInput disabled value="{{this.trips.Destination}}">
                                  </mat-form-field>
                                  <mat-form-field class="example-full-width">
-                                    <mat-label>Days</mat-label>
-                                    <input matInput disabled value="{{this.trips.Days}}">
+                                    <mat-label>Persons</mat-label>
+                                    <input matInput disabled value="{{this.trips.Persons}}">
                                  </mat-form-field>
                                  <mat-form-field class="example-full-width">
                                     <mat-label>Date Start</mat-label>
@@ -105,13 +105,13 @@
                            </mat-card>
                         </mat-tab>
                      </mat-tab-group>
-                     <button type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
                   </div>
                   <div class="panel-introduction">
                      <h2 style="text-align: center;font-weight: bold;">Introduction</h2>
                      <div class="introduction-text" >
-                        <i class="fas fa-pager"></i><span class="page-name"style="cursor: pointer;margin-left: 10px;font-size: 16px;" (click)="pageurl.getNavigation(this.trips.PageId)"><strong>{{this.namePage}}</strong></span><br>
-                        <i class="fas fa-map-marked-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>{{this.trips.Destination}}</strong></span>
+                        <i class="fas fa-pager"></i><span class="page-name"style="cursor: pointer;margin-left: 10px;font-size: 16px;" (click)="pageurl.getNavigation(this.trips.PageId)"><strong>{{this.namePage}}</strong></span><br><br>
+                        <i class="fas fa-map-marked-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>{{this.trips.Destination}}</strong></span><br><br>
+                        <i class="fas fa-phone-square-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>{{this.phonePage}}</strong></span>
                      </div>
                    </div>
                   <!-- centerl meta -->
@@ -119,6 +119,7 @@
             </div>
          </div>
       </div>
+      <button class="btn-booknow" type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
    </div>
 </section>
 <app-footer></app-footer>

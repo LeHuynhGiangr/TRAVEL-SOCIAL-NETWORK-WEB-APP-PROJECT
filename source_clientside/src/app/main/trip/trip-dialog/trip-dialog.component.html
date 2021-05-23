@@ -1,62 +1,72 @@
 <h2><strong>Create Trips</strong></h2>
 <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Trip Name</mat-label>
-      <input matInput placeholder="Ex. Vung Tau Trip" name="Name" type="text" id="input" required="required" [(ngModel)]="this.Name" [ngModelOptions]="{standalone: true}">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Content</mat-label>
-        <textarea style="height: 100px;" name="Content" type="text" id="input" required="required" [(ngModel)]="this.Content" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Description</mat-label>
-        <textarea style="height: 100px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Departure</mat-label>
-        <textarea style="height: 100px;" name="Departure" type="text" id="input" required="required" [(ngModel)]="this.Departure" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Destination</mat-label>
-        <textarea style="height: 100px;" name="Destination" type="text" id="input" required="required" [(ngModel)]="this.Destination" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Service</mat-label>
-        <textarea style="height: 100px;" name="Service" type="text" id="input" required="required" [(ngModel)]="this.Service" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Policy</mat-label>
-        <textarea style="height: 100px;" name="Policy" type="text" id="input" required="required" [(ngModel)]="this.Policy" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>InfoContact</mat-label>
-        <textarea style="height: 100px;" name="InfoContact" type="text" id="input" required="required" [(ngModel)]="this.InfoContact" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Cost</mat-label>
-        <input matInput type="number" name="Cost" id="input" required="required" [(ngModel)]="this.Cost"[ngModelOptions]="{standalone: true}">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Days</mat-label>
-        <input matInput type="number" name="Days" id="input" required="required" [(ngModel)]="this.Days" [ngModelOptions]="{standalone: true}">
-    </mat-form-field>
-    <mat-form-field color="accent" appearance="fill">
-        <mat-label>Date Start Tourist</mat-label>
-        <input matInput [matDatepicker]="picker1" name="DateStart" [(ngModel)]="this.DateStart" [ngModelOptions]="{standalone: true}">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field color="accent" appearance="fill">
-        <mat-label>Date End Tourist</mat-label>
-        <input matInput [matDatepicker]="picker2" name="DateEnd" [(ngModel)]="this.DateEnd" [ngModelOptions]="{standalone: true}">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
-    <div class="form-group">
-        <h2>Image</h2>
-        <img [src]="url" height="200"> <br/>
-        <input type='file' accept="image/*" (change)="onSelectFile($event)">
-     </div>
+    <mat-tab-group style = "height:410px;flex-direction: column;" headerPosition="below">
+        <mat-tab label="Introduction"> 
+            <mat-form-field class="example-full-width">
+                <mat-label>Trip Name</mat-label>
+                <input matInput placeholder="Ex. Vung Tau Trip" name="Name" type="text" id="input" required="required" [(ngModel)]="this.Name" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Content</mat-label>
+                <textarea style="height: 100px;" name="Content" type="text" id="input" required="required" [(ngModel)]="this.Content" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea style="height: 100px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Location">
+            <mat-form-field class="example-full-width">
+                <mat-label>Departure</mat-label>
+                <textarea style="height: 100px;" name="Departure" type="text" id="input" required="required" [(ngModel)]="this.Departure" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Destination</mat-label>
+                <textarea style="height: 100px;" name="Destination" type="text" id="input" required="required" [(ngModel)]="this.Destination" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Date-Time">
+            <mat-form-field class="example-full-width">
+                <mat-label>Cost</mat-label>
+                <input matInput type="number" name="Cost" id="input" required="required" [(ngModel)]="this.Cost"[ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Persons</mat-label>
+                <input matInput type="number" name="Persons" id="input" required="required" [(ngModel)]="this.Persons" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Date Start Tourist</mat-label>
+                <input matInput [matDatepicker]="picker1" name="DateStart" [(ngModel)]="this.DateStart" [ngModelOptions]="{standalone: true}">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Date End Tourist</mat-label>
+                <input matInput [matDatepicker]="picker2" name="DateEnd" [(ngModel)]="this.DateEnd" [ngModelOptions]="{standalone: true}">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Other">
+            <mat-form-field class="example-full-width">
+                <mat-label>Service</mat-label>
+                <textarea style="height: 100px;" name="Service" type="text" id="input" required="required" [(ngModel)]="this.Service" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Policy</mat-label>
+                <textarea style="height: 100px;" name="Policy" type="text" id="input" required="required" [(ngModel)]="this.Policy" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>InfoContact</mat-label>
+                <textarea style="height: 100px;" name="InfoContact" type="text" id="input" required="required" [(ngModel)]="this.InfoContact" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <div class="form-group">
+                <h2>Image</h2>
+                <img [src]="url" height="200"> <br/>
+                <input type='file' accept="image/*" (change)="onSelectFile($event)">
+            </div>
+        </mat-tab>
+      </mat-tab-group>
 </form>
 <br>
 <br>

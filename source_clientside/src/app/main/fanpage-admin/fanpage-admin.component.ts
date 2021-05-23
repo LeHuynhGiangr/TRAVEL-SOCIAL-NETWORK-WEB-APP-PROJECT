@@ -39,7 +39,7 @@ export class FanpageAdminComponent implements OnInit {
   }
   CreateTripDialog(): void {
     const dialogRef = this.dialog.open(TripDialogComponent, {
-      width: '600px',
+      width: '1200px',
       height: '600px',
     });
 
