@@ -254,13 +254,10 @@ export const mainRoutes: Routes = [
     RouterModule.forChild(mainRoutes),],
     bootstrap:[MainComponent]
 })
-export class MainModule implements OnInit {
+export class MainModule{
   constructor(private loginService: LoginService) {
     console.log("Main module is constructed")
     StaticWSMediator.register(this.callbackFunc, SYS_TOKEN_DEF.ON_OPENED);
-  }
-
-  ngOnInit(): void {
   }
 
   callbackFunc(message: string): void {
