@@ -11,6 +11,7 @@ import { TripService } from 'src/app/_core/services/trip.service';
 import { PagesService } from 'src/app/_core/services/page.service';
 import { Trips } from 'src/app/_core/models/trip.model';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
+import { DialogModifyTripComponent } from '../fanpage/dialog-modifytrip/dialog-modifytrip.component';
 @Component({
     selector: 'app-fanpage-admin',
     templateUrl: './fanpage-admin.component.html',
@@ -18,8 +19,8 @@ import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 })
 
 export class FanpageAdminComponent implements OnInit {
-  displayedColumns: string[] = ['Content','Description','Name','Id'];
-  dataSource
+  displayedColumns: string[] = ['Name','Departure','Destination','Cost','Action'];
+  dataSource: MatTableDataSource<Trips>
   public appUsers: AppUsers;
   public tripList = new Array<Trips>();
   idpage;
@@ -38,8 +39,8 @@ export class FanpageAdminComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-    this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.getTripList()
+    this.dataSource = new MatTableDataSource<Trips>();
+    this.getTripList();
     this.idpage = this.pageurl.getPageIdStorage();
   }
   CreateTripDialog(): void {
@@ -52,6 +53,22 @@ export class FanpageAdminComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  ModifyTripDialog(id): void {
+    const dialogRef = this.dialog.open(DialogModifyTripComponent, {
+      width: '600px',
+      height: '600px',
+      data: {idtrip: id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.tripList = new Array<Trips>();
+      this.getTripList();
+    });
+  }
+  consoleID(id)
+  {
+    alert(id)
+  }
   getTripList = async () => {
     this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
     for (let i = 0; i < this.trips.length; i++) {
@@ -60,6 +77,8 @@ export class FanpageAdminComponent implements OnInit {
         trip.Name = this.trips[i].name
         trip.Description = this.trips[i].description
         trip.Content = this.trips[i].content
+        trip.Start = this.trips[i].start
+        trip.Destination = this.trips[i].destination
         trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
         trip.authorId = this.trips[i].authorId
         trip.CreatedDate = this.trips[i].dateCreated
@@ -70,14 +89,14 @@ export class FanpageAdminComponent implements OnInit {
         trip.Cost = this.trips[i].cost
         this.tripList.push(trip)
     }
-    this.dataSource.filteredData = this.tripList
-    console.log(this.dataSource)
+    this.dataSource.data = this.tripList
   }
 }
 export interface PeriodicElement {
-  Content:string
+  Destination:string
   Name:string
-  Description:string
+  Departure:string
+  Cost:string
   Id:string
 }
 

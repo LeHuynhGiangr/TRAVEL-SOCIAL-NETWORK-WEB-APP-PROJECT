@@ -71,6 +71,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { NgxPayPalModule } from 'ngx-paypal';
 import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 //primeng component
@@ -103,6 +104,7 @@ import { FanpageReviewComponent } from './fanpage-review/fanpage-review.componen
 import { WebSocketService } from '../_core/services/websocket.service';
 import { LoginService } from '../_core/services/login.service';
 import { delay } from 'rxjs/operators';
+import { DialogModifyTripComponent } from './fanpage/dialog-modifytrip/dialog-modifytrip.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -200,6 +202,7 @@ export const mainRoutes: Routes = [
     BackgroundAreaComponent,
     DialogUploadAvatarComponent,
     DialogUploadBackgroundComponent,
+    DialogModifyTripComponent,
     FanpageBackgroundAreaComponent,
     FanpageReviewComponent,
     DialogReviewComponent
@@ -229,6 +232,7 @@ export const mainRoutes: Routes = [
     MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSlideToggleModule,
     //Primeng
     AccordionModule,
     AutoCompleteModule,

@@ -48,7 +48,7 @@ export class TripPaymentComponent implements OnInit {
       this.trips.Cost = TripStatic.Cost
       this.cost = parseInt(this.trips.Cost)/10
       this.total = (this.cost + parseInt(this.trips.Cost))*this.people
-      this.trips.Departure = TripStatic.Departure
+      this.trips.Start = TripStatic.Departure
       this.trips.Destination = TripStatic.Destination
       this.trips.Policy = TripStatic.Policy
       this.trips.InfoContact = TripStatic.InfoContact

@@ -54,7 +54,7 @@
 									</div>
 								</div> -->
 									<mat-progress-bar *ngIf="this.play === true" mode="indeterminate"></mat-progress-bar>
-									<h2 style="text-align: center;" *ngIf = "this.trips.length === 0">There are currently no tours to display...</h2>
+									<h2 style="text-align: center;" *ngIf = "this.listcount === 0">There are currently no tours to display...</h2>
 									<mat-grid-list cols="2" rowHeight="{{this.lengthcount}}">
 										<mat-grid-tile *ngFor="let trip of tripList">
 											<div class="card">

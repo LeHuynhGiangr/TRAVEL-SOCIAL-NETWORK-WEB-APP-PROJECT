@@ -9,7 +9,7 @@ export class Trips {
     authorAvatar:string;
     Cost:string
     Content:string
-    Departure : string
+    Start : string
     Destination: string
     Policy: string
     InfoContact:string
@@ -17,5 +17,6 @@ export class Trips {
     Persons:string
     DateStart:Date
     DateEnd:Date
+    Active:boolean
     PageId:string
 }

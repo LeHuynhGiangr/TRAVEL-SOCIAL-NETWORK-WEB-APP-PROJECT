@@ -1,0 +1,79 @@
+<h2><strong>Create Trips</strong></h2>
+<form class="example-form">
+    <mat-tab-group style = "height:410px;flex-direction: column;" headerPosition="below">
+        <mat-tab label="Introduction"> 
+            <mat-form-field class="example-full-width">
+                <mat-label>Trip Name</mat-label>
+                <input matInput placeholder="Ex. Vung Tau Trip" name="Name" type="text" id="input" required="required" [(ngModel)]="this.trips.Name" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Content</mat-label>
+                <textarea style="height: 100px;" name="Content" type="text" id="input" required="required" [(ngModel)]="this.trips.Content" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea style="height: 100px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.trips.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Location">
+            <mat-form-field class="example-full-width">
+                <mat-label>Departure</mat-label>
+                <textarea style="height: 100px;" name="Departure" type="text" id="input" required="required" [(ngModel)]="this.trips.Start" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Destination</mat-label>
+                <textarea style="height: 100px;" name="Destination" type="text" id="input" required="required" [(ngModel)]="this.trips.Destination" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Status">
+            <mat-form-field class="example-full-width">
+                <mat-label>Cost</mat-label>
+                <input matInput type="number" name="Cost" id="input" required="required" [(ngModel)]="this.trips.Cost"[ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Persons</mat-label>
+                <input matInput type="number" name="Persons" id="input" required="required" [(ngModel)]="this.trips.Persons" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Date Start Tourist</mat-label>
+                <input matInput [matDatepicker]="picker1" name="DateStart" [(ngModel)]="this.trips.DateStart" [ngModelOptions]="{standalone: true}">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Date End Tourist</mat-label>
+                <input matInput [matDatepicker]="picker2" name="DateEnd" [(ngModel)]="this.trips.DateEnd" [ngModelOptions]="{standalone: true}">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-slide-toggle
+                class="example-margin"
+                [color]="color"
+                [checked]="this.trips.Active"
+                [(ngModel)]="this.trips.Active"
+                [disabled]="disabled">
+                Active
+            </mat-slide-toggle>
+        </mat-tab>
+        <mat-tab label="Other">
+            <mat-form-field class="example-full-width">
+                <mat-label>Service</mat-label>
+                <textarea style="height: 100px;" name="Service" type="text" id="input" required="required" [(ngModel)]="this.trips.Service" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Policy</mat-label>
+                <textarea style="height: 100px;" name="Policy" type="text" id="input" required="required" [(ngModel)]="this.trips.Policy" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>InfoContact</mat-label>
+                <textarea style="height: 100px;" name="InfoContact" type="text" id="input" required="required" [(ngModel)]="this.trips.InfoContact" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </mat-tab>
+      </mat-tab-group>
+</form>
+<br>
+<br>
+<div mat-dialog-actions class="myDiv">
+    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
+    <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
+</div>

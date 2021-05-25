@@ -107,4 +107,13 @@ export class TripService {
             console.log(e);
         }
     }
+    modifyTrip = async (id,trip) => {
+        try {
+            const result = await this.http.put(this.urlAPI + ApiUrlConstants.API_TRIP_URL + id,trip).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 }
