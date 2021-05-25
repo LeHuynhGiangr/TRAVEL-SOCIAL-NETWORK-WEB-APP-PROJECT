@@ -36,10 +36,11 @@ namespace Data.EF
         public DbSet<UserJoinTrip> UserJoinTrips { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<OTP> OTPs { get; set; }
-        public DbSet<Chatting> Chattings { get; set; }
+        public DbSet<ChatBox> ChatBoxes { get; set; }
 
         public DbSet<ReviewPage> ReviewPages { get; set; }
 
+        public DbSet<UserChatBox> UserChatBoxes { get; set; }
         //end declare entites
 
         //this method is called on event model creating
@@ -51,8 +52,9 @@ namespace Data.EF
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new PostConfiguration());
-            builder.ApplyConfiguration(new ChattingConfiguration());
+            builder.ApplyConfiguration(new ChatBoxConfiguration());
             builder.ApplyConfiguration(new FriendConfiguration());
+            builder.ApplyConfiguration(new UserChatBoxConfiguration());
 
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("userclaims");
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("userlogins").HasKey(_ => _.UserId);
@@ -66,7 +68,6 @@ namespace Data.EF
                 .HasOne(sc => sc.User)
                 .WithMany(s => s.UserJoinTrips)
                 .HasForeignKey(sc => sc.Id).OnDelete(DeleteBehavior.Restrict);
-
 
             builder.Entity<UserJoinTrip>()
                 .HasOne(sc => sc.Trip)

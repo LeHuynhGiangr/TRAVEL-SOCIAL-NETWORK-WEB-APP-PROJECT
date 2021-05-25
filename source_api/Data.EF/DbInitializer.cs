@@ -62,6 +62,10 @@ namespace Data.EF
         private static Guid l_guid_post14 = Guid.NewGuid();
         private static Guid l_guid_post15 = Guid.NewGuid();
 
+        private static Guid l_guid_chatbox12 = Guid.NewGuid();
+        private static Guid l_guid_chatbox23 = Guid.NewGuid();
+        private static Guid l_guid_chatbox14 = Guid.NewGuid();
+
         private static string l_string_post_pic1 = "media-file/Fake_DTB/post_pic1.png";
         private static string l_string_post_pic2 = "media-file/Fake_DTB/post_pic2.png";
         private static string l_string_post_pic3 = "media-file/Fake_DTB/post_pic3.png";
@@ -80,7 +84,6 @@ namespace Data.EF
 
         public static void SeedData(ProjectDbContext projectDbContext)
         {
-            
             if (!projectDbContext.Users.Any())
             {
                 projectDbContext.Users.AddRange(new List<User>() {
@@ -1407,6 +1410,95 @@ namespace Data.EF
                     }
                 });
 
+            }
+            if (!projectDbContext.UserChatBoxes.Any())
+            {
+                //add dummy chatbox data
+                projectDbContext.ChatBoxes.AddRange(new List<ChatBox>() { 
+                    // chat box user 1 2
+                    new ChatBox()
+                    {
+                        Id = l_guid_chatbox12,
+                        ChatContentJson = JsonSerializer.Serialize(new List<object>()
+                        {
+                            new
+                            {
+                                Id = l_guid_user2,
+                                Message = "Hi!"
+                            },
+                            new
+                            {
+                                Id = l_guid_user1,
+                                Message = "Hi, what's up, guys"
+                            },
+                            new
+                            {
+                                Id = l_guid_user2,
+                                Message = "First rate"
+                            },
+                            new
+                            {
+                                Id = l_guid_user2,
+                                Message = ":v"
+                            }
+                        })
+                    },
+
+                    //chat box user 2 3
+                    new ChatBox()
+                    {
+                        Id = l_guid_chatbox23,
+                        ChatContentJson = JsonSerializer.Serialize(new List<object>()
+                        {
+                            new
+                            {
+                                Id = l_guid_user3,
+                                Message = "I want to be friends with you"
+                            },
+                            new
+                            {
+                                Id = l_guid_user2,
+                                Message = "Hmm"
+                            }
+                        })
+                    },
+                });
+
+                //add dummy joining entity data for user and chatbox
+                projectDbContext.UserChatBoxes.AddRange(new List<UserChatBox>()
+                {
+                    //user 1, chat with 2
+                    new UserChatBox()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = l_guid_user1,
+                        ChatBoxId = l_guid_chatbox12,
+                    },
+
+                    //user 2, chat with 1
+                    new UserChatBox()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = l_guid_user2,
+                        ChatBoxId = l_guid_chatbox12,
+                    },
+
+                    //user 2, chat with 3
+                    new UserChatBox()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = l_guid_user2,
+                        ChatBoxId = l_guid_chatbox23
+                    },
+
+                    //user 3, chat with 2
+                    new UserChatBox()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = l_guid_user3,
+                        ChatBoxId = l_guid_chatbox23,
+                    },
+                }); ;
             }
             projectDbContext.SaveChanges();
         }
