@@ -16,11 +16,9 @@ namespace Domain.Services
     public class PageService : IPageService<Guid>
     {
         private readonly EFRepository<Page, Guid> m_pageRepository;
-        private readonly EFRepository<UserFollowPage, Guid> m_upageRepository;
-        public PageService(EFRepository<Page, Guid> pageRepository, EFRepository<UserFollowPage, Guid> upageRepository)
+        public PageService(EFRepository<Page, Guid> pageRepository)
         {
             m_pageRepository = pageRepository;
-            m_upageRepository = upageRepository;
         }
         public PageResponse GetById(Guid id)
         {
@@ -37,16 +35,6 @@ namespace Domain.Services
                         page.Follow,
                         page.User.Id.ToString());
             return pageResponse;
-        }
-        public UserFollowPageResponse GetFollowById(Guid id)
-        {
-            var upage = m_upageRepository.FindSingle(_ => _.Id.Equals(id), _ => _.User,_=>_.Page);
-            UserFollowPageResponse upageResponse = new UserFollowPageResponse(
-                        upage.Id,
-                        upage.DateCreated,
-                        upage.UserId.ToString(),
-                        upage.PageId.ToString());
-            return upageResponse;
         }
         IEnumerable<PageResponse> IPageService<Guid>.GetPagesByUserId<IdType>(IdType id)
         {
@@ -70,31 +58,7 @@ namespace Domain.Services
                         page.User.Id.ToString()));
             }
             return l_pageResponses;
-        }
-        public UserFollowPageResponse Follow (UserFollowPageRequest model)
-        {
-            try
-            {
-                Guid l_newGuidId = Guid.NewGuid();
-                //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
-                UserFollowPage l_ufp = new UserFollowPage
-                {
-                    Id = l_newGuidId,
-                    DateCreated = DateTime.Now,
-                    UserId = model.UserId,
-                    PageId = model.PageId
-                };
-
-                m_upageRepository.Add(l_ufp);
-                m_upageRepository.SaveChanges();
-
-                return GetFollowById(l_newGuidId);
-            }
-            catch
-            {
-                throw new Exception("create trip failed");
-            }
-        }    
+        } 
         public PageResponse Create(CreatePageRequest model)
         {
             try
