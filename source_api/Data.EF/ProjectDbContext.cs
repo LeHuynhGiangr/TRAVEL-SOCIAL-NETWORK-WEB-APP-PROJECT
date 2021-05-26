@@ -41,6 +41,7 @@ namespace Data.EF
         public DbSet<ReviewPage> ReviewPages { get; set; }
 
         public DbSet<UserChatBox> UserChatBoxes { get; set; }
+        public DbSet<UserFollowPage> UserFollowPages { get; set; }
         //end declare entites
 
         //this method is called on event model creating
@@ -89,6 +90,14 @@ namespace Data.EF
             builder.Entity<ReviewPage>()
               .HasOne(sc => sc.User)
               .WithMany(s => s.ReviewPages)
+              .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<UserFollowPage>()
+              .HasOne(sc => sc.Page)
+              .WithMany(s => s.UserFollowPages)
+              .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<UserFollowPage>()
+              .HasOne(sc => sc.User)
+              .WithMany(s => s.UserFollowPages)
               .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
         }
 

@@ -135,7 +135,7 @@ namespace API.Controllers
         }
         [Route("rating/block/{id:guid}")]
         [HttpPut]
-        public ActionResult<ReviewPage> BlockUser(Guid id)
+        public ActionResult<ReviewPage> BlockRating(Guid id)
         {
             try
             {
@@ -147,6 +147,19 @@ namespace API.Controllers
             catch (Exception e)
             {
                 return BadRequest(new { message = "Not found !" });
+            }
+        }
+        [HttpPut("{id:guid}")]
+        public IActionResult ModifyPage([FromBody] CreatePageRequest createpageRequest, Guid id)
+        {
+            try
+            {
+                _service.ModifyPageInfo(id, createpageRequest);
+                return Ok("Update successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
             }
         }
     }

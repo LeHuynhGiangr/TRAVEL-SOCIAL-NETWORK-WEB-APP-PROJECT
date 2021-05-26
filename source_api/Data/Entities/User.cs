@@ -65,6 +65,7 @@ namespace Data.Entities
         public Friend Friend { get; set; }
 
         public virtual ICollection<UserChatBox> UserChatBoxes { get; set; }
+        public IList<UserFollowPage> UserFollowPages { get; set; }
 
         //public virtual ICollection<Friend> Friends { get; set; }
 

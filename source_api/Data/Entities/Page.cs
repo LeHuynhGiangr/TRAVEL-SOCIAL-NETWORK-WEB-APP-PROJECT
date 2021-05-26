@@ -18,6 +18,7 @@ namespace Data.Entities
         public DateTime? DateModified { get; set; }
         public IList<Trip> Trips { get; set; }
         public IList<ReviewPage> ReviewPages { get; set; }
+        public IList<UserFollowPage> UserFollowPages { get; set; }
         public PageType PageType { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }

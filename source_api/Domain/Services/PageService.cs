@@ -16,10 +16,11 @@ namespace Domain.Services
     public class PageService : IPageService<Guid>
     {
         private readonly EFRepository<Page, Guid> m_pageRepository;
-
-        public PageService(EFRepository<Page, Guid> tripRepository)
+        private readonly EFRepository<UserFollowPage, Guid> m_upageRepository;
+        public PageService(EFRepository<Page, Guid> pageRepository, EFRepository<UserFollowPage, Guid> upageRepository)
         {
-            m_pageRepository = tripRepository;
+            m_pageRepository = pageRepository;
+            m_upageRepository = upageRepository;
         }
         public PageResponse GetById(Guid id)
         {
@@ -36,6 +37,16 @@ namespace Domain.Services
                         page.Follow,
                         page.User.Id.ToString());
             return pageResponse;
+        }
+        public UserFollowPageResponse GetFollowById(Guid id)
+        {
+            var upage = m_upageRepository.FindSingle(_ => _.Id.Equals(id), _ => _.User,_=>_.Page);
+            UserFollowPageResponse upageResponse = new UserFollowPageResponse(
+                        upage.Id,
+                        upage.DateCreated,
+                        upage.UserId.ToString(),
+                        upage.PageId.ToString());
+            return upageResponse;
         }
         IEnumerable<PageResponse> IPageService<Guid>.GetPagesByUserId<IdType>(IdType id)
         {
@@ -60,6 +71,30 @@ namespace Domain.Services
             }
             return l_pageResponses;
         }
+        public UserFollowPageResponse Follow (UserFollowPageRequest model)
+        {
+            try
+            {
+                Guid l_newGuidId = Guid.NewGuid();
+                //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
+                UserFollowPage l_ufp = new UserFollowPage
+                {
+                    Id = l_newGuidId,
+                    DateCreated = DateTime.Now,
+                    UserId = model.UserId,
+                    PageId = model.PageId
+                };
+
+                m_upageRepository.Add(l_ufp);
+                m_upageRepository.SaveChanges();
+
+                return GetFollowById(l_newGuidId);
+            }
+            catch
+            {
+                throw new Exception("create trip failed");
+            }
+        }    
         public PageResponse Create(CreatePageRequest model)
         {
             try
@@ -86,6 +121,20 @@ namespace Domain.Services
             {
                 throw new Exception("create trip failed");
             }
+        }
+        public void ModifyPageInfo(Guid id, CreatePageRequest model)
+        {
+            Page page = m_pageRepository.FindById(id);
+            var m_page = page;
+            {
+                page.Address = model.Address;
+                page.PhoneNumber = model.PhoneNumber;
+                page.Name = model.Name;
+                page.Description = model.Description;
+                page.UserId = model.UserId;
+            }
+            m_pageRepository.SetModifierPageStatus(m_page, EntityState.Modified);
+            m_pageRepository.SaveChanges();
         }
         public void UploadAvatar(Guid id, string webRootPath, IFormFile avatar)
         {
