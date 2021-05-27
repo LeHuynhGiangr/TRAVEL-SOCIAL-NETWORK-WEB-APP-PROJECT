@@ -16,12 +16,15 @@
     
     <!-- project reference -->
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Data\Data.csproj" />
     <ProjectReference Include="..\MediationLib\MediationLib.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
     <ProjectReference Include="..\WebSocketLib\WebSocketLib.csproj" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.1.0" />
 
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
 

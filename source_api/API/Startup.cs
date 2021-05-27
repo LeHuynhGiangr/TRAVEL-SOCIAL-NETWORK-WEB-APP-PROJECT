@@ -1,6 +1,7 @@
 /*
  * the Startup class configures the request pipeline of the application, dependency injection and how all requests are handled.
  */
+using API.Hub;
 using Data.EF;
 using Data.Entities;
 using Data.Enums;
@@ -183,7 +184,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapHub<Trip>("/trip");
+                endpoints.MapHub<HubClient>("/triprt");
             });
         }
     }

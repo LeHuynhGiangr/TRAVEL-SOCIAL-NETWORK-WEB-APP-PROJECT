@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
+using API.Hub;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers
 {
@@ -19,10 +21,12 @@ namespace API.Controllers
     {
         private readonly ITripService<Guid> _service;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public TripController(ITripService<Guid> service, IWebHostEnvironment webHostEnvironment)
+        private readonly IHubContext<HubClient, IHubClient> _hubContext;
+        public TripController(ITripService<Guid> service, IWebHostEnvironment webHostEnvironment, IHubContext<HubClient, IHubClient> hubContext)
         {
             _service = service;
             _webHostEnvironment = webHostEnvironment;
+            _hubContext = hubContext;
         }
         [HttpGet]
         public IActionResult LoadAllTrip()
@@ -81,13 +85,14 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateTrip([FromForm] CreateTripRequest createTripRequest)
+        public async Task<IActionResult> CreateTripAsync([FromForm] CreateTripRequest createTripRequest)
         {
             try
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 createTripRequest.UserId = id;
                 _service.Create(createTripRequest, _webHostEnvironment.WebRootPath);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Create successfully");
             }
             catch (Exception e)
@@ -96,11 +101,12 @@ namespace API.Controllers
             }
         }
         [HttpPut("{id:guid}")]
-        public IActionResult ModifyTrip([FromBody] CreateTripRequest createTripRequest, Guid id)
+        public async Task<IActionResult> ModifyTripAsync([FromBody] CreateTripRequest createTripRequest, Guid id)
         {
             try
             {
                 _service.ModifyTrip(id,createTripRequest);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Update successfully");
             }
             catch (Exception e)
