@@ -1411,6 +1411,7 @@ namespace Data.EF
                 });
 
             }
+
             if (!projectDbContext.UserChatBoxes.Any())
             {
                 //add dummy chatbox data
@@ -1424,24 +1425,28 @@ namespace Data.EF
                             new
                             {
                                 Id = l_guid_user2,
-                                Message = "Hi!"
+                                Message = "Hi!",
+                                OLEAD = DateTime.UtcNow.AddMinutes(0).ToOADate()
                             },
                             new
                             {
                                 Id = l_guid_user1,
-                                Message = "Hi, what's up, guys"
+                                Message = "Hi, what's up, guys",
+                                OLEAD = DateTime.UtcNow.AddHours(5).ToOADate()
                             },
                             new
                             {
                                 Id = l_guid_user2,
-                                Message = "First rate"
+                                Message = "First rate",
+                                OLEAD = DateTime.UtcNow.AddHours(10).ToOADate()
                             },
                             new
                             {
                                 Id = l_guid_user2,
-                                Message = ":v"
+                                Message = ":v",
+                                OLEAD = DateTime.UtcNow.AddHours(15).ToOADate()
                             }
-                        })
+                        }),
                     },
 
                     //chat box user 2 3
@@ -1453,14 +1458,16 @@ namespace Data.EF
                             new
                             {
                                 Id = l_guid_user3,
-                                Message = "I want to be friends with you"
+                                Message = "I want to be friends with you",
+                                OLEAD = DateTime.UtcNow.AddMinutes(0).ToOADate()
                             },
                             new
                             {
                                 Id = l_guid_user2,
-                                Message = "Hmm"
+                                Message = "Hmm",
+                                OLEAD = DateTime.UtcNow.AddMinutes(5).ToOADate()
                             }
-                        })
+                        }),
                     },
                 });
 
@@ -1472,7 +1479,9 @@ namespace Data.EF
                     {
                         Id = Guid.NewGuid(),
                         UserId = l_guid_user1,
+                        TheOtherId = l_guid_user2,
                         ChatBoxId = l_guid_chatbox12,
+                        ContentCacheJson = "[]"
                     },
 
                     //user 2, chat with 1
@@ -1480,7 +1489,9 @@ namespace Data.EF
                     {
                         Id = Guid.NewGuid(),
                         UserId = l_guid_user2,
+                        TheOtherId = l_guid_user1,
                         ChatBoxId = l_guid_chatbox12,
+                        ContentCacheJson = "[]"
                     },
 
                     //user 2, chat with 3
@@ -1488,7 +1499,9 @@ namespace Data.EF
                     {
                         Id = Guid.NewGuid(),
                         UserId = l_guid_user2,
-                        ChatBoxId = l_guid_chatbox23
+                        TheOtherId = l_guid_user3,
+                        ChatBoxId = l_guid_chatbox23,
+                        ContentCacheJson = "[]"
                     },
 
                     //user 3, chat with 2
@@ -1496,7 +1509,9 @@ namespace Data.EF
                     {
                         Id = Guid.NewGuid(),
                         UserId = l_guid_user3,
+                        TheOtherId = l_guid_user2,
                         ChatBoxId = l_guid_chatbox23,
+                        ContentCacheJson = "[]"
                     },
                 }); ;
             }

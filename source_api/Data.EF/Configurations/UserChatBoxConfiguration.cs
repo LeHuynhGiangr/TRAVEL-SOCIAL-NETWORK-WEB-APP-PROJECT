@@ -13,12 +13,12 @@ namespace Data.EF.Configurations
             builder.HasOne(uc => uc.User).WithMany(u => u.UserChatBoxes)
                 .HasForeignKey(uc => uc.UserId)
                 .HasConstraintName("fk_userchatbox_user_userid")
-                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(uc => uc.ChatBox).WithMany(u => u.UserChatBoxes)
                 .HasForeignKey(uc => uc.ChatBoxId)
                 .HasConstraintName("fk_userchatbox_chatbox_chatboxid")
-                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasIndex(p => new { p.UserId, p.ChatBoxId }).IsUnique();
 

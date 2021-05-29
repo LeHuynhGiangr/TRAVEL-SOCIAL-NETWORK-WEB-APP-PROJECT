@@ -8,6 +8,8 @@ namespace Data.Entities
     {
         public Guid Id {get; set; }
 
+        public string MemberMetadataJson { get; set; } = "[]";
+
         public string ChatContentJson { get; set; }
 
         public DateTime DateCreated { get; set; }

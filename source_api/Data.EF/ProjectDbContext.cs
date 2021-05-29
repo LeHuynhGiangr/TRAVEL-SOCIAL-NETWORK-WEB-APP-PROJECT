@@ -36,10 +36,10 @@ namespace Data.EF
         public DbSet<UserJoinTrip> UserJoinTrips { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<OTP> OTPs { get; set; }
-        public DbSet<ChatBox> ChatBoxes { get; set; }
 
         public DbSet<ReviewPage> ReviewPages { get; set; }
 
+        public DbSet<ChatBox> ChatBoxes { get; set; }
         public DbSet<UserChatBox> UserChatBoxes { get; set; }
         //end declare entites
 

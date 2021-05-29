@@ -8,7 +8,7 @@ namespace Domain.IServices
     {
         IEnumerable<ChatBoxResponse> GetAllChatBoxesByUserId(Guid id);
         ChatBoxResponse GetChatBoxByChatBoxId(Guid id);
-
-        ChatBoxResponse CreateOrUpdateChatBox(UpdateChatBoxRequest chatBoxRequest);
+        ChatBoxResponse GetChatBox(Guid id, Guid theOtherId);
+        UpdateChatBoxContentResponse UpdateChatBoxContent(UpdateChatBoxContentRequest chatBoxRequest);
     }
 }
