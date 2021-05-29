@@ -10,5 +10,6 @@ namespace Domain.IServices
     {
         UserFollowPageResponse GetFollowById(Guid id);
         UserFollowPageResponse Follow(UserFollowPageRequest model);
+        void UnFollow(UserUnfollowRequest userUnfollowRequest);
     }
 }

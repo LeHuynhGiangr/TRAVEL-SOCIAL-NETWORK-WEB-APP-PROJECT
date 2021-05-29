@@ -520,7 +520,7 @@ namespace Domain.Services
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, ((int)user.Role).ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(15),
+                Expires = DateTime.UtcNow.AddMinutes(60),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(l_key), SecurityAlgorithms.HmacSha256Signature)
             };
             var l_token = l_tokenHandler.CreateToken(l_tokenDescriptor);

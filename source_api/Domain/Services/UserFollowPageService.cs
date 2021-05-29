@@ -2,13 +2,15 @@
 using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
+using Domain.IServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain.Services
 {
-    public class UserFollowPageService
+    public class UserFollowPageService : IUserFollow<Guid>
     {
         private readonly EFRepository<UserFollowPage, Guid> m_upageRepository;
         public UserFollowPageService(EFRepository<UserFollowPage, Guid> upageRepository)
@@ -46,7 +48,21 @@ namespace Domain.Services
             }
             catch
             {
-                throw new Exception("create trip failed");
+                throw new Exception("follow failed");
+            }
+        }
+        public void UnFollow(UserUnfollowRequest userUnfollowRequest)
+        {
+            try
+            {
+                var l_trips = m_upageRepository.GetAll(_ => _.Page, _ => _.User).Where(_ => _.PageId.ToString().ToLower().Contains(userUnfollowRequest.PageId.ToString().ToLower())
+                 && _.UserId.ToString().ToLower().Contains(userUnfollowRequest.UserId.ToString().ToLower())).FirstOrDefault();
+                m_upageRepository.Remove(l_trips);
+                m_upageRepository.SaveChanges();
+            }
+            catch
+            {
+                throw new Exception("delete failed");
             }
         }
     }

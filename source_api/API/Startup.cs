@@ -83,8 +83,9 @@ namespace API
             services.AddScoped<EFRepository<UserJoinTrip, Guid>, EFRepository<UserJoinTrip, Guid>>();
             services.AddScoped<EFRepository<Page, Guid>, EFRepository<Page, Guid>>();
             services.AddScoped<EFRepository<ReviewPage, Guid>, EFRepository<ReviewPage, Guid>>();
-            services.AddScoped<IRepository<Friend, Guid>, EFRepository<Friend, Guid>>();
+            services.AddScoped<EFRepository<UserFollowPage, Guid>, EFRepository<UserFollowPage, Guid>>();
 
+            services.AddScoped<IRepository<Friend, Guid>, EFRepository<Friend, Guid>>();
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<IPostService<Guid>, PostService>();
             services.AddScoped<ITripService<Guid>, TripService>();
@@ -93,6 +94,7 @@ namespace API
             services.AddScoped<IPageService<Guid>, PageService>();
             services.AddScoped<IFriendService<Guid>, FriendService>();
             services.AddScoped<IRatingService<Guid>, RatingService>();
+            services.AddScoped<IUserFollow<Guid>, UserFollowPageService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

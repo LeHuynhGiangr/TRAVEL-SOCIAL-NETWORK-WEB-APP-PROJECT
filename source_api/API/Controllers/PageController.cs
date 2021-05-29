@@ -19,11 +19,13 @@ namespace API.Controllers
     {
         private readonly IPageService<Guid> _service;
         private readonly IRatingService<Guid> _service_;
+        private readonly IUserFollow<Guid> f_service;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public PageController(IPageService<Guid> service, IWebHostEnvironment webHostEnvironment, IRatingService<Guid> service_)
+        public PageController(IPageService<Guid> service, IWebHostEnvironment webHostEnvironment, IRatingService<Guid> service_, IUserFollow<Guid> _f_service)
         {
             _service = service;
             _service_ = service_;
+            f_service = _f_service;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -156,6 +158,36 @@ namespace API.Controllers
             {
                 _service.ModifyPageInfo(id, createpageRequest);
                 return Ok("Update successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("follow")]
+        [HttpPost]
+        public IActionResult FollowPage([FromBody] UserFollowPageRequest followpageRequest)
+        {
+            try
+            {
+                followpageRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                f_service.Follow(followpageRequest);
+                return Ok("Follow successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("unfollow")]
+        [HttpDelete]
+        public IActionResult UnFollowPage([FromBody] UserUnfollowRequest userUnfollowRequest)
+        {
+            try
+            {
+                userUnfollowRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                f_service.UnFollow(userUnfollowRequest);
+                return Ok("UnFollow successfully");
             }
             catch (Exception e)
             {
