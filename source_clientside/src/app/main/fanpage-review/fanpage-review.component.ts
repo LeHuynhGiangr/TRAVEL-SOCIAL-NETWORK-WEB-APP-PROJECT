@@ -11,6 +11,8 @@ import { RatingService } from 'src/app/_core/services/rating.service';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 import { Ratings } from 'src/app/_core/models/rating.model';
 import { DialogReviewComponent } from '../fanpage/dialog-review/dialog-review.component';
+import * as signalR from '@aspnet/signalr';
+import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-fanpage-review',
     templateUrl: './fanpage-review.component.html',
@@ -66,6 +68,21 @@ export class FanpageReviewComponent implements OnInit {
       else
         this.reviews = this.countRating.toString() + " review"
       this.ngAfterViewInit()
+      const connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.baseUrl)  
+      .build(); 
+      connection.start().then(function () {  
+        console.log('SignalR Connected!');  
+      }).catch(function (err) {  
+        return console.error(err.toString());  
+      });  
+    
+      connection.on("BroadcastMessage", () => {  
+        this.userRatingsList = new Array<Ratings>();
+        this.getListReview()
+        this.ngAfterViewInit()
+      });
     }
     ngAfterViewInit() {
       (document.querySelector('.star1') as HTMLElement).style.width = (this.star1 / this.countRating) *100 + '%';

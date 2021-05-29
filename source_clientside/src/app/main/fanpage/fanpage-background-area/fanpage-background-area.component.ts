@@ -10,6 +10,8 @@ import { Pages } from 'src/app/_core/models/pages.model';
 import { DialogUploadPageBackgroundComponent } from '../dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import { LoginService } from 'src/app/_core/services/login.service';
 import { RatingService } from 'src/app/_core/services/rating.service';
+import * as signalR from '@aspnet/signalr';
+import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-fanpage-background-area',
     templateUrl: './fanpage-background-area.component.html',
@@ -30,15 +32,28 @@ export class FanpageBackgroundAreaComponent implements OnInit {
     }
     
     async ngOnInit() {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = "../assets/js/script.js";
-        this.elementRef.nativeElement.appendChild(script);
-        this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
-          return false;
-        }
-        this.getRatingStar()
-        this.getPage()
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "../assets/js/script.js";
+      this.elementRef.nativeElement.appendChild(script);
+      this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
+        return false;
+      }
+      this.getRatingStar()
+      this.getPage()
+      const connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.baseUrl)  
+      .build(); 
+      connection.start().then(function () {  
+        console.log('SignalR Connected!');  
+      }).catch(function (err) {  
+        return console.error(err.toString());  
+      });  
+    
+      connection.on("BroadcastMessage", () => {  
+        this.getRatingStar()  
+      });
     }
     async getPage(){
         this.pages = new Pages()
@@ -79,13 +94,18 @@ export class FanpageBackgroundAreaComponent implements OnInit {
       }
       async getRatingStar()
       {
+        this.rating = 0
+        this.countRating = 0
         this.ratings = await this.RService.getAllRatings(this.pageurl.getPageIdStorage())
         for (let i = 0; i < this.ratings.length; i++) {
             this.rating += parseFloat(this.ratings[i].rating)
             this.countRating += 1
         }
         if(this.countRating >0)
+        {
           this.rating = this.rating / this.countRating
+          this.rating = parseFloat(this.rating.toFixed(2));
+        }
         else
           this.rating = 0
         if(this.countRating > 1)

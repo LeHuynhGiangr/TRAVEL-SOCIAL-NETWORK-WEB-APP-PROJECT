@@ -12,6 +12,8 @@ import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import {PageUrl} from 'src/app/_helpers/get-page-url'
 import { AddFriendDialogComponent } from '../trip/addfriend-dialog/addfriend-dialog.component';
+import * as signalR from '@aspnet/signalr';
+import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-fanpage',
     templateUrl: './fanpage.component.html',
@@ -44,6 +46,20 @@ export class FanpageComponent implements OnInit {
       this.getPage()
       this.startTimer()
       this.getTripList()
+      const connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.baseUrl)  
+      .build(); 
+      connection.start().then(function () {  
+        console.log('SignalR Connected!');  
+      }).catch(function (err) {  
+        return console.error(err.toString());  
+      });  
+    
+      connection.on("BroadcastMessage", () => {  
+        this.tripList = new Array<Trips>();
+        this.getTripList()  
+      });  
     }
     async getPage(){
       this.pages = new Pages()
