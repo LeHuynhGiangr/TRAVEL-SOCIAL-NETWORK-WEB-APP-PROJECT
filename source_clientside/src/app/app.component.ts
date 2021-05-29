@@ -20,17 +20,6 @@ export class AppComponent {
 
   ngOnInit(): void {  
     // this.getEmployeeData(); 
-  
-    const connection = new signalR.HubConnectionBuilder()  
-      .configureLogging(signalR.LogLevel.Information)  
-      .withUrl("https://localhost:44350/" + 'triprt')  
-      .build();  
-  
-    connection.start().then(function () {  
-      console.log('SignalR Connected!');  
-    }).catch(function (err) {  
-      return console.error(err.toString());  
-    });  
   } 
 
   logout() {

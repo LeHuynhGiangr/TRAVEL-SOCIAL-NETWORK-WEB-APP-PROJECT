@@ -79,6 +79,7 @@ export class FanpageAdminComponent implements OnInit {
         trip.Content = this.trips[i].content
         trip.Start = this.trips[i].start
         trip.Destination = this.trips[i].destination
+        trip.Cost = this.trips[i].cost.toString()
         trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
         trip.authorId = this.trips[i].authorId
         trip.CreatedDate = this.trips[i].dateCreated

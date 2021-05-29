@@ -5,7 +5,8 @@ import { LoginService } from '../../_core/services/login.service';
 import { UserProfile } from '../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { MatDialog } from '@angular/material/dialog';
-import { TripDialogComponent } from './trip-dialog/trip-dialog.component';
+import * as signalR from '@aspnet/signalr';  
+import { environment } from 'src/environments/environment';  
 import { AddFriendDialogComponent } from './addfriend-dialog/addfriend-dialog.component';
 import { Trips } from '../../_core/models/trip.model';
 import { TripService } from '../../_core/services/trip.service';
@@ -39,21 +40,35 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
         
     }
     async ngOnInit() {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = "../assets/js/script.js";
-        this.elementRef.nativeElement.appendChild(script);
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "../assets/js/script.js";
+      this.elementRef.nativeElement.appendChild(script);
 
-        this.filters = new FilterTrip()
-        this.filters.Name = ""
-        this.filters.CostStart = 0
-        this.filters.CostEnd = 99999999
-        this.getTripList()
-        this.startTimer()
-        UserProfile.count = 1
-        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-           return false;
-         }
+      this.filters = new FilterTrip()
+      this.filters.Name = ""
+      this.filters.CostStart = 0
+      this.filters.CostEnd = 99999999
+      this.getTripList()
+      this.startTimer()
+      UserProfile.count = 1
+      const connection = new signalR.HubConnectionBuilder()  
+      .configureLogging(signalR.LogLevel.Information)  
+      .withUrl(environment.baseUrl)  
+      .build(); 
+      connection.start().then(function () {  
+        console.log('SignalR Connected!');  
+      }).catch(function (err) {  
+        return console.error(err.toString());  
+      });  
+    
+      connection.on("BroadcastMessage", () => {  
+        this.tripList = new Array<Trips>();
+        this.getTripList()  
+      });  
+      this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+      }
     }
     startTimer() {
       this.play = true;
