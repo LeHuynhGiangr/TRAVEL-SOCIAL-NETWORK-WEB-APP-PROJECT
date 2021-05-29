@@ -11,6 +11,7 @@ namespace Domain.IServices
     {
         PageResponse GetById(Guid id);
         PageResponse Create(CreatePageRequest model);
+        void ModifyPageInfo(Guid id, CreatePageRequest model);
         IEnumerable<PageResponse> GetPagesByUserId<IdType>(IdType id);
         void UploadAvatar(Guid id, string webRootPath, IFormFile background);
         void UploadBackground(Guid id, string webRootPath, IFormFile background);

@@ -8,6 +8,8 @@
 
     <!--lehuynhgiang1219@outlook.com add packages for using authentication https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore -->
     <!--PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />-->
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.2" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
   </ItemGroup>
 

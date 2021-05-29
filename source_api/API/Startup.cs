@@ -1,8 +1,10 @@
 /*
  * the Startup class configures the request pipeline of the application, dependency injection and how all requests are handled.
  */
+using API.Hub;
 using Data.EF;
 using Data.Entities;
+using Data.Enums;
 using Data.Interfaces;
 using Domain.IServices;
 using Domain.Services;
@@ -81,8 +83,9 @@ namespace API
             services.AddScoped<EFRepository<UserJoinTrip, Guid>, EFRepository<UserJoinTrip, Guid>>();
             services.AddScoped<EFRepository<Page, Guid>, EFRepository<Page, Guid>>();
             services.AddScoped<EFRepository<ReviewPage, Guid>, EFRepository<ReviewPage, Guid>>();
-            services.AddScoped<IRepository<Friend, Guid>, EFRepository<Friend, Guid>>();
+            services.AddScoped<EFRepository<UserFollowPage, Guid>, EFRepository<UserFollowPage, Guid>>();
 
+            services.AddScoped<IRepository<Friend, Guid>, EFRepository<Friend, Guid>>();
             services.AddScoped<IUserService<Guid>, UserService>();
             services.AddScoped<IPostService<Guid>, PostService>();
             services.AddScoped<ITripService<Guid>, TripService>();
@@ -91,6 +94,7 @@ namespace API
             services.AddScoped<IPageService<Guid>, PageService>();
             services.AddScoped<IFriendService<Guid>, FriendService>();
             services.AddScoped<IRatingService<Guid>, RatingService>();
+            services.AddScoped<IUserFollow<Guid>, UserFollowPageService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -108,6 +112,7 @@ namespace API
                   config.ClaimActions.MapJsonKey(ClaimTypes.Email, "EmailAddress", ClaimValueTypes.Email);
                   config.ClaimActions.MapJsonKey(ClaimTypes.Name, "Name");
               });
+            services.AddSignalR();
 
         }
 
@@ -156,7 +161,7 @@ namespace API
             //app.UseWebSockets(new WebSocketOptions { 
             //    KeepAliveInterval=TimeSpan.FromSeconds(120),//How frequently to send "ping" frames to the client to ensure proxies keep the connection open. The default is two minutes.
             //    ReceiveBufferSize= 4096, // 1024 byte * 4 = 4kb
-                
+
             //});
 
             //app.Use(async (context, next) => {
@@ -178,7 +183,11 @@ namespace API
             //    }
             //});
 
-            app.UseEndpoints(_ => _.MapControllers());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<HubClient>("/triprt");
+            });
         }
     }
 }

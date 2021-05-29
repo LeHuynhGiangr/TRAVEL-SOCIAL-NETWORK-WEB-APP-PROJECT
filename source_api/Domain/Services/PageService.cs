@@ -16,10 +16,9 @@ namespace Domain.Services
     public class PageService : IPageService<Guid>
     {
         private readonly EFRepository<Page, Guid> m_pageRepository;
-
-        public PageService(EFRepository<Page, Guid> tripRepository)
+        public PageService(EFRepository<Page, Guid> pageRepository)
         {
-            m_pageRepository = tripRepository;
+            m_pageRepository = pageRepository;
         }
         public PageResponse GetById(Guid id)
         {
@@ -59,7 +58,7 @@ namespace Domain.Services
                         page.User.Id.ToString()));
             }
             return l_pageResponses;
-        }
+        } 
         public PageResponse Create(CreatePageRequest model)
         {
             try
@@ -86,6 +85,20 @@ namespace Domain.Services
             {
                 throw new Exception("create trip failed");
             }
+        }
+        public void ModifyPageInfo(Guid id, CreatePageRequest model)
+        {
+            Page page = m_pageRepository.FindById(id);
+            var m_page = page;
+            {
+                page.Address = model.Address;
+                page.PhoneNumber = model.PhoneNumber;
+                page.Name = model.Name;
+                page.Description = model.Description;
+                page.UserId = model.UserId;
+            }
+            m_pageRepository.SetModifierPageStatus(m_page, EntityState.Modified);
+            m_pageRepository.SaveChanges();
         }
         public void UploadAvatar(Guid id, string webRootPath, IFormFile avatar)
         {
