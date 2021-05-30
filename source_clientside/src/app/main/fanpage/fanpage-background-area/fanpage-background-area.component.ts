@@ -74,7 +74,8 @@ export class FanpageBackgroundAreaComponent implements OnInit {
             return false;
           }
           const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
-            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],infoPage["userId"])
+            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],
+            infoPage["address"],infoPage["phoneNumber"],infoPage["description"],infoPage["userId"])
             this.pages.Avatar = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageAvatarStorage()
         });
       }
@@ -88,8 +89,9 @@ export class FanpageBackgroundAreaComponent implements OnInit {
             return false;
           }
           const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
-            this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],infoPage["userId"])
-            this.pages.Background = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageBackgroundStorage()
+          this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],
+          infoPage["address"],infoPage["phoneNumber"],infoPage["description"],infoPage["userId"])
+          this.pages.Background = ApiUrlConstants.API_URL + "/" + this.pageurl.getPageBackgroundStorage()
         });
       }
       async getRatingStar()

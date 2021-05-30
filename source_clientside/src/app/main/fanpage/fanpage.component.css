@@ -4,7 +4,11 @@
 .left {
     margin-left :550px 
 }
-
+.rcorners2 {
+  border-radius: 25px;
+  border: 2px solid #898e91;
+  padding: 20px; 
+}
 /* Number text (1/3 etc) */
 .numbertext {
 color: #f2f2f2;

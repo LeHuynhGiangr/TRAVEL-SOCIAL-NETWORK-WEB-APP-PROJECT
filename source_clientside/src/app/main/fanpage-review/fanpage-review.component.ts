@@ -94,7 +94,6 @@ export class FanpageReviewComponent implements OnInit {
     async getListReview()
     {
       this.userRatings = await this.RService.getAllRatings(this.pageurl.getPageIdStorage())
-      console.log(this.userRatings)
       for (let i = this.userRatings.length-1; i >=0; i--) {
         if((this.userRatings[i].pageId.toString() == this.pageurl.getPageIdStorage()) && this.userRatings[i].active == true)
         {

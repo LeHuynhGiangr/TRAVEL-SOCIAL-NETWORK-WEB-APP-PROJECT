@@ -65,6 +65,9 @@ export class FanpageComponent implements OnInit {
       this.pages = new Pages()
       this.pages.Id = this.pageurl.getPageIdStorage()
       this.pages.Avatar = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageAvatarStorage()   
+      this.pages.Address = this.pageurl.getPageAddressStorage()
+      this.pages.PhoneNumber = this.pageurl.getPagePhoneNumberStorage()
+      this.pages.Description = this.pageurl.getPageDescriptionStorage()
     }
     CreateTripDialog(): void {
       const dialogRef = this.dialog.open(TripDialogComponent, {
