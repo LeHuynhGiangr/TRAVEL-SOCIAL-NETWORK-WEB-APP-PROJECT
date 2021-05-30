@@ -33,6 +33,7 @@ namespace Domain.Services
                         page.Background,
                         page.Description,
                         page.Follow,
+                        page.Active,
                         page.User.Id.ToString());
             return pageResponse;
         }
@@ -55,6 +56,7 @@ namespace Domain.Services
                         page.Background,
                         page.Description,
                         page.Follow,
+                        page.Active,
                         page.User.Id.ToString()));
             }
             return l_pageResponses;
@@ -69,10 +71,12 @@ namespace Domain.Services
                 {
                     Id = l_newTripGuidId,
                     Name = model.Name,
+                    Address = model.Address,
                     Description = model.Description,
                     PhoneNumber = model.PhoneNumber,
                     DateCreated = DateTime.Now,
                     Follow = 0,
+                    Active = false,
                     UserId = model.UserId
                 };
 
@@ -95,7 +99,8 @@ namespace Domain.Services
                 page.PhoneNumber = model.PhoneNumber;
                 page.Name = model.Name;
                 page.Description = model.Description;
-                page.UserId = model.UserId;
+                page.Active = page.Active;
+                page.UserId = page.UserId;
             }
             m_pageRepository.SetModifierPageStatus(m_page, EntityState.Modified);
             m_pageRepository.SaveChanges();

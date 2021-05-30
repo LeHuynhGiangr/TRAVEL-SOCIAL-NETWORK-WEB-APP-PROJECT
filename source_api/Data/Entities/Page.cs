@@ -14,6 +14,9 @@ namespace Data.Entities
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public double Follow { get; set; }
+        public bool Active { get; set; }
+        public string FImageCard { get; set; }
+        public string BImageCard { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public IList<Trip> Trips { get; set; }

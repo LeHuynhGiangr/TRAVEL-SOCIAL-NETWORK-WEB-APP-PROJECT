@@ -79,13 +79,14 @@ namespace API.Controllers
         }
         [Route("avatar")]
         [HttpPut]
-        public IActionResult UploadAvatar([FromForm] Guid id,IFormFile avatar)
+        public async Task<IActionResult> UploadAvatarAsync([FromForm] Guid id,IFormFile avatar)
         {
             try
             {
                 var l_memStream = new System.IO.MemoryStream();
                 avatar.CopyTo(l_memStream);
                 _service.UploadAvatar(id, _webHostEnvironment.WebRootPath, avatar);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)
@@ -96,13 +97,14 @@ namespace API.Controllers
 
         [Route("background")]
         [HttpPut]
-        public IActionResult UploadBackground([FromForm] Guid id, IFormFile background)
+        public async Task<IActionResult> UploadBackgroundAsync([FromForm] Guid id, IFormFile background)
         {
             try
             {
                 var l_memStream = new System.IO.MemoryStream();
                 background.CopyTo(l_memStream);
                 _service.UploadBackground(id, _webHostEnvironment.WebRootPath, background);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Upload background success fully");
             }
             catch (Exception e)
