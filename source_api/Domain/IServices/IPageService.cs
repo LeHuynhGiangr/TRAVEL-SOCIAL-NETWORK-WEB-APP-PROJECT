@@ -15,5 +15,7 @@ namespace Domain.IServices
         IEnumerable<PageResponse> GetPagesByUserId<IdType>(IdType id);
         void UploadAvatar(Guid id, string webRootPath, IFormFile background);
         void UploadBackground(Guid id, string webRootPath, IFormFile background);
+        void AddFollow(Guid id);
+        void RemoveFollow(Guid id);
     }
 }

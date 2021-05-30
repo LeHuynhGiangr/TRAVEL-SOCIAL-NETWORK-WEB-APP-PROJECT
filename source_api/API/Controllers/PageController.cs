@@ -182,6 +182,7 @@ namespace API.Controllers
             {
                 followpageRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 f_service.Follow(followpageRequest);
+                _service.AddFollow(followpageRequest.PageId);
                 await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Follow successfully");
             }
@@ -198,6 +199,7 @@ namespace API.Controllers
             {
                 userUnfollowRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 f_service.UnFollow(userUnfollowRequest);
+                _service.RemoveFollow(userUnfollowRequest.PageId);
                 await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("UnFollow successfully");
             }

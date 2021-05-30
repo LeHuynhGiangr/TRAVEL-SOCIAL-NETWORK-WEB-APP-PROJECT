@@ -136,5 +136,17 @@ namespace Domain.Services
 
             return dirFile + nameImage;
         }
+        public void AddFollow(Guid id)
+        {
+            Page page = m_pageRepository.FindById(id);
+            page.Follow = page.Follow + 1;
+            m_pageRepository.SaveChanges();
+        }
+        public void RemoveFollow(Guid id)
+        {
+            Page page = m_pageRepository.FindById(id);
+            page.Follow = page.Follow - 1;
+            m_pageRepository.SaveChanges();
+        }
     }
 }
