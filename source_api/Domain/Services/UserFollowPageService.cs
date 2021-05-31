@@ -27,6 +27,16 @@ namespace Domain.Services
                         upage.PageId.ToString());
             return upageResponse;
         }
+        public bool GetFollow(UserFollowPageRequest userFollowRequest)
+        {
+            var l_trips = m_upageRepository.GetAll(_ => _.Page, _ => _.User).Where(_ => _.PageId.ToString().ToLower().Contains(userFollowRequest.PageId.ToString().ToLower())
+                    && _.UserId.ToString().ToLower().Contains(userFollowRequest.UserId.ToString().ToLower())).FirstOrDefault();
+            if (l_trips != null)
+                return true;
+            else
+                return false;
+
+        }
         public UserFollowPageResponse Follow(UserFollowPageRequest model)
         {
             try

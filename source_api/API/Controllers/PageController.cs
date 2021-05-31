@@ -176,6 +176,17 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        [Route("checkfollow")]
+        [HttpPost]
+        public bool CheckFollowPage([FromBody] UserFollowPageRequest followpageRequest)
+        {
+            followpageRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+            if (f_service.GetFollow(followpageRequest) == true)
+                return true;
+            else
+                return false;
+        }
+
         [Route("follow")]
         [HttpPost]
         public async Task<IActionResult> FollowPageAsync([FromBody] UserFollowPageRequest followpageRequest)
@@ -183,10 +194,17 @@ namespace API.Controllers
             try
             {
                 followpageRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                f_service.Follow(followpageRequest);
-                _service.AddFollow(followpageRequest.PageId);
-                await _hubContext.Clients.All.BroadcastMessage();
-                return Ok("Follow successfully");
+                if(f_service.GetFollow(followpageRequest) == false)
+                {
+                    f_service.Follow(followpageRequest);
+                    _service.AddFollow(followpageRequest.PageId);
+                    await _hubContext.Clients.All.BroadcastMessage();
+                    return Ok("Follow successfully");
+                }
+                else
+                {
+                    return Ok("Follow failure");
+                }    
             }
             catch (Exception e)
             {
