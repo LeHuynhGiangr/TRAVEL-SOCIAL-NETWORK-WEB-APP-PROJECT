@@ -44,7 +44,6 @@ export class DialogModifyTripComponent implements OnInit {
         this.trips.Cost = this.trips.Cost.toString()
         this.trips.Persons = this.trips.Persons.toString()
         const trip = await this.TService.modifyTrip(this.data.idtrip,this.trips)
-        console.log(this.trips)
         alert("Update successfully !")
         this.dialogRef.close();
     }

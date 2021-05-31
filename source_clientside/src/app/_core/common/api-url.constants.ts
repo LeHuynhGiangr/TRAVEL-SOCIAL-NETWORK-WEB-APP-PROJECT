@@ -38,6 +38,7 @@ export class ApiUrlConstants{
     public static API_UPDATE_PAGEBACKGROUND_URL ='/page/background'
     public static API_RATING_LOAD = '/page/rating/'
     public static API_RATING_BLOCK = '/page/rating/block/'
-    public static API_RATING_FOLLOW = '/page/follow'
-    public static API_RATING_UNFOLLOW = '/page/unfollow'
+    public static API_PAGE_CHECKFOLLOW = '/page/checkfollow'
+    public static API_PAGE_FOLLOW = '/page/follow'
+    public static API_PAGE_UNFOLLOW = '/page/unfollow'
 }

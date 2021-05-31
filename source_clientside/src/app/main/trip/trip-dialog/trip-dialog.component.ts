@@ -77,7 +77,6 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
         await this.service.createTrip(formData);
         alert("Create succesfully !")
         this.dialogRef.close();
-        this.refresh()
       }
       else
       {
@@ -88,11 +87,5 @@ import { PageUrl } from 'src/app/_helpers/get-page-url';
     {
       alert("Upload failure !")
     }
-  }
-  refresh(): void {
-    this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/trip';
-    this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
-    
-    //window.location.reload();
   }
 }

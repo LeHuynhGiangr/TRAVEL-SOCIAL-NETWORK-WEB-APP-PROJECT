@@ -79,6 +79,17 @@ position: absolute;
 right: 20px;
 margin-bottom: 60px;
 }
+.setting-page
+{
+  cursor: pointer;
+  font-style: italic;
+  position: relative;
+  float: right;
+}
+.setting-page:hover
+{
+  text-decoration: underline;
+}
 @media (max-width:760px) {
   .title-panel
   {

@@ -1,0 +1,21 @@
+<mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <textarea style="height: 60px;" name="Name" type="text" id="input" required="required" [(ngModel)]="this.pages.Name" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Phone Number</mat-label>
+    <textarea style="height: 60px;" name="PhoneNumber" type="text" id="input" required="required" [(ngModel)]="this.pages.PhoneNumber" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Address</mat-label>
+    <textarea style="height: 100px;" name="Address" type="text" id="input" required="required" [(ngModel)]="this.pages.Address" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <textarea style="height: 100px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.pages.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<br>
+<div mat-dialog-actions class="myDiv">
+    <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
+    <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
+</div>

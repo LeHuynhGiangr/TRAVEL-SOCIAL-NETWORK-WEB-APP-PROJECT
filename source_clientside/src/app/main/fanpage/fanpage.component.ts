@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import { LoginService } from '../../_core/services/login.service';
 import { PagesService } from '../../_core/services/page.service';
 import {Pages} from '../../_core/models/pages.model'
-import { TripDialogComponent } from 'src/app/main/trip/trip-dialog/trip-dialog.component';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { Trips } from '../../_core/models/trip.model';
@@ -14,6 +13,7 @@ import {PageUrl} from 'src/app/_helpers/get-page-url'
 import { AddFriendDialogComponent } from '../trip/addfriend-dialog/addfriend-dialog.component';
 import * as signalR from '@aspnet/signalr';
 import { environment } from 'src/environments/environment';
+import { DialogModifyPageComponent } from './dialog-modifypage/dialog-modifypage.component';
 @Component({
     selector: 'app-fanpage',
     templateUrl: './fanpage.component.html',
@@ -59,6 +59,7 @@ export class FanpageComponent implements OnInit {
       connection.on("BroadcastMessage", () => {  
         this.tripList = new Array<Trips>();
         this.getTripList()  
+        this.reloadPage()
       });  
     }
     async getPage(){
@@ -68,17 +69,29 @@ export class FanpageComponent implements OnInit {
       this.pages.Address = this.pageurl.getPageAddressStorage()
       this.pages.PhoneNumber = this.pageurl.getPagePhoneNumberStorage()
       this.pages.Description = this.pageurl.getPageDescriptionStorage()
+      this.pages.Follow = Number(this.pageurl.getPageFollowStorage())
+      this.pages.UserId = this.pageurl.getPageUserIdStorage()
     }
-    CreateTripDialog(): void {
-      const dialogRef = this.dialog.open(TripDialogComponent, {
+    ModifyPage(): void {
+      const dialogRef = this.dialog.open(DialogModifyPageComponent, {
         width: '600px',
         height: '600px',
       });
   
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }
+        this.reloadPage()
         console.log('The dialog was closed');
-        console.log(result);
       });
+    }
+    async reloadPage()
+    {
+      const infoPage = await this.PService.getPageById(this.pageurl.getPageIdStorage())
+      this.pageurl.savePageInfoStorage(infoPage["name"],infoPage["avatar"],infoPage["background"],
+      infoPage["address"],infoPage["phoneNumber"],infoPage["description"],infoPage["follow"],infoPage["userId"])
+      this.getPage()
     }
     onLogout() {
       this.service.logout();

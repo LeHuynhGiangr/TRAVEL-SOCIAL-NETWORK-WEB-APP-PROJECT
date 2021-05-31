@@ -50,7 +50,8 @@ export class FanpageAdminComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.tripList = new Array<Trips>();
+      this.getTripList();
     });
   }
   ModifyTripDialog(id): void {

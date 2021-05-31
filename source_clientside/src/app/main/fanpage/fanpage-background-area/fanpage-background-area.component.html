@@ -2,8 +2,8 @@
     <div class="feature-photo">
         <figure class="background-figure"><img class="background-img" src={{this.pages.Background}} alt=""></figure>
         <div *ngIf="this.pages.UserId!=this.userid" class="add-btn">
-            <span>1.3k followers</span>
-            <a href="#" title="" data-ripple="">Follow</a>
+            <a *ngIf="this.check === false" href="#" title="" data-ripple="">Follow</a>
+            <a *ngIf="this.check === true" href="#" title="" data-ripple="">Unfollow</a>
         </div>
         <form class="edit-phto" (click)="openDialogBackground()" *ngIf="this.pages.UserId===this.userid">
             <i class="fa fa-camera-retro"></i>

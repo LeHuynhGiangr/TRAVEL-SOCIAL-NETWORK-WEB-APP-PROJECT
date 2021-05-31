@@ -78,4 +78,36 @@ export class PagesService {
             console.log("ok");
         }
     }
+    modifyPage = async (id,page) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_PAGEID_URL + id ,page).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    checkfollowPage = async (page) => {
+        try {
+            return await this.http.post(this.urlAPI + ApiUrlConstants.API_PAGE_CHECKFOLLOW,page ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    followPage = async (page) => {
+        try {
+            return await this.http.post(this.urlAPI + ApiUrlConstants.API_PAGE_FOLLOW,page ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    unfollowPage = async (page) => {
+        try {
+            return await this.http.delete(this.urlAPI + ApiUrlConstants.API_PAGE_FOLLOW,page ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
 }
