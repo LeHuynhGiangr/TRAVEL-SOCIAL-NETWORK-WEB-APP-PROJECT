@@ -24,7 +24,6 @@ export class AdminService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
         }
     }
     deleteUser = async (id) => {
@@ -40,7 +39,6 @@ export class AdminService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
         }
     }
     blockUser = async (id) => {
@@ -56,7 +54,15 @@ export class AdminService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
+        }
+    }
+    getAllPages = async () => {
+        try {
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
         }
     }
 }

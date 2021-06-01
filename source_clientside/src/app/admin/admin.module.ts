@@ -6,6 +6,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {DialogDeleteComponent} from './dialog-delete/dialog-delete.component'
 import {DialogPostDetailComponent} from './dialog-post-detail/dialog-post-detail.component'
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ButtonModule } from 'primeng/button';
+import {AccordionModule} from 'primeng/accordion';
 @NgModule({
   declarations: [AdminComponent,
   DialogDeleteComponent,
@@ -14,7 +18,11 @@ import {DialogPostDetailComponent} from './dialog-post-detail/dialog-post-detail
     CommonModule,
     AppRoutingModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    AccordionModule,
+    ButtonModule
   ]
 })
 export class AdminModule { }

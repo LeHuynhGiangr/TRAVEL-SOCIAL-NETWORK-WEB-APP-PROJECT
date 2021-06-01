@@ -21,6 +21,7 @@ export class ApiUrlConstants{
     public static API_LOGIN_URL = '/identity/authenticate'
     //admin API
     public static API_ADMIN_URL = '/admin/'
+    public static API_ADMIN_PAGE = '/admin/page'
     //trip API
     public static API_TRIP_URL = '/trip/'
     public static API_TRIPLOAD_URL = '/trip/load/'

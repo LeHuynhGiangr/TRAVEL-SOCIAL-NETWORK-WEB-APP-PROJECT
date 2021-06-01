@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {LoginService} from './login.service'
 import { ApiUrlConstants } from '../common/api-url.constants';
 @Injectable({
@@ -104,7 +104,17 @@ export class PagesService {
     }
     unfollowPage = async (page) => {
         try {
-            return await this.http.delete(this.urlAPI + ApiUrlConstants.API_PAGE_FOLLOW,page ).toPromise();            
+            const options = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json'
+                }),
+                body: page
+              }
+          
+              this.http.delete(this.urlAPI + ApiUrlConstants.API_PAGE_UNFOLLOW, options).subscribe(s => {
+                console.log(s);
+              })
+            //return await this.http.delete(this.urlAPI + ApiUrlConstants.API_PAGE_UNFOLLOW,page ).toPromise();            
         }
         catch (e) {
             console.log("ok");

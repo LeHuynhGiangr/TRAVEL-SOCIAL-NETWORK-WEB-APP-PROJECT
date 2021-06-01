@@ -159,7 +159,13 @@
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#messages" data-toggle="tab">
-                            <i class="material-icons">code</i> Posts
+                            <i class="material-icons">code</i> Pages
+                            <div class="ripple-container"></div>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#settings" data-toggle="tab">
+                            <i class="material-icons">code</i> Page Request
                             <div class="ripple-container"></div>
                           </a>
                         </li>
@@ -193,7 +199,8 @@
                                   <td>{{user.LastName}}</td>
                                   <td>{{user.Active}}</td>
                                   <button mat-button class="undertop">Detail</button>
-                                  <button mat-raised-button color="primary" class="undertop"(click)="blockUser(user.Id)">Block</button>
+                                  <button mat-raised-button color="primary" class="undertop"(click)="blockUser(user.Id)" *ngIf="user.Active === false">UnBlock</button>
+                                  <button mat-raised-button color="primary" class="undertop"(click)="blockUser(user.Id)" *ngIf="user.Active === true">Block</button>
                                   <button mat-raised-button color="warn" class="undertop"(click)="openDialog(user.Id)">Delete</button>
                                 </tr>
                               </tbody>
@@ -203,23 +210,30 @@
                       </table>
                     </div>
                     <div class="tab-pane" id="messages">
-                      <table class="table table-hover">
-                        <thead class="text-warning">
-                          <th>ID</th>
-                          <th>AuthorID</th>
-                        </thead>
-                        <tbody>
-                          <ng-template ngFor let-post [ngForOf]="m_posts" let-i="index">
-                            <tr>
-                              <td>{{post.id}}</td>
-                              <td>{{post.authorId}}</td>
-                              <button mat-button class="undertop" (click)="openDialogPost(post.id)">Detail</button>
-                              <button mat-raised-button color="primary" class="undertop">Block</button>
-                              <button mat-raised-button color="warn" class="undertop">Delete</button>
-                            </tr>
-                        </ng-template>
-                        </tbody>
-                      </table>
+                      <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource">
+                        
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="Name">
+                          <th mat-header-cell *matHeaderCellDef> Name </th>
+                          <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                          </ng-container>
+                        
+                          <!-- Active Column -->
+                          <ng-container matColumnDef="Active">
+                          <th mat-header-cell *matHeaderCellDef> Active </th>
+                          <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Action">
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
+                          <p-button label="Block" *matCellDef="let element" [style]="{'display':'grid','margin-right':'auto','margin-left':'auto'}"  ></p-button>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        </div>
                     </div>
                     <div class="tab-pane" id="settings">
                       <table class="table">

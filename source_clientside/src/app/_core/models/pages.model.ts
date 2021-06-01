@@ -8,5 +8,6 @@ export class Pages {
     PhoneNumber:string;
     Follow:number;
     CreatedDate:Date;
+    Active:boolean;
     UserId:string;
 }

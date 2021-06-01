@@ -42,6 +42,8 @@ export class FanpageBackgroundAreaComponent implements OnInit {
       this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
         return false;
       }
+      this.follows = new Follow()
+      this.follows.pageId = this.pageurl.getPageIdStorage()
       this.getRatingStar()
       this.getPage()
       this.checkFollow()
@@ -119,10 +121,18 @@ export class FanpageBackgroundAreaComponent implements OnInit {
       else
         this.reviews = this.countRating.toString() + " review"
     }
+    async follow()
+    {
+      const follow = await this.PService.followPage(this.follows)
+      this.check = true
+    }
+    async unfollow()
+    {
+      const follow = await this.PService.unfollowPage(this.follows)
+      this.check = false
+    }
     async checkFollow()
     {
-      this.follows = new Follow()
-      this.follows.pageId = this.pageurl.getPageIdStorage()
       const follow = await this.PService.checkfollowPage(this.follows)
       this.check = Boolean(follow)
     }
