@@ -17,5 +17,6 @@ namespace Domain.IServices
         void UploadBackground(Guid id, string webRootPath, IFormFile background);
         void AddFollow(Guid id);
         void RemoveFollow(Guid id);
+        IEnumerable<PageResponse> GetAll();
     }
 }

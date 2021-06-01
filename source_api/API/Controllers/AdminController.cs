@@ -15,11 +15,13 @@ namespace API.Controllers
     [Route("admin")]//routing/
     public class AdminController:ControllerBase
     {
-        private IUserService<Guid> m_userService;//dependency injection/
+        private readonly IUserService<Guid> m_userService;//dependency injection/
+        private readonly IPageService<Guid> p_service;
         //Parameter DI/
-        public AdminController(IUserService<Guid> userService)
+        public AdminController(IUserService<Guid> userService, IPageService<Guid> p_service_)
         {
             m_userService = userService;
+            p_service = p_service_;
         }
 
         [HttpGet]
@@ -64,6 +66,19 @@ namespace API.Controllers
             catch (Exception e)
             {
                 return BadRequest(new { message = "Not found !" });
+            }
+        }
+        [HttpGet("page")]
+        public IActionResult GetAllPage()
+        {
+            try
+            {
+                var pageResponses = p_service.GetAll();
+                return Ok(pageResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
             }
         }
     }

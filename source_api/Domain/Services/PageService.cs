@@ -20,6 +20,28 @@ namespace Domain.Services
         {
             m_pageRepository = pageRepository;
         }
+        public IEnumerable<PageResponse> GetAll()
+        {
+            var l_page = m_pageRepository.GetAll(_ => _.User);
+            List<PageResponse> pageResponse = new List<PageResponse>();
+            foreach (Page page in l_page)
+            {
+                pageResponse.Add(
+                new PageResponse(
+                    page.Id,
+                    page.DateCreated,
+                    page.Name,
+                    page.Address,
+                    page.PhoneNumber,
+                    page.Avatar,
+                    page.Background,
+                    page.Description,
+                    page.Follow,
+                    page.Active,
+                    page.User.Id.ToString()));
+            }
+            return pageResponse;
+        }
         public PageResponse GetById(Guid id)
         {
             var page = m_pageRepository.FindSingle(_ => _.Id.Equals(id), _ => _.User);
