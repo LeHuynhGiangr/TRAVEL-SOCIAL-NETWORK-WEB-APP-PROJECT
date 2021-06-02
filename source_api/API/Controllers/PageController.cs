@@ -63,7 +63,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreatePage([FromBody] CreatePageRequest createPageRequest)
+        public IActionResult CreatePage([FromForm] CreatePageRequest createPageRequest)
         {
             try
             {
