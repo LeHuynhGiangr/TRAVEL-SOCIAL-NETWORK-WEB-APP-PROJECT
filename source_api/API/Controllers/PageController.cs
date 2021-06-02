@@ -69,7 +69,7 @@ namespace API.Controllers
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 createPageRequest.UserId = id;
-                _service.Create(createPageRequest);
+                _service.Create(createPageRequest, _webHostEnvironment.WebRootPath);
                 return Ok("Create successfully");
             }
             catch (Exception e)

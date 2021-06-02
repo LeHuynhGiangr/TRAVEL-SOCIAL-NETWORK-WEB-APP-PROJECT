@@ -83,11 +83,13 @@ namespace Domain.Services
             }
             return l_pageResponses;
         } 
-        public PageResponse Create(CreatePageRequest model)
+        public PageResponse Create(CreatePageRequest model, string webRootPath)
         {
             try
             {
                 Guid l_newTripGuidId = Guid.NewGuid();
+                string fImageCard = this.SaveFile(webRootPath, $"media-file/{l_newTripGuidId}/", model.FImageCard);
+                string bImageCard = this.SaveFile(webRootPath, $"media-file/{l_newTripGuidId}/", model.BImageCard);
                 //Post l_newPost = new Post(l_newPostGuidId, model.Status, System.Text.Encoding.ASCII.GetBytes(model.Base64Str), System.Guid.Parse(model.UserId));
                 Page l_newPage = new Page
                 {
@@ -96,6 +98,9 @@ namespace Domain.Services
                     Address = model.Address,
                     Description = model.Description,
                     PhoneNumber = model.PhoneNumber,
+                    FImageCard = fImageCard,
+                    BImageCard = bImageCard,
+                    RequestCreate = false,
                     DateCreated = DateTime.Now,
                     Follow = 0,
                     Active = false,
@@ -109,7 +114,7 @@ namespace Domain.Services
             }
             catch
             {
-                throw new Exception("create trip failed");
+                throw new Exception("create page failed");
             }
         }
         public void ModifyPageInfo(Guid id, CreatePageRequest model)
@@ -173,6 +178,12 @@ namespace Domain.Services
         {
             Page page = m_pageRepository.FindById(id);
             page.Follow = page.Follow - 1;
+            m_pageRepository.SaveChanges();
+        }
+        public void AcceptRequest(Guid id)
+        {
+            Page page = m_pageRepository.FindById(id);
+            page.RequestCreate = true;
             m_pageRepository.SaveChanges();
         }
     }

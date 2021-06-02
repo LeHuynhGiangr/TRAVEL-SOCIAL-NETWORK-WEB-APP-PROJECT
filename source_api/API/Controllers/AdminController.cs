@@ -1,9 +1,11 @@
 ﻿using API.Helpers;
+using API.Hub;
 using Data.Entities;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,11 +19,13 @@ namespace API.Controllers
     {
         private readonly IUserService<Guid> m_userService;//dependency injection/
         private readonly IPageService<Guid> p_service;
+        private readonly IHubContext<HubClient, IHubClient> _hubContext;
         //Parameter DI/
-        public AdminController(IUserService<Guid> userService, IPageService<Guid> p_service_)
+        public AdminController(IUserService<Guid> userService, IPageService<Guid> p_service_, IHubContext<HubClient, IHubClient> hubContext)
         {
             m_userService = userService;
             p_service = p_service_;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -75,6 +79,21 @@ namespace API.Controllers
             {
                 var pageResponses = p_service.GetAll();
                 return Ok(pageResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("page/accept")]
+        [HttpPut]
+        public async Task<IActionResult> UnFollowPageAsync([FromBody] Guid id)
+        {
+            try
+            {
+                p_service.AcceptRequest(id);
+                await _hubContext.Clients.All.BroadcastMessage();
+                return Ok("UnFollow successfully");
             }
             catch (Exception e)
             {

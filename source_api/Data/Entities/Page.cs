@@ -17,6 +17,7 @@ namespace Data.Entities
         public bool Active { get; set; }
         public string FImageCard { get; set; }
         public string BImageCard { get; set; }
+        public bool RequestCreate { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public IList<Trip> Trips { get; set; }
