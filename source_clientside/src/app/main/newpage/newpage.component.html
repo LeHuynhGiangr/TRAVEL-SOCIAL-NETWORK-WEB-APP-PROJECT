@@ -49,6 +49,16 @@
 											  <input type="text" required="required" [(ngModel)]="pages.Description" [ngModelOptions]="{ standalone: true }"/>
 											  <label class="control-label" for="input">Description</label><i class="mtrl-select"></i>
 											</div>
+											<div class="form-group half">
+												<h2>Front of ID Card</h2>
+												<img [src]="urlf" height="200"> <br/>
+												<input type='file' accept="image/*" (change)="onSelectFileFID($event)">
+											</div>
+											<div class="form-group half">
+												<h2>Back of ID Card</h2>
+												<img [src]="urlb" height="200"> <br/>
+												<input type='file' accept="image/*" (change)="onSelectFileBID($event)">
+											</div>
 											<div class="submit-btns">
 												<button type="button" class="mtr-btn"><span>Cancel</span></button>
 												<button type="button" class="mtr-btn" (click)="createPage(pages)"><span>Save</span></button>

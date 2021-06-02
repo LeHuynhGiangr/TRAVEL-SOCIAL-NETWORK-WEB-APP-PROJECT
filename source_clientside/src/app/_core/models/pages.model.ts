@@ -9,5 +9,8 @@ export class Pages {
     Follow:number;
     CreatedDate:Date;
     Active:boolean;
+    FImageCard:File;
+    BImageCard:File;
+    RequestCreate:boolean
     UserId:string;
 }

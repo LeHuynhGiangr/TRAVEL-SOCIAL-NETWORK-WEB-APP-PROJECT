@@ -34,6 +34,8 @@ export class GroupsSearchComponent implements OnInit {
             page.Name = this.pages[i].name;
             page.Follow = this.pages[i].follow;
             page.Description = this.pages[i].description
+            page.Active = this.pages[i].active
+            page.RequestCreate = this.pages[i].requestCreate
             page.Avatar = ApiUrlConstants.API_URL+"/"+this.pages[i].avatar
             page.Background = ApiUrlConstants.API_URL+"/"+this.pages[i].background
             this.pageList.push(page);

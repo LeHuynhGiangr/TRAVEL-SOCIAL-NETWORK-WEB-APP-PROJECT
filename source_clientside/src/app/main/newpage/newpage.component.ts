@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NewpageComponent implements OnInit {
   public pages: Pages;
   public m_returnUrl: string;
+  urlf;
+  urlb;
   constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
   private PService:PagesService,private m_route: ActivatedRoute,private m_router: Router) {
     
@@ -29,14 +31,45 @@ export class NewpageComponent implements OnInit {
     UserProfile.IdTemp = this.service.getUserIdStorage()
     this.pages = new Pages();
   }
-  createPage = async (page) => {
+  onSelectFileFID(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.urlf = event.target.result;
+      }
+
+      // Saved Image into varible
+      this.pages.FImageCard = event.target.files[0];
+    }
+  }
+  onSelectFileBID(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.urlb = event.target.result;
+      }
+
+      // Saved Image into varible
+      this.pages.BImageCard = event.target.files[0];
+    }
+  }
+  createPage = async () => {
     try {
-      const result = await this.PService.postPage(page);
-      alert('Add sucessfully');    
-      this.pages.Name=''
-      this.pages.Address=''
-      this.pages.PhoneNumber=''
-      this.pages.Description=''
+      const formData = new FormData();
+      formData.append('name',this.pages.Name)
+      formData.append('description',this.pages.Description)
+      formData.append('address',this.pages.Address)
+      formData.append('phoneNumber',this.pages.PhoneNumber)
+      formData.append('fImageCard',this.pages.FImageCard)
+      formData.append('bImageCard',this.pages.BImageCard)
+      const result = await this.PService.postPage(formData);
+      alert('Add sucessfully');
       this.refresh()
     }
     catch (e) {
