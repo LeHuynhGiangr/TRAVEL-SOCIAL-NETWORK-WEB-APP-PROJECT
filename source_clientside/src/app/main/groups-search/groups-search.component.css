@@ -2,4 +2,40 @@
     border-radius: 25px;
     border: 2px solid #898e91;
     padding: 20px; 
-  }
+}
+.inactive
+{
+  width:20%;
+  display:inherit;
+  position: absolute;
+  right: 10%;
+  margin-top: -3%;
+}
+.pending
+{
+  width: 30%;
+  background-color: lightskyblue;
+  display: inherit;
+  position: absolute;
+  right: 8%;
+  margin-top: 7%;
+  font-weight: bold;
+}
+:host ::ng-deep .p-button {
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}

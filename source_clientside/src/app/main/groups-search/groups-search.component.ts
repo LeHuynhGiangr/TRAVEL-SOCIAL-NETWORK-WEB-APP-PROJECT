@@ -6,6 +6,7 @@ import { PagesService } from '../../_core/services/page.service';
 import {Pages} from '../../_core/models/pages.model'
 import {PageUrl} from 'src/app/_helpers/get-page-url'
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
     selector: 'app-groups-search',
     templateUrl: './groups-search.component.html',
@@ -15,15 +16,17 @@ export class GroupsSearchComponent implements OnInit {
     public pages:any
     public m_returnUrl: string;
     public pageList = new Array<Pages>();
+    displayPosition: boolean;
+    position: string;
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService,
-    private PService:PagesService, public pageurl:PageUrl ) {}
+    private PService:PagesService, public pageurl:PageUrl,private primengConfig: PrimeNGConfig ) {}
 
     ngOnInit() {
       var script = document.createElement("script");
       script.type = "text/javascript";
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
-      
+      this.primengConfig.ripple = true;
       this.getMyListPages()
     }
     async getMyListPages(){
@@ -44,5 +47,9 @@ export class GroupsSearchComponent implements OnInit {
     onLogout() {
       this.service.logout();
       this.router.navigateByUrl('/login');
+    }
+    showPositionDialog() {
+      this.position = "top";
+      this.displayPosition = true;
     }
 }

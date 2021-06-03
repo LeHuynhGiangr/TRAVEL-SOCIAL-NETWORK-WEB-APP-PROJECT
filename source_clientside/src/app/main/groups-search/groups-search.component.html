@@ -29,15 +29,52 @@
 										<span><i class="fa fa-users"></i> Pages</span>
 									</div>
 									<ul class="nearby-contct" *ngFor="let page of pageList">
-										<li>
+										<li *ngIf="page.Active === true && page.RequestCreate === true" style="cursor: pointer;">
+											<div class="nearly-pepls" (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]">
+												<figure>
+													<a ><img src={{page.Avatar}} style="width:60px; height:60px;" alt=""></a>
+												</figure>
+												<div class="pepl-info">
+													<h4 style="width: 30%;"><a (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]" title="">{{page.Name}}</a></h4>
+													<span>{{page.Description}}</span>
+													<em>{{page.Follow}} Follows</em>
+												</div>
+											</div>
+										</li>
+										<li *ngIf="page.Active === true && page.RequestCreate === false" style="cursor: pointer;">
+											<div class="nearly-pepls" (click)="showPositionDialog()">
+												<figure>
+													<a title=""><img src={{page.Avatar}} style="width:60px; height:60px;" alt=""></a>
+												</figure>
+												<div class="pepl-info">
+													<h4 style="width: 30%;"><a title="">{{page.Name}}</a></h4>
+													<span>{{page.Description}}</span>
+													<em>{{page.Follow}} Follows</em>
+												</div>
+												<div class="pending">
+													<span>Waiting for confirmation...</span>
+												</div>
+											</div>
+											<p-dialog header="The page is not working yet !" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+												[draggable]="false" [resizable]="false">
+												<p>Your travel page is being reviewed by the system, please wait within 24 hours.</p>
+													<ng-template pTemplate="footer">
+														<p-button icon="pi pi-check" (click)="displayPosition=false" label="Ok" styleClass="p-button-text"></p-button>
+													</ng-template>
+											</p-dialog>
+										</li>
+										<li *ngIf="page.Active === false && page.RequestCreate === true" style="background-color: #c5c7c5;pointer-events: none;">
 											<div class="nearly-pepls">
 												<figure>
 													<a (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]" title=""><img src={{page.Avatar}} style="width:60px; height:60px;" alt=""></a>
 												</figure>
 												<div class="pepl-info">
-													<h4><a (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]" title="">{{page.Name}}</a></h4>
+													<h4 style="width: 30%;"><a (click)="pageurl.getNavigation(page.Id)" [routerLink]="['/fanpage/:', page.Id]" title="">{{page.Name}}</a></h4>
 													<span>{{page.Description}}</span>
 													<em>{{page.Follow}} Follows</em>
+												</div>
+												<div class="inactive">
+													<img src="../../../assets/images/inactive.png">
 												</div>
 											</div>
 										</li>
