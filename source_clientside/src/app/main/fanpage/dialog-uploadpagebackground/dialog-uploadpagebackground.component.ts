@@ -1,13 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../../../_core/models/DialogData';
-import { LoginService } from '../../../_core/services/login.service';
 import { PagesService } from '../../../_core/services/page.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ImageService } from '../../../_core/services/images.service';
 import {Pages} from '../../../_core/models/pages.model'
 import { PageUrl } from 'src/app/_helpers/get-page-url';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-dialog-uploadpagebackground',
   templateUrl: './dialog-uploadpagebackground.component.html',
@@ -19,9 +20,9 @@ export class DialogUploadPageBackgroundComponent implements OnInit {
   url;
   public message: string;
   public pages: Pages;
-  constructor(public dialogRef: MatDialogRef<DialogUploadPageBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private PService: PagesService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService,public pageurl:PageUrl) {
+  constructor(public dialogRef: MatDialogRef<DialogUploadPageBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private PService: PagesService,private m_router: Router,public uriHandler:UriHandler,
+    public Iservice:ImageService,public pageurl:PageUrl,private timelineurl:TimelineUrl, private primengConfig: PrimeNGConfig) {
 
   }
   onNoClick(): void {
@@ -32,6 +33,7 @@ export class DialogUploadPageBackgroundComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
+    this.primengConfig.ripple = true;
     this.pages=new Pages()
     this.pages.Id = this.pageurl.getPageIdStorage()
     this.pages.Background = this.pageurl.getPageBackgroundStorage()
@@ -59,11 +61,13 @@ export class DialogUploadPageBackgroundComponent implements OnInit {
       if (Image) {
         formData.append('MediaFile', this.background);
         this.Iservice.postImage(formData);
-        //this.dialogRef.close();
       }
       else
       {
-        alert("Upload failure !")
+        this.timelineurl.showError("Save image in gallery failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
 
   }
@@ -71,22 +75,29 @@ export class DialogUploadPageBackgroundComponent implements OnInit {
     try{
       const formData = new FormData();
       formData.append('id', this.pages.Id);
-      if (Image) {
-        formData.append('background', this.background);
+      formData.append('background', this.background);
+      if (this.background != null) {
         await this.PService.uploadBackground(formData);
         //this.saveImage()
-        alert("Upload succesfully !")
-        this.dialogRef.close();
-        //this.refresh()
+        this.timelineurl.showSuccess("Upload successfully !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
       else
       {
-        alert("Upload failure !")
+        this.timelineurl.showError("Upload failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
     }
     catch(e)
     {
-      alert("Upload failure !")
+      this.timelineurl.showError(e)
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
     }
   }
 }

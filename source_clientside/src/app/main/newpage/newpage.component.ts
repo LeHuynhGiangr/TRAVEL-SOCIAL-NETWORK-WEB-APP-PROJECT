@@ -15,6 +15,7 @@ export class NewpageComponent implements OnInit {
   public m_returnUrl: string;
   urlf;
   urlb;
+  checkfield:boolean
   constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
   private PService:PagesService,private m_route: ActivatedRoute,private m_router: Router) {
     
@@ -28,6 +29,7 @@ export class NewpageComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
+    this.checkfield = true;
     UserProfile.IdTemp = this.service.getUserIdStorage()
     this.pages = new Pages();
   }
@@ -68,9 +70,16 @@ export class NewpageComponent implements OnInit {
       formData.append('phoneNumber',this.pages.PhoneNumber)
       formData.append('fImageCard',this.pages.FImageCard)
       formData.append('bImageCard',this.pages.BImageCard)
-      const result = await this.PService.postPage(formData);
-      alert('Add sucessfully');
-      this.refresh()
+      if(this.pages.Name == ""||this.pages.Address==""||this.pages.PhoneNumber==""||this.pages.FImageCard==null||this.pages.BImageCard==null)
+      {
+        alert('Please enter full information');
+      }
+      else
+      {
+        const result = await this.PService.postPage(formData);
+        alert('Add sucessfully');
+        this.refresh()
+      }
     }
     catch (e) {
       alert('Add failed');

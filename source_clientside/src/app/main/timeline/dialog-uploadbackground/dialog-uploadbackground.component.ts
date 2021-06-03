@@ -4,18 +4,16 @@ import { DialogData } from '../../../_core/models/DialogData';
 import { LoginService } from '../../../_core/services/login.service';
 import { TimeLineService } from '../../../_core/services/timeline.service';
 import { AppUsers } from '../../../login/shared/login.model';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from '../../../_core/data-repository/profile'
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ImageService } from '../../../_core/services/images.service';
 import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
-import { MessageService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
   selector: 'app-dialog-uploadbackground',
   templateUrl: './dialog-uploadbackground.component.html',
   styleUrls: ['./dialog-uploadbackground.component.css'],
-  providers: [MessageService]
 })
 export class DialogUploadBackgroundComponent implements OnInit {
   public appUsers: AppUsers;
@@ -24,8 +22,8 @@ export class DialogUploadBackgroundComponent implements OnInit {
   url;
   public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadBackgroundComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private timeLineService: TimeLineService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
+    private timeLineService: TimeLineService,public uriHandler:UriHandler,
+    public Iservice:ImageService, private primengConfig: PrimeNGConfig, private timelineurl:TimelineUrl) {
 
   }
   onNoClick(): void {
@@ -36,18 +34,6 @@ export class DialogUploadBackgroundComponent implements OnInit {
     this.appUsers = new AppUsers();
     this.appUsers.Background = ApiUrlConstants.API_URL+"/"+UserProfile.Background
     this.primengConfig.ripple = true;
-  }
-  showSuccess() {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
-    setTimeout(() => {
-      this.dialogRef.close();
-   }, 1000)
-  }
-  showError() {
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Message Content'});
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 1000)
   }
   //display image before upload
   onSelectFile(event) {
@@ -67,13 +53,16 @@ export class DialogUploadBackgroundComponent implements OnInit {
   async saveImage()
   {
       const formData = new FormData();
-      if (Image) {
+      if (this.background != null) {
         formData.append('MediaFile', this.background);
         await this.Iservice.postImage(formData);
       }
       else
       {
-        this.showError()
+        this.timelineurl.showError("Save image in gallery failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
 
   }
@@ -81,20 +70,30 @@ export class DialogUploadBackgroundComponent implements OnInit {
     try{
       const formData = new FormData();
       formData.append('id', this.service.getUserIdStorage());
-      if (Image) {
-        formData.append('background', this.background);
-        await this.timeLineService.uploadBackground(this.service.getUserIdStorage(), formData);
-        this.saveImage()
-        this.showSuccess()
+      formData.append('background', this.background);
+      if(this.background == null)
+      {
+        this.timelineurl.showError("Upload failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
       else
       {
-        this.showError()
+        await this.timeLineService.uploadBackground(this.service.getUserIdStorage(), formData);
+        this.saveImage()
+        this.timelineurl.showSuccess("Upload successfully !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
     }
     catch(e)
     {
-      this.showError()
+      this.timelineurl.showError(e)
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 1000)
     }
   }
 }

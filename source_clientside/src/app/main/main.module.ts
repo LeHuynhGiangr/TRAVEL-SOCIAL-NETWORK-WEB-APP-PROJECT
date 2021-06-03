@@ -106,6 +106,8 @@ import { LoginService } from '../_core/services/login.service';
 import { delay } from 'rxjs/operators';
 import { DialogModifyTripComponent } from './fanpage/dialog-modifytrip/dialog-modifytrip.component';
 import { DialogModifyPageComponent } from './fanpage/dialog-modifypage/dialog-modifypage.component';
+import { DialogUploadPageAvatarComponent } from './fanpage/dialog-uploadpageavatar/dialog-uploadpageavatar.component';
+import { DialogUploadPageBackgroundComponent } from './fanpage/dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -206,6 +208,8 @@ export const mainRoutes: Routes = [
     DialogModifyTripComponent,
     FanpageBackgroundAreaComponent,
     FanpageReviewComponent,
+    DialogUploadPageAvatarComponent,
+    DialogUploadPageBackgroundComponent,
     DialogReviewComponent,
     DialogModifyPageComponent
     //Primeng
@@ -260,7 +264,7 @@ export const mainRoutes: Routes = [
       echarts: () => import('echarts')
     }),
     RouterModule.forChild(mainRoutes),],
-    bootstrap:[MainComponent]
+    bootstrap:[MainComponent],
 })
 export class MainModule{
   constructor(private loginService: LoginService) {
