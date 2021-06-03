@@ -38,6 +38,7 @@ namespace Domain.Services
                     page.Description,
                     page.Follow,
                     page.Active,
+                    page.RequestCreate,
                     page.User.Id.ToString()));
             }
             return pageResponse;
@@ -56,6 +57,7 @@ namespace Domain.Services
                         page.Description,
                         page.Follow,
                         page.Active,
+                        page.RequestCreate,
                         page.User.Id.ToString());
             return pageResponse;
         }
@@ -79,6 +81,7 @@ namespace Domain.Services
                         page.Description,
                         page.Follow,
                         page.Active,
+                        page.RequestCreate,
                         page.User.Id.ToString()));
             }
             return l_pageResponses;
@@ -103,7 +106,7 @@ namespace Domain.Services
                     RequestCreate = false,
                     DateCreated = DateTime.Now,
                     Follow = 0,
-                    Active = false,
+                    Active = true,
                     UserId = model.UserId
                 };
 
