@@ -28,7 +28,7 @@
         <mat-tab label="Status">
             <mat-form-field class="example-full-width">
                 <mat-label>Cost</mat-label>
-                <input matInput type="number" name="Cost" id="input" required="required" [(ngModel)]="this.trips.Cost" [ngModelOptions]="{standalone: true}">
+                <input matInput type="number" min="0" max="10000" name="Cost" id="input" required="required" [(ngModel)]="this.trips.Cost" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Persons</mat-label>
@@ -77,3 +77,4 @@
     <button class="btn btn-primary" mat-button (click)="onSave()">Save</button>
     <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
 </div>
+<p-toast></p-toast>

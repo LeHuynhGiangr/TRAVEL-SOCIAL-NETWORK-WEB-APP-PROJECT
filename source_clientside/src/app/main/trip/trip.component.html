@@ -86,13 +86,25 @@
                               <h2 style="text-align: center;" *ngIf = " this.listcount === 0">There are currently no tours to display...</h2>
                               <mat-grid-list cols="2" rowHeight="{{this.lengthcount}}" style="height: 300px;">
                                   <mat-grid-tile *ngFor="let trip of tripList" class="tile-grid">
-                                        <div class="card">
-                                        <img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
+                                      <div class="card" *ngIf="trip.PersonsInTrip < trip.PersonsLimit" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
+                                          <img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;">
+                                          <div class="container">
+                                            <h4 class="trip-name"><b>{{trip.Name}}</b></h4> 
+                                          </div>
+                                          <span class="cost"><strong>{{trip.Cost}} $</strong></span> 
+                                      </div>
+                                      <div class="card-instock" *ngIf="trip.PersonsInTrip >= trip.PersonsLimit" (click)="tripurl.getNavigation(trip.Id)" [routerLink]="['/trip-detail/:', trip.Id]">
+                                        <img src="{{trip.Image}}" alt="Avatar" style="width: 100%; height: 65%;">
                                         <div class="container">
                                           <h4 class="trip-name"><b>{{trip.Name}}</b></h4> 
                                         </div>
-                                        <span class="cost"><strong>{{trip.Cost}} $</strong></span> 
-                                      </div>
+                                        <div>
+                                          <img class="outofstock" src="../../../assets/images/outofstock.png">
+                                        </div>
+                                        <div>
+                                          <span class="cost"><strong>{{trip.Cost}} $</strong></span> 
+                                        </div>
+                                    </div>
                                     </mat-grid-tile>
                                   </mat-grid-list>
                                   <br>

@@ -33,6 +33,15 @@ mat-form-field {
   bottom: 2%;
   left: 48%;
 }
+.btn-booknow-dis
+{
+  margin: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 48%;
+  background-color: darkgrey;
+  pointer-events: none;
+}
 @media (max-width:430px)
 {
   .left

@@ -4,6 +4,8 @@ import { Trips } from 'src/app/_core/models/trip.model';
 import { TripService } from 'src/app/_core/services/trip.service';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 import {ThemePalette} from '@angular/material/core';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
     selector: 'app-dialog-modifytrip',
     templateUrl: './dialog-modifytrip.component.html',
@@ -16,8 +18,9 @@ export class DialogModifyTripComponent implements OnInit {
     checked = false;
     disabled = false;
     constructor(public dialogRef: MatDialogRef<DialogModifyTripComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    public pageurl:PageUrl,private TService:TripService){}
+    public pageurl:PageUrl,private TService:TripService,private timelineurl:TimelineUrl, private primengConfig: PrimeNGConfig){}
     async ngOnInit() {
+        this.primengConfig.ripple = true;
         const trip = await this.TService.getTripDetail(this.data.idtrip)
         this.trips = new Trips()
         this.trips.Id = this.data.idtrip
@@ -43,8 +46,19 @@ export class DialogModifyTripComponent implements OnInit {
     {
         this.trips.Cost = this.trips.Cost.toString()
         this.trips.Persons = this.trips.Persons.toString()
-        const trip = await this.TService.modifyTrip(this.data.idtrip,this.trips)
-        alert("Update successfully !")
-        this.dialogRef.close();
+        if(this.trips.Content == "" || this.trips.Start == "" || this.trips.Description == "" || this.trips.Destination ==""
+        || this.trips.InfoContact == "" || this.trips.Name == "" || this.trips.Cost == "" || this.trips.Persons == "" 
+        || this.trips.Policy == "" || this.trips.Service == "")
+        {
+            this.timelineurl.showError("Please enter full information !")
+        }
+        else
+        {
+            const trip = await this.TService.modifyTrip(this.data.idtrip,this.trips)
+            this.timelineurl.showSuccess("Modify trip successfully !")
+            setTimeout(() => {
+                this.dialogRef.close();
+            }, 1000)
+        }
     }
 }

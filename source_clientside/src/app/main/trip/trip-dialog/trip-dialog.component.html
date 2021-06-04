@@ -28,7 +28,7 @@
         <mat-tab label="Date-Time">
             <mat-form-field class="example-full-width">
                 <mat-label>Cost</mat-label>
-                <input matInput type="number" name="Cost" id="input" required="required" [(ngModel)]="this.Cost"[ngModelOptions]="{standalone: true}">
+                <input matInput type="number" name="Cost" min="0" max="10000" id="input" required="required" [(ngModel)]="this.Cost"[ngModelOptions]="{standalone: true}">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Persons</mat-label>

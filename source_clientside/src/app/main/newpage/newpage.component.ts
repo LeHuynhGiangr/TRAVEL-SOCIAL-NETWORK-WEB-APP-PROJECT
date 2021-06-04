@@ -5,6 +5,8 @@ import { UserProfile } from '../../_core/data-repository/profile'
 import { PagesService } from 'src/app/_core/services/page.service'
 import {Pages} from 'src/app/_core/models/pages.model'
 import { ActivatedRoute, Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-newpage',
     templateUrl: './newpage.component.html',
@@ -17,7 +19,8 @@ export class NewpageComponent implements OnInit {
   urlb;
   checkfield:boolean
   constructor(private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
-  private PService:PagesService,private m_route: ActivatedRoute,private m_router: Router) {
+  private PService:PagesService,private m_route: ActivatedRoute,private m_router: Router
+  , private primengConfig: PrimeNGConfig, private timelineurl:TimelineUrl) {
     
   }
   
@@ -29,9 +32,14 @@ export class NewpageComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
+    this.primengConfig.ripple = true;
     this.checkfield = true;
     UserProfile.IdTemp = this.service.getUserIdStorage()
     this.pages = new Pages();
+    this.pages.Description = ""
+    this.pages.Address = ""
+    this.pages.Name = ""
+    this.pages.PhoneNumber = ""
   }
   onSelectFileFID(event) {
     if (event.target.files && event.target.files[0]) {
@@ -72,13 +80,15 @@ export class NewpageComponent implements OnInit {
       formData.append('bImageCard',this.pages.BImageCard)
       if(this.pages.Name == ""||this.pages.Address==""||this.pages.PhoneNumber==""||this.pages.FImageCard==null||this.pages.BImageCard==null)
       {
-        alert('Please enter full information');
+        this.timelineurl.showError('Please enter full information')
       }
       else
       {
         const result = await this.PService.postPage(formData);
-        alert('Add sucessfully');
-        this.refresh()
+        this.timelineurl.showSuccess('The request to create a travel page has been sent to the system !')
+        setTimeout(() => {
+          this.refresh()
+        }, 1500)
       }
     }
     catch (e) {

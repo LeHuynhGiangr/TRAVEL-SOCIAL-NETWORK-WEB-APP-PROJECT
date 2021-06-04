@@ -84,7 +84,7 @@ export class TripDialogComponent implements OnInit {
       else
       {
         await this.service.createTrip(formData);
-        this.timelineurl.showSuccess("The request to create a travel page has been sent to the system !")
+        this.timelineurl.showSuccess("Create a trip successfully !")
         setTimeout(() => {
           this.dialogRef.close();
         }, 2000)
