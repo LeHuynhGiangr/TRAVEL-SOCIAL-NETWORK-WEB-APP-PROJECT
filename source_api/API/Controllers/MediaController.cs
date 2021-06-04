@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
+using API.Hub;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers
 {
@@ -18,11 +20,13 @@ namespace API.Controllers
     {
         private readonly IMediaService<Guid> _service;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHubContext<HubClient, IHubClient> _hubContext;
 
-        public MediaController(IMediaService<Guid> service, IWebHostEnvironment webHostEnvironment)
+        public MediaController(IMediaService<Guid> service, IWebHostEnvironment webHostEnvironment, IHubContext<HubClient, IHubClient> hubContext)
         {
             _service = service;
             _webHostEnvironment = webHostEnvironment;
+            _hubContext = hubContext;
         }
         [HttpGet]
         public IActionResult GetMedia()
@@ -53,13 +57,14 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreateMedia([FromForm] CreateMediaRequest createMediaRequest)
+        public async Task<IActionResult> CreateMediaAsync([FromForm] CreateMediaRequest createMediaRequest)
         {
             try
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 createMediaRequest.UserId = id;
                 _service.Create(createMediaRequest, _webHostEnvironment.WebRootPath);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Create successfully");
             }
             catch (Exception e)

@@ -87,13 +87,13 @@ namespace API.Controllers
         }
         [Route("page/accept")]
         [HttpPut]
-        public async Task<IActionResult> UnFollowPageAsync([FromBody] Guid id)
+        public async Task<IActionResult> AcceptRequest([FromBody] Guid id)
         {
             try
             {
                 p_service.AcceptRequest(id);
                 await _hubContext.Clients.All.BroadcastMessage();
-                return Ok("UnFollow successfully");
+                return Ok("Accept successfully");
             }
             catch (Exception e)
             {
