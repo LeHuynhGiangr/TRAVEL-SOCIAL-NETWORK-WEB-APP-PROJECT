@@ -22,6 +22,7 @@ export class ApiUrlConstants{
     //admin API
     public static API_ADMIN_URL = '/admin/'
     public static API_ADMIN_PAGE = '/admin/page'
+    public static API_ADMIN_PAGE_ACCEPT = '/admin/page/accept'
     //trip API
     public static API_TRIP_URL = '/trip/'
     public static API_TRIPLOAD_URL = '/trip/load/'

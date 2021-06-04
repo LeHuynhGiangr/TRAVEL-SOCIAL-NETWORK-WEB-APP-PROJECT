@@ -19,7 +19,7 @@ import { LoginService } from './_core/services/login.service';
 import { WebSocketService } from './_core/services/websocket.service';
 import { WebSocketHandler } from 'src/assets/js/websocket/WSMediator';
 import { ApiUrlConstants } from './_core/common/api-url.constants';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -48,7 +48,8 @@ import { MessageService } from 'primeng/api';
       provide: MatDialogRef,
       useValue: {}
     },
-    MessageService
+    MessageService,
+    ConfirmationService
     //fakeBackendProvider
   ],
   bootstrap: [AppComponent],

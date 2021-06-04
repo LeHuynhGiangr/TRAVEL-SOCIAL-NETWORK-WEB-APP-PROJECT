@@ -10,6 +10,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ButtonModule } from 'primeng/button';
 import {AccordionModule} from 'primeng/accordion';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { MessagesModule } from 'primeng/messages';
 @NgModule({
   declarations: [AdminComponent,
   DialogDeleteComponent,
@@ -22,7 +24,9 @@ import {AccordionModule} from 'primeng/accordion';
     MatTableModule,
     MatPaginatorModule,
     AccordionModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule,
+    MessagesModule,
   ]
 })
 export class AdminModule { }
