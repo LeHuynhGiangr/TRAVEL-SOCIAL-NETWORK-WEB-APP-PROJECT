@@ -1,8 +1,12 @@
+.example-form {
+    min-width: 150px;
+    width: 100%;
+}
+.example-full-width {
+    width: 97%;
+}
 .myDiv {
     border: 1px outset rgb(157, 192, 221);
     background-color: whitesmoke;
     text-align: center;
   }
-.left {
-    margin-left :25px 
-}

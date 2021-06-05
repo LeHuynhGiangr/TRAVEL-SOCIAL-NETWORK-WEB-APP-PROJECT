@@ -67,7 +67,7 @@ export class AdminService {
     }
     acceptPage = async (id) => {
         try {
-            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_ACCEPT,id ).toPromise();            
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_ACCEPT + id,null ).toPromise();            
         }
         catch (e) {
             console.log("ok");

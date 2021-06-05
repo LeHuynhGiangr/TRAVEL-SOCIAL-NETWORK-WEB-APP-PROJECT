@@ -3,7 +3,6 @@ import { LoginService } from '../_core/services/login.service';
 import { Router } from '@angular/router';
 import { AppUsers } from './../login/shared/login.model';
 import { AdminService } from './../admin/admin.service';
-import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component'
 import { DialogPostDetailComponent } from './dialog-post-detail/dialog-post-detail.component'
 import { MatDialog } from '@angular/material/dialog';
 import { PostService } from 'src/app/_core/services/post.service';
@@ -13,6 +12,7 @@ import { Pages } from '../_core/models/pages.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { DialogPageRequestComponent } from './dialog-pagerequest/dialog-pagerequest.component';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -31,14 +31,15 @@ export class AdminComponent implements OnInit {
   pages: any
   pagesrequest: any
   countlist:number
+  countlistRequest:number
   public pageList = new Array<Pages>();
   public pageListRequest = new Array<Pages>();
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-
+  @ViewChild('MatPaginator1') MatPaginator1: MatPaginator;
+  @ViewChild('MatPaginator2') MatPaginator2: MatPaginator;
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSourceRequest.paginator = this.paginator;
+    this.dataSource.paginator = this.MatPaginator1;
+    this.dataSourceRequest.paginator = this.MatPaginator2;
   }
   constructor(private router: Router, private service: LoginService, private Aservice: AdminService,
     public dialog: MatDialog, private PService: PostService, private confirmationService: ConfirmationService,
@@ -56,11 +57,11 @@ export class AdminComponent implements OnInit {
     this.primengConfig.ripple = true;
     this.dataSource = new MatTableDataSource<Pages>();
     this.dataSourceRequest = new MatTableDataSource<Pages>();
-    this.ngAfterViewInit()
     this.getPageListRequestCreate()
     this.getUserList()
     this.getPostList()
     this.getPageList()
+    this.ngAfterViewInit()
   }
   onLogout() {
     this.service.logout();
@@ -80,16 +81,18 @@ export class AdminComponent implements OnInit {
   public getPostList = async () => {
     this.PService.getPost().subscribe((jsonData: Post[]) => this.m_posts = jsonData);
   }
-  openDialog(id): void {
-    const dialogRef = this.dialog.open(DialogDeleteComponent, {
-      width: '400px',
-      height: '150px',
+  openDialogRequest(id): void {
+    const dialogRef = this.dialog.open(DialogPageRequestComponent, {
+      width: '600px',
+      height: '800px',
     });
-    dialogRef.componentInstance.idUser = id;
+    dialogRef.componentInstance.idPage = id;
     dialogRef.afterClosed().subscribe(result => {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return false;
       }
+      this.pageListRequest = new Array<Pages>();
+      this.getPageListRequestCreate()
     });
   }
   openDialogPost(id): void {
@@ -116,7 +119,7 @@ export class AdminComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.block(id)
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        this.messageService.add({ severity: 'success', summary: 'Done', detail: 'Change status page successfully' });
       },
       reject: (type) => {
         switch (type) {
@@ -135,40 +138,17 @@ export class AdminComponent implements OnInit {
     this.pageList = new Array<Pages>();
     this.getPageList()
   }
-  async blockPage(id) {
+  async blockPage(id, status) {
     this.confirmationService.confirm({
       message: 'Do you want to change the page status ?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.blockpage(id)
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-      },
-      reject: (type) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
-            break;
-        }
-      }
-    });
-  }
-  async accept(id) {
-    await this.Aservice.acceptPage(id)
-    this.pageListRequest = new Array<Pages>();
-    this.getPageListRequestCreate()
-  }
-  async acceptPage(id) {
-    this.confirmationService.confirm({
-      message: 'Do you want to accept page ?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.accept(id)
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        if(status == true)
+          this.messageService.add({ severity: 'success', summary: 'Done', detail: 'Block page successfully !' });
+        else
+          this.messageService.add({ severity: 'success', summary: 'Done', detail: 'UnBlock page successfully !' });
       },
       reject: (type) => {
         switch (type) {
@@ -200,6 +180,7 @@ export class AdminComponent implements OnInit {
       page.UserId = this.pages[i].userId
       this.pageList.push(page)
     }
+    this.countlist = this.pageList.length
     this.dataSource.data = this.pageList
   }
   async getPageListRequestCreate() {
@@ -217,10 +198,8 @@ export class AdminComponent implements OnInit {
         page.UserId = this.pagesrequest[i].userId
         this.pageListRequest.push(page)
       }
-      else
-        i = i + 1
     }
-    this.countlist = this.pageListRequest.length
+    this.countlistRequest = this.pageListRequest.length
     this.dataSourceRequest.data = this.pageListRequest
   }
 }
