@@ -7,7 +7,9 @@ namespace Domain.DomainModels.API.ResponseModels
     public class PageResponse
     {
         public PageResponse() { }
-        public PageResponse(Guid id, System.DateTime dateCreated, string name,string address,string phonenumber, string avatar, string background, string description,double follow,bool active,bool requestCreate, string userId)
+        public PageResponse(Guid id, System.DateTime dateCreated, string name,string address,
+            string phonenumber, string avatar, string background, string description,double follow,
+            bool active,bool requestCreate,string fImageCard,string bImageCard, string userId)
         {
             Id = id;
             DateCreated = dateCreated;
@@ -20,6 +22,8 @@ namespace Domain.DomainModels.API.ResponseModels
             Follow = follow;
             Active = active;
             RequestCreate = requestCreate;
+            FImageCard = fImageCard;
+            BImageCard = bImageCard;
             UserId = userId;
         }
 
@@ -31,6 +35,8 @@ namespace Domain.DomainModels.API.ResponseModels
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Background { get; set; }
+        public string FImageCard { get; set; }
+        public string BImageCard { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public bool Active { get; set; }

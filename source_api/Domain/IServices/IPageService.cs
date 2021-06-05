@@ -20,5 +20,6 @@ namespace Domain.IServices
         IEnumerable<PageResponse> GetAll();
         void AcceptRequest(Guid id);
         bool BlockPage(Guid id);
+        void DeleteRequest(Guid id);
     }
 }

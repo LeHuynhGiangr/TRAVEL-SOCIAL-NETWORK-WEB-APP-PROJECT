@@ -107,15 +107,30 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
-        [Route("page/accept")]
+        [Route("page/accept/{id:guid}")]
         [HttpPut]
-        public async Task<IActionResult> AcceptRequest([FromBody] Guid id)
+        public async Task<IActionResult> AcceptRequest(Guid id)
         {
             try
             {
                 p_service.AcceptRequest(id);
                 await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Accept successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("page/reject/{id:guid}")]
+        [HttpPut]
+        public async Task<IActionResult> RejectPage(Guid id)
+        {
+            try
+            {
+                p_service.DeleteRequest(id);
+                await _hubContext.Clients.All.BroadcastMessage();
+                return Ok("Reject successfully");
             }
             catch (Exception e)
             {

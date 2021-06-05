@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Utilities;
 
@@ -39,6 +40,8 @@ namespace Domain.Services
                     page.Follow,
                     page.Active,
                     page.RequestCreate,
+                    page.FImageCard,
+                    page.BImageCard,
                     page.User.Id.ToString()));
             }
             return pageResponse;
@@ -58,6 +61,8 @@ namespace Domain.Services
                         page.Follow,
                         page.Active,
                         page.RequestCreate,
+                        page.FImageCard,
+                        page.BImageCard,
                         page.User.Id.ToString());
             return pageResponse;
         }
@@ -82,6 +87,8 @@ namespace Domain.Services
                         page.Follow,
                         page.Active,
                         page.RequestCreate,
+                        page.FImageCard,
+                        page.BImageCard,
                         page.User.Id.ToString()));
             }
             return l_pageResponses;
@@ -199,6 +206,19 @@ namespace Domain.Services
                 return true;
             else
                 return false;
+        }
+        public void DeleteRequest(Guid id)
+        {
+            try
+            {
+                var page_request = m_pageRepository.GetAll( _ => _.User).Where(_ => _.Id.ToString().ToLower().Contains(id.ToString().ToLower())).FirstOrDefault();
+                m_pageRepository.Remove(page_request);
+                m_pageRepository.SaveChanges();
+            }
+            catch
+            {
+                throw new Exception("delete failed");
+            }
         }
     }
 }
