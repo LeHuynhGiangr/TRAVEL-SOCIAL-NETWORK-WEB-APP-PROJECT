@@ -85,6 +85,28 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        [Route("page/block/{id:guid}")]
+        [HttpPut]
+        public async Task<IActionResult> BlockPage(Guid id)
+        {
+            try
+            {
+                if (p_service.BlockPage(id) == true)
+                {
+                    await _hubContext.Clients.All.BroadcastMessage();
+                    return Ok("UnBlock page successfully");
+                }    
+                else
+                {
+                    await _hubContext.Clients.All.BroadcastMessage();
+                    return Ok("Block page successfully");
+                }    
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [Route("page/accept")]
         [HttpPut]
         public async Task<IActionResult> AcceptRequest([FromBody] Guid id)

@@ -19,5 +19,6 @@ namespace Domain.IServices
         void RemoveFollow(Guid id);
         IEnumerable<PageResponse> GetAll();
         void AcceptRequest(Guid id);
+        bool BlockPage(Guid id);
     }
 }

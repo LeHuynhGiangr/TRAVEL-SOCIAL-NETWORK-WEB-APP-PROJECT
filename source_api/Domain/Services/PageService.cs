@@ -189,5 +189,16 @@ namespace Domain.Services
             page.RequestCreate = true;
             m_pageRepository.SaveChanges();
         }
+        public bool BlockPage(Guid id)
+        {
+            Page page = m_pageRepository.FindById(id);
+            page.Active = !page.Active;
+            m_pageRepository.SetModifierPageStatus(page, EntityState.Modified);
+            m_pageRepository.SaveChanges();
+            if (page.Active == true)
+                return true;
+            else
+                return false;
+        }
     }
 }

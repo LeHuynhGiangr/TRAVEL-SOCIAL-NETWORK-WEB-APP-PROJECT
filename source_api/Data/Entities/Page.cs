@@ -23,6 +23,7 @@ namespace Data.Entities
         public IList<Trip> Trips { get; set; }
         public IList<ReviewPage> ReviewPages { get; set; }
         public IList<UserFollowPage> UserFollowPages { get; set; }
+        public IList<Notification> NotificationPages { get; set; }
         public PageType PageType { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
