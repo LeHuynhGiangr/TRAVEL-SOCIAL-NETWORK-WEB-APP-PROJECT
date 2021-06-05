@@ -12,5 +12,6 @@ export class Pages {
     FImageCard:File;
     BImageCard:File;
     RequestCreate:boolean
+    Status:string
     UserId:string;
 }

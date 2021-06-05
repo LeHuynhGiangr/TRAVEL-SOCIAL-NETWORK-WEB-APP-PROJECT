@@ -73,4 +73,12 @@ export class AdminService {
             console.log("ok");
         }
     }
+    blockPage = async (id) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_BLOCK + id,null ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
 }

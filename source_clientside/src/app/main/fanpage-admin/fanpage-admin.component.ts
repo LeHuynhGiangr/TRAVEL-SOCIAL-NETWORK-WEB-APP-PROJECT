@@ -66,10 +66,6 @@ export class FanpageAdminComponent implements OnInit {
       this.getTripList();
     });
   }
-  consoleID(id)
-  {
-    alert(id)
-  }
   getTripList = async () => {
     this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
     for (let i = 0; i < this.trips.length; i++) {
