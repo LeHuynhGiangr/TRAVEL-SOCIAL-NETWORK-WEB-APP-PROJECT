@@ -45,6 +45,7 @@ export class TripPaymentComponent implements OnInit {
       this.trips.Id = TripStatic.Id
       this.trips.Name = TripStatic.Name
       this.trips.Description = TripStatic.Description
+      const x = Number(TripStatic.Cost)
       this.trips.Cost = TripStatic.Cost
       this.cost = parseInt(this.trips.Cost)/10
       this.total = (this.cost + parseInt(this.trips.Cost))*this.people
@@ -68,7 +69,7 @@ export class TripPaymentComponent implements OnInit {
         this.check=true
     }
     valuechange(newValue) {
-        this.total = (this.cost + parseInt(this.trips.Cost))*newValue
+        this.total = parseFloat(((this.cost + parseInt(this.trips.Cost))*newValue).toFixed(2));
     }
     private initConfig(): void {
         this.payPalConfig = {

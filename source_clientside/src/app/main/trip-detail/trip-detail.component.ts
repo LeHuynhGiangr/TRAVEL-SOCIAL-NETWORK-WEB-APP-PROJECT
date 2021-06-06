@@ -7,6 +7,7 @@ import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { PagesService } from 'src/app/_core/services/page.service';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 import { TripService } from 'src/app/_core/services/trip.service';
+import { LoginService } from 'src/app/_core/services/login.service';
 @Component({
     selector: 'app-trip-detail',
     templateUrl: './trip-detail.component.html',
@@ -17,8 +18,11 @@ export class TripDetailComponent implements OnInit {
     namePage
     phonePage
     persons:any
+    tripIdTemp
+    history:any
+    checkbook:boolean
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl,
-    private PService:PagesService,public pageurl:PageUrl, private TService:TripService ) {}
+    private PService:PagesService,public pageurl:PageUrl, private TService:TripService, private service:LoginService ) {}
 
     async ngOnInit() {
       var script = document.createElement("script");
@@ -26,6 +30,12 @@ export class TripDetailComponent implements OnInit {
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
 
+      this.checkbook = false
+      this.history = await this.TService.getPaymentTrip(this.service.getUserIdStorage())
+      for (let i = 0; i < this.history.length; i++) {
+        if(this.history[i].tripId == TripStatic.Id)
+          this.checkbook = true
+      }
       this.trips = new Trips()
       this.trips.Id = TripStatic.Id
       this.trips.Name = TripStatic.Name

@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe, DOCUMENT } from '@angular/common';
-import { Trips } from '../../_core/models/trip.model';
 import { TripHistory } from '../../_core/models/trip-history.model';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

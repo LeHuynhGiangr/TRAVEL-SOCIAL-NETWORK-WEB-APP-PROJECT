@@ -119,8 +119,9 @@
             </div>
          </div>
       </div>
-      <button *ngIf="this.trips.PersonsInTrip < this.trips.PersonsLimit"class="btn-booknow" type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
-      <button *ngIf="this.trips.PersonsInTrip >= this.trips.PersonsLimit"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Out Of Stock</button>
+      <button *ngIf="this.trips.PersonsInTrip < this.trips.PersonsLimit && this.checkbook === false"class="btn-booknow" type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
+      <button *ngIf="this.trips.PersonsInTrip >= this.trips.PersonsLimit && this.checkbook === false"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Out Of Stock</button>
+      <button *ngIf="this.checkbook === true"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Booked</button>
    </div>
 </section>
 <app-footer></app-footer>
