@@ -1,0 +1,56 @@
+<h1><strong>Trip History Detail</strong></h1>
+<mat-form-field class="example-full-width">
+    <mat-label>Trip Name</mat-label>
+    <textarea disabled style="height: 70px;" name="Name" type="text" id="input" required="required" [(ngModel)]="this.trip.Name" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Content</mat-label>
+    <textarea disabled style="height: 70px;" name="Content" type="text" id="input" required="required" [(ngModel)]="this.trip.Content" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <textarea disabled style="height: 70px;" name="Description" type="text" id="input" required="required" [(ngModel)]="this.trip.Description" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Departure</mat-label>
+    <textarea disabled style="height: 70px;" name="Departure" type="text" id="input" required="required" [(ngModel)]="this.trip.Start" [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Destination</mat-label>
+    <textarea disabled style="height: 70px;" name="Destination" type="text" id="input" required="required" [(ngModel)]="this.trip.Destination " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>DateStart</mat-label>
+    <textarea disabled style="height: 70px;" name="DateStart" type="text" id="input" required="required" [(ngModel)]="this.dateStart " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>DateEnd</mat-label>
+    <textarea disabled style="height: 70px;" name="DateEnd" type="text" id="input" required="required" [(ngModel)]="this.dateEnd " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Info Contact</mat-label>
+    <textarea disabled style="height: 70px;" name="Info Contact" type="text" id="input" required="required" [(ngModel)]="this.trip.InfoContact " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Service</mat-label>
+    <textarea disabled style="height: 70px;" name="Service" type="text" id="input" required="required" [(ngModel)]="this.trip.Service " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Policy</mat-label>
+    <textarea disabled style="height: 70px;" name="Policy" type="text" id="input" required="required" [(ngModel)]="this.trip.Service " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Limited number of passengers</mat-label>
+    <textarea disabled style="height: 70px;" name="Number" type="text" id="input" required="required" [(ngModel)]="this.trip.Persons " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Date Payment</mat-label>
+    <textarea disabled style="height: 70px;" name="Number" type="text" id="input" required="required" [(ngModel)]="this.datePayment " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Trip creator</mat-label>
+    <textarea disabled style="height: 70px;" name="Number" type="text" id="input" required="required" [(ngModel)]="this.pageName " [ngModelOptions]="{standalone: true}" matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+<div mat-dialog-actions class="myDiv">
+    <button class="btn btn-danger left" mat-button (click)="onNoClick()" style="margin-left: 5%;">Cancel</button>
+</div>

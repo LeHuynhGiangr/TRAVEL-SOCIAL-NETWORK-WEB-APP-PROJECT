@@ -7,6 +7,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { TripService } from 'src/app/_core/services/trip.service';
 import { LoginService } from 'src/app/_core/services/login.service';
+import { DialogTripHistoryDetailComponent } from './trip-history-detail/trip-history-detail.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
     selector: 'app-trip-history',
     templateUrl: './trip-history.component.html',
@@ -21,7 +23,7 @@ export class TripHistoryComponent implements OnInit {
     public historiesList = new Array<TripHistory>();
     @ViewChild('MatPaginator') paginator: MatPaginator;
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, private TService:TripService,
-    private service:LoginService,public datepipe: DatePipe) {}
+    private service:LoginService,public datepipe: DatePipe, public dialog: MatDialog) {}
     async ngOnInit(){
         var script = document.createElement("script");
         script.type = "text/javascript";
@@ -49,4 +51,14 @@ export class TripHistoryComponent implements OnInit {
         }
         this.dataSource.data = this.historiesList
     }
+    DetailTripHistory(id,datePayment): void {
+        const dialogRef = this.dialog.open(DialogTripHistoryDetailComponent, {
+          width: '600px',
+          height: '600px',
+        });
+        dialogRef.componentInstance.idTrip = id;
+        dialogRef.componentInstance.datePayment = datePayment;
+        dialogRef.afterClosed().subscribe(result => {
+        });
+      }
 }
