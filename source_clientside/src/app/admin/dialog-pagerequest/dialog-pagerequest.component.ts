@@ -64,6 +64,33 @@ import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/a
             break;
         }
         }
-    });
+        });
+    }
+    async reject() {
+        await this.Aservice.rejectPage(this.idPage)
+    }
+    async rejectPage() {
+        this.confirmationService.confirm({
+            message: 'Do you want to reject request create a page ?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+            this.reject()
+            this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Reject successfully' });
+            setTimeout(() => {
+                this.dialogRef.close();
+                }, 1500)
+            },
+            reject: (type) => {
+            switch (type) {
+                case ConfirmEventType.REJECT:
+                this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+                break;
+                case ConfirmEventType.CANCEL:
+                this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+                break;
+            }
+        }
+        });
     }
 }

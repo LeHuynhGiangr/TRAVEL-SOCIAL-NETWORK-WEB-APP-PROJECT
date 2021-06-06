@@ -47,7 +47,4 @@ export class TripDetailComponent implements OnInit {
       this.trips.PersonsInTrip = this.persons.length
       this.trips.PersonsLimit = Number(this.trips.Persons)
     }
-    getPath(){
-      return this.router.url;
-    }
 }

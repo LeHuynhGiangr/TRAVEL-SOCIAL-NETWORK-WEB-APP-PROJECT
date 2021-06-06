@@ -1,0 +1,18 @@
+export class TripHistory {
+    Id:string
+    TripId:string
+    Name:string
+    PhoneNumber:string
+    Email:string
+    Address:string
+    Requirements:string
+    PeopleNumber:number
+    CostPayment:number
+    DateCreated:Date
+    Departure:string
+    Destination:string
+    Description:string
+    DateStart:string
+    DatePayment:string
+    DateEnd:string
+}

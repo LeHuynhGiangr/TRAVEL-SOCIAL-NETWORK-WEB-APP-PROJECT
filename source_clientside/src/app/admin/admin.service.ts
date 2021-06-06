@@ -81,4 +81,12 @@ export class AdminService {
             console.log("ok");
         }
     }
+    rejectPage = async (id) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_REJECT + id,null ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
 }

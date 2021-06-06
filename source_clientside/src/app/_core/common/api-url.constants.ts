@@ -24,6 +24,7 @@ export class ApiUrlConstants{
     public static API_ADMIN_PAGE = '/admin/page'
     public static API_ADMIN_PAGE_ACCEPT = '/admin/page/accept/'
     public static API_ADMIN_PAGE_BLOCK = '/admin/page/block/'
+    public static API_ADMIN_PAGE_REJECT = '/admin/page/reject/'
     //trip API
     public static API_TRIP_URL = '/trip/'
     public static API_TRIPLOAD_URL = '/trip/load/'

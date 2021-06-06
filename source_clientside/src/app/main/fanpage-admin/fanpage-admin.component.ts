@@ -90,12 +90,3 @@ export class FanpageAdminComponent implements OnInit {
     this.dataSource.data = this.tripList
   }
 }
-export interface PeriodicElement {
-  Destination:string
-  Name:string
-  Departure:string
-  Cost:string
-  Id:string
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [];
