@@ -11,15 +11,15 @@ using System.Text.Json;
 
 namespace Domain.Services
 {
-    class ChatService : IChatService<Guid>
+    public class ChatService : IChatService<Guid>
     {
-        private readonly IRepository<User, Guid> m_UserRepository;
+        //private readonly IRepository<User, Guid> m_UserRepository;
         private readonly IRepository<ChatBox, Guid> m_ChatBoxRepository;
         private readonly IRepository<UserChatBox, Guid> m_UserChatBoxRepository;
 
-        public ChatService(IRepository<User, Guid> userRepo, IRepository<ChatBox, Guid> chatBoxRepo, IRepository<UserChatBox, Guid> userChatBoxRepo)
+        public ChatService(IRepository<ChatBox, Guid> chatBoxRepo, IRepository<UserChatBox, Guid> userChatBoxRepo)
         {
-            m_UserRepository = userRepo;
+            //m_UserRepository = userRepo;
             m_ChatBoxRepository = chatBoxRepo;
             m_UserChatBoxRepository = userChatBoxRepo;
         }
@@ -57,7 +57,7 @@ namespace Domain.Services
             catch (Exception e)
             {
                 Console.WriteLine("Domain/Services/ChatService.cs (UpdateChatBoxContent): Something's wrong: " + e.StackTrace);
-                throw new Exception("can not update chatbox content: " + e.StackTrace);
+                throw new Exception("can not update chatbox content");
             }
         }
 
@@ -82,7 +82,7 @@ namespace Domain.Services
             return chatBoxesResponse;
         }
 
-        public ChatBoxResponse GetChatBoxByChatBoxId(Guid id)
+        public ChatBoxResponse GetChatBox(Guid id)
         {
             var chatBox = m_ChatBoxRepository.FindById(id);
 
@@ -98,17 +98,60 @@ namespace Domain.Services
 
         public ChatBoxResponse GetChatBox(Guid id, Guid theOtherId)
         {
-            var userChatBox = m_UserChatBoxRepository.FindSingle(p => p.UserId == id && p.TheOtherId == theOtherId, p => p.ChatBox);
+            var l_userChatBox = m_UserChatBoxRepository.FindSingle(p => p.UserId == id && p.TheOtherId == theOtherId, p => p.ChatBox);
 
-            if (userChatBox == null || userChatBox.ChatBox == null)
+            if (l_userChatBox == null)
+            {
+                var l_chatBox = new ChatBox();
+                l_chatBox.Id = Guid.NewGuid();
+                l_chatBox.MemberMetadataJson = "[]";
+                l_chatBox.ChatContentJson = "[]";
+
+                l_userChatBox = new UserChatBox();
+                l_userChatBox.Id = Guid.NewGuid();
+                l_userChatBox.UserId = id;
+                l_userChatBox.TheOtherId = theOtherId;
+                l_userChatBox.ChatBoxId = l_chatBox.Id;
+                l_userChatBox.ContentCacheJson = "[]";
+
+                l_userChatBox.ChatBox = l_chatBox;
+
+                m_UserChatBoxRepository.Add(l_userChatBox);
+                m_UserChatBoxRepository.SaveChanges();
+            }
+
+            var chatBox = l_userChatBox.ChatBox;
+            var chatBoxResponse = new ChatBoxResponse(chatBox.Id.ToString(), chatBox.MemberMetadataJson, chatBox.ChatContentJson);
+
+            return chatBoxResponse;
+        }
+
+        public UpdateChatBoxContentResponse LoadCachedChatBoxContent(Guid userId, Guid chatBoxId)
+        {
+            UserChatBox l_userChatBox;
+            string l_cachedContentJson;
+
+            l_userChatBox = m_UserChatBoxRepository.FindSingle(p => p.UserId == userId && p.ChatBoxId == chatBoxId);
+
+            if (l_userChatBox == null)
             {
                 throw new Exception("record is not found");
             }
 
-            var chatBox = userChatBox.ChatBox;
-            var chatBoxResponse = new ChatBoxResponse(chatBox.Id.ToString(), chatBox.MemberMetadataJson, chatBox.ChatContentJson);
+            try
+            {
+                l_cachedContentJson = l_userChatBox.ContentCacheJson.Clone().ToString();
+                l_userChatBox.ContentCacheJson = "[]";
 
-            return chatBoxResponse;
+                m_UserChatBoxRepository.Update(l_userChatBox);
+                m_ChatBoxRepository.SaveChanges();
+                return new UpdateChatBoxContentResponse(l_userChatBox.Id.ToString(), l_cachedContentJson);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Domain/Services/ChatService.cs (LoadCachedChatBoxContent): Something's wrong: " + e.StackTrace);
+                throw new Exception("Can not load cached chatbox content");
+            }
         }
     }
 }

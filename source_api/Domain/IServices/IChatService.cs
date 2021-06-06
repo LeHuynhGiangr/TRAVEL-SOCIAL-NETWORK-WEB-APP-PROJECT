@@ -7,8 +7,9 @@ namespace Domain.IServices
     public interface IChatService<Guid>
     {
         IEnumerable<ChatBoxResponse> GetAllChatBoxesByUserId(Guid id);
-        ChatBoxResponse GetChatBoxByChatBoxId(Guid id);
+        ChatBoxResponse GetChatBox(Guid id);
         ChatBoxResponse GetChatBox(Guid id, Guid theOtherId);
         UpdateChatBoxContentResponse UpdateChatBoxContent(UpdateChatBoxContentRequest chatBoxRequest);
+        UpdateChatBoxContentResponse LoadCachedChatBoxContent(Guid userId, Guid chatBoxId);
     }
 }

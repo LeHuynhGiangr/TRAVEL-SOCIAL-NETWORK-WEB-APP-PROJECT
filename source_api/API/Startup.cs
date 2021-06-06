@@ -95,6 +95,11 @@ namespace API
             services.AddScoped<IFriendService<Guid>, FriendService>();
             services.AddScoped<IRatingService<Guid>, RatingService>();
             services.AddScoped<IUserFollow<Guid>, UserFollowPageService>();
+
+            services.AddScoped<IRepository<ChatBox, Guid>, EFRepository<ChatBox, Guid>>();
+            services.AddScoped<IRepository<UserChatBox, Guid>, EFRepository<UserChatBox, Guid>>();
+            services.AddScoped<IChatService<Guid>, ChatService>();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

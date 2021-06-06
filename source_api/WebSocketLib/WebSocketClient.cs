@@ -12,6 +12,7 @@ namespace WebSocketLib
         private Guid _ClientId;
         private int _ClientNo;
         private TcpClient _TcpClient;
+        private byte[] _FrameForSend;
 
         public WebSocketClient(TcpClient client)
         {
@@ -66,29 +67,35 @@ namespace WebSocketLib
                 Console.WriteLine("Exception from WebSocketClient.HandleReceive(1): " + e.Message);
             }
 
-            while (true)
+            try
             {
-                try
+                while (!networkStream.DataAvailable)
                 {
-                    while (!networkStream.DataAvailable) ;//pass this line when stream has data for reading
+                    Console.WriteLine("loop");
+                }//pass this line when stream has data for reading
 
-                    numOfBytes = _TcpClient.Available;
+                numOfBytes = _TcpClient.Available;
 
-                    bytes = new byte[numOfBytes];
-                    networkStream.Read(bytes, 0, numOfBytes);
+                bytes = new byte[numOfBytes];
+                networkStream.Read(bytes, 0, numOfBytes);
 
-                    byte[] unmaskedBytes;
-                    DecodeData(bytes, out unmaskedBytes);
-                    plainTxt = Encoding.UTF8.GetString(unmaskedBytes, 0, unmaskedBytes.Length);
+                byte[] unmaskedBytes;
+                DecodeData(bytes, out unmaskedBytes);
+                plainTxt = Encoding.UTF8.GetString(unmaskedBytes, 0, unmaskedBytes.Length);
 
-                    Console.WriteLine("Receive data: " + plainTxt);
-                    //TODO: sending sent flag to client 
-                    networkStream.Flush();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Exception from WebSocketClient.HandleReceive(2): " + e.Message);
-                }
+                Console.WriteLine("First message received from client: " + plainTxt);
+                //TODO: sending sent flag to client 
+                networkStream.Flush();
+
+                _FrameForSend = bytes;
+                _FrameForSend[1] = 0x0;
+                Send("First message send to client");
+
+                Send("Second message send to client");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception from WebSocketClient.HandleReceive(2): " + e.Message);
             }
         }
 
@@ -100,9 +107,14 @@ namespace WebSocketLib
             try
             {
                 //while (networkStream.DataAvailable) { };
-
                 message = Encoding.UTF8.GetBytes((string)obj);
-                networkStream.Write(message, 0, message.Length);
+                int bytePos = 1;
+                _FrameForSend[bytePos++] = (byte)(message.Length & 0x7f);
+                for(int i = 0; i < message.Length; i++)
+                {
+                    _FrameForSend[bytePos++] = message[i];
+                }
+                networkStream.Write(_FrameForSend, 0, bytePos);
                 networkStream.Flush();
             }
             catch (Exception e)
