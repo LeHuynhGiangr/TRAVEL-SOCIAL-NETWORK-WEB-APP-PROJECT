@@ -63,13 +63,13 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult CreatePage([FromBody] CreatePageRequest createPageRequest)
+        public IActionResult CreatePage([FromForm] CreatePageRequest createPageRequest)
         {
             try
             {
                 System.Guid id = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 createPageRequest.UserId = id;
-                _service.Create(createPageRequest);
+                _service.Create(createPageRequest, _webHostEnvironment.WebRootPath);
                 return Ok("Create successfully");
             }
             catch (Exception e)
@@ -79,13 +79,14 @@ namespace API.Controllers
         }
         [Route("avatar")]
         [HttpPut]
-        public IActionResult UploadAvatar([FromForm] Guid id,IFormFile avatar)
+        public async Task<IActionResult> UploadAvatarAsync([FromForm] Guid id,IFormFile avatar)
         {
             try
             {
                 var l_memStream = new System.IO.MemoryStream();
                 avatar.CopyTo(l_memStream);
                 _service.UploadAvatar(id, _webHostEnvironment.WebRootPath, avatar);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Upload avatar success fully");
             }
             catch (Exception e)
@@ -96,13 +97,14 @@ namespace API.Controllers
 
         [Route("background")]
         [HttpPut]
-        public IActionResult UploadBackground([FromForm] Guid id, IFormFile background)
+        public async Task<IActionResult> UploadBackgroundAsync([FromForm] Guid id, IFormFile background)
         {
             try
             {
                 var l_memStream = new System.IO.MemoryStream();
                 background.CopyTo(l_memStream);
                 _service.UploadBackground(id, _webHostEnvironment.WebRootPath, background);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Upload background success fully");
             }
             catch (Exception e)
@@ -174,6 +176,17 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        [Route("checkfollow")]
+        [HttpPost]
+        public bool CheckFollowPage([FromBody] UserFollowPageRequest followpageRequest)
+        {
+            followpageRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+            if (f_service.GetFollow(followpageRequest) == true)
+                return true;
+            else
+                return false;
+        }
+
         [Route("follow")]
         [HttpPost]
         public async Task<IActionResult> FollowPageAsync([FromBody] UserFollowPageRequest followpageRequest)
@@ -181,9 +194,17 @@ namespace API.Controllers
             try
             {
                 followpageRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
-                f_service.Follow(followpageRequest);
-                await _hubContext.Clients.All.BroadcastMessage();
-                return Ok("Follow successfully");
+                if(f_service.GetFollow(followpageRequest) == false)
+                {
+                    f_service.Follow(followpageRequest);
+                    _service.AddFollow(followpageRequest.PageId);
+                    await _hubContext.Clients.All.BroadcastMessage();
+                    return Ok("Follow successfully");
+                }
+                else
+                {
+                    return Ok("Follow failure");
+                }    
             }
             catch (Exception e)
             {
@@ -198,6 +219,7 @@ namespace API.Controllers
             {
                 userUnfollowRequest.UserId = System.Guid.Parse(HttpContext.Items["Id"].ToString());
                 f_service.UnFollow(userUnfollowRequest);
+                _service.RemoveFollow(userUnfollowRequest.PageId);
                 await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("UnFollow successfully");
             }

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
+using API.Hub;
 using Domain.DomainModels.API.RequestModels;
 using Domain.DomainModels.API.ResponseModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers
 {
@@ -17,10 +19,11 @@ namespace API.Controllers
     public class UserJoinTripController : ControllerBase
     {
         private readonly IUserJoinTripService<Guid> _service;
-
-        public UserJoinTripController(IUserJoinTripService<Guid> service)
+        private readonly IHubContext<HubClient, IHubClient> _hubContext;
+        public UserJoinTripController(IUserJoinTripService<Guid> service, IHubContext<HubClient, IHubClient> hubContext)
         {
             _service = service;
+            _hubContext = hubContext;
         }
         [HttpGet("history")]
         public ActionResult<IEnumerable<UserJoinTripResponse>> GetHistoryByUserId()
@@ -52,11 +55,12 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Invite([FromForm] UserJoinTripRequest userjoinTripRequest)
+        public async Task<IActionResult> InviteAsync([FromForm] UserJoinTripRequest userjoinTripRequest)
         {
             try
             {
                 _service.InviteUser(userjoinTripRequest);
+                await _hubContext.Clients.All.BroadcastMessage();
                 return Ok("Invite successfully");
             }
             catch (Exception e)

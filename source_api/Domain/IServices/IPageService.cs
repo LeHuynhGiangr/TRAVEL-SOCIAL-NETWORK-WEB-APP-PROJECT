@@ -10,10 +10,16 @@ namespace Domain.IServices
     public interface IPageService<T>
     {
         PageResponse GetById(Guid id);
-        PageResponse Create(CreatePageRequest model);
+        PageResponse Create(CreatePageRequest model, string webRootPath);
         void ModifyPageInfo(Guid id, CreatePageRequest model);
         IEnumerable<PageResponse> GetPagesByUserId<IdType>(IdType id);
         void UploadAvatar(Guid id, string webRootPath, IFormFile background);
         void UploadBackground(Guid id, string webRootPath, IFormFile background);
+        void AddFollow(Guid id);
+        void RemoveFollow(Guid id);
+        IEnumerable<PageResponse> GetAll();
+        void AcceptRequest(Guid id);
+        bool BlockPage(Guid id);
+        void DeleteRequest(Guid id);
     }
 }

@@ -14,11 +14,16 @@ namespace Data.Entities
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public double Follow { get; set; }
+        public bool Active { get; set; }
+        public string FImageCard { get; set; }
+        public string BImageCard { get; set; }
+        public bool RequestCreate { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public IList<Trip> Trips { get; set; }
         public IList<ReviewPage> ReviewPages { get; set; }
         public IList<UserFollowPage> UserFollowPages { get; set; }
+        public IList<Notification> NotificationPages { get; set; }
         public PageType PageType { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }

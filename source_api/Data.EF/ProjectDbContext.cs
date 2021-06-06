@@ -99,6 +99,14 @@ namespace Data.EF
               .HasOne(sc => sc.User)
               .WithMany(s => s.UserFollowPages)
               .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Notification>()
+             .HasOne(sc => sc.Page)
+             .WithMany(s => s.NotificationPages)
+             .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Notification>()
+              .HasOne(sc => sc.User)
+              .WithMany(s => s.NotificationPages)
+              .HasForeignKey(sc => sc.UserId).OnDelete(DeleteBehavior.Restrict);
         }
 
         public override int SaveChanges()
