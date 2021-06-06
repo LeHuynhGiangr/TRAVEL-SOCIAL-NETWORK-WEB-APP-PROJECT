@@ -10,4 +10,5 @@ export class SystemConstants {
     public static LOCAL_STORED_USER_Key='user';
     public static LOCAL_STORED_JWT_Key='jwt';
     public static LOCAL_STORED_RFTK_Key='rftk';
+    public static USERID_KEY = 'userId';
 }

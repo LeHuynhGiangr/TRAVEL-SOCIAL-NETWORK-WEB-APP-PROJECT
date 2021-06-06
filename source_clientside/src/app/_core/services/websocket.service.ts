@@ -27,11 +27,6 @@ export class WebSocketService {
         */
     }
 
-    async getFlag(): Promise<number>{
-        while(this.flag ==0);
-        return this.flag;
-    }
-
     async sendMessage(message: string): Promise<void> {
         //TODO: call ws sent async
         /*

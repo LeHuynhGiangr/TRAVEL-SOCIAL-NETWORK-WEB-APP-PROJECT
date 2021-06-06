@@ -105,6 +105,7 @@ import { WebSocketService } from '../_core/services/websocket.service';
 import { LoginService } from '../_core/services/login.service';
 import { delay } from 'rxjs/operators';
 import { DialogModifyTripComponent } from './fanpage/dialog-modifytrip/dialog-modifytrip.component';
+import { ChatAreaComponent } from './messages/chat-area/chat-area.component';
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -205,7 +206,8 @@ export const mainRoutes: Routes = [
     DialogModifyTripComponent,
     FanpageBackgroundAreaComponent,
     FanpageReviewComponent,
-    DialogReviewComponent
+    DialogReviewComponent,
+    ChatAreaComponent
     //Primeng
   ],
   imports: [

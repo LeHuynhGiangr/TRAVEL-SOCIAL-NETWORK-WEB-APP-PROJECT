@@ -110,7 +110,8 @@ export class LoginService {
     }
 
     saveIdUserStorage = (userId: string) => {
-        localStorage.setItem('userId', userId)
+        localStorage.setItem('userId', userId);
+        sessionStorage.setItem(SystemConstants.USERID_KEY, userId);
     }
     saveUserInfoStorage = (firstName: string, lastName: string, avatar: string, background: string) => {
         localStorage.setItem('firstName', firstName)
