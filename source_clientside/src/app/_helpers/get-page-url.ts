@@ -12,16 +12,23 @@ export class PageUrl{
         this.savePageIdStorage(id);
 
         const result = await this.PService.getPageById(id);
-        this.savePageInfoStorage(result["name"],result["avatar"],result["background"],result["userId"])
+        console.log(result)
+        this.savePageInfoStorage(result["name"],result["avatar"],result["background"],result["address"],
+        result["phoneNumber"],result["description"], result["follow"],result["userId"])
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
     }
     savePageIdStorage = (pageId: string) => {
         localStorage.setItem('pageId', pageId)
     }
-    savePageInfoStorage = (pageName: string, pageAvatar: string, pageBackground: string, ownPageId: string) => {
+    savePageInfoStorage = (pageName: string, pageAvatar: string, pageBackground: string,pageAddress:string,pagePhoneNumber:string,
+        pageDescription:string, pageFollow:string, ownPageId: string) => {
         localStorage.setItem('pageName', pageName)
         localStorage.setItem('pageAvatar', pageAvatar)
         localStorage.setItem('pageBackground', pageBackground)
+        localStorage.setItem('pageAddress',pageAddress)
+        localStorage.setItem('pagePhoneNumber', pagePhoneNumber)
+        localStorage.setItem('pageDescription',pageDescription)
+        localStorage.setItem('pageFollow',pageFollow)
         localStorage.setItem('ownPageId',ownPageId)
     }
     getPageIdStorage = () => {
@@ -35,6 +42,18 @@ export class PageUrl{
     }
     getPageBackgroundStorage = () => {
         return localStorage.getItem('pageBackground').toString();
+    }
+    getPageAddressStorage = () => {
+        return localStorage.getItem('pageAddress').toString();
+    }
+    getPagePhoneNumberStorage = () => {
+        return localStorage.getItem('pagePhoneNumber').toString();
+    }
+    getPageDescriptionStorage = () => {
+        return localStorage.getItem('pageDescription').toString();
+    }
+    getPageFollowStorage = () => {
+        return localStorage.getItem('pageFollow').toString();
     }
     getPageUserIdStorage = () => {
         return localStorage.getItem('ownPageId').toString();

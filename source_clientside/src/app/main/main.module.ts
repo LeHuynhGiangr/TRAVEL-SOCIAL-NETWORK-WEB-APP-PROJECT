@@ -73,7 +73,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { NgxPayPalModule } from 'ngx-paypal';
-import {PaymentHistoryDialogComponent} from '../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 //primeng component
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 import {AutoCompleteModule} from 'primeng/autocomplete';
@@ -101,10 +100,14 @@ import { DialogUploadBackgroundComponent } from './timeline/dialog-uploadbackgro
 import { DialogReviewComponent} from './fanpage/dialog-review/dialog-review.component';
 import { FanpageBackgroundAreaComponent } from './fanpage/fanpage-background-area/fanpage-background-area.component';
 import { FanpageReviewComponent } from './fanpage-review/fanpage-review.component';
+import { TripHistoryComponent } from './trip-history/trip-history.component';
 import { WebSocketService } from '../_core/services/websocket.service';
 import { LoginService } from '../_core/services/login.service';
 import { delay } from 'rxjs/operators';
 import { DialogModifyTripComponent } from './fanpage/dialog-modifytrip/dialog-modifytrip.component';
+import { DialogModifyPageComponent } from './fanpage/dialog-modifypage/dialog-modifypage.component';
+import { DialogUploadPageAvatarComponent } from './fanpage/dialog-uploadpageavatar/dialog-uploadpageavatar.component';
+import { DialogUploadPageBackgroundComponent } from './fanpage/dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import { ChatAreaComponent } from './messages/chat-area/chat-area.component';
 export const mainRoutes: Routes = [
 
@@ -136,6 +139,7 @@ export const mainRoutes: Routes = [
   { path: 'notifications', component: NotificationsComponent },
   { path: 'people-nearby', component: PeopleNearbyComponent },
   { path: 'trip', component: TripComponent },
+  { path: 'trip-history', component: TripHistoryComponent },
   { path: 'trip-detail/:id', component: TripDetailComponent },
   { path: 'trip-payment/:id', component: TripPaymentComponent },
   { path: 'timeline/:id', component: TimelineComponent },
@@ -199,15 +203,18 @@ export const mainRoutes: Routes = [
     AddFriendDialogComponent,
     ChatBoxComponent,
     UsersListTripComponent,
-    PaymentHistoryDialogComponent,
+    TripHistoryComponent,
     BackgroundAreaComponent,
     DialogUploadAvatarComponent,
     DialogUploadBackgroundComponent,
     DialogModifyTripComponent,
     FanpageBackgroundAreaComponent,
     FanpageReviewComponent,
+    DialogUploadPageAvatarComponent,
+    DialogUploadPageBackgroundComponent,
     DialogReviewComponent,
-    ChatAreaComponent
+    DialogModifyPageComponent
+	ChatAreaComponent
     //Primeng
   ],
   imports: [
@@ -260,7 +267,7 @@ export const mainRoutes: Routes = [
       echarts: () => import('echarts')
     }),
     RouterModule.forChild(mainRoutes),],
-    bootstrap:[MainComponent]
+    bootstrap:[MainComponent],
 })
 export class MainModule{
   constructor(private loginService: LoginService) {

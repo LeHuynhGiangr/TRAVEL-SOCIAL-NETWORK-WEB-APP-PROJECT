@@ -6,6 +6,7 @@ import { TripStatic } from '../../_core/data-repository/trip';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { PagesService } from 'src/app/_core/services/page.service';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
+import { TripService } from 'src/app/_core/services/trip.service';
 @Component({
     selector: 'app-trip-detail',
     templateUrl: './trip-detail.component.html',
@@ -15,8 +16,9 @@ export class TripDetailComponent implements OnInit {
     public trips :Trips;
     namePage
     phonePage
+    persons:any
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc, public tripurl:TripUrl,
-    private PService:PagesService,public pageurl:PageUrl ) {}
+    private PService:PagesService,public pageurl:PageUrl, private TService:TripService ) {}
 
     async ngOnInit() {
       var script = document.createElement("script");
@@ -41,8 +43,8 @@ export class TripDetailComponent implements OnInit {
       const page = await this.PService.getPageById(this.trips.PageId)
       this.namePage = page["name"]
       this.phonePage = page["phoneNumber"]
-    }
-    getPath(){
-      return this.router.url;
+      this.persons = await this.TService.getFriendInTrip(this.trips.Id)
+      this.trips.PersonsInTrip = this.persons.length
+      this.trips.PersonsLimit = Number(this.trips.Persons)
     }
 }

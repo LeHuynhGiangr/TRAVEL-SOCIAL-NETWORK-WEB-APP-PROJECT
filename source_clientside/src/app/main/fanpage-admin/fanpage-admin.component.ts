@@ -50,7 +50,8 @@ export class FanpageAdminComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.tripList = new Array<Trips>();
+      this.getTripList();
     });
   }
   ModifyTripDialog(id): void {
@@ -64,10 +65,6 @@ export class FanpageAdminComponent implements OnInit {
       this.tripList = new Array<Trips>();
       this.getTripList();
     });
-  }
-  consoleID(id)
-  {
-    alert(id)
   }
   getTripList = async () => {
     this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
@@ -93,12 +90,3 @@ export class FanpageAdminComponent implements OnInit {
     this.dataSource.data = this.tripList
   }
 }
-export interface PeriodicElement {
-  Destination:string
-  Name:string
-  Departure:string
-  Cost:string
-  Id:string
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [];

@@ -82,6 +82,8 @@
 									<hr>
 									<br>
 									<div style="margin-top: -15px;margin-bottom: 15px;"><p-button label="Create a review" icon="pi pi-plus" (click)="openDialogReview()"></p-button></div>
+									<h2 style="text-align: center;" *ngIf = "this.listcount === 0">There are currently no review to display...</h2>
+									<p-scrollPanel [style]="{width: '100%', height: '600px'}">
 									<div *ngFor="let userRating of userRatingsListSort">
 										<mat-card style="margin-bottom: 10px;">
 											<div class="rating-star">
@@ -114,7 +116,7 @@
 											</div>
 										</mat-card>
 									</div>
-									<div class="lodmore"><button class="btn-view btn-load-more" (click)="loadmore()"></button></div>
+									</p-scrollPanel>
 								</div><!-- photos -->
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">

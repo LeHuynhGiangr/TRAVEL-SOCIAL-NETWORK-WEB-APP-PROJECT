@@ -34,6 +34,7 @@ export class FanpageReviewComponent implements OnInit {
     star5:number=0
     imgsample:string
     iduser
+    listcount
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
     private PService:PagesService,public dialog: MatDialog, public tripurl:TripUrl, public pageurl:PageUrl,private RService:RatingService) {}
     async ngOnInit() {
@@ -94,7 +95,7 @@ export class FanpageReviewComponent implements OnInit {
     async getListReview()
     {
       this.userRatings = await this.RService.getAllRatings(this.pageurl.getPageIdStorage())
-      console.log(this.userRatings)
+      this.listcount = this.userRatings.length
       for (let i = this.userRatings.length-1; i >=0; i--) {
         if((this.userRatings[i].pageId.toString() == this.pageurl.getPageIdStorage()) && this.userRatings[i].active == true)
         {

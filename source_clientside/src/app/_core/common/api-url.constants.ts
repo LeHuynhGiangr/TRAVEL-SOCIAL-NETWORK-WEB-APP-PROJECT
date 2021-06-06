@@ -21,6 +21,10 @@ export class ApiUrlConstants{
     public static API_LOGIN_URL = '/identity/authenticate'
     //admin API
     public static API_ADMIN_URL = '/admin/'
+    public static API_ADMIN_PAGE = '/admin/page'
+    public static API_ADMIN_PAGE_ACCEPT = '/admin/page/accept/'
+    public static API_ADMIN_PAGE_BLOCK = '/admin/page/block/'
+    public static API_ADMIN_PAGE_REJECT = '/admin/page/reject/'
     //trip API
     public static API_TRIP_URL = '/trip/'
     public static API_TRIPLOAD_URL = '/trip/load/'
@@ -38,4 +42,7 @@ export class ApiUrlConstants{
     public static API_UPDATE_PAGEBACKGROUND_URL ='/page/background'
     public static API_RATING_LOAD = '/page/rating/'
     public static API_RATING_BLOCK = '/page/rating/block/'
+    public static API_PAGE_CHECKFOLLOW = '/page/checkfollow'
+    public static API_PAGE_FOLLOW = '/page/follow'
+    public static API_PAGE_UNFOLLOW = '/page/unfollow'
 }

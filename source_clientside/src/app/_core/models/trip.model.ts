@@ -15,6 +15,8 @@ export class Trips {
     InfoContact:string
     Service:string
     Persons:string
+    PersonsInTrip:number
+    PersonsLimit:number
     DateStart:Date
     DateEnd:Date
     Active:boolean

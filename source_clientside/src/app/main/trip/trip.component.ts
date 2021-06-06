@@ -34,6 +34,9 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
     name:string=null
     coststart:number=null
     costend:number=null
+    persons:any
+    personlength:number
+    persontrip:number
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
       private PService:PagesService,public pageurl:PageUrl, public tripurl:TripUrl) {
@@ -111,19 +114,23 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
+          trip.Persons =this.trips[i].persons
+          trip.PersonsLimit = Number(trip.Persons)
           trip.PageId = this.trips[i].pageId
           const page = await this.PService.getPageById(trip.PageId)
           trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
           trip.authorName = page["name"]
           trip.Cost = this.trips[i].cost
           trip.Content = this.trips[i].content
+          this.persons = await this.TService.getFriendInTrip(trip.Id)
+          trip.PersonsInTrip = this.persons.length
           this.tripList.push(trip)
       }
     }
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.filterTrip(this.filters)
+      this.trips = await this.TService.getAllTrips()
       this.count = this.count + 2
       this.lengthcount = "2:"+(this.count/2-1)
       for (let i = this.count-2; i < this.count; i++) {
@@ -134,12 +141,16 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
+          trip.Persons =this.trips[i].persons
+          trip.PersonsLimit = Number(trip.Persons)
           trip.PageId = this.trips[i].pageId
           const page = await this.PService.getPageById(trip.PageId)
           trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
           trip.authorName = page["name"]
           trip.Cost = this.trips[i].cost
           trip.Content = this.trips[i].content
+          this.persons = await this.TService.getFriendInTrip(trip.Id)
+          trip.PersonsInTrip = this.persons.length
           this.tripList.push(trip)
       }
     }

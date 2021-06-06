@@ -24,7 +24,6 @@ export class AdminService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
         }
     }
     deleteUser = async (id) => {
@@ -40,7 +39,6 @@ export class AdminService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
         }
     }
     blockUser = async (id) => {
@@ -56,7 +54,39 @@ export class AdminService {
         }
         catch (e) {
             console.log(e);
-            // this.removeToken();
+        }
+    }
+    getAllPages = async () => {
+        try {
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    acceptPage = async (id) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_ACCEPT + id,null ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    blockPage = async (id) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_BLOCK + id,null ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    rejectPage = async (id) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_ADMIN_PAGE_REJECT + id,null ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
         }
     }
 }

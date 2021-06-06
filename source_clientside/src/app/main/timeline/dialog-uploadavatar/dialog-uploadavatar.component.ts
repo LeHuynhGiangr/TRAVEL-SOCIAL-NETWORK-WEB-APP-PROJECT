@@ -8,24 +8,22 @@ import { AppUsers } from '../../../login/shared/login.model';
 import { Router } from '@angular/router';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
 import { ApiUrlConstants } from '../../../../../src/app/_core/common/api-url.constants';
-import { MessageService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 
 @Component({
   selector: 'app-dialog-uploadavatar',
   templateUrl: './dialog-uploadavatar.component.html',
   styleUrls: ['./dialog-uploadavatar.component.css'],
-  providers: [MessageService]
 })
 export class DialogUploadAvatarComponent implements OnInit {
   public appUsers: AppUsers;
   public avatar: File
   public m_returnUrl: string;
   url;
-  public message: string;
   constructor(public dialogRef: MatDialogRef<DialogUploadAvatarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
     private timeLineService: TimeLineService,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService, private messageService: MessageService, private primengConfig: PrimeNGConfig) {
+    public Iservice:ImageService, private primengConfig: PrimeNGConfig, private timelineurl:TimelineUrl) {
 
   }
   onNoClick(): void {
@@ -39,18 +37,6 @@ export class DialogUploadAvatarComponent implements OnInit {
     this.appUsers = new AppUsers();
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+ this.service.getAvatarStorage()
     this.primengConfig.ripple = true;
-  }
-  showSuccess() {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
-    setTimeout(() => {
-      this.dialogRef.close();
-   }, 1000)
-  }
-  showError() {
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Message Content'});
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 1000)
   }
   //display image before upload
   onSelectFile(event) {
@@ -77,7 +63,10 @@ export class DialogUploadAvatarComponent implements OnInit {
       }
       else
       {
-        this.showError()
+        this.timelineurl.showError("Save image in gallery failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
 
   }
@@ -85,21 +74,30 @@ export class DialogUploadAvatarComponent implements OnInit {
     try{
       const formData = new FormData();
       formData.append('id', this.service.getUserIdStorage());
-      if (Image) {
-        formData.append('avatar', this.avatar);
-        await this.timeLineService.uploadAvatar(this.service.getUserIdStorage(), formData);
-        this.saveImage()
-        this.showSuccess()
+      formData.append('avatar', this.avatar);
+      if(this.avatar == null)
+      {
+        this.timelineurl.showError("Upload failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
       else
       {
-        this.showError()
+        await this.timeLineService.uploadAvatar(this.service.getUserIdStorage(), formData);
+        this.saveImage()
+        this.timelineurl.showSuccess("Upload successfully !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
     }
     catch(e)
     {
-      this.showError()
+      this.timelineurl.showError(e)
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 1000)
     }
   }
-  
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../../../_core/models/DialogData';
-import { LoginService } from '../../../_core/services/login.service';
 import { ImageService } from '../../../_core/services/images.service';
 import { PagesService } from '../../../_core/services/page.service';
 import {Pages} from '../../../_core/models/pages.model'
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UriHandler } from 'src/app/_helpers/uri-handler';
-import { PageStatic } from 'src/app/_core/data-repository/page';
 import { PageUrl } from 'src/app/_helpers/get-page-url';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-dialog-uploadpageavatar',
   templateUrl: './dialog-uploadpageavatar.component.html',
@@ -20,9 +20,9 @@ export class DialogUploadPageAvatarComponent implements OnInit {
   url;
   public message: string;
   public pages: Pages;
-  constructor(public dialogRef: MatDialogRef<DialogUploadPageAvatarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: LoginService,
-    private PService: PagesService,private m_route: ActivatedRoute,private m_router: Router,public uriHandler:UriHandler,
-    public Iservice:ImageService,public pageurl:PageUrl) {
+  constructor(public dialogRef: MatDialogRef<DialogUploadPageAvatarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private PService: PagesService,private m_router: Router,public uriHandler:UriHandler,
+    public Iservice:ImageService,public pageurl:PageUrl,private timelineurl:TimelineUrl, private primengConfig: PrimeNGConfig) {
 
   }
   onNoClick(): void {
@@ -34,14 +34,12 @@ export class DialogUploadPageAvatarComponent implements OnInit {
     this.m_router.routeReuseStrategy.shouldReuseRoute = () =>{
       return false;
     }
-    console.log(PageStatic.Id)
+    this.primengConfig.ripple = true;
     this.pages=new Pages()
     this.pages.Id = this.pageurl.getPageIdStorage()
     this.pages.Avatar = this.pageurl.getPageAvatarStorage()
   }
 
-  // sửa sao thành lưu /assets/sdsad.jpg nữa chắc ok
-  //display image before upload
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -66,7 +64,10 @@ export class DialogUploadPageAvatarComponent implements OnInit {
       }
       else
       {
-        alert("Upload failure !")
+        this.timelineurl.showError("Save image in gallery failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
 
   }
@@ -74,21 +75,29 @@ export class DialogUploadPageAvatarComponent implements OnInit {
     try{
       const formData = new FormData();
       formData.append('id',  this.pages.Id);
-      if (Image) {
-        formData.append('avatar', this.avatar);
+      formData.append('avatar', this.avatar);
+      if (this.avatar != null) {
         await this.PService.uploadAvatar(formData);
         //this.saveImage()
-        alert("Upload succesfully !")
-        this.dialogRef.close();
+        this.timelineurl.showSuccess("Upload successfully !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
       else
       {
-        alert("Upload failure !")
+        this.timelineurl.showError("Upload failure !")
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
       }
     }
     catch(e)
     {
-      alert("Upload failure !")
+      this.timelineurl.showError(e)
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 1000)
     }
   }
   

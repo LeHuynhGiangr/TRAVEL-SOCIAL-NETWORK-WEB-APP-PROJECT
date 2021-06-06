@@ -9,7 +9,6 @@ import { SearchService } from '../../_core/services/friends-search.service';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { ApiUrlConstants } from '../../../../src/app/_core/common/api-url.constants';
 import { MatDialog } from '@angular/material/dialog';
-import {PaymentHistoryDialogComponent} from '../../main/trip-payment/payment-history-dialog/payment-history-dialog.component'
 import {MenuItem} from 'primeng/api';
 @Component({
     selector: 'app-header',
@@ -86,18 +85,6 @@ export class HeaderComponent implements OnInit {
             }
         }
       //this.refresh()
-    }
-    openDialog(): void {
-      const dialogRef = this.dialog.open(PaymentHistoryDialogComponent, {
-        width: '500px',
-        height: '400px',
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-          return false;
-        }
-        console.log('The dialog was closed');
-      });
     }
     returnId()
     {

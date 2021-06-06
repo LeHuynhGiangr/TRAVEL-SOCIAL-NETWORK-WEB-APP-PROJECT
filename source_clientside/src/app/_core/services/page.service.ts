@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {LoginService} from './login.service'
 import { ApiUrlConstants } from '../common/api-url.constants';
 @Injectable({
@@ -73,6 +73,48 @@ export class PagesService {
                 }
             }
             return await this.http.put(this.urlAPI + ApiUrlConstants.API_UPDATE_PAGEBACKGROUND_URL ,formData, config).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    modifyPage = async (id,page) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_PAGEID_URL + id ,page).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    checkfollowPage = async (page) => {
+        try {
+            return await this.http.post(this.urlAPI + ApiUrlConstants.API_PAGE_CHECKFOLLOW,page ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    followPage = async (page) => {
+        try {
+            return await this.http.post(this.urlAPI + ApiUrlConstants.API_PAGE_FOLLOW,page ).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    unfollowPage = async (page) => {
+        try {
+            const options = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json'
+                }),
+                body: page
+              }
+          
+              this.http.delete(this.urlAPI + ApiUrlConstants.API_PAGE_UNFOLLOW, options).subscribe(s => {
+                console.log(s);
+              })
+            //return await this.http.delete(this.urlAPI + ApiUrlConstants.API_PAGE_UNFOLLOW,page ).toPromise();            
         }
         catch (e) {
             console.log("ok");
