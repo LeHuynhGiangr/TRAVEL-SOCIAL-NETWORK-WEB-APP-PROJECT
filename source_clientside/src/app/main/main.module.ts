@@ -213,8 +213,8 @@ export const mainRoutes: Routes = [
     DialogUploadPageAvatarComponent,
     DialogUploadPageBackgroundComponent,
     DialogReviewComponent,
-    DialogModifyPageComponent
-	ChatAreaComponent
+    DialogModifyPageComponent,
+	  ChatAreaComponent
     //Primeng
   ],
   imports: [
