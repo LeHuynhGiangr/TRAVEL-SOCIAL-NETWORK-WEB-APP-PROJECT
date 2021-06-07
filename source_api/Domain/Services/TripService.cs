@@ -220,7 +220,7 @@ namespace Domain.Services
         }
         IEnumerable<TripResponse> ITripService<Guid>.GetTripsByPageId<IdType>(IdType id)
         {
-            var l_trips = m_tripRepository.FindMultiple(_ => _.Page.Id.Equals(id), _ => _.Page, _ => _.User);
+            var l_trips = m_tripRepository.FindMultiple(_ => _.Page.Id.Equals(id) && _.Active == true, _ => _.Page, _ => _.User);
 
 
             List<TripResponse> l_tripResponses = new List<TripResponse>();
@@ -253,7 +253,7 @@ namespace Domain.Services
         public IEnumerable<TripResponse> FilterTrip(FilterRequest filterRequest)
         {
             var l_trips = m_tripRepository.GetAll(_ => _.Page, _ => _.User).Where(_ => _.Name.ToLower().Contains(filterRequest.Name.ToLower())
-            && Convert.ToInt32(_.Cost) >= filterRequest.CostStart && Convert.ToInt32(_.Cost) <= filterRequest.CostEnd);
+            && Convert.ToInt32(_.Cost) >= filterRequest.CostStart && Convert.ToInt32(_.Cost) <= filterRequest.CostEnd && _.Active.Equals(true));
 
             List<TripResponse> l_tripResponses = new List<TripResponse>();
 
