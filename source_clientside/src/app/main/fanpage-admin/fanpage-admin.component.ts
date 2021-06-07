@@ -80,6 +80,7 @@ export class FanpageAdminComponent implements OnInit {
         trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
         trip.authorId = this.trips[i].authorId
         trip.CreatedDate = this.trips[i].dateCreated
+        trip.Active = this.trips[i].active
         trip.PageId = this.trips[i].pageId
         const page = await this.PService.getPageById(trip.PageId)
         trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]

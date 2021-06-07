@@ -58,7 +58,6 @@ export class TripService {
                 }
             }
             const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIPLOAD_URL+id, config).toPromise();
-            console.log(result)
             return result;
         }
         catch (e) {

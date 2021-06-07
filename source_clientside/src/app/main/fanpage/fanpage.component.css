@@ -90,6 +90,59 @@ margin-bottom: 60px;
 {
   text-decoration: underline;
 }
+.outofstock
+{
+  height: 50%;
+  width: 75%;
+  display: block;
+  margin-left: 15%;
+  margin-top: -45%;
+}
+.pag
+{
+  position: absolute;
+  right: 20px;
+  margin-bottom: 60px;
+}
+.expired
+{
+  display: block;
+  width: 30%;
+  position: absolute;
+  bottom: 5px;
+  background: darkgray;
+  font-weight: bold;
+  color: white;
+}
+.card-instock {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 97%;
+  height: 97%;
+  cursor: pointer;
+  background-color: #cfc8b8;
+}
+.cost
+{
+  position: absolute;
+  bottom: 4%;
+  font-size: 20px;
+  right: 6%;
+}
+.card-instock:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  opacity: 0.7;
+}
+.available
+{
+  display: block;
+  width: 30%;
+  position: absolute;
+  bottom: 5px;
+  background: rgb(108, 150, 148);
+  font-weight: bold;
+  color: white;
+}
 @media (max-width:760px) {
   .title-panel
   {
