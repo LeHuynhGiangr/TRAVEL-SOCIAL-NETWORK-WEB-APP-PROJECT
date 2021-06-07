@@ -112,6 +112,7 @@ import { ChatAreaComponent } from './messages/chat-area/chat-area.component';
 import { DialogTripHistoryDetailComponent } from './trip-history/trip-history-detail/trip-history-detail.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { MatSortModule } from '@angular/material/sort';
+import { DialogPassengersComponent } from './fanpage-admin/dialog-passengers/dialog-passengers.component'
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -220,7 +221,8 @@ export const mainRoutes: Routes = [
     DialogModifyPageComponent,
 	  ChatAreaComponent,
     DialogTripHistoryDetailComponent,
-    PaymentHistoryComponent
+    PaymentHistoryComponent,
+    DialogPassengersComponent
     //Primeng
   ],
   imports: [

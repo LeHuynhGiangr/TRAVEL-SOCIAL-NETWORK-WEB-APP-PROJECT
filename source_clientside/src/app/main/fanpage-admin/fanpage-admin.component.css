@@ -51,4 +51,17 @@ table {
   .example-element-description-attribution {
     opacity: 0.5;
   }
-  
+  .export
+  {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .rowtable
+  {
+    cursor: pointer;
+  }
+  .rowtable:hover
+  {
+      opacity: 0.5;
+  }

@@ -28,25 +28,25 @@
 							  <!-- Position Column -->
 							  <ng-container matColumnDef="Name">
 								<th mat-header-cell *matHeaderCellDef> Name </th>
-								<td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+								<td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailPassengers(element.Id)"> {{element.Name}} </td>
 							  </ng-container>
 						  
 							  <!-- Name Column -->
 							  <ng-container matColumnDef="Departure">
 								<th mat-header-cell *matHeaderCellDef> Departure </th>
-								<td mat-cell *matCellDef="let element"> {{element.Start}} </td>
+								<td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailPassengers(element.Id)"> {{element.Start}} </td>
 							  </ng-container>
 						  
 							  <!-- Weight Column -->
 							  <ng-container matColumnDef="Destination">
 								<th mat-header-cell *matHeaderCellDef> Destination </th>
-								<td mat-cell *matCellDef="let element"> {{element.Destination}} </td>
+								<td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailPassengers(element.Id)"> {{element.Destination}} </td>
 							  </ng-container>
 						  
 							  <!-- Symbol Column -->
 							  <ng-container matColumnDef="Cost">
 								<th mat-header-cell *matHeaderCellDef> Cost </th>
-								<td mat-cell *matCellDef="let element"> {{element.Cost}} $</td>
+								<td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailPassengers(element.Id)"> {{element.Cost}} $</td>
 							  </ng-container>
 							  <ng-container matColumnDef="Action">
 								<th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
@@ -61,6 +61,8 @@
 					</div>
 				</div>
 			</div>
+			<br>
+			<button *ngIf ="this.tripcount > 0"class="export"type="submit" mat-button mat-raised-button color="primary">Export statistics</button>
 		</div>	
 	</section>
 <app-footer></app-footer>

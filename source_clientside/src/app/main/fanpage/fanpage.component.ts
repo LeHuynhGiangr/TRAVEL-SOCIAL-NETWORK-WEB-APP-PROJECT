@@ -116,7 +116,7 @@ export class FanpageComponent implements OnInit {
     }
     getTripList = async () => {
       this.count=4
-      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
+      this.trips = await this.TService.getAllTripsByPageIdActive(this.pageurl.getPageIdStorage())
       this.listcount = this.trips.length
       this.lengthcount = "2:2"
       for (let i = 0; i < this.count; i++) {
@@ -150,7 +150,7 @@ export class FanpageComponent implements OnInit {
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
+      this.trips = await this.TService.getAllTripsByPageIdActive(this.pageurl.getPageIdStorage())
       if(this.count + 2 > this.trips.length)
         this.setcount = 1
       else

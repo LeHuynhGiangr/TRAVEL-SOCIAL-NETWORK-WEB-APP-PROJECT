@@ -47,10 +47,12 @@
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
             <mat-slide-toggle
+                [(ngModel)]="trips.Active"
                 class="example-margin"
                 [color]="color"
-                [checked]="this.trips.Active"
-                [(ngModel)]="this.trips.Active">
+                [checked]="trips.Active"
+                name="tripsActive"
+                >
                 Active
             </mat-slide-toggle>
         </mat-tab>

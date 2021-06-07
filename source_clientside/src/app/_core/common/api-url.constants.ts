@@ -28,6 +28,7 @@ export class ApiUrlConstants{
     //trip API
     public static API_TRIP_URL = '/trip/'
     public static API_TRIPLOAD_URL = '/trip/load/'
+    public static API_TRIPLOADACTIVE_URL = '/trip/loadactive/'
     public static API_FRIENDSINTRIP_URL = '/invitefriend/'
     public static API_FRIENDSINTRIPLOAD_URL = '/invitefriend/load?tripid='
     public static API_PAYMENTHISTORY_URL = '/invitefriend/history?userId='

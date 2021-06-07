@@ -12,6 +12,7 @@ import { PagesService } from 'src/app/_core/services/page.service';
 import { Trips } from 'src/app/_core/models/trip.model';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 import { DialogModifyTripComponent } from '../fanpage/dialog-modifytrip/dialog-modifytrip.component';
+import { DialogPassengersComponent } from './dialog-passengers/dialog-passengers.component';
 @Component({
     selector: 'app-fanpage-admin',
     templateUrl: './fanpage-admin.component.html',
@@ -25,6 +26,7 @@ export class FanpageAdminComponent implements OnInit {
   public tripList = new Array<Trips>();
   idpage;
   trips:any
+  tripcount:number
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -66,8 +68,18 @@ export class FanpageAdminComponent implements OnInit {
       this.getTripList();
     });
   }
+  DetailPassengers(id): void {
+    const dialogRef = this.dialog.open(DialogPassengersComponent, {
+      width: '800px',
+      height: '400px',
+    });
+    dialogRef.componentInstance.idTrip = id;
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
   getTripList = async () => {
     this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
+    this.tripcount = this.trips.length
     for (let i = 0; i < this.trips.length; i++) {
         let trip = new Trips();
         trip.Id = this.trips[i].id.toString()

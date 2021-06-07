@@ -64,6 +64,21 @@ export class TripService {
             console.log(e);
         }
     }
+    getAllTripsByPageIdActive = async (id) => {
+        try {
+       
+            const config = {
+                headers: {
+                    Authorization: this.service.getConfigToken()
+                }
+            }
+            const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_TRIPLOADACTIVE_URL+id, config).toPromise();
+            return result;
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
     filterTrip = async (filter) => {
         try {
             const result = await this.http.post(this.urlAPI + ApiUrlConstants.API_FILTER_TRIP,filter).toPromise();
