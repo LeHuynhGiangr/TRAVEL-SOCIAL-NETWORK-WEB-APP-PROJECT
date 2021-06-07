@@ -84,6 +84,20 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        //get trip by page id
+        [HttpGet("loadactive/{id:guid}")]
+        public IActionResult LoadTripsByPageIdActive(Guid id)
+        {
+            try
+            {
+                var tripResponses = _service.GetTripsByPageIdActive(id);
+                return Ok(tripResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> CreateTripAsync([FromForm] CreateTripRequest createTripRequest)
         {

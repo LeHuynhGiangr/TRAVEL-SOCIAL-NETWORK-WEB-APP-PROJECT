@@ -12,6 +12,7 @@ namespace Domain.IServices
         IEnumerable<TripResponse> GetAll();
         IEnumerable<TripResponse> GetTripsByUserId<IdType>(IdType id);
         IEnumerable<TripResponse> GetTripsByPageId<IdType>(IdType id);
+        IEnumerable<TripResponse> GetTripsByPageIdActive<IdType>(IdType id);
         IEnumerable<TripResponse> FilterTrip(FilterRequest filterRequest);
         TripResponse GetById(T id);
         TripResponse Create(CreateTripRequest model, string webRootPath);

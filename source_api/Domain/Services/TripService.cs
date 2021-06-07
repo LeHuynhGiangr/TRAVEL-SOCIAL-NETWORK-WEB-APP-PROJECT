@@ -220,6 +220,38 @@ namespace Domain.Services
         }
         IEnumerable<TripResponse> ITripService<Guid>.GetTripsByPageId<IdType>(IdType id)
         {
+            var l_trips = m_tripRepository.FindMultiple(_ => _.Page.Id.Equals(id), _ => _.Page, _ => _.User);
+
+
+            List<TripResponse> l_tripResponses = new List<TripResponse>();
+
+            foreach (Trip trip in l_trips)
+            {
+                l_tripResponses.Add(
+                    new TripResponse(
+                        trip.Id,
+                        trip.DateCreated,
+                        trip.Description,
+                        trip.User.Id.ToString(),
+                        trip.Image,
+                        trip.Name,
+                        trip.Start,
+                        trip.Destination,
+                        trip.Service,
+                        trip.Policy,
+                        trip.InfoContact,
+                        trip.Content,
+                        trip.Cost,
+                        trip.Persons,
+                        trip.Active,
+                        trip.DateStart,
+                        trip.DateEnd,
+                        trip.PageId.ToString()));
+            }
+            return l_tripResponses;
+        }
+        IEnumerable<TripResponse> ITripService<Guid>.GetTripsByPageIdActive<IdType>(IdType id)
+        {
             var l_trips = m_tripRepository.FindMultiple(_ => _.Page.Id.Equals(id) && _.Active == true, _ => _.Page, _ => _.User);
 
 
