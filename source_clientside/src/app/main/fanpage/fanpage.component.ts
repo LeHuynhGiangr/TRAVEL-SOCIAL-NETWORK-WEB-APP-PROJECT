@@ -118,7 +118,7 @@ export class FanpageComponent implements OnInit {
       this.count=4
       this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
       this.listcount = this.trips.length
-      this.lengthcount="2:"+this.count/2
+      this.lengthcount = "2:2"
       for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
@@ -157,10 +157,7 @@ export class FanpageComponent implements OnInit {
         this.setcount = 2
       console.log(this.setcount)
       this.count = this.count + this.setcount
-      if(this.count % 2 == 0)
-        this.lengthcount = "2:"+((this.count)/2-1)
-      else
-        this.lengthcount = "2:"+((this.count+1)/2-1)
+      this.lengthcount = "2:2"
       for (let i = this.count - this.setcount; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()

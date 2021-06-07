@@ -19,6 +19,7 @@ export class Trips {
     PersonsLimit:number
     DateStart:Date
     DateEnd:Date
+    DuringDate:number
     SetDate:boolean
     Active:boolean
     PageId:string

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiUrlConstants } from '../_core/common/api-url.constants';
 import { TripStatic } from './../_core/data-repository/trip';
 import { TripService } from './../_core/services/trip.service';
 @Injectable({
@@ -23,6 +24,7 @@ export class TripUrl{
         TripStatic.InfoContact = result["infoContact"]
         TripStatic.Service = result["service"]
         TripStatic.Persons = result["persons"]
+        TripStatic.Image =  ApiUrlConstants.API_URL+"/"+result["image"]
         TripStatic.DateStart = result["dateStart"]
         TripStatic.DateEnd = result["dateEnd"]
         TripStatic.PageId = result["pageId"]

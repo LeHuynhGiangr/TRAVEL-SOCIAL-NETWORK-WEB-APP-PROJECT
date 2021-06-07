@@ -108,7 +108,7 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
       this.count=4
       this.trips = await this.TService.filterTrip(this.filters)
       this.listcount = this.trips.length
-      this.lengthcount="2:"+this.count/2
+      this.lengthcount="2:2"
       for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
@@ -145,12 +145,9 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
         this.setcount = 1
       else
         this.setcount = 2
-      console.log(this.setcount)
       this.count = this.count + this.setcount
-      if(this.count % 2 == 0)
-        this.lengthcount = "2:"+((this.count)/2-1)
-      else
-        this.lengthcount = "2:"+((this.count+1)/2-1)
+      this.lengthcount = "2:2"
+      console.log(this.lengthcount)
       for (let i = this.count - this.setcount; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()

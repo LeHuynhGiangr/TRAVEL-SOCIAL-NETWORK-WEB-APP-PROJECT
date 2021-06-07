@@ -18,6 +18,9 @@
                <div class="row" id="page-contents">
                   <div class="col-lg-6 left">
                      <h1 style="font-weight: bold;">{{this.trips.Name}} </h1>
+                     <div>
+                        <img style="width:100%;height:300px" src = "{{this.trips.Image}}">
+                     </div>
                      <span>
                         <mat-icon>local_atm</mat-icon>
                         <strong> {{this.trips.Cost}} $ / person</strong>
@@ -29,9 +32,11 @@
                                  <mat-card-title>Tourist Description</mat-card-title>
                               </mat-card-header>
                               <mat-card-content>
-                                 <p class="angular-with-newlines">
-                                    {{this.trips.Description}}
-                                 </p>
+                                 <p-scrollPanel [style]="{width: '100%', height: '300px'}">
+                                    <p class="angular-with-newlines">
+                                       {{this.trips.Description}}
+                                    </p>
+                                 </p-scrollPanel>
                               </mat-card-content>
                            </mat-card>
                         </mat-tab>
@@ -70,9 +75,11 @@
                                  <mat-card-title>Tourist Policy</mat-card-title>
                               </mat-card-header>
                               <mat-card-content>
-                                 <p class="angular-with-newlines">
-                                    {{this.trips.Policy}}
-                                 </p>
+                                 <p-scrollPanel [style]="{width: '100%', height: '300px'}">
+                                    <p class="angular-with-newlines">
+                                       {{this.trips.Policy}}
+                                    </p>
+                                 </p-scrollPanel>
                               </mat-card-content>
                            </mat-card>
                         </mat-tab>
@@ -82,13 +89,15 @@
                                  <mat-card-title>Contact Infomation</mat-card-title>
                               </mat-card-header>
                               <mat-card-content>
-                                 <p class="angular-with-newlines">
-                                    {{this.trips.InfoContact}}
-                                 </p>
-                                 <p class="angular-with-newlines" style="cursor: pointer;" (click)="pageurl.getNavigation(this.trips.PageId)">
-                                    <span>Page Info:</span>
-                                    <strong>{{this.namePage}}</strong>
-                                 </p>
+                                 <p-scrollPanel [style]="{width: '100%', height: '300px'}">
+                                    <p class="angular-with-newlines">
+                                       {{this.trips.InfoContact}}
+                                    </p>
+                                    <p class="angular-with-newlines" style="cursor: pointer;" (click)="pageurl.getNavigation(this.trips.PageId)">
+                                       <span>Page Info:</span>
+                                       <strong>{{this.namePage}}</strong>
+                                    </p>
+                                 </p-scrollPanel>
                               </mat-card-content>
                            </mat-card>
                         </mat-tab>
@@ -98,9 +107,11 @@
                                  <mat-card-title>Service</mat-card-title>
                               </mat-card-header>
                               <mat-card-content>
-                                 <p class="angular-with-newlines">
-                                    {{this.trips.Service}}
-                                 </p>
+                                 <p-scrollPanel [style]="{width: '100%', height: '300px'}">
+                                    <p class="angular-with-newlines">
+                                       {{this.trips.Service}}
+                                    </p>
+                                 </p-scrollPanel>
                               </mat-card-content>
                            </mat-card>
                         </mat-tab>
@@ -110,8 +121,9 @@
                      <h2 style="text-align: center;font-weight: bold;">Introduction</h2>
                      <div class="introduction-text" >
                         <i class="fas fa-pager"></i><span class="page-name"style="cursor: pointer;margin-left: 10px;font-size: 16px;" (click)="pageurl.getNavigation(this.trips.PageId)"><strong>{{this.namePage}}</strong></span><br><br>
-                        <i class="fas fa-map-marked-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>{{this.trips.Destination}}</strong></span><br><br>
-                        <i class="fas fa-phone-square-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>{{this.phonePage}}</strong></span>
+                        <i class="fas fa-map-marked-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>Address: {{this.addressPage}}</strong></span><br><br>
+                        <i class="far fa-calendar-plus"></i><span style="cursor: pointer;margin-left: 10px;"><strong>Page creation date: {{this.createdDatePage}}</strong></span><br><br>
+                        <i class="fas fa-phone-square-alt"></i><span style="cursor: pointer;margin-left: 10px;"><strong>Phone number: {{this.phonePage}}</strong></span>
                      </div>
                    </div>
                   <!-- centerl meta -->
@@ -119,9 +131,11 @@
             </div>
          </div>
       </div>
-      <button *ngIf="this.trips.PersonsInTrip < this.trips.PersonsLimit && this.checkbook === false"class="btn-booknow" type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
-      <button *ngIf="this.trips.PersonsInTrip >= this.trips.PersonsLimit && this.checkbook === false"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Out Of Stock</button>
-      <button *ngIf="this.checkbook === true"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Booked</button>
+      <div class="during-date"><h1>{{this.trips.DuringDate}} Days</h1><hr></div>
+      <button *ngIf="this.trips.PersonsInTrip < this.trips.PersonsLimit && this.checkbook === false  && this.trips.SetDate === false"class="btn-booknow" type="submit" mat-button mat-raised-button color="primary" (click)="tripurl.getNavigationPayment(this.trips.Id)" [routerLink]="['/trip-payment/:', this.trips.Id]">Book Now !</button>
+      <button *ngIf="this.trips.PersonsInTrip >= this.trips.PersonsLimit && this.checkbook === false  && this.trips.SetDate === false"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Out Of Stock</button>
+      <button *ngIf="this.checkbook === true && this.trips.SetDate === false"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Booked</button>
+      <button *ngIf="this.trips.SetDate === true"class="btn-booknow-dis" type="submit" mat-button mat-raised-button color="primary">Expired</button>
    </div>
 </section>
 <app-footer></app-footer>
