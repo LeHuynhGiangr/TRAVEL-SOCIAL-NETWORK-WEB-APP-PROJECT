@@ -65,3 +65,7 @@ table {
   {
       opacity: 0.5;
   }
+  .dis-table
+  {
+    display: none;
+  }

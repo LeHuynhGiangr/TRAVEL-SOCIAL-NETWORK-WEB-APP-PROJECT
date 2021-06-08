@@ -1,6 +1,7 @@
 export class TripHistory {
     Id:string
     TripId:string
+    TripName:string
     Name:string
     PhoneNumber:string
     Email:string

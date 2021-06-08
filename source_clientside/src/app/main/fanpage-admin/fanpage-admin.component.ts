@@ -13,6 +13,8 @@ import { Trips } from 'src/app/_core/models/trip.model';
 import { ApiUrlConstants } from 'src/app/_core/common/api-url.constants';
 import { DialogModifyTripComponent } from '../fanpage/dialog-modifytrip/dialog-modifytrip.component';
 import { DialogPassengersComponent } from './dialog-passengers/dialog-passengers.component';
+import { TripHistory } from 'src/app/_core/models/trip-history.model';
+import * as XLSX from 'xlsx';
 @Component({
     selector: 'app-fanpage-admin',
     templateUrl: './fanpage-admin.component.html',
@@ -27,6 +29,11 @@ export class FanpageAdminComponent implements OnInit {
   idpage;
   trips:any
   tripcount:number
+  public passengerList = new Array<TripHistory>();
+  public reportList = new Array<TripHistory>();
+  title = 'angular-app';
+  fileName= 'ExcelSheet.xlsx';
+  totalPrice:number
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -42,6 +49,7 @@ export class FanpageAdminComponent implements OnInit {
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
     this.dataSource = new MatTableDataSource<Trips>();
+    this.totalPrice = 0
     this.getTripList();
     this.idpage = this.pageurl.getPageIdStorage();
   }
@@ -83,6 +91,7 @@ export class FanpageAdminComponent implements OnInit {
     for (let i = 0; i < this.trips.length; i++) {
         let trip = new Trips();
         trip.Id = this.trips[i].id.toString()
+        this.getListPassengers(trip.Id)
         trip.Name = this.trips[i].name
         trip.Description = this.trips[i].description
         trip.Content = this.trips[i].content
@@ -102,4 +111,53 @@ export class FanpageAdminComponent implements OnInit {
     }
     this.dataSource.data = this.tripList
   }
+  async getListPassengers(id)
+    {
+        const passengers = await this.TService.getFriendInTrip(id) as Array<any>;
+
+        const passengerList = [];
+
+        for (let i = 0; i < passengers.length; i++)
+        {
+          const passenger = new TripHistory();
+          passenger.TripId = passengers[i].tripId
+          const tripconst = await this.TService.getTripDetail(passenger.TripId)
+          passenger.TripName = tripconst["name"]
+          passenger.Name = passengers[i].name
+          passenger.PhoneNumber = passengers[i].phoneNumber
+          passenger.Email = passengers[i].email
+          passenger.Address = passengers[i].address
+          passenger.Requirements = passengers[i].requirements
+          passenger.PeopleNumber = passengers[i].peopleNumber
+          passenger.DateCreated = passengers[i].dateCreated
+          passenger.CostPayment = passengers[i].costPayment
+          this.totalPrice = Number(this.totalPrice) + Number(passenger.CostPayment)
+          passengerList.push(passenger);
+        }
+        this.reportList = this.reportList.concat(passengerList);
+    }
+    exportexcel(): void
+    {
+      /* pass here the table id */
+      let element = document.getElementById('excel-table');
+      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+      var wscols = [
+        {wch:30},
+        {wch:20},
+        {wch:25},
+        {wch:20},
+        {wch:15},
+        {wch:20},
+        {wch:10},
+        {wch:15}
+    ];
+      ws['!cols'] = wscols
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+   
+      /* save to file */  
+      XLSX.writeFile(wb, this.fileName);
+   
+    }
 }

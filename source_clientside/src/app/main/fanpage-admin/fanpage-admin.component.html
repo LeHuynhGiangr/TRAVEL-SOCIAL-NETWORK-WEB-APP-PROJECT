@@ -60,9 +60,41 @@
 						  </div>	
 					</div>
 				</div>
+				<table id="excel-table" class="dis-table">
+					<tr>
+					  <th>Trip Name</th>
+					  <th>Name</th>
+					  <th>Email</th>
+					  <th>Address</th>
+					  <th>Phone Number</th>
+					  <th>Requirements</th>
+					  <th>Passengers</th>
+					  <th>Date Booking</th>
+					</tr>
+					<tr *ngFor="let passenger of reportList">
+					  <td>{{this.passenger.TripName}}</td>
+					  <td>{{this.passenger.Name}}</td>
+					  <td>{{this.passenger.Email}}</td>
+					  <td>{{this.passenger.Address}}</td>
+					  <td>{{this.passenger.PhoneNumber}}</td>
+					  <td>{{this.passenger.Requirements}}</td>
+					  <td>{{this.passenger.PeopleNumber}}</td>
+					  <td>{{this.passenger.DateCreated| date: 'dd/MM/yyyy'}}</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Total Price: </td>
+						<td>{{this.totalPrice}} dola</td>
+					</tr>
+				</table>
 			</div>
 			<br>
-			<button *ngIf ="this.tripcount > 0"class="export"type="submit" mat-button mat-raised-button color="primary">Export statistics</button>
+			<button *ngIf ="this.tripcount > 0"class="export"type="submit" mat-button mat-raised-button color="primary" (click)="exportexcel()">Export statistics</button>
 		</div>	
 	</section>
 <app-footer></app-footer>
