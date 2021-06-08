@@ -94,6 +94,14 @@ export class PagesService {
             console.log("ok");
         }
     }
+    getUserFollowPage = async (id) => {
+        try {
+            return await this.http.get(this.urlAPI + ApiUrlConstants.API_PAGE_USERFOLLOW+ id).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
     followPage = async (page) => {
         try {
             return await this.http.post(this.urlAPI + ApiUrlConstants.API_PAGE_FOLLOW,page ).toPromise();            

@@ -46,4 +46,9 @@ export class ApiUrlConstants{
     public static API_PAGE_CHECKFOLLOW = '/page/checkfollow'
     public static API_PAGE_FOLLOW = '/page/follow'
     public static API_PAGE_UNFOLLOW = '/page/unfollow'
+    public static API_PAGE_USERFOLLOW = '/page/userfollow/'
+
+    //notification API
+    public static API_NOTIFICATION_PAGE = '/notification/notipage/'
+    public static API_NOTIFICATION_PAGENEW = '/notification/newnotipage/'
 }

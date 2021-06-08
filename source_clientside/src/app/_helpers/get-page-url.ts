@@ -10,9 +10,7 @@ export class PageUrl{
     public async getNavigation( id) {
         this.m_returnUrl = this.m_route.snapshot.queryParams['returnUrl'] || '/main/fanpage/'+id;
         this.savePageIdStorage(id);
-
         const result = await this.PService.getPageById(id);
-        console.log(result)
         this.savePageInfoStorage(result["name"],result["avatar"],result["background"],result["address"],
         result["phoneNumber"],result["description"], result["follow"],result["userId"])
         this.m_router.navigateByUrl(this.m_returnUrl, {skipLocationChange:true});
