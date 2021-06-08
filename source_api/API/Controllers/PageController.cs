@@ -186,7 +186,19 @@ namespace API.Controllers
             else
                 return false;
         }
-
+        [HttpGet("userfollow/{id:guid}")]
+        public IActionResult GetAllUserFollowByPageId(Guid id)
+        {
+            try
+            {
+                var userResponse = f_service.GetUserFollowByPageId(id);
+                return Ok(userResponse);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [Route("follow")]
         [HttpPost]
         public async Task<IActionResult> FollowPageAsync([FromBody] UserFollowPageRequest followpageRequest)

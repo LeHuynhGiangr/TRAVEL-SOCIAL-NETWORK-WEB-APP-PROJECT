@@ -12,5 +12,6 @@ namespace Domain.IServices
         UserFollowPageResponse Follow(UserFollowPageRequest model);
         void UnFollow(UserUnfollowRequest userUnfollowRequest);
         bool GetFollow(UserFollowPageRequest userFollowRequest);
+        IEnumerable<UserFollowPageResponse> GetUserFollowByPageId<IdType>(IdType id);
     }
 }

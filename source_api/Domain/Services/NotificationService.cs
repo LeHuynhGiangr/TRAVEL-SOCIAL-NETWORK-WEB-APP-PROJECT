@@ -19,7 +19,7 @@ namespace Domain.Services
         }
         IEnumerable<NotificationResponse> INotificationService<Guid>.GetNotificationByUserId<IdType>(IdType id)
         {
-            var l_noti = m_notiRepository.FindMultiple(_ => _.User.Id.Equals(id), _ => _.User, _ => _.Page);
+            var l_noti = m_notiRepository.FindMultiple(_ => _.User.Id.Equals(id), _ => _.User, _ => _.Page).OrderByDescending(_ => _.DateCreated);
 
             List<NotificationResponse> l_notiResponses = new List<NotificationResponse>();
 
@@ -30,8 +30,8 @@ namespace Domain.Services
                         noti.Id,
                         noti.DateCreated,
                         noti.Description,
-                        noti.Page.Id.ToString(),
-                        noti.User.Id.ToString()));
+                        noti.User.Id.ToString(),
+                        noti.Page.Id.ToString()));
             }
             return l_notiResponses;
         }
@@ -43,7 +43,7 @@ namespace Domain.Services
                         noti.DateCreated,
                         noti.Description,
                         noti.User.Id.ToString(),
-                        noti.PageId.ToString());
+                        noti.Page.Id.ToString());
             return notiResponse;
         }
         public NotificationResponse GetNewNotification(Guid id)
@@ -54,7 +54,7 @@ namespace Domain.Services
                         noti.DateCreated,
                         noti.Description,
                         noti.User.Id.ToString(),
-                        noti.PageId.ToString());
+                        noti.Page.Id.ToString());
             return notiResponse;
         }
         public NotificationResponse CreateNotification(NotificationRequest model)
