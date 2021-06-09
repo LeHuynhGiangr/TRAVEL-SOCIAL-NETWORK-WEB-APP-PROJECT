@@ -10,6 +10,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { NotificationPageService } from 'src/app/_core/services/notificationpage.service';
 import { PagesService } from 'src/app/_core/services/page.service';
 import { Notifications } from 'src/app/_core/models/notifications.model';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-trip-dialog',
     templateUrl: './trip-dialog.component.html',
@@ -33,15 +34,16 @@ export class TripDialogComponent implements OnInit {
   public Cost : string=""
   public Persons : string=""
   public m_returnUrl: string;
-  public noti:Notifications
-  userfollows:any
   url;
   constructor(public dialogRef: MatDialogRef<TripDialogComponent>, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
     private service: TripService,public datepipe: DatePipe, public pageurl:PageUrl,private timelineurl:TimelineUrl, private primengConfig: PrimeNGConfig,
-    private Nservice:NotificationPageService, private Pservice:PagesService) {
+    private Nservice:NotificationPageService, private Pservice:PagesService,private router: Router) {
   }
   async ngOnInit() {
     this.primengConfig.ripple = true;
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+      return false;
+    }
   }
   onNoClick(): void {
       this.dialogRef.close();
@@ -107,13 +109,15 @@ export class TripDialogComponent implements OnInit {
   }
   async sendNoti()
   {
-    this.userfollows = await this.Pservice.getUserFollowPage(this.pageurl.getPageIdStorage())
-    for (let i = 0; i < this.userfollows.length; i++) {
-      this.noti = new Notifications();
-      this.noti.Description = "Page just created a new tour !"
-      this.noti.UserId = this.userfollows[i].userId
-      this.noti.PageId = this.pageurl.getPageIdStorage()
-      const create = await this.Nservice.createNotifications(this.noti)
+    const userfollows = await this.Pservice.getUserFollowPage(this.pageurl.getPageIdStorage()) as Array<any>;
+    console.log(userfollows)
+    for (let i = 0; i < userfollows.length; i++) {
+      let noti = new Notifications();
+      noti.UserId = userfollows[i].userId
+      noti.PageId = this.pageurl.getPageIdStorage()
+      const page = await this.Pservice.getPageById(this.pageurl.getPageIdStorage())
+      noti.Description = page["name"] + " just created a new tour !"
+      const create = await this.Nservice.createNotifications(noti)
     }
   }
 }

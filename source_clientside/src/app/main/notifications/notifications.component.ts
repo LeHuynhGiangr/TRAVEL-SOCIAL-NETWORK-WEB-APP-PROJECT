@@ -21,22 +21,21 @@ import { environment } from 'src/environments/environment';
 export class NotificationsComponent implements OnInit {
 
   public appUsers: AppUsers;
-  public notis : any
-  public notisnew : any
   public notisList = new Array<Notifications>();
-  public noti: Notifications
+  loop:number
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
   public dialog: MatDialog,public uriHandler:UriHandler,public timelineurl:TimelineUrl,private Nservice:NotificationPageService,
   private Pservice:PagesService) {
     
   }
   
-  async ngOnInit() {
+  ngOnInit() {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
 
+    this.loop = 0
     this.appUsers = new AppUsers();
     this.appUsers.Id = this.service.getUserIdStorage()
     this.getAllNotification()
@@ -51,45 +50,32 @@ export class NotificationsComponent implements OnInit {
       });  
     
       connection.on("BroadcastMessage", () => {  
-        this.notisList= new Array<Notifications>();
-        this.getAllNotification()
-      });  
+        this.loop = this.loop+1
+        if(this.loop % 3 == 0)
+        {
+          this.notisList= new Array<Notifications>();
+          this.getAllNotification()
+        }
+      });
       this.router.routeReuseStrategy.shouldReuseRoute = () =>{
         return false;
-    }
+      }  
   }
   async getAllNotification()
   {
-    this.notis = await this.Nservice.getAllNotifications(this.service.getUserIdStorage())
-    for (let i = 0; i < this.notis.length; i++) {
-      this.noti = new Notifications()
-      this.noti.Id = this.notis[i].id
-      this.noti.DateCreated = this.notis[i].dateCreated
-      this.noti.Description = this.notis[i].description
-      this.noti.PageId = this.notis[i].pageId
-      const page = await this.Pservice.getPageById(this.noti.PageId)
+    const notis = await this.Nservice.getAllNotifications(this.service.getUserIdStorage()) as Array<any>
+    for (let i = 0; i < notis.length; i++) {
+      let noti = new Notifications()
+      noti.Id = notis[i].id
+      noti.DateCreated = notis[i].dateCreated
+      noti.Description = notis[i].description
+      noti.PageId = notis[i].pageId
+      const page = await this.Pservice.getPageById(noti.PageId)
       if(page["avatar"] == "" || page["avatar"] == undefined)
-        this.noti.PageAvatar= "assets/images/undefined.png"
+        noti.PageAvatar= "assets/images/undefined.png"
       else
-        this.noti.PageAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
-      this.notisList.push(this.noti)
-    }
-  }
-  async getNewNotification()
-  {
-    this.notis = await this.Nservice.getNewNotifications(this.service.getUserIdStorage())
-    for (let i = 0; i < this.notis.length; i++) {
-      this.noti = new Notifications()
-      this.noti.Id = this.notis[i].id
-      this.noti.DateCreated = this.notis[i].dateCreated
-      this.noti.Description = this.notis[i].description
-      this.noti.PageId = this.notis[i].pageId
-      const page = await this.Pservice.getPageById(this.noti.PageId)
-      if(page["avatar"] == "" || page["avatar"] == undefined)
-        this.noti.PageAvatar= "assets/images/undefined.png"
-      else
-        this.noti.PageAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
-      this.notisList.push(this.noti)
+        noti.PageAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
+      this.notisList.push(noti)
     }
   }
 }

@@ -40,6 +40,7 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
     datenow:Date
     datenow2:Date
     setcount:number
+    loop:number = 0
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
       private PService:PagesService,public pageurl:PageUrl, public tripurl:TripUrl) {
@@ -55,6 +56,7 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
       this.filters.Name = ""
       this.filters.CostStart = 0
       this.filters.CostEnd = 99999999
+      this.tripList.length = 0
       this.getTripList()
       this.startTimer()
       UserProfile.count = 1
@@ -69,8 +71,12 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
       });  
     
       connection.on("BroadcastMessage", () => {  
-        this.tripList = new Array<Trips>();
-        this.getTripList()  
+        this.loop = this.loop+1
+        if(this.loop % 3 ==0 && this.loop >=3)
+        {
+          this.tripList = new Array<Trips>();
+          this.getTripList()  
+        }
       });  
       this.router.routeReuseStrategy.shouldReuseRoute = () =>{
           return false;
