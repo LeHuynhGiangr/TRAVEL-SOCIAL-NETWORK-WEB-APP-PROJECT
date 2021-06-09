@@ -37,6 +37,23 @@ namespace Domain.Services
                 return false;
 
         }
+        IEnumerable<UserFollowPageResponse> IUserFollow<Guid>.GetUserFollowByPageId<IdType>(IdType id)
+        {
+            var l_user = m_upageRepository.FindMultiple(_ => _.Page.Id.Equals(id), _ => _.User, _ => _.Page);
+
+            List<UserFollowPageResponse> l_user_response = new List<UserFollowPageResponse>();
+
+            foreach (UserFollowPage user in l_user)
+            {
+                l_user_response.Add(
+                    new UserFollowPageResponse(
+                        user.Id,
+                        user.DateCreated,
+                        user.User.Id.ToString(),
+                        user.Page.Id.ToString()));
+            }
+            return l_user_response;
+        }
         public UserFollowPageResponse Follow(UserFollowPageRequest model)
         {
             try

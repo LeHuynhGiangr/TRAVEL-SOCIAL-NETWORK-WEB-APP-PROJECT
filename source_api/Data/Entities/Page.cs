@@ -24,6 +24,7 @@ namespace Data.Entities
         public IList<ReviewPage> ReviewPages { get; set; }
         public IList<UserFollowPage> UserFollowPages { get; set; }
         public IList<Notification> NotificationPages { get; set; }
+        public IList<Advertisement> Advertisements { get; set; }
         public PageType PageType { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
