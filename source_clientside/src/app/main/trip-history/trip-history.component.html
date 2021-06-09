@@ -21,37 +21,37 @@
                       <!-- Name Column -->
                       <ng-container matColumnDef="Name">
                         <th mat-header-cell *matHeaderCellDef> Name </th>
-                        <td mat-cell *matCellDef="let element" style="width: 33%;" class="rowtable"> {{element.Name}} </td>
+                        <td mat-cell *matCellDef="let element" style="width: 33%;" class="rowtable" (click)="DetailTripHistory(element.TripId, element.DatePayment)"> {{element.Name}} </td>
                       </ng-container>
                   
                       <!-- Departure Column -->
                       <ng-container matColumnDef="Departure">
                         <th mat-header-cell *matHeaderCellDef> Departure </th>
-                        <td mat-cell *matCellDef="let element" class="rowtable"> {{element.Departure}} </td>
+                        <td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailTripHistory(element.TripId, element.DatePayment)"> {{element.Departure}} </td>
                       </ng-container>
                   
                       <!-- Destination Column -->
                       <ng-container matColumnDef="Destination">
                         <th mat-header-cell *matHeaderCellDef> Destination </th>
-                        <td mat-cell *matCellDef="let element" class="rowtable"> {{element.Destination}} </td>
+                        <td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailTripHistory(element.TripId, element.DatePayment)"> {{element.Destination}} </td>
                       </ng-container>
                   
                       <!-- DateStart Column -->
                       <ng-container matColumnDef="DateStart">
                         <th mat-header-cell *matHeaderCellDef> DateStart </th>
-                        <td mat-cell *matCellDef="let element" class="rowtable"> {{element.DateStart}}</td>
+                        <td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailTripHistory(element.TripId, element.DatePayment)"> {{element.DateStart}}</td>
                       </ng-container>
 
                       <!-- DateEnd Column -->
                       <ng-container matColumnDef="DateEnd">
                         <th mat-header-cell *matHeaderCellDef> DateEnd </th>
-                        <td mat-cell *matCellDef="let element" class="rowtable"> {{element.DateEnd}}</td>
+                        <td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailTripHistory(element.TripId, element.DatePayment)"> {{element.DateEnd}}</td>
                       </ng-container>
 
                        <!-- DatePayment Column -->
                        <ng-container matColumnDef="DatePayment">
                         <th mat-header-cell *matHeaderCellDef> DatePayment </th>
-                        <td mat-cell *matCellDef="let element" class="rowtable"> {{element.DatePayment}}</td>
+                        <td mat-cell *matCellDef="let element" class="rowtable" (click)="DetailTripHistory(element.TripId, element.DatePayment)"> {{element.DatePayment}}</td>
                       </ng-container>
                       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

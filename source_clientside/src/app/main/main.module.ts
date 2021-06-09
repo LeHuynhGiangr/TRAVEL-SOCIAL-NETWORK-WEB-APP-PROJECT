@@ -109,6 +109,10 @@ import { DialogModifyPageComponent } from './fanpage/dialog-modifypage/dialog-mo
 import { DialogUploadPageAvatarComponent } from './fanpage/dialog-uploadpageavatar/dialog-uploadpageavatar.component';
 import { DialogUploadPageBackgroundComponent } from './fanpage/dialog-uploadpagebackground/dialog-uploadpagebackground.component';
 import { ChatAreaComponent } from './messages/chat-area/chat-area.component';
+import { DialogTripHistoryDetailComponent } from './trip-history/trip-history-detail/trip-history-detail.component';
+import { PaymentHistoryComponent } from './payment-history/payment-history.component';
+import { MatSortModule } from '@angular/material/sort';
+import { DialogPassengersComponent } from './fanpage-admin/dialog-passengers/dialog-passengers.component'
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -140,6 +144,7 @@ export const mainRoutes: Routes = [
   { path: 'people-nearby', component: PeopleNearbyComponent },
   { path: 'trip', component: TripComponent },
   { path: 'trip-history', component: TripHistoryComponent },
+  { path: 'payment-history', component: PaymentHistoryComponent },
   { path: 'trip-detail/:id', component: TripDetailComponent },
   { path: 'trip-payment/:id', component: TripPaymentComponent },
   { path: 'timeline/:id', component: TimelineComponent },
@@ -214,7 +219,10 @@ export const mainRoutes: Routes = [
     DialogUploadPageBackgroundComponent,
     DialogReviewComponent,
     DialogModifyPageComponent,
-	  ChatAreaComponent
+	  ChatAreaComponent,
+    DialogTripHistoryDetailComponent,
+    PaymentHistoryComponent,
+    DialogPassengersComponent
     //Primeng
   ],
   imports: [
@@ -241,6 +249,7 @@ export const mainRoutes: Routes = [
     MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     MatSlideToggleModule,
     //Primeng
     AccordionModule,

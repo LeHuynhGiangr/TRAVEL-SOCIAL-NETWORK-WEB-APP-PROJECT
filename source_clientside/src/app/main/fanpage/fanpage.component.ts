@@ -31,6 +31,12 @@ export class FanpageComponent implements OnInit {
     lengthcount
     count
     listcount
+    persons:any
+    personlength:number
+    persontrip:number
+    datenow:Date
+    datenow2:Date
+    setcount:number
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService,
     private PService:PagesService,public dialog: MatDialog,private TService:TripService, public tripurl:TripUrl, public pageurl:PageUrl) {}
 
@@ -110,33 +116,49 @@ export class FanpageComponent implements OnInit {
     }
     getTripList = async () => {
       this.count=4
-      this.trips = await this.TService.getAllTripsByPageId(this.pageurl.getPageIdStorage())
+      this.trips = await this.TService.getAllTripsByPageIdActive(this.pageurl.getPageIdStorage())
       this.listcount = this.trips.length
-      this.lengthcount="2:"+this.count/2
+      this.lengthcount = "2:2"
       for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
           trip.Description = this.trips[i].description
-          trip.Content = this.trips[i].content
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
+          trip.DateStart = this.trips[i].dateStart
+          this.datenow = new Date()
+          this.datenow2 = new Date(trip.DateStart)
+          if(this.datenow.getDate() > this.datenow2.getDate())
+            trip.SetDate = true
+          else
+            trip.SetDate = false
+          trip.Persons =this.trips[i].persons
+          trip.PersonsLimit = Number(trip.Persons)
           trip.PageId = this.trips[i].pageId
           const page = await this.PService.getPageById(trip.PageId)
           trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
           trip.authorName = page["name"]
           trip.Cost = this.trips[i].cost
+          trip.Content = this.trips[i].content
+          this.persons = await this.TService.getFriendInTrip(trip.Id)
+          trip.PersonsInTrip = this.persons.length
           this.tripList.push(trip)
       }
     }
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTrips()
-      this.count = this.count + 2
-      this.lengthcount = "2:"+(this.count/2-1)
-      for (let i = this.count-2; i < this.count; i++) {
+      this.trips = await this.TService.getAllTripsByPageIdActive(this.pageurl.getPageIdStorage())
+      if(this.count + 2 > this.trips.length)
+        this.setcount = 1
+      else
+        this.setcount = 2
+      console.log(this.setcount)
+      this.count = this.count + this.setcount
+      this.lengthcount = "2:2"
+      for (let i = this.count - this.setcount; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
@@ -144,12 +166,23 @@ export class FanpageComponent implements OnInit {
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
+          trip.DateStart = this.trips[i].dateStart
+          this.datenow = new Date()
+          this.datenow2 = new Date(trip.DateStart)
+          if(this.datenow.getDate() > this.datenow2.getDate())
+            trip.SetDate = true
+          else
+            trip.SetDate = false
+          trip.Persons =this.trips[i].persons
+          trip.PersonsLimit = Number(trip.Persons)
           trip.PageId = this.trips[i].pageId
           const page = await this.PService.getPageById(trip.PageId)
           trip.authorAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
           trip.authorName = page["name"]
           trip.Cost = this.trips[i].cost
           trip.Content = this.trips[i].content
+          this.persons = await this.TService.getFriendInTrip(trip.Id)
+          trip.PersonsInTrip = this.persons.length
           this.tripList.push(trip)
       }
     }

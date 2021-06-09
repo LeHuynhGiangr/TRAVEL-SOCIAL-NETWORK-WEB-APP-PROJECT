@@ -7,6 +7,9 @@ import { DatePipe } from '@angular/common'
 import { PageUrl } from 'src/app/_helpers/get-page-url';
 import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 import { PrimeNGConfig } from 'primeng/api';
+import { NotificationPageService } from 'src/app/_core/services/notificationpage.service';
+import { PagesService } from 'src/app/_core/services/page.service';
+import { Notifications } from 'src/app/_core/models/notifications.model';
 @Component({
     selector: 'app-trip-dialog',
     templateUrl: './trip-dialog.component.html',
@@ -30,9 +33,12 @@ export class TripDialogComponent implements OnInit {
   public Cost : string=""
   public Persons : string=""
   public m_returnUrl: string;
+  public noti:Notifications
+  userfollows:any
   url;
   constructor(public dialogRef: MatDialogRef<TripDialogComponent>, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
-    private service: TripService,public datepipe: DatePipe, public pageurl:PageUrl,private timelineurl:TimelineUrl, private primengConfig: PrimeNGConfig) {
+    private service: TripService,public datepipe: DatePipe, public pageurl:PageUrl,private timelineurl:TimelineUrl, private primengConfig: PrimeNGConfig,
+    private Nservice:NotificationPageService, private Pservice:PagesService) {
   }
   async ngOnInit() {
     this.primengConfig.ripple = true;
@@ -84,6 +90,7 @@ export class TripDialogComponent implements OnInit {
       else
       {
         await this.service.createTrip(formData);
+        this.sendNoti()
         this.timelineurl.showSuccess("Create a trip successfully !")
         setTimeout(() => {
           this.dialogRef.close();
@@ -96,6 +103,17 @@ export class TripDialogComponent implements OnInit {
         setTimeout(() => {
           this.dialogRef.close();
         }, 1000)
+    }
+  }
+  async sendNoti()
+  {
+    this.userfollows = await this.Pservice.getUserFollowPage(this.pageurl.getPageIdStorage())
+    for (let i = 0; i < this.userfollows.length; i++) {
+      this.noti = new Notifications();
+      this.noti.Description = "Page just created a new tour !"
+      this.noti.UserId = this.userfollows[i].userId
+      this.noti.PageId = this.pageurl.getPageIdStorage()
+      const create = await this.Nservice.createNotifications(this.noti)
     }
   }
 }

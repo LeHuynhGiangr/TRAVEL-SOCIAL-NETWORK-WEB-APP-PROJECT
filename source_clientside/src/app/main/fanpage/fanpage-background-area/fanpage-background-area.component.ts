@@ -66,6 +66,8 @@ export class FanpageBackgroundAreaComponent implements OnInit {
         this.pages.Id = this.pageurl.getPageIdStorage()
         this.pages.Name =  this.pageurl.getPageNameStorage()
         this.pages.Avatar = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageAvatarStorage()
+        if(this.pages.Avatar == ApiUrlConstants.API_URL+"/undefined")
+          this.pages.Avatar = "assets/images/undefined.png"
         this.pages.Background = ApiUrlConstants.API_URL+"/"+this.pageurl.getPageBackgroundStorage()
         this.pages.UserId = this.pageurl.getPageUserIdStorage()
         this.userid = this.service.getUserIdStorage()

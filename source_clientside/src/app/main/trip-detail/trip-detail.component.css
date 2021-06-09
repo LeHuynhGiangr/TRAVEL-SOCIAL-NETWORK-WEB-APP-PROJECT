@@ -13,7 +13,7 @@ mat-form-field {
   width: 400px;
   height: 250px;
   background-color: white;
-  margin-right: 10%;
+  margin-right: 5%;
   border: solid 1px;
   border-radius: 15px;
 }
@@ -29,18 +29,33 @@ mat-form-field {
 .btn-booknow
 {
   margin: 0;
+  height: 90px;
   position: absolute;
-  bottom: 2%;
-  left: 48%;
+  bottom: 30%;
+  left: 80%;
+}
+.btn-booknow:hover
+{
+  opacity: 0.5;
 }
 .btn-booknow-dis
 {
   margin: 0;
+  height: 90px;
   position: absolute;
-  bottom: 2%;
-  left: 48%;
+  bottom: 30%;
+  left: 80%;
+  width: 100px;
   background-color: darkgrey;
   pointer-events: none;
+}
+.during-date
+{
+  display: inline-block;
+  position: absolute;
+  font-weight: bold;
+  bottom: 40%;
+  left: 80.5%;
 }
 @media (max-width:430px)
 {

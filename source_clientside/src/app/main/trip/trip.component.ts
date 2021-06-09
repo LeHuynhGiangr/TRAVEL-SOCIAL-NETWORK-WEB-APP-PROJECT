@@ -37,6 +37,9 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
     persons:any
     personlength:number
     persontrip:number
+    datenow:Date
+    datenow2:Date
+    setcount:number
     constructor(private router: Router, private elementRef: ElementRef, @Inject(DOCUMENT) private doc,
       private service: LoginService,public uriHandler:UriHandler, public dialog: MatDialog,private TService:TripService,
       private PService:PagesService,public pageurl:PageUrl, public tripurl:TripUrl) {
@@ -105,7 +108,7 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
       this.count=4
       this.trips = await this.TService.filterTrip(this.filters)
       this.listcount = this.trips.length
-      this.lengthcount="2:"+this.count/2
+      this.lengthcount="2:2"
       for (let i = 0; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
@@ -114,6 +117,13 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
+          trip.DateStart = this.trips[i].dateStart
+          this.datenow = new Date()
+          this.datenow2 = new Date(trip.DateStart)
+          if(this.datenow.getDate() > this.datenow2.getDate())
+            trip.SetDate = true
+          else
+            trip.SetDate = false
           trip.Persons =this.trips[i].persons
           trip.PersonsLimit = Number(trip.Persons)
           trip.PageId = this.trips[i].pageId
@@ -130,10 +140,15 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
     async getTripListmore(){
       this.time=0
       this.startTimer()
-      this.trips = await this.TService.getAllTrips()
-      this.count = this.count + 2
-      this.lengthcount = "2:"+(this.count/2-1)
-      for (let i = this.count-2; i < this.count; i++) {
+      this.trips = await this.TService.filterTrip(this.filters)
+      if(this.count + 2 > this.trips.length)
+        this.setcount = 1
+      else
+        this.setcount = 2
+      this.count = this.count + this.setcount
+      this.lengthcount = "2:2"
+      console.log(this.lengthcount)
+      for (let i = this.count - this.setcount; i < this.count; i++) {
           let trip = new Trips();
           trip.Id = this.trips[i].id.toString()
           trip.Name = this.trips[i].name
@@ -141,6 +156,13 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
           trip.Image = ApiUrlConstants.API_URL+"/"+this.trips[i].image
           trip.authorId = this.trips[i].authorId
           trip.CreatedDate = this.trips[i].dateCreated
+          trip.DateStart = this.trips[i].dateStart
+          this.datenow = new Date()
+          this.datenow2 = new Date(trip.DateStart)
+          if(this.datenow.getDate() > this.datenow2.getDate())
+            trip.SetDate = true
+          else
+            trip.SetDate = false
           trip.Persons =this.trips[i].persons
           trip.PersonsLimit = Number(trip.Persons)
           trip.PageId = this.trips[i].pageId

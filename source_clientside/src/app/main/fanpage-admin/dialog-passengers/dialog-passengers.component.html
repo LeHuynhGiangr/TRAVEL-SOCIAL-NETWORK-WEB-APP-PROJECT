@@ -1,0 +1,21 @@
+<table id="excel-table">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Phone Number</th>
+      <th>Requirements</th>
+      <th>Passenger Number</th>
+      <th>Date Booking</th>
+    </tr>
+    <tr *ngFor="let passenger of passengerList">
+      <td>{{this.passenger.Name}}</td>
+      <td>{{this.passenger.Email}}</td>
+      <td>{{this.passenger.Address}}</td>
+      <td>{{this.passenger.PhoneNumber}}</td>
+      <td>{{this.passenger.Requirements}}</td>
+      <td>{{this.passenger.PeopleNumber}}</td>
+      <td>{{this.passenger.DateCreated| date: 'dd/MM/yyyy'}}</td>
+    </tr>
+</table>
+  
