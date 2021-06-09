@@ -19,6 +19,7 @@ export class SYS_TOKEN_DEF{
     static FRIEND_LOGIN = "FRIEND_LOGIN";
     static NEW_POST = "FRIEND_POST";
     static NEW_COMMENT = "FRIEND_COMMENT";
+    static SYNC_MESG_CHAT = "SYNC_MESG_CHAT";
 }
 
 /**
@@ -89,7 +90,7 @@ export class WebSocketHandler {
 
     static OnReceivedEventHandler(event) {
         console.log("receive: "+ event.data);
-        //StaticWSMediator.notify(event.data, []);
+        StaticWSMediator.notify(event.data, []);
     }
 
     static OnClosedEventHandler(event) {

@@ -2,5 +2,5 @@ import { MessageUnit } from "./MessageUnit";
 
 export interface UpdateChatBoxContentResponse {
     ChatBoxId: string,
-    UpdatedContentJson: MessageUnit[],
+    UpdatedContentJson: any[],
 }

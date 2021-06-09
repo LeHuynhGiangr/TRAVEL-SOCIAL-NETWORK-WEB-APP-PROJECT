@@ -7,7 +7,7 @@
     </div>
     -->
 
-    <ul class="chatting-area">
+    <ul #chattingArea class="chatting-area">
         <ng-template ngFor let-item [ngForOf]="messageUnits" let-i="index">
             <div *ngIf="isFriend(item.Id); then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
@@ -22,11 +22,13 @@
                     <p>{{item.Message}}</p>
                 </li>
             </ng-template>
+            
+            <div>{{scrollChatBoxToBottom()}}</div>
         </ng-template>
     </ul>
     <div class="message-text-container">
         <form method="post">
-            <textarea (change)="onTextareaChanged($event)" placeholder="say somthing with your friend"></textarea>
+            <textarea #textArea (change)="onTextareaChanged($event)" placeholder="say somthing with your friend"></textarea>
             <button title="send" (click)="onSubmitBtnClicked()"><i class="fa fa-paper-plane"></i></button>
         </form>
     </div>
