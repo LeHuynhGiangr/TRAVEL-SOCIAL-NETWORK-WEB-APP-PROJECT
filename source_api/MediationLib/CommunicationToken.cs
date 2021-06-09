@@ -13,5 +13,6 @@
         public static readonly string FRIEND_LOGIN = "FRIEND_LOGIN";
         public static readonly string NEW_POST = "FRIEND_POST";
         public static readonly string NEW_COMMENT = "FRIEND_COMMENT";
+        public static readonly string SYNC_MESG_CHAT = "SYNC_MESG_CHAT";
     }
 }

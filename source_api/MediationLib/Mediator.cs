@@ -48,6 +48,14 @@ namespace MediationLib
             }
         }
 
+        public static void Notify(Guid guid, object message)
+        {
+            if (s_clients.ContainsKey(guid))
+            {
+                s_clients[guid]?.Invoke(message);
+            }
+        }
+
         public static void Notify(List<Guid> guids, string token, object message)
         {
             //Notify to client

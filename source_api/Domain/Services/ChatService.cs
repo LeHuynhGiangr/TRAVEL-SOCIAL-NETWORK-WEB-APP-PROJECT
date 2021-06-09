@@ -28,7 +28,7 @@ namespace Domain.Services
         {
             ChatBox l_updatedChatBox;
             string l_cachedContentJson;
-            MessageUnitDC l_messObj = new MessageUnitDC(request.UserId, request.Message, request.OLEAD);
+            MessageUnitDC l_messObj = new MessageUnitDC(request.UserId, request.Message, DateTime.UtcNow.ToOADate());
             string messJsonStr = JsonSerializer.Serialize(l_messObj);
 
             try
@@ -39,11 +39,22 @@ namespace Domain.Services
                     throw new Exception("record is not found");
                 }
 
-                l_updatedChatBox.ChatContentJson.Insert(l_updatedChatBox.ChatContentJson.Length - 1, "," + messJsonStr);
+                string l_chatContentRef = l_updatedChatBox.ChatContentJson;
+                l_updatedChatBox.ChatContentJson = l_chatContentRef.Insert(l_chatContentRef.Length - 1, "," + messJsonStr);
 
                 foreach (var userChatBox in l_updatedChatBox.UserChatBoxes)
                 {
-                    userChatBox.ContentCacheJson.Insert(userChatBox.ContentCacheJson.Length - 1, "," + messJsonStr);
+                    l_chatContentRef = userChatBox.ContentCacheJson;
+                    string l_stringForInsert;
+                    if (l_chatContentRef.Length == 2)
+                    {
+                        l_stringForInsert = messJsonStr;
+                    }
+                    else
+                    {
+                        l_stringForInsert = "," + messJsonStr;
+                    }
+                    userChatBox.ContentCacheJson = l_chatContentRef.Insert(l_chatContentRef.Length - 1, l_stringForInsert);
                 }
 
                 var l_updatedUserChatBox = l_updatedChatBox.UserChatBoxes.FirstOrDefault(p => p.UserId.ToString() == request.UserId && p.ChatBoxId.ToString() == request.ChatBoxId);
@@ -52,6 +63,7 @@ namespace Domain.Services
 
                 m_ChatBoxRepository.Update(l_updatedChatBox);
                 m_ChatBoxRepository.SaveChanges();
+                MediationLib.Mediator.Notify(l_updatedUserChatBox.TheOtherId, MediationLib.CommunicationToken.SYNC_MESG_CHAT);
                 return new UpdateChatBoxContentResponse(l_updatedChatBox.Id.ToString(), l_cachedContentJson);
             }
             catch (Exception e)
