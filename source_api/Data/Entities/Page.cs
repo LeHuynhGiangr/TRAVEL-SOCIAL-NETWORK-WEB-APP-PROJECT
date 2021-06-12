@@ -17,6 +17,8 @@ namespace Data.Entities
         public bool Active { get; set; }
         public string FImageCard { get; set; }
         public string BImageCard { get; set; }
+        public double Priority { get; set; }
+        public string Location { get; set; }
         public bool RequestCreate { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
