@@ -39,7 +39,10 @@ export class GroupsSearchComponent implements OnInit {
             page.Description = this.pages[i].description
             page.Active = this.pages[i].active
             page.RequestCreate = this.pages[i].requestCreate
-            page.Avatar = ApiUrlConstants.API_URL+"/"+this.pages[i].avatar
+            if(page.Avatar == undefined)
+              page.Avatar = "assets/images/undefined.png"
+            else
+              page.Avatar = ApiUrlConstants.API_URL+"/"+this.pages[i].avatar
             page.Background = ApiUrlConstants.API_URL+"/"+this.pages[i].background
             this.pageList.push(page);
         }

@@ -12,6 +12,14 @@
     position: absolute;
     right: 10%;
 }
+.green-tick
+{
+    display: inline-flex;
+    height: 20px;
+    width: 20px;
+    margin-top: -15px;
+    margin-left: 5px;
+}
 @media (max-width:420px)
 {
     .rating-star{
