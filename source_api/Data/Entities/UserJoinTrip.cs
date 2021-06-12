@@ -21,6 +21,8 @@ namespace Data.Entities
         public string Requirements { get; set; }
         public int PeopleNumber { get; set; }
         public string CostPayment { get; set; }
+        public int Status { get; set; }
+        public string CodeID { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         

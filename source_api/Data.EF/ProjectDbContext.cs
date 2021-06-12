@@ -42,6 +42,7 @@ namespace Data.EF
         public DbSet<ChatBox> ChatBoxes { get; set; }
         public DbSet<UserChatBox> UserChatBoxes { get; set; }
         public DbSet<UserFollowPage> UserFollowPages { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
         //end declare entites
 
         //this method is called on event model creating
@@ -110,6 +111,10 @@ namespace Data.EF
             builder.Entity<Advertisement>()
               .HasOne(sc => sc.Page)
               .WithMany(s => s.Advertisements)
+              .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Discount>()
+              .HasOne(sc => sc.Page)
+              .WithMany(s => s.Discounts)
               .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
         }
 
