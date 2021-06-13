@@ -42,6 +42,8 @@ namespace Domain.Services
                     page.RequestCreate,
                     page.FImageCard,
                     page.BImageCard,
+                    page.Priority,
+                    page.Location,
                     page.User.Id.ToString()));
             }
             return pageResponse;
@@ -63,6 +65,8 @@ namespace Domain.Services
                         page.RequestCreate,
                         page.FImageCard,
                         page.BImageCard,
+                        page.Priority,
+                        page.Location,
                         page.User.Id.ToString());
             return pageResponse;
         }
@@ -89,6 +93,8 @@ namespace Domain.Services
                         page.RequestCreate,
                         page.FImageCard,
                         page.BImageCard,
+                        page.Priority,
+                        page.Location,
                         page.User.Id.ToString()));
             }
             return l_pageResponses;
@@ -114,6 +120,8 @@ namespace Domain.Services
                     DateCreated = DateTime.Now,
                     Follow = 0,
                     Active = true,
+                    Priority = 0,
+                    Location = null,
                     UserId = model.UserId
                 };
 
@@ -136,7 +144,6 @@ namespace Domain.Services
                 page.PhoneNumber = model.PhoneNumber;
                 page.Name = model.Name;
                 page.Description = model.Description;
-                page.Active = page.Active;
                 page.UserId = page.UserId;
             }
             m_pageRepository.SetModifierPageStatus(m_page, EntityState.Modified);

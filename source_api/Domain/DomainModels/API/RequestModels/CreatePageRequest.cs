@@ -15,6 +15,8 @@ namespace Domain.DomainModels.API.RequestModels
         public IFormFile BImageCard { get; set; }
         public bool RequestCreate { get; set; }
         public double Follow { get; set; }
+        public double Priority { get; set; }
+        public string Location { get; set; }
         public bool Active { get; set; }
         public Guid UserId { get; set; }
     }

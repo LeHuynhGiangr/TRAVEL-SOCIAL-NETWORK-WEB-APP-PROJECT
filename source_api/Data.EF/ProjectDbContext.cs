@@ -116,6 +116,10 @@ namespace Data.EF
               .HasOne(sc => sc.Page)
               .WithMany(s => s.Discounts)
               .HasForeignKey(sc => sc.PageId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<UserJoinTrip>()
+              .HasOne(sc => sc.Discount)
+              .WithMany(s => s.UserJoinTrips)
+              .HasForeignKey(sc => sc.DiscountId).OnDelete(DeleteBehavior.Restrict);
         }
 
         public override int SaveChanges()

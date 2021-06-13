@@ -85,6 +85,7 @@ namespace API
             services.AddScoped<EFRepository<ReviewPage, Guid>, EFRepository<ReviewPage, Guid>>();
             services.AddScoped<EFRepository<UserFollowPage, Guid>, EFRepository<UserFollowPage, Guid>>();
             services.AddScoped<EFRepository<Notification, Guid>, EFRepository<Notification, Guid>>();
+            services.AddScoped<EFRepository<Discount, Guid>, EFRepository<Discount, Guid>>();
 
             services.AddScoped<IRepository<Friend, Guid>, EFRepository<Friend, Guid>>();
             services.AddScoped<IUserService<Guid>, UserService>();
@@ -97,6 +98,7 @@ namespace API
             services.AddScoped<IRatingService<Guid>, RatingService>();
             services.AddScoped<IUserFollow<Guid>, UserFollowPageService>();
             services.AddScoped<INotificationService<Guid>, NotificationService>();
+            services.AddScoped<IDiscountService<Guid>, DiscountService>();
             services.AddScoped<IRepository<ChatBox, Guid>, EFRepository<ChatBox, Guid>>();
             services.AddScoped<IRepository<UserChatBox, Guid>, EFRepository<UserChatBox, Guid>>();
             services.AddScoped<IChatService<Guid>, ChatService>();

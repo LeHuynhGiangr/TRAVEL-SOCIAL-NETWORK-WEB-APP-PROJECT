@@ -12,6 +12,7 @@ namespace Data.Entities
         public string CodeDiscount { get; set; }
         public int DiscountPer { get; set; }
         public bool Active { get; set; }
+        public IList<UserJoinTrip> UserJoinTrips { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public Guid PageId { get; set; }
