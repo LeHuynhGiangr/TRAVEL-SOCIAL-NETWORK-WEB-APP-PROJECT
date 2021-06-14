@@ -1,0 +1,36 @@
+.rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #898e91;
+    padding: 20px; 
+  }
+.discount
+{
+    display: inline-block;
+    background-color: greenyellow;
+    font-weight: bold;
+    color: cornflowerblue;
+    font-size: 20px;
+}
+.info-discount
+{
+    display: inline-block;
+    margin-left: 10%;
+    font-weight: bold;
+}
+.expried
+{
+    display: inline-block;
+    float: right;
+}
+@media (max-width:420px)
+{
+    .info-discount
+    {
+        font-size: 12px;
+        margin-left: 15%;
+    }
+    .expried
+    {
+        font-size: 10px;
+    }
+}

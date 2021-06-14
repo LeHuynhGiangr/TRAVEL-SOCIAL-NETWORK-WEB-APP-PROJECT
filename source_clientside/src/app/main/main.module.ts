@@ -92,6 +92,7 @@ import {DataViewModule} from 'primeng/dataview';
 import {TooltipModule} from 'primeng/tooltip';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {SidebarModule} from 'primeng/sidebar';
+import {SplitButtonModule} from 'primeng/splitbutton';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
@@ -113,6 +114,8 @@ import { DialogTripHistoryDetailComponent } from './trip-history/trip-history-de
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { MatSortModule } from '@angular/material/sort';
 import { DialogPassengersComponent } from './fanpage-admin/dialog-passengers/dialog-passengers.component'
+import { FanpageDiscountComponent } from './fanpage-discount/fanpage-discount.component'
+import { DialogDiscountComponent } from './fanpage-discount/dialog-discount/dialog-discount.component'
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -131,6 +134,7 @@ export const mainRoutes: Routes = [
   { path: 'fanpage/:id', component: FanpageComponent },
   { path: 'fanpage-admin', component: FanpageAdminComponent },
   { path: 'fanpage-review', component: FanpageReviewComponent },
+  { path: 'fanpage-discount', component: FanpageDiscountComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'groups', component: GroupsComponent },
   { path: 'groups-search', component: GroupsSearchComponent },
@@ -222,7 +226,9 @@ export const mainRoutes: Routes = [
 	  ChatAreaComponent,
     DialogTripHistoryDetailComponent,
     PaymentHistoryComponent,
-    DialogPassengersComponent
+    DialogPassengersComponent,
+    FanpageDiscountComponent,
+    DialogDiscountComponent
     //Primeng
   ],
   imports: [
@@ -269,6 +275,7 @@ export const mainRoutes: Routes = [
     TooltipModule,
     TabMenuModule,
     SidebarModule,
+    SplitButtonModule,
     //Module support
     ReadMoreModule,
     DataViewModule,

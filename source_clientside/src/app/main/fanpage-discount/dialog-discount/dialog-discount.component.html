@@ -1,0 +1,33 @@
+<h1><strong>Create a discount code</strong></h1>
+<hr>
+<mat-form-field class="example-full-width">
+    <mat-label>Discount Name</mat-label>
+    <textarea style="height: 50px;" name="Name" type="text" id="input" required="required" [(ngModel)]="this.discounts.Name" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter code"></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Discount Code</mat-label>
+    <textarea style="height: 50px;" name="Code" type="text" id="input" required="required" [(ngModel)]="this.discounts.CodeDiscount" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter code"></textarea>
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Percent Discout</mat-label>
+    <input matInput min="0" type="number" name="Percent Discout" [(ngModel)]="this.discounts.DiscountPer" [ngModelOptions]="{standalone: true}" id="input" required="required">
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Limit Passenger</mat-label>
+    <input matInput min="0" type="number" name="Limit Passenger" [(ngModel)]="this.discounts.LimitPassenger" [ngModelOptions]="{standalone: true}" id="input" required="required">
+</mat-form-field>
+<mat-form-field class="example-full-width">
+    <mat-label>Limit Cost</mat-label>
+    <input matInput min="0" type="number" name="Limit Cost" [(ngModel)]="this.discounts.LimitCost" [ngModelOptions]="{standalone: true}" id="input" required="required">
+</mat-form-field>
+<mat-form-field color="accent" appearance="fill">
+    <mat-label>Date Expried</mat-label>
+    <input matInput [matDatepicker]="picker2" name="DateExpried" [(ngModel)]="this.discounts.DateExpired" [ngModelOptions]="{standalone: true}">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+<div mat-dialog-actions class="myDiv">
+    <button class="btn btn-primary" mat-button (click)="onSave()">Create</button>
+    <button class="btn btn-danger left" mat-button (click)="onNoClick()">Cancel</button>
+</div>
+<p-toast></p-toast>

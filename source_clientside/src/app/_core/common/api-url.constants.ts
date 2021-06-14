@@ -51,4 +51,7 @@ export class ApiUrlConstants{
     //notification API
     public static API_NOTIFICATION_PAGE = '/notification/notipage/'
     public static API_NOTIFICATION_PAGENEW = '/notification/newnotipage/'
+    
+    //discount API
+    public static API_DISCOUNT_URL = '/discount/'
 }

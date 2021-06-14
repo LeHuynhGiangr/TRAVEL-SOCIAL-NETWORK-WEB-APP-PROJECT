@@ -32,7 +32,7 @@
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Persons</mat-label>
-                <input matInput type="number" name="Persons" id="input" required="required" [(ngModel)]="this.trips.Persons" [ngModelOptions]="{standalone: true}">
+                <input matInput type="number" min="0" name="Persons" id="input" required="required" [(ngModel)]="this.trips.Persons" [ngModelOptions]="{standalone: true}">
             </mat-form-field>
             <mat-form-field color="accent" appearance="fill">
                 <mat-label>Date Start Tourist</mat-label>

@@ -4,6 +4,10 @@
     position: absolute;
     right: 0;
 }
+.mat-elevation-z8
+{
+  margin-bottom: 100px;
+}
 table {
     width: 100%;
   }

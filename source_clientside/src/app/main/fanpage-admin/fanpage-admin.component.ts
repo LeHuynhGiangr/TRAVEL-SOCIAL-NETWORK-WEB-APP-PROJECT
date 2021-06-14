@@ -15,6 +15,10 @@ import { DialogModifyTripComponent } from '../fanpage/dialog-modifytrip/dialog-m
 import { DialogPassengersComponent } from './dialog-passengers/dialog-passengers.component';
 import { TripHistory } from 'src/app/_core/models/trip-history.model';
 import * as XLSX from 'xlsx';
+import { DialogDiscountComponent } from '../fanpage-discount/dialog-discount/dialog-discount.component';
+import { Discount } from 'src/app/_core/models/discount.model';
+import { DiscountService } from 'src/app/_core/services/discount.service';
+import { MenuItem } from 'primeng/api';
 @Component({
     selector: 'app-fanpage-admin',
     templateUrl: './fanpage-admin.component.html',
@@ -23,24 +27,31 @@ import * as XLSX from 'xlsx';
 
 export class FanpageAdminComponent implements OnInit {
   displayedColumns: string[] = ['Name','Departure','Destination','Cost','Action'];
+  displayeddisColumns: string[] = ['Name','CodeDiscount','DiscountPer','Active','DateExpired','Action'];
   dataSource: MatTableDataSource<Trips>
+  dataSourcedis: MatTableDataSource<Discount>
   public appUsers: AppUsers;
   public tripList = new Array<Trips>();
   idpage;
   trips:any
   tripcount:number
+  dis_count:number
+  discounts:any
+  public discountList = new Array<Discount>();
   public passengerList = new Array<TripHistory>();
   public reportList = new Array<TripHistory>();
   title = 'angular-app';
   fileName= 'ExcelSheet.xlsx';
   totalPrice:number
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  items: MenuItem[];
+  @ViewChild('MatPaginator1') MatPaginator1: MatPaginator;
+  @ViewChild('MatPaginator2') MatPaginator2: MatPaginator;
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.MatPaginator1;
+    this.dataSourcedis.paginator = this.MatPaginator2;
   }
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,public pageurl:PageUrl,
-  public dialog: MatDialog,private TService:TripService,private PService:PagesService) {
+  public dialog: MatDialog,private TService:TripService,private PService:PagesService, private DService: DiscountService) {
 
   }
   async ngOnInit() {
@@ -48,9 +59,19 @@ export class FanpageAdminComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
+    this.items = [
+      {label: 'Block', icon: 'pi pi-lock', command: () => {
+        alert("ok");
+      }},
+      {label: 'Delete', icon: 'pi pi-trash', command: () => {
+        alert("ok");
+      }}
+    ]
     this.dataSource = new MatTableDataSource<Trips>();
+    this.dataSourcedis = new MatTableDataSource<Discount>();
     this.totalPrice = 0
-    this.getTripList();
+    this.getTripList()
+    this.getDiscountList()
     this.idpage = this.pageurl.getPageIdStorage();
   }
   CreateTripDialog(): void {
@@ -111,6 +132,25 @@ export class FanpageAdminComponent implements OnInit {
     }
     this.dataSource.data = this.tripList
   }
+  getDiscountList = async () => {
+    this.discounts = await this.DService.getListDiscountByPageId(this.pageurl.getPageIdStorage())
+    this.dis_count = this.discounts.length
+    for (let i = 0; i < this.discounts.length; i++) {
+        let discount = new Discount();
+        discount.Id = this.discounts[i].id.toString()
+        discount.Name = this.discounts[i].name
+        discount.CodeDiscount = this.discounts[i].codeDiscount
+        discount.Active = this.discounts[i].active
+        discount.DiscountPer = this.discounts[i].discountPer
+        discount.LimitCost = this.discounts[i].limitCost
+        discount.LimitPassenger = this.discounts[i].limitPassenger
+        discount.DateExpired = this.discounts[i].dateExpired
+        discount.DateCreate = this.discounts[i].dateCreated
+        discount.PageId = this.discounts[i].pageId
+        this.discountList.push(discount)
+    }
+    this.dataSourcedis.data = this.discountList
+  }
   async getListPassengers(id)
     {
         const passengers = await this.TService.getFriendInTrip(id) as Array<any>;
@@ -159,5 +199,18 @@ export class FanpageAdminComponent implements OnInit {
       /* save to file */  
       XLSX.writeFile(wb, this.fileName);
    
+    }
+    openDialogDiscount(): void {
+      const dialogRef = this.dialog.open(DialogDiscountComponent, {
+        width: '500px',
+        height: '500px',
+      });
+      dialogRef.afterClosed().subscribe(async result => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }
+        this.discountList = new Array<Discount>();
+        this.getDiscountList();
+      });
     }
 }
