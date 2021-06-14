@@ -31,6 +31,9 @@ namespace Domain.Services
                         dis.CodeDiscount,
                         dis.DiscountPer,
                         dis.Active,
+                        dis.LimitPassenger,
+                        dis.LimitCost,
+                        dis.DateExpired,
                         dis.Page.Id.ToString()));
             }
             return disResponse;
@@ -45,6 +48,9 @@ namespace Domain.Services
                         dis.CodeDiscount,
                         dis.DiscountPer,
                         dis.Active,
+                        dis.LimitPassenger,
+                        dis.LimitCost,
+                        dis.DateExpired,
                         dis.Page.Id.ToString());
             return disResponse;
         }
@@ -64,6 +70,9 @@ namespace Domain.Services
                         dis.CodeDiscount,
                         dis.DiscountPer,
                         dis.Active,
+                        dis.LimitPassenger,
+                        dis.LimitCost,
+                        dis.DateExpired,
                         dis.Page.Id.ToString()));
             }
             return l_distResponses;
@@ -81,6 +90,9 @@ namespace Domain.Services
                     DiscountPer = model.DiscountPer,
                     Active = model.Active,
                     DateCreated = DateTime.Now,
+                    LimitPassenger = model.LimitPassenger,
+                    LimitCost = model.LimitCost,
+                    DateExpired = model.DateExpired,
                     PageId = model.PageId
                 };
 

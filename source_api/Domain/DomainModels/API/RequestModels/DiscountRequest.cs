@@ -10,6 +10,9 @@ namespace Domain.DomainModels.API.RequestModels
         public string CodeDiscount { get; set; }
         public int DiscountPer { get; set; }
         public bool Active { get; set; }
+        public int LimitPassenger { get; set; }
+        public double LimitCost { get; set; }
+        public DateTime DateExpired { get; set; }
         public Guid PageId { get; set; }
     }
 }
