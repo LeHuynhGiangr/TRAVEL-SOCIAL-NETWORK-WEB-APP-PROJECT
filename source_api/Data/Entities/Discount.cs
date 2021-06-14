@@ -16,7 +16,7 @@ namespace Data.Entities
         public double LimitCost { get; set; }
         public IList<UserJoinTrip> UserJoinTrips { get; set; }
         public DateTime DateCreated { get; set; }
-        public DateTime DateExpired { get; set; }
+        public DateTime? DateExpired { get; set; }
         public DateTime? DateModified { get; set; }
         public Guid PageId { get; set; }
         public Page Page { get; set; }

@@ -56,7 +56,7 @@ namespace Domain.Services
         }
         IEnumerable<DiscountResponse> IDiscountService<Guid>.GetDiscountByPageId<IdType>(IdType id)
         {
-            var l_dis = m_disRepository.FindMultiple(_ => _.Page.Id.Equals(id), _ => _.Page);
+            var l_dis = m_disRepository.FindMultiple(_ => _.Page.Id.Equals(id), _ => _.Page).OrderByDescending(_ => _.DateCreated); ;
 
             List<DiscountResponse> l_distResponses = new List<DiscountResponse>();
 
@@ -92,7 +92,7 @@ namespace Domain.Services
                     DateCreated = DateTime.Now,
                     LimitPassenger = model.LimitPassenger,
                     LimitCost = model.LimitCost,
-                    DateExpired = model.DateExpired,
+                    DateExpired = DateTime.Parse(model.DateExpired),
                     PageId = model.PageId
                 };
 
