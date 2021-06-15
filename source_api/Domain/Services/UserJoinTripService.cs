@@ -36,7 +36,8 @@ namespace Domain.Services
                     PeopleNumber = model.PeopleNumber,
                     PhoneNumber = model.PhoneNumber,
                     Requirements = model.Requirements,
-                    DateCreated = DateTime.Now
+                    DateCreated = DateTime.Now,
+                    DiscountId = model.DiscountId
                 };
                 m_userjointripRepository.Add(l_newUjt);
                 m_userjointripRepository.SaveChanges();
@@ -63,7 +64,8 @@ namespace Domain.Services
                     Requirements = user.Requirements,
                     PeopleNumber = user.PeopleNumber,
                     CostPayment = user.CostPayment,
-                    TripId = user.TripId
+                    TripId = user.TripId,
+                    DiscountId = user.DiscountId
                 });
             }
             return l_userResponses;
@@ -88,7 +90,8 @@ namespace Domain.Services
                         utrip.Requirements,
                         utrip.PeopleNumber,
                         utrip.CostPayment,
-                        utrip.TripId));
+                        utrip.TripId,
+                        utrip.DiscountId));
             }
             return l_utripResponses;
         }
@@ -112,7 +115,8 @@ namespace Domain.Services
                         utrip.Requirements,
                         utrip.PeopleNumber,
                         utrip.CostPayment,
-                        utrip.TripId));
+                        utrip.TripId,
+                        utrip.DiscountId));
             }
             return l_utripResponses;
         }

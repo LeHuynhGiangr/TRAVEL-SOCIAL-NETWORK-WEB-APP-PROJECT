@@ -25,8 +25,8 @@ namespace Data.Entities
         public string CodeID { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
-        public Guid DiscountId { get; set; }
-        public Discount Discount { get; set; }
+        public Guid? DiscountId { get; set; }
+        public virtual Discount Discount { get; set; }
 
     }
 }

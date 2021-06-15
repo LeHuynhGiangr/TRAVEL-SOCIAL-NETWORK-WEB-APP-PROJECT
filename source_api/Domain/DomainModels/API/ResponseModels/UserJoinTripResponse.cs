@@ -8,7 +8,7 @@ namespace Domain.DomainModels.API.ResponseModels
     {
         public UserJoinTripResponse() { }
         public UserJoinTripResponse(Guid uid, System.DateTime dateCreated, string name,string phonenumber,string email,string address,
-            string requirements,int peoplenumber,string costpayment,Guid tid)
+            string requirements,int peoplenumber,string costpayment,Guid tid, Guid? discountId)
         {
             UserId = uid;
             DateCreated = dateCreated;
@@ -20,6 +20,7 @@ namespace Domain.DomainModels.API.ResponseModels
             PeopleNumber = peoplenumber;
             CostPayment = costpayment;
             TripId = tid;
+            DiscountId = discountId;
         }
         public Guid UserId { get; set; }
         public Guid TripId { get; set; }
@@ -30,6 +31,7 @@ namespace Domain.DomainModels.API.ResponseModels
         public string Requirements { get; set; }
         public int PeopleNumber { get; set; }
         public string CostPayment { get; set; }
+        public Guid? DiscountId { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
     }

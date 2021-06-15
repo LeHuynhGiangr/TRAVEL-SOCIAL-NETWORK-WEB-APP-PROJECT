@@ -15,5 +15,6 @@ namespace Domain.DomainModels.API.RequestModels
         public int PeopleNumber { get; set; }
         public string CostPayment { get; set; }
         public Guid UserId { get; set; }
+        public Guid? DiscountId { get; set; }
     }
 }
