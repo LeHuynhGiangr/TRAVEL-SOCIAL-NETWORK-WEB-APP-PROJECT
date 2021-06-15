@@ -116,6 +116,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { DialogPassengersComponent } from './fanpage-admin/dialog-passengers/dialog-passengers.component'
 import { FanpageDiscountComponent } from './fanpage-discount/fanpage-discount.component'
 import { DialogDiscountComponent } from './fanpage-discount/dialog-discount/dialog-discount.component'
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { AdsComponent } from './ads/ads.component'
 export const mainRoutes: Routes = [
 
   { path: 'home', component: NewsfeedComponent },//main entry point
@@ -123,6 +125,7 @@ export const mainRoutes: Routes = [
   /* ------------------------------------------- */
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
+  { path: 'ads', component: AdsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'edit-basic', component: EditBasicComponent },
   { path: 'edit-hobby', component: EditHobbyComponent },
@@ -163,6 +166,7 @@ export const mainRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     AboutComponent,
+    AdsComponent,
     ContactComponent,
     EditBasicComponent,
     EditHobbyComponent,
@@ -228,7 +232,8 @@ export const mainRoutes: Routes = [
     PaymentHistoryComponent,
     DialogPassengersComponent,
     FanpageDiscountComponent,
-    DialogDiscountComponent
+    DialogDiscountComponent,
+
     //Primeng
   ],
   imports: [
@@ -276,6 +281,7 @@ export const mainRoutes: Routes = [
     TabMenuModule,
     SidebarModule,
     SplitButtonModule,
+    ConfirmDialogModule,
     //Module support
     ReadMoreModule,
     DataViewModule,

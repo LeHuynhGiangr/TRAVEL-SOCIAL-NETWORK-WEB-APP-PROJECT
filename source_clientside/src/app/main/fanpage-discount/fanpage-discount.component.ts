@@ -27,26 +27,29 @@ export class FanpageDiscountComponent implements OnInit {
         this.discounts = await this.DService.getListDiscountByPageId(this.pageurl.getPageIdStorage())
         this.dis_count = this.discounts.length
         for (let i = 0; i < this.discounts.length; i++) {
-            let discount = new Discount();
-            discount.Id = this.discounts[i].id.toString()
-            discount.Name = this.discounts[i].name
-            discount.CodeDiscount = this.discounts[i].codeDiscount
-            discount.Active = this.discounts[i].active
-            discount.DiscountPer = this.discounts[i].discountPer
-            discount.LimitCost = this.discounts[i].limitCost
-            discount.LimitPassenger = this.discounts[i].limitPassenger
-            if(discount.LimitCost == 0 && discount.LimitPassenger == 0)
-                discount.Case = "all cases"
-            if(discount.LimitCost == 0 && discount.LimitPassenger > 0)
-                discount.Case = " > " + discount.LimitPassenger + " passenger"
-            if(discount.LimitCost > 0 && discount.LimitPassenger == 0)
-                discount.Case = " > " + discount.LimitCost + " $"
-            if(discount.LimitCost > 0 && discount.LimitPassenger > 0)
-                discount.Case = " > " + discount.LimitPassenger + " passenger" + " and > " + discount.LimitCost + " $"
-            discount.DateExpired = this.discounts[i].dateExpired
-            discount.DateCreate = this.discounts[i].dateCreated
-            discount.PageId = this.discounts[i].pageId
-            this.discountList.push(discount)
+            if(this.discounts[i].active == true)
+            {
+                let discount = new Discount();
+                discount.Id = this.discounts[i].id.toString()
+                discount.Name = this.discounts[i].name
+                discount.CodeDiscount = this.discounts[i].codeDiscount
+                discount.Active = this.discounts[i].active
+                discount.DiscountPer = this.discounts[i].discountPer
+                discount.LimitCost = this.discounts[i].limitCost
+                discount.LimitPassenger = this.discounts[i].limitPassenger
+                if(discount.LimitCost == 0 && discount.LimitPassenger == 0)
+                    discount.Case = "all cases"
+                if(discount.LimitCost == 0 && discount.LimitPassenger > 0)
+                    discount.Case = " > " + discount.LimitPassenger + " people"
+                if(discount.LimitCost > 0 && discount.LimitPassenger == 0)
+                    discount.Case = " > " + discount.LimitCost + " $"
+                if(discount.LimitCost > 0 && discount.LimitPassenger > 0)
+                    discount.Case = " > " + discount.LimitPassenger + " people" + " and > " + discount.LimitCost + " $"
+                discount.DateExpired = this.discounts[i].dateExpired
+                discount.DateCreate = this.discounts[i].dateCreated
+                discount.PageId = this.discounts[i].pageId
+                this.discountList.push(discount)
+            }
         }
     }
 }

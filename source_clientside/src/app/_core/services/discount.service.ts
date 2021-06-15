@@ -26,4 +26,20 @@ export class DiscountService {
             console.log("ok");
         }
     }
+    deleteDiscount = async (id) => {
+        try {
+            return await this.http.delete(this.urlAPI + ApiUrlConstants.API_DISCOUNT_URL + id).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    blockDiscount = async (id) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_DISCOUNT_URL + id,null).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
 }

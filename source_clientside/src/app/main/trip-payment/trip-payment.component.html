@@ -18,88 +18,102 @@
 					<div class="col-lg-12">
 						<div class="row" id="page-contents">
 							<div class="col-lg-6 left">
-                                <mat-horizontal-stepper #stepper>
-                                    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-                                      <form [formGroup]="firstFormGroup">
-                                        <ng-template matStepLabel>Information</ng-template>
-                                        <mat-form-field>
-                                          <mat-label>Name</mat-label>
-                                          <input matInput placeholder="Last name, First name" name="1" id="1" [(ngModel)]="this.name" formControlName="firstCtrl" required>
-                                        </mat-form-field>
-                                        <mat-form-field>
-                                            <mat-label>Phone Number</mat-label>
-                                            <input matInput placeholder="Phone Number" name="2" id="2" [(ngModel)]="this.phone" formControlName="firstCtrl" required>
-                                        </mat-form-field>
-                                        <mat-form-field>
-                                            <mat-label>Email</mat-label>
-                                            <input matInput placeholder="Email" name="3" id="3" [(ngModel)]="this.email" formControlName="firstCtrl" required>
-                                        </mat-form-field>
-                                        <mat-form-field>
-                                            <mat-label>Address</mat-label>
-                                            <input matInput placeholder="Address" name="4" id="4" [(ngModel)]="this.address" formControlName="firstCtrl" required>
-                                        </mat-form-field>
-                                        <mat-form-field>
-                                            <mat-label>Requirements</mat-label>
-                                            <input matInput placeholder="Requirements" name="5" id="5" [(ngModel)]="this.requirements" formControlName="firstCtrl" required>
-                                        </mat-form-field>
-                                        <div>
-                                          <p>Enter information for the team leader or person responsible for keeping in touch with the Tour service provider</p>
-                                          <button mat-button matStepperNext>Next</button>
-                                        </div>
-                                      </form>
-                                    </mat-step>
-                                    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-                                      <form [formGroup]="secondFormGroup">
-                                        <ng-template matStepLabel>Passengers</ng-template>
-                                        <mat-form-field>
-                                          <mat-label>Number of passengers</mat-label>
-                                          <input matInput type="number" min="1" name="Name" id="name" [(ngModel)]="this.people" (ngModelChange)="valuechange(this.people)" formControlName="secondCtrl"
-                                                 required>
-                                        </mat-form-field>
-                                        <div>
-                                          <p>Enter the number of passengers participating in the tour</p>
-                                          <button mat-button matStepperPrevious>Back</button>
-                                          <button mat-button matStepperNext>Next</button>
-                                        </div>
-                                      </form>
-                                    </mat-step>
-                                    <mat-step [stepControl]="thirdFormGroup">
-                                        <form [formGroup]="thirdFormGroup">
-                                          <ng-template matStepLabel>Payment</ng-template>
-                                          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-                                          
-                                          <div>
-                                            <p>Choose a method of payment</p>
-                                            <button mat-button matStepperPrevious>Back</button>
-                                          </div>
-                                        </form>
-                                      </mat-step>
-                                    <mat-step *ngIf="this.check===true">
-                                        <ng-template matStepLabel>Done</ng-template>
-                                        <p>You are now done.</p>
-                                        <div>
-                                          <button mat-button [routerLink]="['/main/home']">OK</button>
-                                        </div>
-                                    </mat-step>
-                                  </mat-horizontal-stepper>                                  
-                            </div><!-- centerl meta --> 
-                            <div class="col-lg-3">
-                                <aside >
-                                    <div class="widget friend-list stick-widget">
-                                        <h4 class="widget-title">Tour Infomation</h4>
-                                        <br>
-                                        <mat-list>
-                                            <mat-list-item><mat-icon>airport_shuttle</mat-icon>Departure: {{this.trips.Start}}</mat-list-item>
-                                            <mat-list-item><mat-icon>date_range</mat-icon>Date Start: {{this.trips.DateStart | date: 'dd/MM/yyyy'}}</mat-list-item>
-                                            <mat-divider></mat-divider>
-                                            <mat-list-item>	<mat-icon> local_atm</mat-icon>Amount per passenger: {{this.trips.Cost}} $</mat-list-item>
-                                            <mat-list-item>	<mat-icon> local_atm</mat-icon>VAT: {{this.cost}} $</mat-list-item>
-                                            <mat-divider></mat-divider>
-                                            <mat-list-item><mat-icon>chrome_reader_mode</mat-icon>Total: {{this.total}} $</mat-list-item>
-                                        </mat-list>
-                                    </div><!-- friends list sidebar -->
-                                </aside>
-                            </div><!-- sidebar -->
+                  <mat-horizontal-stepper #stepper>
+                      <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+                        <form [formGroup]="firstFormGroup">
+                          <ng-template matStepLabel>Information</ng-template>
+                          <mat-form-field>
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Last name, First name" name="1" id="1" [(ngModel)]="this.name" formControlName="firstCtrl" required>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <mat-label>Phone Number</mat-label>
+                              <input matInput placeholder="Phone Number" name="2" id="2" [(ngModel)]="this.phone" formControlName="firstCtrl" required>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <mat-label>Email</mat-label>
+                              <input matInput placeholder="Email" name="3" id="3" [(ngModel)]="this.email" formControlName="firstCtrl" required>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <mat-label>Address</mat-label>
+                              <input matInput placeholder="Address" name="4" id="4" [(ngModel)]="this.address" formControlName="firstCtrl" required>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <mat-label>Requirements</mat-label>
+                              <input matInput placeholder="Requirements" name="5" id="5" [(ngModel)]="this.requirements" formControlName="firstCtrl" required>
+                          </mat-form-field>
+                          <div>
+                            <p>Enter information for the team leader or person responsible for keeping in touch with the Tour service provider</p>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+                      <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+                        <form [formGroup]="secondFormGroup">
+                          <ng-template matStepLabel>Passengers</ng-template>
+                          <mat-form-field>
+                            <mat-label>Number of passengers</mat-label>
+                            <input matInput type="number" min="1" name="Name" id="name" [(ngModel)]="this.people" (ngModelChange)="valuechange(this.people)" formControlName="secondCtrl"
+                                    required>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>{{this.code}}</mat-label>
+                            <input matInput disabled name="Name" id="name"
+                            required>
+                          </mat-form-field>
+                          <br>
+                          <hr>
+                          <div class="scrolling-wrapper">
+                            <div *ngFor="let discount of discountList" class="card" pTooltip="{{discount.Case}}"
+                              tooltipPosition="bottom" (click)="letDiscount(discount.LimitCost,discount.LimitPassenger,discount.CodeDiscount,discount.DiscountPer)">
+                              <mat-card class="card-dis">{{discount.CodeDiscount}}</mat-card>
+                            </div>
+                          </div>
+                          <div>
+                            <p>Enter the number of passengers participating in the tour</p>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                          </div>
+                        </form>
+                      </mat-step>
+                      <mat-step [stepControl]="thirdFormGroup">
+                          <form [formGroup]="thirdFormGroup">
+                            <ng-template matStepLabel>Payment</ng-template>
+                            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                            
+                            <div>
+                              <p>Choose a method of payment</p>
+                              <button mat-button matStepperPrevious>Back</button>
+                            </div>
+                          </form>
+                        </mat-step>
+                      <mat-step *ngIf="this.check===true">
+                          <ng-template matStepLabel>Done</ng-template>
+                          <p>You are now done.</p>
+                          <div>
+                            <button mat-button [routerLink]="['/main/home']">OK</button>
+                          </div>
+                      </mat-step>
+                    </mat-horizontal-stepper>                                  
+              </div><!-- centerl meta --> 
+              <div class="col-lg-3">
+                  <aside >
+                      <div class="widget friend-list stick-widget">
+                          <h4 class="widget-title">Tour Infomation</h4>
+                          <br>
+                          <mat-list>
+                              <mat-list-item><mat-icon>airport_shuttle</mat-icon>Departure: {{this.trips.Start}}</mat-list-item>
+                              <mat-list-item><mat-icon>date_range</mat-icon>Date Start: {{this.trips.DateStart | date: 'dd/MM/yyyy'}}</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item>	<mat-icon> local_atm</mat-icon>Amount per passenger: {{this.trips.Cost}} $</mat-list-item>
+                              <mat-list-item>	<mat-icon> local_atm</mat-icon>VAT: {{this.cost}} $</mat-list-item>
+                              <mat-list-item>	<mat-icon> arrow_downward</mat-icon>Discount: {{this.percent}} %</mat-list-item>
+                              <mat-divider></mat-divider>
+                              <mat-list-item><mat-icon>chrome_reader_mode</mat-icon>Total: {{this.total}} $</mat-list-item>
+                          </mat-list>
+                      </div><!-- friends list sidebar -->
+                  </aside>
+              </div><!-- sidebar -->
 						</div>	
 					</div>
 				</div>

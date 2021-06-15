@@ -18,7 +18,7 @@ import * as XLSX from 'xlsx';
 import { DialogDiscountComponent } from '../fanpage-discount/dialog-discount/dialog-discount.component';
 import { Discount } from 'src/app/_core/models/discount.model';
 import { DiscountService } from 'src/app/_core/services/discount.service';
-import { MenuItem } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 @Component({
     selector: 'app-fanpage-admin',
     templateUrl: './fanpage-admin.component.html',
@@ -43,7 +43,6 @@ export class FanpageAdminComponent implements OnInit {
   title = 'angular-app';
   fileName= 'ExcelSheet.xlsx';
   totalPrice:number
-  items: MenuItem[];
   @ViewChild('MatPaginator1') MatPaginator1: MatPaginator;
   @ViewChild('MatPaginator2') MatPaginator2: MatPaginator;
   ngAfterViewInit() {
@@ -51,7 +50,8 @@ export class FanpageAdminComponent implements OnInit {
     this.dataSourcedis.paginator = this.MatPaginator2;
   }
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,public pageurl:PageUrl,
-  public dialog: MatDialog,private TService:TripService,private PService:PagesService, private DService: DiscountService) {
+  public dialog: MatDialog,private TService:TripService,private PService:PagesService, private DService: DiscountService
+  , private confirmationService: ConfirmationService,private messageService: MessageService) {
 
   }
   async ngOnInit() {
@@ -59,14 +59,6 @@ export class FanpageAdminComponent implements OnInit {
     script.type = "text/javascript";
     script.src = "../assets/js/script.js";
     this.elementRef.nativeElement.appendChild(script);
-    this.items = [
-      {label: 'Block', icon: 'pi pi-lock', command: () => {
-        alert("ok");
-      }},
-      {label: 'Delete', icon: 'pi pi-trash', command: () => {
-        alert("ok");
-      }}
-    ]
     this.dataSource = new MatTableDataSource<Trips>();
     this.dataSourcedis = new MatTableDataSource<Discount>();
     this.totalPrice = 0
@@ -211,6 +203,63 @@ export class FanpageAdminComponent implements OnInit {
         }
         this.discountList = new Array<Discount>();
         this.getDiscountList();
+      });
+    }
+    async deleteDiscount(id)
+    {
+      await this.DService.deleteDiscount(id)
+      this.discountList = new Array<Discount>();
+      this.getDiscountList();
+    }
+    async delete(id) {
+      this.confirmationService.confirm({
+        message: 'Do you want to remove the discount code ?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.deleteDiscount(id)
+          this.messageService.add({ severity: 'success', summary: 'Done', detail: 'Delete discount successfully !' });
+        },
+        reject: (type) => {
+          switch (type) {
+            case ConfirmEventType.REJECT:
+              this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+              break;
+            case ConfirmEventType.CANCEL:
+              this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+              break;
+          }
+        }
+      });
+    }
+    async blockDiscount(id)
+    {
+      await this.DService.blockDiscount(id)
+      this.discountList = new Array<Discount>();
+      this.getDiscountList();
+    }
+    async block(id,status) {
+      this.confirmationService.confirm({
+        message: 'Do you want to change the status of the discount code ?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.blockDiscount(id)
+          if(status == true)
+            this.messageService.add({ severity: 'success', summary: 'Done', detail: 'Block discount successfully !' });
+          else
+            this.messageService.add({ severity: 'success', summary: 'Done', detail: 'UnBlock discount successfully !' });
+        },
+        reject: (type) => {
+          switch (type) {
+            case ConfirmEventType.REJECT:
+              this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+              break;
+            case ConfirmEventType.CANCEL:
+              this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+              break;
+          }
+        }
       });
     }
 }

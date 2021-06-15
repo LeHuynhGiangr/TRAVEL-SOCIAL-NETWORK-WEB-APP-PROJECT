@@ -9,6 +9,9 @@ import { TripStatic } from '../../_core/data-repository/trip';
 import { TripService } from '../../_core/services/trip.service';
 import {TripUrl} from 'src/app/_helpers/get-trip-url'
 import { LoginService } from 'src/app/_core/services/login.service';
+import { Discount } from 'src/app/_core/models/discount.model';
+import { DiscountService } from 'src/app/_core/services/discount.service';
+import { TimelineUrl } from 'src/app/_helpers/get-timeline-url';
 @Component({
     selector: 'app-trip-payment',
     templateUrl: './trip-payment.component.html',
@@ -32,8 +35,13 @@ export class TripPaymentComponent implements OnInit {
     email:string
     phone:string
     requirements:string
+    dis_count:number
+    discounts:any
+    code:string
+    percent:number
+    public discountList = new Array<Discount>();
     constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private _formBuilder: FormBuilder,
-    private TService:TripService, public tripurl:TripUrl,private service: LoginService ) {}
+    private TService:TripService, public tripurl:TripUrl,private service: LoginService, private DService: DiscountService, private timelineurl:TimelineUrl ) {}
 
     ngOnInit() {
       var script = document.createElement("script");
@@ -41,6 +49,8 @@ export class TripPaymentComponent implements OnInit {
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
       this.initConfig();
+      this.getDiscountList()
+      this.code = "Code Discount"
       this.trips = new Trips()
       this.trips.Id = TripStatic.Id
       this.trips.Name = TripStatic.Name
@@ -69,7 +79,9 @@ export class TripPaymentComponent implements OnInit {
         this.check=true
     }
     valuechange(newValue) {
-        this.total = parseFloat(((this.cost + parseInt(this.trips.Cost))*newValue).toFixed(2));
+      this.code = "Code Discount"
+      this.percent = 0
+      this.total = parseFloat(((this.cost + parseInt(this.trips.Cost))*newValue).toFixed(2));
     }
     private initConfig(): void {
         this.payPalConfig = {
@@ -153,4 +165,47 @@ export class TripPaymentComponent implements OnInit {
           }
         };
       }
+      getDiscountList = async () => {
+        this.discounts = await this.DService.getListDiscountByPageId(TripStatic.PageId)
+        this.dis_count = this.discounts.length
+        for (let i = 0; i < this.discounts.length; i++) {
+          if(this.discounts[i].active == true)
+          {
+            let discount = new Discount();
+            discount.Id = this.discounts[i].id.toString()
+            discount.Name = this.discounts[i].name
+            discount.CodeDiscount = this.discounts[i].codeDiscount
+            discount.Active = this.discounts[i].active
+            discount.DiscountPer = this.discounts[i].discountPer
+            discount.LimitCost = this.discounts[i].limitCost
+            discount.LimitPassenger = this.discounts[i].limitPassenger
+            if(discount.LimitCost == 0 && discount.LimitPassenger == 0)
+                discount.Case = discount.DiscountPer + "% discount for all cases"
+            if(discount.LimitCost == 0 && discount.LimitPassenger > 0)
+                discount.Case = discount.DiscountPer + "% discount when more than " + discount.LimitPassenger + " people"
+            if(discount.LimitCost > 0 && discount.LimitPassenger == 0)
+                discount.Case = discount.DiscountPer + "% discount when the price is more than " + discount.LimitCost + " $"
+            if(discount.LimitCost > 0 && discount.LimitPassenger > 0)
+                discount.Case = discount.DiscountPer + "% discount when more than " + discount.LimitPassenger + " people and " + discount.LimitCost + " $"
+            discount.DateExpired = this.discounts[i].dateExpired
+            discount.DateCreate = this.discounts[i].dateCreated
+            discount.PageId = this.discounts[i].pageId
+            this.discountList.push(discount)
+          }
+        }
+    }
+    letDiscount(lcost,lpas,code,lper)
+    {
+      console.log(lpas)
+      console.log(lcost)
+      if(Number(this.people) < Number(lpas) || Number(this.cost) < Number(lcost))
+        this.timelineurl.showError("Not eligible for use !")
+      else
+      {
+        this.code =  code
+        this.percent = Number(lper)
+        this.timelineurl.showSuccess("Discount code applied successfully!")
+        this.total = parseFloat(((this.cost + parseInt(this.trips.Cost))*this.people).toFixed(2)) - parseFloat(((this.cost + parseInt(this.trips.Cost))*this.people*this.percent/100).toFixed(2));
+      }
+    }
 }
