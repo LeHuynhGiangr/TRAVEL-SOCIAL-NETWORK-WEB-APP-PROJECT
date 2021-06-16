@@ -51,7 +51,7 @@ export class NotificationsComponent implements OnInit {
     
       connection.on("BroadcastMessage", () => {  
         this.loop = this.loop+1
-        if(this.loop % 3 == 0)
+        if(this.loop % 2 == 0)
         {
           this.notisList= new Array<Notifications>();
           this.getAllNotification()

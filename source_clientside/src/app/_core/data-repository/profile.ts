@@ -30,4 +30,5 @@ export class UserProfile {
     public static Name;
     public static UserName:string;
     public static count=6;
+    public static noti:boolean;
 }

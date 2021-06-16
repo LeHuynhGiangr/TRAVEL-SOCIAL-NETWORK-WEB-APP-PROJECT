@@ -83,6 +83,9 @@ export class FanpageReviewComponent implements OnInit {
         this.userRatingsList = new Array<Ratings>();
         this.getListReview()
         this.ngAfterViewInit()
+        this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+          return false;
+        }  
       });
     }
     ngAfterViewInit() {

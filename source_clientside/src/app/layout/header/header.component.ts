@@ -32,8 +32,10 @@ export class HeaderComponent implements OnInit {
     public res:boolean=false
     public users:any
     public userList = new Array<AppUsers>();
+    public notisList = new Array<Notifications>();
     pageid
     loop:number
+    noticount
     constructor(private router: Router ,private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
       public Sservice:SearchService,public timelineurl:TimelineUrl, public dialog: MatDialog,private Nservice:NotificationPageService,
       private Pservice:PagesService,private messageService: MessageService, private primengConfig: PrimeNGConfig, public pageurl:PageUrl) {}
@@ -43,8 +45,12 @@ export class HeaderComponent implements OnInit {
       script.type = "text/javascript";
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
-
+      this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+        return false;
+      }
+      this.getAllNotification()
       this.loop = 0
+      this.noticount = 0
       this.primengConfig.ripple = true;
       //item responsive
       this.items = [
@@ -70,6 +76,10 @@ export class HeaderComponent implements OnInit {
       this.appUsers.Id = this.service.getUserIdStorage()
       this.appUsers.FirstName = this.service.getFirstNameStorage()
       this.appUsers.LastName = this.service.getLastNameStorage()
+      this.connection()
+    }
+    connection()
+    {
       const connection = new signalR.HubConnectionBuilder()  
       .configureLogging(signalR.LogLevel.Information)  
       .withUrl(environment.baseUrl)  
@@ -79,17 +89,19 @@ export class HeaderComponent implements OnInit {
       }).catch(function (err) {  
         return console.error(err.toString());  
       });  
-    
       connection.on("BroadcastMessage", () => {  
         this.loop = this.loop+1
-        if(this.loop % 3 === 0 && this.loop >=3)
+        if(this.loop % 2 == 0)
         {
-          this.getNewNoti()
+          this.notisList= new Array<Notifications>();
+          this.getAllNotification()
+          this.noticount = this.noticount + 1
         }
-      });  
-      this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-        return false;
-      }
+      }); 
+    }
+    resetcount()
+    {
+      this.noticount = 0
     }
     onLogout() {
       this.service.logout();
@@ -117,22 +129,23 @@ export class HeaderComponent implements OnInit {
         }
       //this.refresh()
     }
-    async getNewNoti()
-    {
+  async getAllNotification()
+  {
+    const notis = await this.Nservice.getAllNotifications(this.service.getUserIdStorage()) as Array<any>
+    for (let i = 0; i < notis.length; i++) {
       let noti = new Notifications()
-      const notis = await this.Nservice.getNewNotifications(this.service.getUserIdStorage())
-      noti.Id = notis["id"]
-      noti.DateCreated = notis["dateCreated"]
-      noti.Description = notis["description"]
-      this.messageService.add({severity:'info', summary: 'Double click to view more ..', detail: noti.Description, sticky: true});
-      noti.PageId = notis["pageId"]
-      this.pageid = noti.PageId
+      noti.Id = notis[i].id
+      noti.DateCreated = notis[i].dateCreated
+      noti.Description = notis[i].description
+      noti.PageId = notis[i].pageId
       const page = await this.Pservice.getPageById(noti.PageId)
       if(page["avatar"] == "" || page["avatar"] == undefined)
         noti.PageAvatar= "assets/images/undefined.png"
       else
         noti.PageAvatar = ApiUrlConstants.API_URL+"/"+page["avatar"]
+      this.notisList.push(noti)
     }
+  }
     returnId()
     {
       UserProfile.IdTemp = UserProfile.Id

@@ -72,15 +72,15 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
     
       connection.on("BroadcastMessage", () => {  
         this.loop = this.loop+1
-        if(this.loop % 3 ==0 && this.loop >=3)
+        if(this.loop % 2 ==0 && this.loop <3)
         {
           this.tripList = new Array<Trips>();
-          this.getTripList()  
+          this.getTripList()
+          this.router.routeReuseStrategy.shouldReuseRoute = () =>{
+            return false;
+        }  
         }
       });  
-      this.router.routeReuseStrategy.shouldReuseRoute = () =>{
-          return false;
-      }
     }
     startTimer() {
       this.play = true;

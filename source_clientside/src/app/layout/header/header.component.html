@@ -85,22 +85,18 @@ width: 100%;">
                 </mat-menu>
             </li>
             <li>
-                <button class="top" mat-icon-button [matMenuTriggerFor]="menu2" pTooltip="Notifications" tooltipPosition="bottom" aria-label="Example icon-button with a menu">
-                    <mat-icon matBadge="3" matBadgeColor="warn">notifications</mat-icon>
+                <button (click)="resetcount()"class="top" mat-icon-button [matMenuTriggerFor]="menu2" pTooltip="Notifications" tooltipPosition="bottom" aria-label="Example icon-button with a menu">
+                    <mat-icon matBadge="{{this.noticount}}" matBadgeColor="warn">notifications</mat-icon>
                 </button>
                 <mat-menu #menu2="matMenu" style="width:200px;">
-                    <button mat-menu-item>
-                        <mat-icon>thumb_up_alt</mat-icon>
-                        <span><strong>John</strong> just liked your photo</span>
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon>people_outline</mat-icon>
-                        <span><strong>Sena</strong> agreed to the friend request</span>
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon> insert_comment</mat-icon>
-                        <span><strong>Khoi</strong> commented on your post</span>
-                    </button>
+                    <p-scrollPanel [style]="{width: '100%', height: '200px'}">
+                    <div *ngFor="let noti of notisList">
+                        <button mat-menu-item pTooltip="{{noti.DateCreated | date: 'dd/MM/yyyy hh:mm::ss'}}" tooltipPosition="bottom" (click) = "pageurl.getNavigation(noti.PageId)">
+                            <mat-icon>assignment</mat-icon>
+                            <span>{{noti.Description}}</span>
+                        </button>
+                    </div>
+                </p-scrollPanel>
                   </mat-menu>
             </li>
         </ul>
