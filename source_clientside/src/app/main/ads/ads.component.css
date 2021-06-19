@@ -1,0 +1,98 @@
+.div-ads1
+{
+    height: 220px;
+    background: white;
+    width: 65%;
+    border-radius: 25px;
+    border: 2px solid #898e91;
+    margin-left: 2%;
+}
+.div-ads2
+{
+    margin-top: 20px;
+    height: 400px;
+    background: white;
+    width: 65%;
+    border-radius: 25px;
+    border: 2px solid #898e91;
+    margin-left: 2%;
+}
+.div-ads3
+{
+    margin-top: 20px;
+    height: 220px;
+    background: white;
+    width: 65%;
+    border-radius: 25px;
+    border: 2px solid #898e91;
+    margin-left: 2%;
+}
+.nav-info
+{
+    position: fixed;
+    right: 2%;
+    width: 25%;
+    background-color: white;
+    height: 15%;
+    border-radius: 25px;
+    border: 2px solid #898e91;
+}
+.nav-info-cost
+{
+    position: fixed;
+    margin-top: 8%;
+    right: 2%;
+    width: 25%;
+    background-color: white;
+    height: 25%;
+    border-radius: 25px;
+    border: 2px solid #898e91;
+}
+.nav-info-button
+{
+    position: fixed;
+    margin-top: 22%;
+    right: 3%;
+}
+.example-form {
+    min-width: 150px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 95%;
+    margin-left: 2%;
+  }
+  .example-hfull-width
+  {
+    width: 70%;
+    margin-left: 15%;
+    display: inline-block;
+    margin-top: -1%;
+  }
+  .example-half-width {
+    width: 45%;
+    margin-left: 2%;
+    display: inline-block;
+  }
+  .mat-slider-horizontal {
+    height: 89px;
+    margin-left: 9%;
+    min-width: 80%;
+}
+.fee
+{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 2%;
+    color: #4b698b;
+}
+.infoo
+{
+    margin-top: -1%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+.mat-slider-thumb-label{
+    background-color: #4b698b;
+}

@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     pageid
     loop:number
     noticount
+    notilength
     constructor(private router: Router ,private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
       public Sservice:SearchService,public timelineurl:TimelineUrl, public dialog: MatDialog,private Nservice:NotificationPageService,
       private Pservice:PagesService,private messageService: MessageService, private primengConfig: PrimeNGConfig, public pageurl:PageUrl) {}
@@ -132,6 +133,7 @@ export class HeaderComponent implements OnInit {
   async getAllNotification()
   {
     const notis = await this.Nservice.getAllNotifications(this.service.getUserIdStorage()) as Array<any>
+    this.notilength = notis.length
     for (let i = 0; i < notis.length; i++) {
       let noti = new Notifications()
       noti.Id = notis[i].id

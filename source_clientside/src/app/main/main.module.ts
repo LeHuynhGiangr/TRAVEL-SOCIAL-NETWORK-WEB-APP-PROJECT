@@ -72,6 +72,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSliderModule} from '@angular/material/slider';
 import { NgxPayPalModule } from 'ngx-paypal';
 //primeng component
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
@@ -93,6 +94,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {SidebarModule} from 'primeng/sidebar';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import {InputTextModule} from 'primeng/inputtext';
 //module support
 import { ReadMoreModule } from 'ng-readmore';
 import { BackgroundAreaComponent } from './background-area/background-area.component';
@@ -247,6 +249,7 @@ export const mainRoutes: Routes = [
     MatListModule,
     MatMenuModule,
     MatIconModule,
+    MatSliderModule,
     MatProgressBarModule,
     MatExpansionModule,
     MatDatepickerModule,
@@ -282,6 +285,7 @@ export const mainRoutes: Routes = [
     SidebarModule,
     SplitButtonModule,
     ConfirmDialogModule,
+    InputTextModule,
     //Module support
     ReadMoreModule,
     DataViewModule,

@@ -90,6 +90,7 @@ width: 100%;">
                 </button>
                 <mat-menu #menu2="matMenu" style="width:200px;">
                     <p-scrollPanel [style]="{width: '100%', height: '200px'}">
+                    <p *ngIf="this.notilength == 0" style="font-weight: bold;">There are no notifications to display...</p>
                     <div *ngFor="let noti of notisList">
                         <button mat-menu-item pTooltip="{{noti.DateCreated | date: 'dd/MM/yyyy hh:mm::ss'}}" tooltipPosition="bottom" (click) = "pageurl.getNavigation(noti.PageId)">
                             <mat-icon>assignment</mat-icon>
