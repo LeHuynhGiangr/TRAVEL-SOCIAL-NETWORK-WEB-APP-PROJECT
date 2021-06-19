@@ -30,6 +30,8 @@ namespace Domain.Services
                     ads.Name,
                     ads.Cost,
                     ads.Priority,
+                    ads.EndDate,
+                    ads.Active,
                     ads.Page.Id.ToString()));
             }
             return adsResponse;
@@ -43,6 +45,8 @@ namespace Domain.Services
                     ads.Name,
                     ads.Cost,
                     ads.Priority,
+                    ads.EndDate,
+                    ads.Active,
                     ads.Page.Id.ToString());
             return adsResponse;
         }
@@ -61,6 +65,29 @@ namespace Domain.Services
                         ads.Name,
                         ads.Cost,
                         ads.Priority,
+                        ads.EndDate,
+                        ads.Active,
+                        ads.Page.Id.ToString()));
+            }
+            return l_adsResponses;
+        }
+        IEnumerable<AdvertisementResponse> IAdvertisementService<Guid>.GetAdsActiveByPageId<IdType>(IdType id)
+        {
+            var l_ads = m_adRepository.FindMultiple(_ => _.Page.Id.Equals(id) && _.Active == true, _ => _.Page);
+
+            List<AdvertisementResponse> l_adsResponses = new List<AdvertisementResponse>();
+
+            foreach (Advertisement ads in l_ads)
+            {
+                l_adsResponses.Add(
+                    new AdvertisementResponse(
+                        ads.Id,
+                        ads.DateCreated,
+                        ads.Name,
+                        ads.Cost,
+                        ads.Priority,
+                        ads.EndDate,
+                        ads.Active,
                         ads.Page.Id.ToString()));
             }
             return l_adsResponses;
@@ -77,6 +104,8 @@ namespace Domain.Services
                     Name = model.Name,
                     Cost = model.Cost,
                     Priority = model.Priority,
+                    EndDate = model.EndDate,
+                    Active = true,
                     PageId = model.PageId
                 };
 
@@ -102,6 +131,16 @@ namespace Domain.Services
             {
                 throw new Exception("delete failed");
             }
+        }
+        public bool BlockAdvertisement(Guid id)
+        {
+            Advertisement ads = m_adRepository.FindById(id);
+            ads.Active = !ads.Active;
+            m_adRepository.SaveChanges();
+            if (ads.Active == true)
+                return true;
+            else
+                return false;
         }
     }
 }

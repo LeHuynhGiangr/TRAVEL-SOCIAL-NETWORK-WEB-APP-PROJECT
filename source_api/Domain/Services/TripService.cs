@@ -340,5 +340,11 @@ namespace Domain.Services
             m_tripRepository.SetModifierTripStatus(m_trip, EntityState.Modified);
             m_tripRepository.SaveChanges();
         }
+        public void UpdatePriorityTrip(PriorityPageRequest priorityPage)
+        {
+            Trip trip = m_tripRepository.FindById(priorityPage.Id);
+            trip.Priority = priorityPage.Priority;
+            m_tripRepository.SaveChanges();
+        }
     }
 }

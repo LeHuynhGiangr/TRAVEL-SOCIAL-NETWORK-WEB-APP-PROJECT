@@ -20,5 +20,6 @@ namespace Domain.IServices
         bool Delete(T id);
         void DeleteByUserId(Guid id);
         void ModifyTrip(Guid id, CreateTripRequest model);
+        void UpdatePriorityTrip(PriorityPageRequest priorityPage);
     }
 }

@@ -11,7 +11,9 @@ namespace Domain.IServices
         IEnumerable<AdvertisementResponse> GetAll();
         AdvertisementResponse GetById(Guid id);
         IEnumerable<AdvertisementResponse> GetAdsByPageId<IdType>(IdType id);
+        IEnumerable<AdvertisementResponse> GetAdsActiveByPageId<IdType>(IdType id);
         AdvertisementResponse CreateAdvertisement(AdvertisementRequest model);
         void DeleteAdvertisement(Guid id);
+        bool BlockAdvertisement(Guid id);
     }
 }

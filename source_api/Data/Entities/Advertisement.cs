@@ -13,6 +13,8 @@ namespace Data.Entities
         public string Name { get; set; }
         public string Cost { get; set; }
         public int Priority { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool Active { get; set; }
         public Guid PageId { get; set; }
         public Page Page { get; set; }
 

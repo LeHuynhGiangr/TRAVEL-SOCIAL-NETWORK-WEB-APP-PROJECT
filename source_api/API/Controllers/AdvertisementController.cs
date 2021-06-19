@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
 using API.Hub;
+using Data.Entities;
 using Domain.DomainModels.API.RequestModels;
 using Domain.IServices;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,19 @@ namespace API.Controllers
             try
             {
                 var adsResponses = _service.GetAdsByPageId(id);
+                return Ok(adsResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [HttpGet("active/{id:guid}")]
+        public IActionResult GetAllAdsActivePageId(Guid id)
+        {
+            try
+            {
+                var adsResponses = _service.GetAdsActiveByPageId(id);
                 return Ok(adsResponses);
             }
             catch (Exception e)
@@ -64,6 +78,25 @@ namespace API.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("block/{id:guid}")]
+        [HttpPut]
+        public async Task<ActionResult<Advertisement>> BlockAdsAsync(Guid id)
+        {
+            try
+            {
+                if (_service.BlockAdvertisement(id) == true)
+                {
+                    await _hubContext.Clients.All.BroadcastMessage();
+                    return Ok("UnBlock rating successfully");
+                }
+                else
+                    return Ok("Block rating successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Not found !" });
             }
         }
     }

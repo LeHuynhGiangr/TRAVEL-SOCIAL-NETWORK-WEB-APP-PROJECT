@@ -240,5 +240,20 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        [Route("priority")]
+        [HttpPut]
+        public async Task<IActionResult> UpdatePriorityPage([FromBody] PriorityPageRequest priorityPage)
+        {
+            try
+            {
+                _service.UpdatePriorityPage(priorityPage);
+                await _hubContext.Clients.All.BroadcastMessage();
+                return Ok("Update successfully !");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
     }
 }

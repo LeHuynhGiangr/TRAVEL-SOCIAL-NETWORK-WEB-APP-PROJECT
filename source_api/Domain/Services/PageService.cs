@@ -227,5 +227,11 @@ namespace Domain.Services
                 throw new Exception("delete failed");
             }
         }
+        public void UpdatePriorityPage(PriorityPageRequest priorityPage)
+        {
+            Page page = m_pageRepository.FindById(priorityPage.Id);
+            page.Priority = priorityPage.Priority;
+            m_pageRepository.SaveChanges();
+        }
     }
 }

@@ -21,5 +21,6 @@ namespace Domain.IServices
         void AcceptRequest(Guid id);
         bool BlockPage(Guid id);
         void DeleteRequest(Guid id);
+        void UpdatePriorityPage(PriorityPageRequest priorityPage);
     }
 }
