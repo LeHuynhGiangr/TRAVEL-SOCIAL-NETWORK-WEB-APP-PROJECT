@@ -26,7 +26,6 @@ import { RightSidebarListFriendComponent } from './right-sidebar-list-friend/rig
 import { FanpageAdminComponent } from './fanpage-admin/fanpage-admin.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { ImagesComponent } from './images/images.component';
-import { InsightsComponent } from './insights/insights.component';
 import { KnowledgeComponent } from './knowledge/knowledge.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NewpageComponent } from './newpage/newpage.component';
@@ -145,7 +144,6 @@ export const mainRoutes: Routes = [
   { path: 'groups-search', component: GroupsSearchComponent },
   { path: 'inbox', component: InboxComponent },
   { path: 'images', component: ImagesComponent },
-  { path: 'insights', component: InsightsComponent },
   { path: 'knowledge', component: KnowledgeComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'newpage', component: NewpageComponent },
@@ -184,7 +182,6 @@ export const mainRoutes: Routes = [
     GroupsSearchComponent,
     InboxComponent,
     ImagesComponent,
-    InsightsComponent,
     KnowledgeComponent,
     MessagesComponent,
     DialogPostComponent,
