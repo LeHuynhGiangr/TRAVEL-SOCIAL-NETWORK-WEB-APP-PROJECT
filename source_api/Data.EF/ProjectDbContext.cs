@@ -43,6 +43,7 @@ namespace Data.EF
         public DbSet<UserChatBox> UserChatBoxes { get; set; }
         public DbSet<UserFollowPage> UserFollowPages { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Messenger> Messengers { get; set; }
         //end declare entites
 
         //this method is called on event model creating
@@ -120,6 +121,14 @@ namespace Data.EF
               .HasOne(sc => sc.Discount)
               .WithMany(s => s.UserJoinTrips)
               .HasForeignKey(sc => sc.DiscountId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Messenger>()
+              .HasOne(sc => sc.UserFrom)
+              .WithMany(s => s.Messengers1)
+              .HasForeignKey(sc => sc.FromId).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Messenger>()
+              .HasOne(sc => sc.UserTo)
+              .WithMany(s => s.Messengers2)
+              .HasForeignKey(sc => sc.ToId).OnDelete(DeleteBehavior.Restrict);
         }
 
         public override int SaveChanges()

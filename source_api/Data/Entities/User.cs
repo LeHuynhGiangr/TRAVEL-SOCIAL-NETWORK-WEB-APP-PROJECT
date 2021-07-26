@@ -63,6 +63,8 @@ namespace Data.Entities
         public IList<ReviewPage> ReviewPages { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public IList<Notification> NotificationPages { get; set; }
+        public IList<Messenger> Messengers1 { get; set; }
+        public IList<Messenger> Messengers2 { get; set; }
         public Friend Friend { get; set; }
 
         public virtual ICollection<UserChatBox> UserChatBoxes { get; set; }
