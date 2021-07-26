@@ -76,6 +76,15 @@ body {
   float: left;
   color: #999;
 }
+.attachment
+{
+  height: 200px;
+  width: 300px;
+}
+.attachment:hover
+{
+  opacity: 0.5;
+}
 @media screen and (max-width: 1025px) {
   .search-box
   {

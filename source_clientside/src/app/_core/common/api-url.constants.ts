@@ -54,4 +54,7 @@ export class ApiUrlConstants{
     
     //discount API
     public static API_DISCOUNT_URL = '/discount/'
+
+    //messages
+    public static API_MESSAGES_URL = '/messenger/'
 }

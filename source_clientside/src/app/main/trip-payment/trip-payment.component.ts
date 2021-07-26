@@ -82,6 +82,7 @@ export class TripPaymentComponent implements OnInit {
       this.code = "Code Discount"
       this.percent = 0
       this.total = parseFloat(((this.cost + parseInt(this.trips.Cost))*newValue).toFixed(2));
+      console.log(this.people)
     }
     private initConfig(): void {
         this.payPalConfig = {
@@ -106,7 +107,7 @@ export class TripPaymentComponent implements OnInit {
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'USD',
-                  value: (this.cost + parseInt(this.trips.Cost)).toString(),
+                  value: (this.total/this.people).toString(),
                 },
               }]
             }]
@@ -198,14 +199,17 @@ export class TripPaymentComponent implements OnInit {
     {
       console.log(lpas)
       console.log(lcost)
-      if(Number(this.people) < Number(lpas) || Number(this.cost) < Number(lcost))
+      if(Number(this.people) < Number(lpas) || Number(this.total) < Number(lcost))
         this.timelineurl.showError("Not eligible for use !")
       else
       {
         this.code =  code
         this.percent = Number(lper)
         this.timelineurl.showSuccess("Discount code applied successfully!")
+        console.log(((this.cost + parseInt(this.trips.Cost))*this.people).toFixed(2))
+        console.log(((this.cost + parseInt(this.trips.Cost))*this.people*this.percent/100).toFixed(2))
         this.total = parseFloat(((this.cost + parseInt(this.trips.Cost))*this.people).toFixed(2)) - parseFloat(((this.cost + parseInt(this.trips.Cost))*this.people*this.percent/100).toFixed(2));
+        console.log(this.total)
       }
     }
 }

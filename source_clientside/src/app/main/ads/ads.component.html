@@ -25,8 +25,8 @@
                     <mat-form-field appearance="fill" class="example-full-width">
                       <mat-label>My pages</mat-label>
                       <mat-select>
-                        <mat-option *ngFor="let food of foods" [value]="food.value">
-                          {{food.viewValue}}
+                        <mat-option *ngFor="let page of pageList" [value]="page.Name">
+                          {{page.Name}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>

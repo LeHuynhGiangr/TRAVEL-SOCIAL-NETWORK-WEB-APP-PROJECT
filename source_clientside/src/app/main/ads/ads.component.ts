@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { Pages } from 'src/app/_core/models/pages.model';
+import { PagesService } from 'src/app/_core/services/page.service';
 @Component({
     selector: 'app-ads',
     templateUrl: './ads.component.html',
@@ -14,15 +16,12 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 export class AdsComponent implements OnInit {
   public payPalConfig ?: IPayPalConfig;
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  public pages:any
+  public pageList = new Array<Pages>();
   formatLabel(value: number) {
       return Math.round(value) + '%';
   }
-    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ) {}
+    constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private PService:PagesService ) {}
 
     ngOnInit() {
       var script = document.createElement("script");
@@ -30,7 +29,16 @@ export class AdsComponent implements OnInit {
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
       this.initConfig();
-      
+      this.getMyListPages();
+    }
+    async getMyListPages(){
+      this.pages = await this.PService.getAllPages();
+        for (let i = 0; i < this.pages.length; i++) {
+            let page = new Pages();
+            page.Id = this.pages[i].id.toString();
+            page.Name = this.pages[i].name
+            this.pageList.push(page);
+        }
     }
     keyPress(event: any) {
       const pattern = /[0-9]/;
@@ -110,8 +118,4 @@ export class AdsComponent implements OnInit {
         }
       };
     }
-}
-interface Food {
-  value: string;
-  viewValue: string;
 }

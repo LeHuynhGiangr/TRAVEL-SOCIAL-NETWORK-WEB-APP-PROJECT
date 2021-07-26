@@ -15,47 +15,41 @@
                     <span class="status f-online"></span>
                 </figure>
                 <div class="friendz-meta">
-                    <a class="in-progress"(click)="showDialog()" >{{friend.Name}}</a>
+                    <a class="in-progress"(click)="showDialog(friend.Id)" >{{friend.Name}}</a>
                 </div>
             </li>
         </ng-template>
     </ul>
 </div>
-<p-dialog header="Dang Bao" [(visible)]="display" [style]="{width: '30vw'}">
-    <img class = "rcorners1" src="assets/images/logo-login.png" alt="">
+<p-dialog header="{{this.NameUser}}" [(visible)]="display" [style]="{width: '30vw'}">
     <div class="p-col-12 p-md-4">
-        <p-scrollPanel [style]="{width: '105%', height: '200px'}">                   
-            <div class="container">
-                <img src="assets/images/logo-login.png" alt="Avatar" class= "rcorners1">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
-              </div>
-              
-              <div class="container darker">
-                <img src="assets/images/logo-login.png" alt="Avatar" class="right rcorners1">
-                <p>Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-left">11:01</span>
-              </div>
-              
-              <div class="container">
-                <img src="assets/images/logo-login.png" alt="Avatar" class="rcorners1">
-                <p>Sweet! So, what do you wanna do today?</p>
-                <span class="time-right">11:02</span>
-              </div>
-              
-              <div class="container darker">
-                <img src="assets/images/logo-login.png" alt="Avatar" class="right rcorners1">
-                <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-                <span class="time-left">11:05</span>
-              </div>
-        </p-scrollPanel>
+        <div #scrollMe style="overflow: scroll;height: 350px;overflow-x: hidden;">
+            <div *ngFor="let message of messagesList">
+                <div class="container" *ngIf="message.FromId != this.IdUser">
+                    <img src="{{this.AvatarUser}}" alt="Avatar" class= "rcorners1">
+                    <p>{{message.Content}}</p>
+                    <a href="{{message.Attachment}}" download>
+                        <img *ngIf="message.Attachment!=null" src="{{message.Attachment}}" class="attachment" style="max-width: 350px;border-radius:0%;">
+                    </a>
+                    <span class="time-right">11:00</span>
+                </div>
+                  
+                <div class="container darker" *ngIf="message.FromId == this.IdUser">
+                    <img src="{{this.AvatarNow}}" alt="Avatar" class="right rcorners1">
+                    <p>{{message.Content}}</p>
+                    <a href="{{message.Attachment}}" download>
+                        <img *ngIf="message.Attachment!=null" src="{{message.Attachment}}" class="attachment" style="max-width: 350px;margin-left: 5%;border-radius:0%;">
+                    </a>
+                    <span class="time-left">11:01</span>
+                </div>
+            </div>
+        </div>                         
         <br>
         <mat-form-field appearance="outline" class="auto">
             <mat-label>Write a message</mat-label>
-            <textarea matInput></textarea>
-            <button mat-icon-button><mat-icon> insert_photo</mat-icon></button>
-            <button mat-icon-button><mat-icon>gif</mat-icon></button>
-            <button mat-icon-button><mat-icon> sentiment_satisfied_alt</mat-icon></button>
+            <textarea matInput (keyup.enter)="sendMessage()" [(ngModel)]="this.Content"></textarea>
+            <input type='file' accept="image/*" (change)="onSelectFile($event)">
         </mat-form-field>
+        <img [src]="url" style="height: 50px;width: 50px;" *ngIf="url!=null">
     </div>
 </p-dialog>
