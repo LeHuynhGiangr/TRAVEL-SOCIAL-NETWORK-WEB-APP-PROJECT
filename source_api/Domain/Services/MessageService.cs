@@ -98,5 +98,31 @@ namespace Domain.Services
 
             return dirFile + nameImage;
         }
+        public void DeleteMessages(Guid iduser, Guid idclient)
+        {
+            try
+            {
+                var mes_request = m_mesRepository.FindMultiple(_ => (_.FromId.Equals(iduser) && _.ToId.Equals(idclient)) || (_.FromId.Equals(idclient) && _.ToId.Equals(iduser)), _ => _.UserFrom, _ => _.UserTo).ToList();
+                m_mesRepository.RemoveMultiple(mes_request);
+                m_mesRepository.SaveChanges();
+            }
+            catch
+            {
+                throw new Exception("delete failed");
+            }
+        }
+        public void DeleteMessagesById(Guid id)
+        {
+            try
+            {
+                var mes_request = m_mesRepository.FindSingle(_ => _.Id.Equals(id), _ => _.UserFrom, _ => _.UserTo);
+                m_mesRepository.Remove(mes_request);
+                m_mesRepository.SaveChanges();
+            }
+            catch
+            {
+                throw new Exception("delete failed");
+            }
+        }
     }
 }

@@ -56,5 +56,37 @@ namespace API.Controllers
                 return StatusCode(500, new { message = e.Message });
             }
         }
+        [Route("all/{id:guid}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMessages(Guid id)
+        {
+            try
+            {
+                Guid iduser = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                _service.DeleteMessages(iduser, id);
+                await _hubContext.Clients.All.BroadcastMessage();
+                return Ok("Delete successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
+        [Route("{id:guid}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMessagesById(Guid id)
+        {
+            try
+            {
+                Guid iduser = System.Guid.Parse(HttpContext.Items["Id"].ToString());
+                _service.DeleteMessagesById(id);
+                await _hubContext.Clients.All.BroadcastMessage();
+                return Ok("Delete successfully");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
     }
 }

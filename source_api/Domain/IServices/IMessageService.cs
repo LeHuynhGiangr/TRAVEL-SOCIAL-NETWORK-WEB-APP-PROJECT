@@ -10,5 +10,7 @@ namespace Domain.IServices
     {
         IEnumerable<MessengerResponse> GetMesByUserId<IdType>(IdType iduser, IdType idclient);
         string Create(MessengerRequest model, string webRootPath);
+        void DeleteMessages(Guid iduser, Guid idclient);
+        void DeleteMessagesById(Guid id);
     }
 }
