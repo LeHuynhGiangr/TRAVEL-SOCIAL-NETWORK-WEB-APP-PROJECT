@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
     loop:number
     noticount
     notilength
+
     constructor(private router: Router ,private elementRef: ElementRef,@Inject(DOCUMENT) private doc,private service: LoginService, public uriHandler:UriHandler, private m_route: ActivatedRoute, private m_router: Router,
       public Sservice:SearchService,public timelineurl:TimelineUrl, public dialog: MatDialog,private Nservice:NotificationPageService,
       private Pservice:PagesService,private messageService: MessageService, private primengConfig: PrimeNGConfig, public pageurl:PageUrl) {}
@@ -79,6 +80,7 @@ export class HeaderComponent implements OnInit {
       this.appUsers.LastName = this.service.getLastNameStorage()
       this.connection()
     }
+
     connection()
     {
       const connection = new signalR.HubConnectionBuilder()  

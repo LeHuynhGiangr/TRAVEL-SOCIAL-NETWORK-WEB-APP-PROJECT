@@ -53,12 +53,12 @@ export class TripDetailComponent implements OnInit {
       this.trips.Persons = TripStatic.Persons
       this.trips.DateStart = TripStatic.DateStart
       this.trips.DateEnd = TripStatic.DateEnd
-      var Time1 = new Date(this.trips.DateEnd).getDate()
-      var Time2 = new Date(this.trips.DateStart).getDate()
-      this.trips.DuringDate = Time1 - Time2
+      var Time1 = new Date(this.trips.DateEnd).getTime()
+      var Time2 = new Date(this.trips.DateStart).getTime()
+      this.trips.DuringDate = (Time1 - Time2)/86400000
       this.datenow = new Date()
       this.datenow2 = new Date(this.trips.DateStart)
-      if(this.datenow.getDate() > this.datenow2.getDate())
+      if(this.datenow.getTime() > this.datenow2.getTime())
         this.trips.SetDate = true
       else
         this.trips.SetDate = false

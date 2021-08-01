@@ -39,6 +39,7 @@ export class GroupsSearchComponent implements OnInit {
             page.Description = this.pages[i].description
             page.Active = this.pages[i].active
             page.RequestCreate = this.pages[i].requestCreate
+            page.Avatar = this.pages[i].avatar
             if(page.Avatar == undefined)
               page.Avatar = "assets/images/undefined.png"
             else

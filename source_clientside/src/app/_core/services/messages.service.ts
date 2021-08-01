@@ -27,5 +27,20 @@ export class MessagesService2 {
             console.log("ok");
         }
     }
-
+    deleteAllMessages = async (id) => {
+        try {
+            return await this.http.delete(this.urlAPI + ApiUrlConstants.API_ALLMESSAGES_URL+id).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    deleteMessagesById = async (id) => {
+        try {
+            return await this.http.delete(this.urlAPI + ApiUrlConstants.API_MESSAGES_URL+id).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
 }

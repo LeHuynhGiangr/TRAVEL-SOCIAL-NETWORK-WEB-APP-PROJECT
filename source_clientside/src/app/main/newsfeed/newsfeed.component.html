@@ -124,6 +124,32 @@
                                     </div>
                                 </div><!-- page like widget -->
                                 <!-- friends list sidebar here -->
+                                <div class="widget" style="margin-top: 50px;" *ngIf="this.hidead == true">
+                                    <div class="banner medium-opacity bluesh">
+                                        <div style="background-image: url({{this.AdAvatar}})"
+                                            class="bg-image"></div>
+                                        <div class="baner-top">
+                                            <span><img src="assets/images/book-icon.png" alt=""></span>
+                                            <button mat-icon-button [matMenuTriggerFor]="menu"
+                                            aria-label="Example icon-button with a menu" class="left">
+                                            <mat-icon>arrow_drop_down</mat-icon>
+                                           </button>
+                                           <mat-menu #menu="matMenu">
+                                           <button mat-menu-item (click)="hideAds()">
+                                               <mat-icon>layers_clear</mat-icon>
+                                               <span>Hide Ad</span>
+                                           </button>
+                                         </mat-menu>
+                                        </div>
+                                        <div class="banermeta">
+                                            <p>
+                                                {{this.AdName}}
+                                            </p>
+                                            <span>{{this.AdDes}}</span>
+                                            <a [routerLink]="['/main/newpage']" title="" data-ripple="">Follow it !</a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <app-right-sidebar-list-friend class="display-miniscreen"></app-right-sidebar-list-friend>
                             </aside>
                         </div><!-- sidebar -->

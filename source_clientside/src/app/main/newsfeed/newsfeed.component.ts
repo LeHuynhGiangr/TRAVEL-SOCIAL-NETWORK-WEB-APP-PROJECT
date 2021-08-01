@@ -15,6 +15,9 @@ import { PostCommentRequest } from 'src/app/_core/models/models.request/post-com
 import { PostComment } from 'src/app/_core/models/post-comment.model';
 import { PostCommentResponse } from 'src/app/_core/models/models.response/post-comment-response';
 import { WebSocketService } from 'src/app/_core/services/websocket.service';
+import { PagesService } from 'src/app/_core/services/page.service';
+import { Pages } from 'src/app/_core/models/pages.model';
+import { AdminService } from 'src/app/admin/admin.service';
 @Component({
     selector: 'app-newsfeed',
     templateUrl: './newsfeed.component.html',
@@ -28,8 +31,17 @@ export class NewsfeedComponent implements OnInit {
   play:boolean
   interval;
   time: number = 0;
+  public pages:any
+  public pageList = new Array<Pages>();
+  AdAvatar:string=""
+  AdName:string=""
+  AdDes:string=""
+  hidead:boolean=true
+  ran1
+  ran2
   constructor(private router: Router, private elementRef: ElementRef,@Inject(DOCUMENT) private doc ,private service: LoginService, 
-  private m_postService:PostService,public dialog: MatDialog,public uriHandler:UriHandler, private wsService:WebSocketService) { 
+  private m_postService:PostService,public dialog: MatDialog,public uriHandler:UriHandler, private wsService:WebSocketService
+  ,private PService:PagesService) { 
   }
   
   async ngOnInit() {
@@ -43,6 +55,14 @@ export class NewsfeedComponent implements OnInit {
     this.appUsers.Avatar = ApiUrlConstants.API_URL+"/"+this.service.getAvatarStorage();
     this.loadPostData();
     this.getProfile(user);
+    this.pageAds()
+    for(let i = 0; i < 1; i++)
+    {
+      if(this.AdAvatar == "")
+        this.pageAds()
+      else
+        break
+    }
     this.startTimer()
   }
   startTimer() {
@@ -59,7 +79,47 @@ export class NewsfeedComponent implements OnInit {
   loadPostData(){
       this.m_postService.getPost().subscribe((jsonData:Post[])=>this.m_posts=jsonData);
   }
-
+  hideAds()
+  {
+    this.hidead = false
+  }
+  async pageAds()
+  {
+    this.pages = await this.PService.getListAllPages()
+    for (let i = 0; i < this.pages.length; i++) {
+      let page = new Pages();
+      page.Avatar = this.pages[i].avatar
+      page.Name = this.pages[i].name
+      page.Description = this.pages[i].description
+      page.Priority = this.pages[i].priority
+      page.Active = this.pages[i].active
+      if(page.Priority >= 1)
+        this.ran2 = Math.floor(Math.random() * (this.pages.length - 0 + 0) + 0)
+      else
+        this.ran2 = 0
+      if(this.ran2 >= i)
+      {
+        this.ran1 = Math.floor(Math.random() * (100 - 1 + 1) + 1)
+        console.log(this.ran1)
+        if(this.ran1 <= page.Priority)
+        {
+          // this.hidead = true
+          if(page.Avatar == undefined)
+          {
+            page.Avatar = "assets/images/undefined.png"
+          }
+          else
+          {
+            page.Avatar = ApiUrlConstants.API_URL+"/"+this.pages[i].avatar
+          }
+          this.AdAvatar = page.Avatar
+          this.AdName = this.pages[i].name
+          this.AdDes = this.pages[i].description
+        }
+      }
+      this.pageList.push(page);
+    } 
+  }
   createPost(newPost:CreatePostRequest){
     if(!newPost)return;
     this.m_postService.createPost(newPost).subscribe((jsonData:Post)=>this.m_posts.unshift(jsonData));

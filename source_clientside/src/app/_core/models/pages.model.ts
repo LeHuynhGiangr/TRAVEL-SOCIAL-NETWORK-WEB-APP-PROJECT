@@ -13,5 +13,6 @@ export class Pages {
     BImageCard:File;
     RequestCreate:boolean
     Status:string
+    Priority:number
     UserId:string;
 }

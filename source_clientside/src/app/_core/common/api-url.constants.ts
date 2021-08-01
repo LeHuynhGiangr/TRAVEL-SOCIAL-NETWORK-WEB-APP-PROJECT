@@ -47,6 +47,7 @@ export class ApiUrlConstants{
     public static API_PAGE_FOLLOW = '/page/follow'
     public static API_PAGE_UNFOLLOW = '/page/unfollow'
     public static API_PAGE_USERFOLLOW = '/page/userfollow/'
+    public static API_PAGE_PRIORITY = '/page/priority/'
 
     //notification API
     public static API_NOTIFICATION_PAGE = '/notification/notipage/'
@@ -57,4 +58,8 @@ export class ApiUrlConstants{
 
     //messages
     public static API_MESSAGES_URL = '/messenger/'
+    public static API_ALLMESSAGES_URL = '/messenger/all/'
+
+    //advertisement
+    public static API_ADVERTISEMENT_URL = '/advertisement/'
 }

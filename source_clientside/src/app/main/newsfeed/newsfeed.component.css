@@ -22,6 +22,12 @@
     width: 70px; 
     height: 70px;
   }
+  .left
+  {
+    position: absolute;
+    top:1%;
+    right: 1%;
+  }
   @media (max-width: 1024px){
     .img-postbox
     {

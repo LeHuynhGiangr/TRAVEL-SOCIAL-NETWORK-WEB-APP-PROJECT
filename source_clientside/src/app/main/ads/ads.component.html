@@ -19,13 +19,13 @@
                     font-weight: bold;margin-top: 1%;">Ad creative</h2>
                     <mat-form-field class="example-full-width">
                         <mat-label>Ad Name</mat-label>
-                        <textarea matInput></textarea>
+                        <textarea matInput [(ngModel)]="this.ad.Name"></textarea>
                     </mat-form-field>
                     <br>
                     <mat-form-field appearance="fill" class="example-full-width">
                       <mat-label>My pages</mat-label>
-                      <mat-select>
-                        <mat-option *ngFor="let page of pageList" [value]="page.Name">
+                      <mat-select (selectionChange)="changePage($event.value)">
+                        <mat-option *ngFor="let page of pageList" [value]="page.Id">
                           {{page.Name}}
                         </mat-option>
                       </mat-select>
@@ -36,7 +36,7 @@
                     font-weight: bold;margin-top: 1%;">Estimated daily results</h2>
                     <mat-form-field class="example-hfull-width">
                         <mat-label>People reached</mat-label>
-                        <input disabled value="8.3K-24.1K" matInput min="0" max="100" name="Days" id="input" required="required">
+                        <input disabled value="{{this.usercountfrom}} - {{this.usercountto}}" matInput min="0" max="100" name="Days" id="input" required="required">
                     </mat-form-field>
                     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="display: inline-block;">
                         <mat-icon>info</mat-icon>
@@ -52,9 +52,12 @@
                     <div style="margin-top: -3%;margin-left: 2%;margin-bottom: 3%;"><span>Your ad will run for 10 days.</span></div>
                     <mat-form-field class="example-hfull-width">
                         <mat-label>People reached</mat-label>
-                        <input disabled value="₫3000000 a day x 10 days." matInput min="0" max="100" name="Days" id="input" required="required">
+                        <input disabled value="${{this.ad.Cost}} a day x {{this.days}} days." matInput min="0" max="100" name="Days" id="input" required="required">
                     </mat-form-field>
                     <hr style="width: 90%;margin-top: 0rem;">
+                    <div class="totalmoney">
+                        <h2>Total: {{this.total}} $</h2>
+                    </div>
                 </div>
                 <div class="nav-info-button">
                     <button mat-button color="primary">Management ></button>
@@ -64,11 +67,11 @@
                     font-weight: bold;margin-top: 1%;">Duration</h2>
                     <mat-form-field class="example-half-width">
                         <mat-label>Days</mat-label>
-                        <input (keypress)="keyPress($event)" matInput type="number" min="0" max="100" name="Days" id="input" required="required">
+                        <input (keypress)="keyPress($event)" (input)="dayChange($event.target.value)" matInput type="number" min="0" max="100" name="Days" id="input" required="required">
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="example-half-width">
                         <mat-label>End Date</mat-label>
-                        <input matInput [matDatepicker]="picker" disabled>
+                        <input matInput [matDatepicker]="picker" disabled  [(ngModel)]="this.date">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -84,9 +87,9 @@
                             font-size: 12px;">When your ads have more opportunities to get results, you may spend more than your daily budget.</p>
                         </mat-menu>
                     </div>
-                    <div style="text-align: center;font-weight: bold;"><span>An estimated 8.3K-24.1K people reached per day</span></div>
+                    <div style="text-align: center;font-weight: bold;"><span>An estimated {{this.usercountfrom}} - {{this.usercountto}} peoples reached per day</span></div>
                     <div class="fee"><span style="font-size: 25px;
-                        margin-right: 5px;">$</span><span style="font-size: 30px;">300</span></div>
+                        margin-right: 5px;">$</span><span style="font-size: 30px;">{{this.ad.Cost}} / Day</span></div>
                     <mat-slider
                     thumbLabel
                     [displayWith]="formatLabel"
@@ -94,7 +97,7 @@
                     step="1"
                     min="0"
                     max="100"
-                    aria-label="units"></mat-slider>
+                    aria-label="units" (input)="onInputChange($event)"></mat-slider>
                 </div>
                 <div class="div-ads3">
                     <h2 style="margin-left: 2%;

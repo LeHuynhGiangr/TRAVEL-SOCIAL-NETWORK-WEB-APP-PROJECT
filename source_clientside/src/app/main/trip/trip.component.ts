@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { LoginService } from '../../_core/services/login.service';
 import { UserProfile } from '../../_core/data-repository/profile'
@@ -51,7 +51,12 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
       script.type = "text/javascript";
       script.src = "../assets/js/script.js";
       this.elementRef.nativeElement.appendChild(script);
-
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0)
+      });
       this.filters = new FilterTrip()
       this.filters.Name = ""
       this.filters.CostStart = 0
@@ -126,7 +131,7 @@ import { FilterTrip } from 'src/app/_core/models/filtertrip.model';
           trip.DateStart = this.trips[i].dateStart
           this.datenow = new Date()
           this.datenow2 = new Date(trip.DateStart)
-          if(this.datenow.getDate() > this.datenow2.getDate())
+          if(this.datenow.getTime() > this.datenow2.getTime())
             trip.SetDate = true
           else
             trip.SetDate = false

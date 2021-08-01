@@ -36,6 +36,10 @@ export class PagesService {
             // this.removeToken();
         }
     }
+    getListAllPages = async () => {
+        const result = await this.http.get(this.urlAPI + ApiUrlConstants.API_PAGEID_URL).toPromise();
+        return result;
+    }
     getPageById = async (id) => {
         try {
        
@@ -81,6 +85,14 @@ export class PagesService {
     modifyPage = async (id,page) => {
         try {
             return await this.http.put(this.urlAPI + ApiUrlConstants.API_PAGEID_URL + id ,page).toPromise();            
+        }
+        catch (e) {
+            console.log("ok");
+        }
+    }
+    priorityPage = async (page) => {
+        try {
+            return await this.http.put(this.urlAPI + ApiUrlConstants.API_PAGE_PRIORITY,page).toPromise();            
         }
         catch (e) {
             console.log("ok");

@@ -21,26 +21,31 @@
         </ng-template>
     </ul>
 </div>
-<p-dialog header="{{this.NameUser}}" [(visible)]="display" [style]="{width: '30vw'}">
-    <div class="p-col-12 p-md-4">
+<p-dialog [(visible)]="display" [style]="{width: '30vw'}">
+    <div class="p-col-12 p-md-4" style="padding-bottom: 0px!important;
+    padding-top: 0px!important;">
+        <div class="setting">
+            <p-splitButton label="{{this.NameUser}}" styleClass="p-button-success p-mb-2" [model]="items" (dblclick)="timelineurl.getNavigation(this.ClientId)" [routerLink]="['/timeline/:', this.ClientId]"></p-splitButton>
+        </div>
+        <hr>
         <div #scrollMe style="overflow: scroll;height: 350px;overflow-x: hidden;">
             <div *ngFor="let message of messagesList">
                 <div class="container" *ngIf="message.FromId != this.IdUser">
                     <img src="{{this.AvatarUser}}" alt="Avatar" class= "rcorners1">
-                    <p>{{message.Content}}</p>
+                    <p style="font-size: 16px;">{{message.Content}}</p>
                     <a href="{{message.Attachment}}" download>
                         <img *ngIf="message.Attachment!=null" src="{{message.Attachment}}" class="attachment" style="max-width: 350px;border-radius:0%;">
                     </a>
-                    <span class="time-right">11:00</span>
+                    <span class="time-right">{{message.DateCreated| date: 'dd/MM/yyyy hh:mm'}}</span>
                 </div>
                   
                 <div class="container darker" *ngIf="message.FromId == this.IdUser">
                     <img src="{{this.AvatarNow}}" alt="Avatar" class="right rcorners1">
-                    <p>{{message.Content}}</p>
+                    <p style="font-size: 16px;">{{message.Content}}</p>
                     <a href="{{message.Attachment}}" download>
                         <img *ngIf="message.Attachment!=null" src="{{message.Attachment}}" class="attachment" style="max-width: 350px;margin-left: 5%;border-radius:0%;">
                     </a>
-                    <span class="time-left">11:01</span>
+                    <span class="time-left">{{message.DateCreated| date: 'dd/MM/yyyy hh:mm'}}</span>
                 </div>
             </div>
         </div>                         
@@ -53,3 +58,6 @@
         <img [src]="url" style="height: 50px;width: 50px;" *ngIf="url!=null">
     </div>
 </p-dialog>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+<p-toast></p-toast>
