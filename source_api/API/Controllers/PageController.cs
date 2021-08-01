@@ -34,6 +34,19 @@ namespace API.Controllers
             _hubContext = hubContext;
         }
 
+        [HttpGet]
+        public IActionResult LoadAllPage()
+        {
+            try
+            {
+                var pageResponses = _service.GetAll();
+                return Ok(pageResponses);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new { message = e.Message });
+            }
+        }
         [HttpGet("{id:guid}")]
         public IActionResult LoadPagesId(Guid id)
         {

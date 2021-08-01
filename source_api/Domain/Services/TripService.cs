@@ -40,7 +40,7 @@ namespace Domain.Services
         }
         public IEnumerable<TripResponse> GetAll()
         {
-            var l_trip = m_tripRepository.GetAll(_ => _.User, _ => _.Page);
+            var l_trip = m_tripRepository.FindMultiple(_ => _.Active.Equals(true),_ => _.User, _ => _.Page).OrderByDescending(_ => _.Page.Priority);
             List<TripResponse> l_tripResponses = new List<TripResponse>();
             foreach (Trip trip in l_trip)
             {
@@ -285,7 +285,7 @@ namespace Domain.Services
         public IEnumerable<TripResponse> FilterTrip(FilterRequest filterRequest)
         {
             var l_trips = m_tripRepository.GetAll(_ => _.Page, _ => _.User).Where(_ => _.Name.ToLower().Contains(filterRequest.Name.ToLower())
-            && Convert.ToInt32(_.Cost) >= filterRequest.CostStart && Convert.ToInt32(_.Cost) <= filterRequest.CostEnd && _.Active.Equals(true));
+            && Convert.ToInt32(_.Cost) >= filterRequest.CostStart && Convert.ToInt32(_.Cost) <= filterRequest.CostEnd && _.Active.Equals(true)).OrderByDescending(_ => _.Page.Priority);
 
             List<TripResponse> l_tripResponses = new List<TripResponse>();
 
