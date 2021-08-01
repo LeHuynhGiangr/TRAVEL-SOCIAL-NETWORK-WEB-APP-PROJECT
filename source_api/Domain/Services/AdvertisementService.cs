@@ -104,7 +104,7 @@ namespace Domain.Services
                     Name = model.Name,
                     Cost = model.Cost,
                     Priority = model.Priority,
-                    EndDate = model.EndDate,
+                    EndDate = Convert.ToDateTime(model.EndDate),
                     Active = true,
                     PageId = model.PageId
                 };
